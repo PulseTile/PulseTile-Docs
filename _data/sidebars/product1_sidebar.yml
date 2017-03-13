@@ -74,3 +74,7 @@ entries:
     - title: Plugins
       url: /plugins.html
       output: web, pdf
+
+    - title: Core UI Project
+      url: /core_UI_Project.html
+      output: web, pdf
