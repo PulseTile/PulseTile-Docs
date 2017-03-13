@@ -84,7 +84,7 @@ entries:
 
     folderitems:    
     - title: Guide to plugins development process
-      url: /plugin_Process.html
+      url: /plugin_process.html
       output: web, pdf
       
       
