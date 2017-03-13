@@ -7,9 +7,9 @@ permalink: initial-QA.html
 folder: product1
 ---
 
-## Question-answer session dated 27.10.2016
+### Question-answer session dated 27.10.2016
 
-## **Q: How does webpack work with Angular to modularise the project? (i.e. is it working against the standard Angular modular architecture and adding complexity where it’s not necessary?)**  
+**Q: How does webpack work with Angular to modularise the project? (i.e. is it working against the standard Angular modular architecture and adding complexity where it’s not necessary?)**  
 **A:** We use export and import directives to manage project modules and they are processed by Webpack to handle different files dependencies. If we were using Gulp, for example, we would have need an additional package like Browserify to achieve the same.  
 
 ***
