@@ -25,7 +25,7 @@ folder: product1
 **Q: Do we know what the driver was for Sergey to choose Redux? It seems we are tied to that technology now, so although it may be a great fit we are still unclear what drove that decision and whether it was the right one.**  
 **A:** It seems the Redux code is clearly delineated from the Ripple code, meaning that we aren't completely tied to the technology choice if it proves to be more of a hindrance than a benefit.
 
-###WebPack
+### WebPack
 **Q: Why was webpack chosen?**  
 **A:** Why?  
 - Useful for a modular architecture, because it has the concept of a dependency tree, unlike Grunt/Gulp  
@@ -52,7 +52,7 @@ folder: product1
 **Q: Currently all modules seem to be very standalone, so it looks as though webpack is not being used to its full potential. Is this just part of a step-by-step implementation process, or has it been by design?**  
 **A:** Related to this point - we discussed how at present Webpack isn't being used in the standard way to send up module bundles to the client, instead of sending the vendor and Ripple bundles in two large files. SliceArt have already noticed this and are planning to send separate, smaller bundles to the client in this way, which will mean less network traffic and higher performance.  
 
-###Bower
+### Bower
 **Q: What are the long term plans for Bower?**  
 **A:** Bower will stay, because it serves a very particular purpose. Bower isn't being replaced by npm, and nor should it be. The 3rd party web components that the system needs should be provided by Bower, even if npm can provide them.  
 
