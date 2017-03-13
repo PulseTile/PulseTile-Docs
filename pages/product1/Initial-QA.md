@@ -7,7 +7,7 @@ permalink: initial-QA.html
 folder: product1
 ---
 
-(Question-answer session dated 27.10.2016)
+// Question-answer session dated 27.10.2016
 
 ***
 
