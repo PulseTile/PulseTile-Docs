@@ -58,3 +58,11 @@ entries:
     - title: Sample 7
       url: /p1_sample7.html
       output: web, pdf
+
+  - title: PulseTIle
+    output: web, pdf
+    
+    folderitems:
+    - title: Initial Q&A
+      url: /initial-QA.html
+      output: web, pdf
