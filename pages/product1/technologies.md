@@ -3,7 +3,7 @@ title: Let's discuss technologies to use?
 keywords: Technologies
 summary: "Brief rationale behind some of the technology choices"
 sidebar: product1_sidebar
-permalink: ptechnologies.html
+permalink: technologies.html
 folder: product1
 ---
 
