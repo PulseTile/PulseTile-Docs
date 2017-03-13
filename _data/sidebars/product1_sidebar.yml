@@ -87,4 +87,50 @@ entries:
       url: /plugin_process.html
       output: web, pdf
       
+  - title: API endpoints - JSON data
+    output: web, pdf
+
+    folderitems:    
+    - title: JSON for Allergies module
+      url: /JSON_Allergies.html
+      output: web, pdf  
+       
+    - title: JSON for Contacts module
+      url: /JSON_Contacts.html
+      output: web, pdf   
+   
+    - title: JSON for MDT module
+      url: /JSON_MDT.html
+      output: web, pdf   
       
+    - title: JSON for Medications module
+      url: /JSON_Medication.html
+      output: web, pdf   
+      
+    - title: JSON for Patients information
+      url: /JSON_Patient_Information.html
+      output: web, pdf   
+      
+    - title: JSON for Patient Lists
+      url: /JSON_Patient_Lists.html
+      output: web, pdf   
+      
+    - title: JSON for Personal Notes module
+      url: /JSON_Personal_Notes.html
+      output: web, pdf   
+            
+    - title: JSON for Procedures module
+      url: /JSON_Procedures.html
+      output: web, pdf   
+            
+    - title: JSON for Referrals module
+      url: /JSON_Referrals.html
+      output: web, pdf   
+            
+    - title: JSON for Test Results module
+      url: /JSON_Results.html
+      output: web, pdf   
+            
+    - title: JSON for Vitals module
+      url: /JSON_Vitals.html
+      output: web, pdf   
