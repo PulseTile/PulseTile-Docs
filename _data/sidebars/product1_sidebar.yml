@@ -66,3 +66,7 @@ entries:
     - title: Initial Q&A
       url: /initial-QA.html
       output: web, pdf
+      
+    - title: Technologies
+      url: /technologies.html
+      output: web, pdf
