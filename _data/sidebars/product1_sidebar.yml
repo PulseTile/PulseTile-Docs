@@ -76,5 +76,5 @@ entries:
       output: web, pdf
 
     - title: Core UI Project
-      url: /core_ui_project.html
+      url: /coreuiproject.html
       output: web, pdf
