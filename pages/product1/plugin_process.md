@@ -3,7 +3,7 @@ title: Plugin development brief
 keywords: plugins process structure
 summary: "Guide to plugins development process"
 sidebar: product1_sidebar
-permalink: plugin_Process.html
+permalink: plugin_process.html
 folder: product1
 ---
 
