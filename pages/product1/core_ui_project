@@ -3,11 +3,12 @@ title: Core UI Project
 keywords: licensing copyright documentation
 summary: "licensing copyright documentation"
 sidebar: product1_sidebar
-permalink: core_UI_Project.html
+permalink: core_ui_project.html
 folder: product1
 ---
 
-### Licensing
+### Licensing   
+
 
 **Q: Revisit the ISC Licence of the UI project, and discuss whether it is the right one to use and whether Tony has any preference**   
 **A:** The UI code will follow the Java middleware and use an Apache 2.0 licence.  
