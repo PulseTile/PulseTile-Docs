@@ -70,3 +70,7 @@ entries:
     - title: Technologies
       url: /technologies.html
       output: web, pdf
+
+    - title: Plugins
+      url: /plugins.html
+      output: web, pdf
