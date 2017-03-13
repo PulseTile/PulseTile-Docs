@@ -78,3 +78,13 @@ entries:
     - title: Core UI Project
       url: /coreuiproject.html
       output: web, pdf
+
+  - title: Plugins Development
+    output: web, pdf
+
+    folderitems:    
+    - title: Guide to plugins development process
+      url: /plugin_Process.html
+      output: web, pdf
+      
+      
