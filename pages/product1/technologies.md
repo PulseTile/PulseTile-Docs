@@ -1,5 +1,5 @@
 ---
-title: Let's discuss technologies to use?
+title: Technologies
 keywords: Technologies
 summary: "Brief rationale behind some of the technology choices"
 sidebar: product1_sidebar
