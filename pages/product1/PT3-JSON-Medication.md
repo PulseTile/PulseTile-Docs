@@ -1,7 +1,7 @@
 ---
-title: JSON for Medications module
+title: JSON Array Medications data
 keywords: sample
-summary: "JSON Array Medications data"
+summary: "JSON for Medications module"
 sidebar: product1_sidebar
 permalink: JSON_Medication.html
 folder: product1
