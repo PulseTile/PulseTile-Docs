@@ -5,6 +5,7 @@ summary: "JSON Array Patient information"
 sidebar: product1_sidebar
 permalink: JSON_Patient_Information.html
 folder: product1
+---
 
 Example of JSON object to work obtain patient information and data for patient summary page.  
 
