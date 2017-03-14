@@ -23,7 +23,7 @@ entries:
   - title: Getting Started
     output: web, pdf
     folderitems:
-    - title: Product 1 home
+    - title: PulseTile Home
       url: /p1_landing_page.html
       output: web
 
