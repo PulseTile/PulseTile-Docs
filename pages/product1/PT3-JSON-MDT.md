@@ -1,7 +1,7 @@
 ---
-title: JSON for MDT module
+title: JSON Array MDT
 keywords: MDT
-summary: "JSON Array MDT"
+summary: "JSON for MDT module"
 sidebar: product1_sidebar
 permalink: JSON_MDT.html
 folder: product1
