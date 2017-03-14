@@ -91,27 +91,27 @@ entries:
     output: web, pdf
 
     folderitems:    
-    - title: JSON for Allergies module
+    - title: JSON Array Allergies data
       url: /JSON_Allergies.html
       output: web, pdf  
        
-    - title: JSON for Contacts module
+    - title: JSON Array Contacts information
       url: /JSON_Contacts.html
       output: web, pdf   
    
-    - title: JSON for MDT module
+    - title: JSON Array MDT
       url: /JSON_MDT.html
       output: web, pdf   
       
-    - title: JSON for Medications module
+    - title: JSON Array Medications data
       url: /JSON_Medication.html
       output: web, pdf   
       
-    - title: JSON for Patients information
+    - title: JSON Array Patient information
       url: /JSON_Patient_Information.html
       output: web, pdf   
       
-    - title: JSON for Patient Lists
+    - title: JSON Array Patient list
       url: /JSON_Patient_Lists.html
       output: web, pdf   
       
@@ -119,18 +119,18 @@ entries:
       url: /JSON_Personal_Notes.html
       output: web, pdf   
             
-    - title: JSON for Procedures module
+    - title: JSON Array Procedures
       url: /JSON_Procedures.html
       output: web, pdf   
             
-    - title: JSON for Referrals module
+    - title: JSON Array Referrals
       url: /JSON_Referrals.html
       output: web, pdf   
             
-    - title: JSON for Test Results module
+    - title: JSON Array Test Results
       url: /JSON_Results.html
       output: web, pdf   
             
-    - title: JSON for Vitals module
+    - title: JSON array Vitals NEWS
       url: /JSON_Vitals.html
       output: web, pdf   
