@@ -1,5 +1,5 @@
 ---
-title: JSON Array MDT
+title: JSON for MDT module
 keywords: MDT
 summary: "JSON Array MDT"
 sidebar: product1_sidebar
