@@ -115,7 +115,7 @@ entries:
       url: /JSON_Patient_Lists.html
       output: web, pdf   
       
-    - title: JSON for Personal Notes module
+    - title: JSON Array Personal Notes
       url: /JSON_Personal_Notes.html
       output: web, pdf   
             
