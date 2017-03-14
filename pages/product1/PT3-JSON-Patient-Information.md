@@ -1,7 +1,7 @@
 ---
-title: JSON for Patients information
+title: JSON Array Patient information
 keywords: Patient information
-summary: "JSON Array Patient information"
+summary: "JSON for Patients information"
 sidebar: product1_sidebar
 permalink: JSON_Patient_Information.html
 folder: product1
