@@ -56,6 +56,35 @@ entries:
       url: /plugin_process.html
       output: web, pdf
       
+  - title: Base UX Framework
+    output: web, pdf
+      
+  - title: Base UI Framework
+    output: web, pdf
+    
+  - title: Core Tiles
+    output: web, pdf
+  
+    folderitems:    
+    - title: Allergies
+      url: /Core_Tiles_Allergies.html
+      output: web, pdf  
+   
+   - title: Clinical Notes
+     url: /Core_Tiles_ClinicalNotes.html
+     output: web, pdf 
+     
+   - title: Medictions
+     url: /Core_Tiles_Medications.html
+     output: web, pdf 
+       
+   - title: Problems / Diagnosis
+     url: /Core_Tiles_Problems_Diagnosis.html
+     output: web, pdf 
+    
+  - title: Add-on Tiles
+    output: web, pdf
+    
   - title: API endpoints - JSON data
     output: web, pdf
 
