@@ -305,7 +305,7 @@ li.dropdownActive a {
 }
 
 .post-content .rssfeedLink {
-    color: #248EC2;
+    color: #df5f17;
 }
 
 footer {
@@ -372,7 +372,7 @@ a.accordion-toggle, a.accordion-collapsed {
 }
 
 .nav a:hover, .nav li.active > a {
-    background-color: #8D8D8D;
+    background-color: #8e8f92;
     color: #f5f5f5;
 }
 
@@ -402,7 +402,7 @@ ul#mysidebar {
 }
 
 .nav li.thirdlevel > a {
-    color: #248EC2;
+    color: #df5f17;
     font-weight:bold;
     padding-left:20px;
     background-color: whitesmoke !important;
@@ -418,7 +418,7 @@ ul#mysidebar {
 }
 
 .nav li a:hover {
-    background-color: #8D8D8D;
+    background-color: #8e8f92;
 }
 
 .nav ul li a {
@@ -520,7 +520,7 @@ section table tr.danger, table tr.preference, table tr.preference > td.sorting_1
 }
 
 table.profile thead tr th {
-    background-color: #248ec2;
+    background-color: #df5f17;
 }
 
 table.request thead tr th {
@@ -583,7 +583,7 @@ i.border {
 }
 
 a[data-toggle] {
-    color: #248EC2;
+    color: #df5f17;
 }
 
 .summary {
@@ -613,7 +613,7 @@ h4 {color: #808080; font-weight:normal; font-size:120%; font-style:italic;}
 }
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
-    background-color: #248ec2;
+    background-color: #df5f17;
     color: white;
 }
 
@@ -725,7 +725,7 @@ ol.series li {
 
 /* not sure if using this ...*/
 .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
-    border-color: #248ec2 !important;
+    border-color: #df5f17 !important;
 }
 
 #mysidebar .nav ul {
@@ -1027,7 +1027,7 @@ span.label.label-primary {
     }
 
 a code {
-    color: #248EC2;
+    color: #df5f17;
 }
 
 code + a > code {
@@ -1186,7 +1186,7 @@ h4.panel-title {
 }
 
 	#rs-navbar .navbar-brand {
-		padding-top: 0;
+		padding-top: 15px;
 		padding-bottom: 0;
 	}
 
@@ -1275,3 +1275,4 @@ h4.panel-title {
 		#search-demo-container ul#results-container {
 			top: 61px;
 		}
+		
