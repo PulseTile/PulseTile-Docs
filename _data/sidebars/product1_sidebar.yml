@@ -1,11 +1,14 @@
 # This is your sidebar TOC. The sidebar code loops through sections here and provides the appropriate formatting.
 
 
+
+
 entries:
 - title: Sidebar
   product: PulseTile
   version: 1.0
   folders:
+
 
   - title:
     output: pdf
@@ -20,6 +23,7 @@ entries:
       output: pdf
       type: frontmatter
 
+
   - title: Getting Started
     output: web, pdf
     folderitems:
@@ -28,84 +32,33 @@ entries:
       output: web
 
 
-  - title: Background / Decision-making process
-    output: web, pdf
-    
-    folderitems:
-    - title: Initial Q&A
-      url: /initial-QA.html
-      output: web, pdf
-      
-    - title: Technologies
-      url: /technologies.html
-      output: web, pdf
-
-    - title: Plugins
-      url: /plugins.html
-      output: web, pdf
-
     - title: Core UI Project
       url: /coreuiproject.html
       output: web, pdf
 
-  - title: Plugins Development
-    output: web, pdf
-
-    folderitems:    
-    - title: Guide to plugins development process
-      url: /plugin_process.html
-      output: web, pdf
-      
-  - title: Base UX Framework
-    output: web, pdf
     
-  - title: Add-on Tiles
+  - title: Core Tiles
     output: web, pdf
-    
-  - title: API endpoints - JSON data
-    output: web, pdf
-
+  
     folderitems:    
-    - title: JSON Array Allergies data
-      url: /JSON_Allergies.html
+    - title: Allergies
+      url: /Core_Tiles_Allergies.html
       output: web, pdf  
-       
-    - title: JSON Array Contacts information
-      url: /JSON_Contacts.html
-      output: web, pdf   
    
-    - title: JSON Array MDT
-      url: /JSON_MDT.html
-      output: web, pdf   
-      
-    - title: JSON Array Medications data
-      url: /JSON_Medication.html
-      output: web, pdf   
-      
-    - title: JSON Array Patient information
-      url: /JSON_Patient_Information.html
-      output: web, pdf   
-      
-    - title: JSON Array Patient list
-      url: /JSON_Patient_Lists.html
-      output: web, pdf   
-      
-    - title: JSON Array Personal Notes
-      url: /JSON_Personal_Notes.html
-      output: web, pdf   
-            
-    - title: JSON Array Procedures
-      url: /JSON_Procedures.html
-      output: web, pdf   
-            
-    - title: JSON Array Referrals
-      url: /JSON_Referrals.html
-      output: web, pdf   
-            
-    - title: JSON Array Test Results
-      url: /JSON_Results.html
-      output: web, pdf   
-            
-    - title: JSON array Vitals NEWS
-      url: /JSON_Vitals.html
-      output: web, pdf   
+    - title: Clinical Notes
+      url: /Core_Tiles_ClinicalNotes.html
+      output: web, pdf 
+    
+    - title: Contacts
+      url: /Core_Tiles_Contacts.html
+      output: web, pdf 
+     
+    - title: Medictions
+      url: /Core_Tiles_Medications.html
+      output: web, pdf 
+       
+    - title: Problems Diagnosis
+      url: /Core_Tiles_Problems_Diagnosis.html
+      output: web, pdf 
+    
+ 
