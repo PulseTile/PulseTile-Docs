@@ -27,12 +27,12 @@ entries:
   - title: Getting Started
     output: web, pdf
     folderitems:
-    - title: PulseTile Home
+    - title: Background
       url: /p1_landing_page.html
       output: web
 
 
-    - title: Core UI Project
+    - title: Licensing 
       url: /coreuiproject.html
       output: web, pdf
 
