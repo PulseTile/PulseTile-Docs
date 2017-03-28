@@ -3,12 +3,14 @@
 topnav:
 - title: Topnav
   items:
+    - title: News
+      url: /news
 
 #Topnav dropdowns
 topnav_dropdowns:
 - title: Topnav dropdowns
   folders:
-        - title: Products
+    - title: Documentation
       folderitems:
         - title: Base UX Framework
           url: /mydoc_introduction.html
