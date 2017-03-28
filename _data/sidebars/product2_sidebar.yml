@@ -33,17 +33,12 @@ entries:
       url: /plugins.html
       output: web, pdf
 
-
-  - title: Plugins Development
-    output: web, pdf
-
-
-    folderitems:    
+  
     - title: Guide to plugins development process
       url: /plugin_process.html
       output: web, pdf
           
-  - title: Add-on Tiles
+  - title: Plugins catalogue
     output: web, pdf
     
   
