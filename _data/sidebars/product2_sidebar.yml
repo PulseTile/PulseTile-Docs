@@ -37,11 +37,12 @@ entries:
     - title: Guide to plugins development process
       url: /plugin_process.html
       output: web, pdf
+      
           
   - title: Plugins catalogue
     output: web, pdf
     
-    #- title: Example Page for Allergy
-    #  url: /plugins.html
-    #  output: web, pdf
+    - title: Example Page for Allergy
+      url: /plugins.html
+      output: web, pdf
   
