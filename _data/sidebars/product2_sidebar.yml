@@ -42,7 +42,7 @@ entries:
   - title: Plugins catalogue
     output: web, pdf
     
-    - title: Example Page for Allergy
-      url: /plugins.html
-      output: web, pdf
+    #- title: Example Page for Allergy
+    #  url: /plugins.html
+    # output: web, pdf
   
