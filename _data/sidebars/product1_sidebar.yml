@@ -38,6 +38,27 @@ entries:
 
     
   - title: Core Tiles
+      output: web, pdf
+
+    folderitems:
+    - title: Patient Summary
+      url: /Core_Tiles_PatientSummary.html
+      output: web, pdf
+
+    - title: Search
+      url: /Core_Tiles_Search.html
+      output: web, pdf
+
+    - title: Multipatients View
+      url: /Core_Tiles_Multipatients.html
+      output: web, pdf
+
+    - title: Charts
+      url: /Core_Tiles_Charts.html
+      output: web, pdf
+
+
+  - title: Plugin Tiles
     output: web, pdf
   
     folderitems:    
