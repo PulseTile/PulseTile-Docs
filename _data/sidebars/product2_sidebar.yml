@@ -43,10 +43,6 @@ entries:
     output: web, pdf
 
     folderitems:
-      - title: Patient Summary
-        url: /Core_Tiles_PatientSummary.html
-        output: web, pdf
-
       - title: Clinical Notes
         url: /Core_Tiles_ClinicalNotes.html
         output: web, pdf
