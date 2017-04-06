@@ -9,7 +9,7 @@ topnav_dropdowns:
   folders:
     - title: Documentation
       folderitems:
-        - title: Base UX Framework
+        - title: Core UX Framework
           url: /mydoc_introduction.html
         - title: Core UI Framework
           url: /p1_landing_page.html
