@@ -56,6 +56,18 @@ entries:
       url: /Core_Tiles_Charts.html
       output: web, pdf
 
+    - title: Allergies
+      url: /Core_Tiles_Allergies.html
+      output: web, pdf
+
+    - title: Contacts
+      url: /Core_Tiles_Contacts.html
+      output: web, pdf
+
+    - title: Medictions
+      url: /Core_Tiles_Medications.html
+      output: web, pdf
+
 
   - title: API endpoints - JSON data
     output: web, pdf

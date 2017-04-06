@@ -47,14 +47,6 @@ entries:
         url: /Core_Tiles_ClinicalNotes.html
         output: web, pdf
 
-      - title: Allergies
-        url: /Core_Tiles_Allergies.html
-        output: web, pdf
-
-      - title: Contacts
-        url: /Core_Tiles_Contacts.html
-        output: web, pdf
-
       - title: Problems Diagnosis
         url: /Core_Tiles_Problems_Diagnosis.html
         output: web, pdf
@@ -69,10 +61,6 @@ entries:
 
       - title: MDT
         url: /Core_Tiles_MDT.html
-        output: web, pdf
-
-      - title: Medictions
-        url: /Core_Tiles_Medications.html
         output: web, pdf
 
       - title: Orders

@@ -1,0 +1,73 @@
+---
+title: Allergies module
+keywords: sample
+summary: "Allergies module"
+sidebar: product1_sidebar
+toc: false
+permalink: Core_Tiles_Allergies.html
+folder: product1
+---
+
+
+{% include image.html file="allergies/allergiesgeneral.png" url="#" alt="Allergy list view" caption="Allergies List" %}
+
+<h2>API URL: /api/patients/{{patientId}}/allergies</h2>
+<h4>GET response</h4>
+<pre>
+    {
+        cause:"New paracetamol"
+        reaction:"New"
+        source:"ethercis"
+        sourceId:"f08cac13-362d-4b31-b3cc-76bd1e51c75d"
+    }
+</pre>
+
+{% include image.html file="allergies/allergiesdetail.png" url="#" alt="Allergy Detail" caption="Allergies Detail" %}
+
+<h2>API URL: /api/patients/{{patientId}}/allergies</h2>
+<h4>GET response</h4>
+<pre>
+    {
+        author:"Dr Tony Shannon"
+        cause:"ww test 01"
+        causeCode:"SNOMED-CT"
+        causeTerminology:1239085
+        dateCreated:1484349982000
+        reaction:"ww test 01"
+        source:"EtherCIS"
+        sourceId:"01fc6ad3-3d10-4bbf-98ce-99c81113ff9c"
+        terminologyCode:"SNOMED-CT"
+    }
+</pre>
+
+{% include image.html file="allergies/allergiesedit.png" url="#" alt="Allergy Edit" caption="Allergies Edit" %}
+
+<h2>API URL: /api/patients/{{patientId}}/allergies/{{sourceId}}</h2>
+<h4>PUT data</h4>
+<pre>
+    {
+        cause:"ww test 01 edit"
+        causeCode:"SNOMED-CT"
+        causeTerminology:1239085
+        reaction:"ww test 01"
+        source:"EtherCIS"
+        sourceId:"sourceId"
+    }
+</pre>
+
+{% include image.html file="allergies/allergiescreate.png" url="#" alt="Allergy Create" caption="Allergies Create" %}
+
+<h2>API URL: /api/patients/{{patientId}}/allergies/{{sourceId}}</h2>
+<h4>POST data</h4>
+<pre>
+    {
+        cause:"create new test"
+        causeCode:"1239085"
+        causeTerminology:"test"
+        reaction:"test"
+        sourceId:""
+    }
+</pre>
+
+{% include image.html file="allergies/allergiesfilter.png" url="#" alt="Allergy Filter" caption="Allergies Filter" %}
+
