@@ -38,8 +38,7 @@ entries:
 
     
   - title: Core Tiles
-      output: web, pdf
-
+    output: web, pdf
     folderitems:
     - title: Patient Summary
       url: /Core_Tiles_PatientSummary.html

@@ -42,7 +42,7 @@ entries:
   - title: Plugins catalogue
     output: web, pdf
 
-      folderitems:
+    folderitems:
       - title: Patient Summary
         url: /Core_Tiles_PatientSummary.html
         output: web, pdf
