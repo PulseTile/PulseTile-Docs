@@ -9,4 +9,50 @@ folder: product2
 ---
 
 {% include image.html file="documents/documentslist.png" url="#" alt="Documents list view" caption="Documents List" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/documents/patient/{patientId}
+</pre>
+<h4>GET response</h4>
+<pre>
+    {
+        author:"McCrea, Siobhan"
+        dateCreated:"2010-05-14T00:00:00Z"
+        documentType:"Discharge summary"
+        source:"marand"
+        sourceId:"16cad9dd-cc4b-42f8-b7b2-980835d9e977"
+    }
+</pre>
+
 {% include image.html file="documents/documentsdetail.png" url="#" alt="Documents Detail" caption="Documents Detail" %}
+
+<h4>API URL</h4>
+<pre>
+    /api//documents/patient/{patientId}/{sourceId}
+</pre>
+<h4>GET response</h4>
+<pre>
+    {
+        author_id:"023781"
+        author_idScheme:"Medical Council No"
+        author_name:"McCrea, Siobhan"
+        clinicalSynopsis:"ADMISSION REASON: Admit with acute abdominal pain, deranged LFTs, normal amylase DIAGNOSIS: Cholecystectomy PROBLEMS: Abdominal pain PROBLEMS: Gallstones THEATRE PROCS: Lap Chole NON THEATRE PROCS: None LAB INVESTIGATIONS: As attached - FBC, UE, LFTs, Amylase RAD INVESTIGATIONS: As attached - USS Abdomen, MRCP OTHER INVESTIGATIONS: None PROGRESS DURING STAY: Uncomplicated post operative recovery.Full diet tolerated, wound sites dry and intact, no oozing.  Vital signs normal, apyrexial.  Mobilising/teds/clexane.  No c/o abdominal pain.  C/O right shoulder tip pain - advised post operative complication and should resolve within several days.  Normal MRCP pre-op. Dx = acute cholecystitis with transiemt choledocholithiasis. ALLERGIES: NKDA DISCHARGE MEDICATION: MEDICATION:Refused analgesia on d/c INFO GIVEN TO PATIENT: All results and surgery as above explained.  For removal of clips in 10/7 in dressing clinic - appt given.  Avoid constipation OPD FOLLOW UP: 6/52 GP ACTIONS: Routine follow up"
+        dateOfAdmission:""
+        dateTimeOfDischarge:""
+        diagnosisList:[]
+        dischargingOrganisation:""
+        documentDate:1273795200000
+        facility:"St.James's Hospital (Dublin)"
+        patientIdentifier_gms:"-"
+        patientIdentifier_gmsType:"GMS"
+        patientIdentifier_mrn:"9999999000"
+        patientIdentifier_mrnType:"MRN"
+        patientIdentifier_oth:"1020714"
+        patientIdentifier_othType:"OTH"
+        responsibleProfessional_id:"4547"
+        responsibleProfessional_idType:"MCN"
+        responsibleProfessional_name:"COOKE MR FIACHRA"
+        sourceId:"88463100-c7f4-4e0b-9cbf-a212d96b1030::ripple_osi.ehrscape.c4h::1"
+    }
+</pre>

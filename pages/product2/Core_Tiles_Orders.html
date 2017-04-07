@@ -9,5 +9,48 @@ folder: product2
 ---
 
 {% include image.html file="orders/orderslist.png" url="#" alt="Orders list view" caption="Orders List" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/laborders
+</pre>
+<h4>GET response</h4>
+<pre>
+    {
+        name:"Cardiac-ECG"
+        orderDate:1458738936944
+        source:"ethercis"
+        sourceId:"4c4df65d-98d4-4f62-998f-fe0d9eeca9a0"
+    }
+</pre>
+
 {% include image.html file="orders/ordersdetail.png" url="#" alt="Orders Detail" caption="Orders Detail" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/laborders/{sourceId}
+</pre>
+<h4>GET response</h4>
+<pre>
+    {
+        author:"Dr John Smith"
+        code:"order4"
+        dateCreated:1458738026000
+        name:"Physio-crutches"
+        orderDate:1458738023504
+        source:"EtherCIS"
+        sourceId:"cc690d51-223f-4f54-afb5-c4ede9f781aa"
+        terminology:"SNOMED-CT"
+    }
+</pre>
+
 {% include image.html file="orders/orderscreate.png" url="#" alt="Orders Edit" caption="Orders Create" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/laborders
+</pre>
+<h4>POST data</h4>
+<pre>
+    [{code: "order1", text: "Xray Chest X-ray"}]
+</pre>

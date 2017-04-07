@@ -9,5 +9,34 @@ folder: product2
 ---
 
 {% include image.html file="dicom/imageslist.png" url="#" alt="Images list view" caption="Images List" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/dicom/studies
+</pre>
+<h4>GET response</h4>
+<pre>
+    {
+        dateRecorded:736124400000
+        source:"orthanc"
+        studyDescription:"RT ANKLE"
+        studyId:"55a9fcd2-e8197ca2-1af7a8e2-0e1ab147-841c65ba"
+    }
+</pre>
+
 {% include image.html file="dicom/imagesdetail.png" url="#" alt="Images Detail" caption="Images Detail" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/dicom/studies/{studyId}/series?source=orthanc
+</pre>
+<h4>GET response</h4>
+<pre>
+    {
+        seriesIds:["fd6433fb-cac3aecf-e1b315ea-a534c0c8-dba38a8f"]
+        source:"orthanc"
+        studyId:"885eb7e5-d07fa57b-5a1c6637-3886ed16-d6f22cf5"
+    }
+</pre>
+
 {% include image.html file="dicom/imagescontrol.png" url="#" alt="Images Control" caption="Images Control" %}

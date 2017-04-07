@@ -9,4 +9,39 @@ folder: product2
 ---
 
 {% include image.html file="results/resultslist.png" url="#" alt="Test Results list view" caption="Test Results List" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/labresults
+</pre>
+<h4>GET response</h4>
+<pre>
+    {
+        dateCreated:1427004662000
+        sampleTaken:1426889462518
+        source:"ethercis"
+        sourceId:"810272ac-28e8-4928-b61b-79dcef4b4170"
+        testName:""
+    }
+</pre>
+
 {% include image.html file="results/resultsdetail.png" url="#" alt="Test Results Detail" caption="Test Results Detail" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/labresults/{sourceId}
+</pre>
+<h4>GET response</h4>
+<pre>
+    {
+        author:"Dr Lab"
+        conclusion:""
+        dateCreated:1437624662000
+        sampleTaken:1437513062518
+        source:"EtherCIS"
+        sourceId:"b97e9fde-d994-4874-b671-8b1cd81b811c"
+        status:""
+        testName:""
+        testResults:[{result: "", value: "", unit: "", normalRange: "", comment: ""}]
+    }
+</pre>

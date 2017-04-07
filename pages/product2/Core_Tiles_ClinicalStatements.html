@@ -9,5 +9,53 @@ folder: product2
 ---
 
 {% include image.html file="clinicalstatements/clinicalstatementslist.png" url="#" alt="Clinical Statements list view" caption="Clinical Statements List" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/clinicalStatements
+</pre>
+<h4>GET response</h4>
+<pre>
+    {
+        author:"bob.smith@gmail.com"
+        dateCreated:1489655645844
+        source:"ethercis"
+        sourceId:"0f86daea-9d25-4921-aa9c-b79b6478433d"
+        type:"test ids"
+    }
+</pre>
+
 {% include image.html file="clinicalstatements/clinicalstatementsdetail.png" url="#" alt="Clinical Statements Detail" caption="Clinical Statements Detail" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/clinicalStatements/{sourceId}
+</pre>
+<h4>GET response</h4>
+<pre>
+    {
+        author:"bob.smith@gmail.com"
+        dateCreated:1489489481713
+        source:"ethercis"
+        sourceId:"f546b8c0-97d6-489f-97e1-02622d721dc2"
+        text:"The pain was medium at 5/10 in severity.  "
+        type:"aaaa"
+    }
+</pre>
+
 {% include image.html file="clinicalstatements/clinicalstatementscreate.png" url="#" alt="Clinical Statements Create" caption="Clinical Statements Create" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/clinicalStatements
+</pre>
+<h4>POST data</h4>
+<pre>
+    {
+        author:"bob.smith@gmail.com"
+        contentStore:{name: "ts", phrases: [{id: "6", tag: "chestpain"}]}
+        dateCreated:"2017-04-07T09:49:29.918Z"
+        text:"<span class="tag" data-id="3" data-phrase="The pain was severe at 10/10 in severity" contenteditable="false">The pain was severe at 10/10 in severity. <a class="remove" contenteditable="false"><i class="fa fa-close" contenteditable="false"></i></a></span> <span id="temp"></span>"
+        type:"test CS 33"
+    }
+</pre>
