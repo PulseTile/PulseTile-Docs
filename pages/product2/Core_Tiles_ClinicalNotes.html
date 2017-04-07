@@ -3,11 +3,75 @@ title: Clinical Notes module
 keywords: sample
 summary: "Clinical Notes module"
 sidebar: product2_sidebar
+toc: false
 permalink: Core_Tiles_ClinicalNotes.html
 folder: product2
 ---
 
 {% include image.html file="clinicalnotes/clinicalnoteslist.png" url="#" alt="Clinical Notes list view" caption="Clinical Notes List" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/clinicalnotes
+</pre>
+<h4>GET response</h4>
+<pre>
+    {
+        author:"Dr Tony Shannon"
+        clinicalNotesType:"Clinical Synopsis"
+        dateCreated:1487072396000
+        source:"ethercis"
+        sourceId:"699160c0-e80e-466a-900c-2184a937bb57"
+    }
+</pre>
+
 {% include image.html file="clinicalnotes/clinicalnotesdetail.png" url="#" alt="Clinical Notes Detail" caption="Clinical Notes Detail" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/clinicalnotes/{sourceId}
+</pre>
+<h4>GET response</h4>
+<pre>
+    {
+        author:"Dr Tony Shannon"
+        clinicalNotesType:"SOAP Note"
+        dateCreated:1456287062000
+        note:"S: Patient was very concerned about her welfare"
+        source:"EtherCIS"
+        sourceId:"3e93aeb5-1d5d-4e5c-b249-4ce34eec6d84"
+    }
+</pre>
+
 {% include image.html file="clinicalnotes/clinicalnotesedit.png" url="#" alt="Clinical Notes Edit" caption="Clinical Notes Edit" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/clinicalnotes
+</pre>
+<h4>PUT data</h4>
+<pre>
+    {
+        author:"Dr Tony Shannon"
+        noteType:"SOAP Note t"
+        notes:"S: Patient was very concerned about her welfare"
+        source:"EtherCIS"
+        sourceId:"3e93aeb5-1d5d-4e5c-b249-4ce34eec6d84"
+    }
+</pre>
+
 {% include image.html file="clinicalnotes/clinicalnotescreate.png" url="#" alt="Clinical Notes Create" caption="Clinical Notes Create" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/clinicalnotes
+</pre>
+<h4>POST data</h4>
+<pre>
+    {
+        dateCreated:"2017-04-07"
+        noteType:"test note"
+        notes:"qwerty"
+        source:"openehr"
+    }
+</pre>
