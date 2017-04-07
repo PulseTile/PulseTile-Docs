@@ -8,4 +8,29 @@ folder: product1
 ---
 
 {% include image.html file="search/mainsearch.png" url="#" alt="Main Search" caption="Main Search" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/search/patient/table
+</pre>
+<h4>POST data</h4>
+<pre>
+    {
+        orderType:"ASC"
+        pageNumber:"1"
+        searchString:"ivor Cox"
+    }
+</pre>
+
 {% include image.html file="search/patientssearch.png" url="#" alt="Advanced Search" caption="Advanced Search" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/advancedSearch
+</pre>
+<h4>POST data</h4>
+<pre>
+    {
+        nhsNumber: patientId
+    }
+</pre>
