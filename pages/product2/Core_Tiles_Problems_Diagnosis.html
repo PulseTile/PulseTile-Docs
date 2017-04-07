@@ -9,6 +9,76 @@ folder: product2
 ---
 
 {% include image.html file="diagnosis/diagnoseslist.png" url="#" alt="Diagnosis list view" caption="Diagnosis List" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/problems
+</pre>
+<h4>GET response</h4>
+<pre>
+    {
+        problem:"asthma"
+        source:"ethercis"
+        sourceId:"08fd487b-765a-41b4-9501-334d48dc2b00"
+    }
+</pre>
+
 {% include image.html file="diagnosis/diagnosesdetail.png" url="#" alt="Diagnosis Detail" caption="Diagnosis Detail" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/problems/{sourceId}
+</pre>
+<h4>GET response</h4>
+<pre>
+    {
+        author:"Dr Tony Shannon"
+        code:299757012
+        dateCreated:1445458262000
+        dateOfOnset:963833437553
+        description:""
+        problem:"angina pectoris"
+        source:"EtherCIS"
+        sourceId:"12f02a05-a14f-4b35-be45-9e52bbe535ed"
+        terminology:"SNOMED-CT"
+    }
+</pre>
+
 {% include image.html file="diagnosis/diagnosesedit.png" url="#" alt="Diagnosis Edit" caption="Diagnosis Edit" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/problems
+</pre>
+<h4>PUT data</h4>
+<pre>
+    {
+        author:"Dr Tony Shannon"
+        code:299757012
+        dateCreated:1445458262000
+        dateOfOnset:963833437553
+        description:""
+        problem:"angina pectoris"
+        source:"EtherCIS"
+        sourceId:"12f02a05-a14f-4b35-be45-9e52bbe535ed"
+        terminology:"SNOMED-CT"
+    }
+</pre>
+
 {% include image.html file="diagnosis/diagnosescreate.png" url="#" alt="Diagnosis Create" caption="Diagnosis Create" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/problems
+</pre>
+<h4>POST data</h4>
+<pre>
+    {
+        code:"12393890"
+        dateOfOnset:"2017-04-07"
+        description:"qwww"
+        problem:"angina pectoris t"
+        sourceId:""
+        terminology:"qwer"
+    }
+</pre>

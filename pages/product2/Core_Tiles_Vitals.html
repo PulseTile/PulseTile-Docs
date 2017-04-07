@@ -9,8 +9,102 @@ folder: product2
 ---
 
 {% include image.html file="vitals/vitalslist.png" url="#" alt="Vitals list view" caption="Vitals List" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/vitalsigns
+</pre>
+<h4>GET response</h4>
+<pre>
+    {
+        author:"Dr Tony Shannon"
+        dateCreate:1438572182000
+        diastolicBP:"64.0"
+        heartRate:"45.0"
+        levelOfConsciousness:"Alert"
+        newsScore:12
+        oxygenSaturation:"97.0"
+        oxygenSupplemental:"true"
+        respirationRate:"23.0"
+        source:"ethercis"
+        sourceId:"27ee5e25-4c32-46d2-b45a-f74149d72030"
+        systolicBP:"92.0"
+        temperature:35.4
+    }
+</pre>
+
 {% include image.html file="vitals/vitalsdetail.png" url="#" alt="Vitals Detail" caption="Vitals Detail" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/vitalsigns/{sourceId}
+</pre>
+<h4>GET response</h4>
+<pre>
+    {
+        author:"Dr Tony Shannon"
+        dateCreate:1438553462518
+        diastolicBP:60
+        heartRate:45
+        levelOfConsciousness:"Alert"
+        newsScore:12
+        oxygenSaturation:97
+        oxygenSupplemental:"false"
+        respirationRate:25
+        source:"Marand"
+        sourceId:"2f4dff89-a41b-465b-85b6-b81d8a59e7a0"
+        systolicBP:90
+        temperature:35.4
+    }
+</pre>
+
 {% include image.html file="vitals/vitalsedit.png" url="#" alt="Vitals Edit" caption="Vitals Edit" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/vitalsigns
+</pre>
+<h4>GET response</h4>
+<pre>
+    {
+        author:"Dr Tony Shannon"
+        dateCreate:1491571062000
+        diastolicBP:60
+        heartRate:45
+        levelOfConsciousness:"Pain"
+        newsScore:11
+        oxygenSaturation:97
+        oxygenSupplemental:false
+        respirationRate:25
+        source:"Marand"
+        sourceId:"2f4dff89-a41b-465b-85b6-b81d8a59e7a0"
+        systolicBP:90
+        temperature:35.4
+    }
+</pre>
+
 {% include image.html file="vitals/vitalscreate.png" url="#" alt="Vitals Create" caption="Vitals Create" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/vitalsigns
+</pre>
+<h4>GET response</h4>
+<pre>
+    {
+        author:"ripple_osi"
+        dateCreate:1491571176000
+        diastolicBP:"77"
+        heartRate:"55"
+        levelOfConsciousness:"Verbal"
+        newsScore:16
+        oxygenSaturation:"33"
+        oxygenSupplemental:true
+        respirationRate:"33"
+        systolicBP:"88"
+        temperature:"88"
+    }
+</pre>
+
 {% include image.html file="vitals/vitalscharts.png" url="#" alt="Vitals Create" caption="Vitals Chart" %}
 {% include image.html file="vitals/vitalschartdetail.png" url="#" alt="Vitals Create" caption="Vitals Chart Detail" %}

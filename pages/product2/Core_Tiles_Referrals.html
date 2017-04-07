@@ -9,6 +9,101 @@ folder: product2
 ---
 
 {% include image.html file="referrals/referralslist.png" url="#" alt="Referrals list view" caption="Referrals List" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/referrals
+</pre>
+<h4>GET response</h4>
+<pre>
+    {
+        dateOfReferral:1458792662000
+referralFrom:"Tony Shannon"
+referralTo:"Ripplefields Optometry service"
+source:"ethercis"
+sourceId:"94133578-f505-4e76-b4ed-762462508801"
+    }
+</pre>
+
 {% include image.html file="referrals/referralsdetail.png" url="#" alt="Referrals Detail" caption="Referrals Detail" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/referrals/{sourceId}
+</pre>
+<h4>GET response</h4>
+<pre>
+    {
+        author:"c4h_ripple_osi"
+        dateOfReferral:1477994812035
+        referralCareFlow:"Service request sent"
+        referralFrom:"Dr Mason"
+        referralOutcome:""
+        referralRef:"816d8873-ccae-4e2c-bf42-4aee7ffcb802"
+        referralServiceName:"Refer to Thoracic Surgeon"
+        referralState:"planned"
+        referralStateCode:526
+        referralStateDate:1477526400000
+        referralTo:"Royal Brompton"
+        referralType:"Refer to Thoracic Surgeon"
+        source:"Marand"
+        sourceId:"aef53554-8e59-4c26-b4c3-b82ae1d2ddc4"
+    }
+</pre>
+
 {% include image.html file="referrals/referralsedit.png" url="#" alt="Referrals Edit" caption="Referrals Edit" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/referrals
+</pre>
+<h4>PUT data</h4>
+<pre>
+    {
+        author:"c4h_ripple_osi"
+        clinicalSummary:"xxccv"
+        dateCreated:"2017-04-07T13:06:44.937Z"
+        dateOfReferral:1477994812035
+        reason:"zzzxxx"
+        referralCareFlow:"Service request sent"
+        referralFrom:"Dr Mason"
+        referralOutcome:""
+        referralRef:"816d8873-ccae-4e2c-bf42-4aee7ffcb802"
+        referralServiceName:"Refer to Thoracic Surgeon"
+        referralState:"planned"
+        referralStateCode:526
+        referralStateDate:1477526400000
+        referralTo:"Royal Brompton"
+        referralType:"Refer to Thoracic Surgeon"
+        source:"Marand"
+        sourceId:"aef53554-8e59-4c26-b4c3-b82ae1d2ddc4"
+    }
+</pre>
+
 {% include image.html file="referrals/referralscreate.png" url="#" alt="Referrals Create" caption="Referrals Create" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/referrals
+</pre>
+<h4>POST data</h4>
+<pre>
+    {
+        author:"c4h_ripple_osi"
+        clinicalSummary:"xxccv"
+        dateCreated:"2017-04-07T13:06:44.937Z"
+        dateOfReferral:1477994812035
+        reason:"zzzxxx"
+        referralCareFlow:"Service request sent"
+        referralFrom:"Dr Mason"
+        referralOutcome:""
+        referralRef:"816d8873-ccae-4e2c-bf42-4aee7ffcb802"
+        referralServiceName:"Refer to Thoracic Surgeon"
+        referralState:"planned"
+        referralStateCode:526
+        referralStateDate:1477526400000
+        referralTo:"Royal Brompton"
+        referralType:"Refer to Thoracic Surgeon"
+        source:"Marand"
+    }
+</pre>

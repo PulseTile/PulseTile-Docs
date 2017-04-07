@@ -8,10 +8,79 @@ permalink: Core_Tiles_Events.html
 folder: product2
 ---
 
-{% include image.html file="events/eventslist.png" url="#" alt="Contacts list view" caption="Events List" %}
-{% include image.html file="events/eventsdetail.png" url="#" alt="Contacts Detail" caption="Events Detail" %}
-{% include image.html file="events/eventschat.png" url="#" alt="Contacts Create" caption="Events Chat" %}
-{% include image.html file="events/eventsstart.png" url="#" alt="Contacts Detail" caption="Events Start Appointment" %}
-{% include image.html file="events/eventsline.png" url="#" alt="Contacts Edit" caption="Events Time line" %}
-{% include image.html file="events/eventscreate.png" url="#" alt="Contacts list view" caption="Events Create" %}
-{% include image.html file="events/eventscreatecalendar.png" url="#" alt="Contacts Edit" caption="Events Calendar" %}
+{% include image.html file="events/eventslist.png" url="#" alt="Events list view" caption="Events List" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/appointments
+</pre>
+<h4>GET response</h4>
+<pre>
+    {
+        dateOfAppointment:1423440000000
+        serviceTeam:"Performance20160818-10:22:44.980"
+        source:"marand"
+        sourceId:"6ba725c8-9a61-41e9-82c0-d4c6788d9ec8"
+        timeOfAppointment:32400000
+    }
+</pre>
+
+{% include image.html file="events/eventsdetail.png" url="#" alt="Events Detail" caption="Events Detail" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/appointments/{sourceId}
+</pre>
+<h4>GET response</h4>
+<pre>
+    {
+        author:"c4h_ripple_osi"
+        dateCreated:1471513613105
+        dateOfAppointment:1423440000000
+        location:"Leeds General"
+        serviceTeam:"${uniqueName}"
+        source:"Marand"
+        sourceId:"f12c293d-6edb-4c38-b52a-d086c23d0d3f"
+        status:"Scheduled"
+        timeOfAppointment:32400000
+    }
+</pre>
+
+{% include image.html file="events/eventschat.png" url="#" alt="Events Chat" caption="Events Chat" %}
+
+<h4>socket channel</h4>
+<pre>
+    socket.emit('appointment:messages', {appointmentId: sourceId});
+</pre>
+<h4>response</h4>
+<pre>
+    {
+        $$hashKey:"object:12432"
+        appointment_id:"12164779-2c69-4a67-89bb-ac6620c77475"
+        author:""
+        message:"<8B@89 @82>H5O has left the chat room"
+        timestamp:"11:12"
+    }
+</pre>
+
+{% include image.html file="events/eventsstart.png" url="#" alt="Events Start Appointment" caption="Events Start Appointment" %}
+{% include image.html file="events/eventsline.png" url="#" alt="Events Time line" caption="Events Time line" %}
+{% include image.html file="events/eventscreate.png" url="#" alt="Events Create" caption="Events Create" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/appointments
+</pre>
+<h4>POST data</h4>
+<pre>
+    {
+        dateCreated:"2017-04-07T11:33:43.037Z"
+        dateOfAppointment:"2017-04-24T21:00:00.000Z"
+        location:"qwert"
+        serviceTeam:"test appt"
+        status:"Scheduled"
+        timeOfAppointment:"2017-02-10T14:00:00.000Z"
+    }
+</pre>
+
+{% include image.html file="events/eventscreatecalendar.png" url="#" alt="Events Calendar" caption="Events Calendar" %}

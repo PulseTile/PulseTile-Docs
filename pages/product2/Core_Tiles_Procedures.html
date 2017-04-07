@@ -9,6 +9,81 @@ folder: product2
 ---
 
 {% include image.html file="procedures/procedureslist.png" url="#" alt="Procedures list view" caption="Procedures List" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/procedures
+</pre>
+<h4>GET response</h4>
+<pre>
+    {
+        date:1436969493829
+name:"total replacement of hip"
+source:"ethercis"
+sourceId:"fa7408c3-7d69-4f50-84ac-cbf735a0ab18"
+time:54693829
+    }
+</pre>
+
 {% include image.html file="procedures/proceduresdetail.png" url="#" alt="Procedures Detail" caption="Procedures Detail" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/procedures/{sourceId}
+</pre>
+<h4>GET response</h4>
+<pre>
+    {
+        author:"Dr Ian Shannon"
+        currentStatus:"completed"
+        date:1483695900000
+        dateSubmitted:1499452459000
+        name:"Proc Name"
+        notes:"Proc Notes (Marand 06-Jan 11:33)"
+        performer:"Performer"
+        procedureCode:12345
+        procedureName:"Proc Name"
+        procedureTerminology:"SNOMED-CT"
+        source:"EtherCIS"
+        sourceId:"bab412c3-132f-487a-b63b-0cb99dbe4358"
+        time:35100000
+    }
+</pre>
+
 {% include image.html file="procedures/proceduresedit.png" url="#" alt="Procedures Edit" caption="Procedures Edit" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/procedures
+</pre>
+<h4>PUT data</h4>
+<pre>
+    {
+        author:"Dr Ian Shannon"
+        currentStatus:"completed"
+        date:1483695900000
+        dateSubmitted:1499452459000
+        name:"Proc Name"
+        notes:"Proc Notes (Marand 06-Jan 11:33)"
+        performer:"Performer"
+        procedureCode:12345
+        procedureName:"Proc Name"
+        procedureTerminology:"SNOMED-CT"
+        source:"EtherCIS"
+        sourceId:"bab412c3-132f-487a-b63b-0cb99dbe4358"
+        time:35100000
+    }
+</pre>
+
 {% include image.html file="procedures/procedurescreate.png" url="#" alt="Procedures Create" caption="Procedures Create" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/procedures
+</pre>
+<h4>POST data</h4>
+<pre>
+    {
+        procedureName:"Performer"
+    }
+</pre>

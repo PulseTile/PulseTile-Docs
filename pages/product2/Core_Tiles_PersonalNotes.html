@@ -9,6 +9,69 @@ folder: product2
 ---
 
 {% include image.html file="personalnotes/personalnoteslist.png" url="#" alt="Personal Notes list view" caption="Personal Notes List" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/personalnotes
+</pre>
+<h4>GET response</h4>
+<pre>
+    {
+        author:"Dr Tony Shannon"
+        dateCreated:1456287062000
+        noteType:"Personal Notes"
+        source:"ethercis"
+        sourceId:"23dbda9d-7688-426c-8cb8-312a4f351071"
+    }
+</pre>
+
 {% include image.html file="personalnotes/personalnotesdetail.png" url="#" alt="Personal Notes Detail" caption="Personal Notes Detail" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/personalnotes/{sourceId}
+</pre>
+<h4>GET response</h4>
+<pre>
+    {
+        author:"Dr Tony Shannon"
+        dateCreated:1482196404000
+        noteType:"Personal Note"
+        notes:"undefined"
+        source:"EtherCIS"
+        sourceId:"b6c198be-2c37-4494-89c3-4fc5a7a92eff"
+    }
+</pre>
+
 {% include image.html file="personalnotes/personalnotesedit.png" url="#" alt="Personal Notes Edit" caption="Personal Notes Edit" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/personalnotes
+</pre>
+<h4>PUT data</h4>
+<pre>
+    {
+        author:"Dr Tony Shannon"
+        noteType:"Personal Note"
+        notes:"Personal Note"
+        source:"EtherCIS"
+        sourceId:"b6c198be-2c37-4494-89c3-4fc5a7a92eff"
+    }
+</pre>
+
 {% include image.html file="personalnotes/personalnotescreate.png" url="#" alt="Personal Notes Create" caption="Personal Notes Create" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/personalnotes
+</pre>
+<h4>POST data</h4>
+<pre>
+    {
+        dateCreated:"2017-04-07"
+        noteType:"Personal Note 33"
+        notes:Personal Note t
+        source:"openehr"
+    }
+</pre>

@@ -9,6 +9,80 @@ folder: product2
 ---
 
 {% include image.html file="mdt/mdtlist.png" url="#" alt="MDT list view" caption="MDT List" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/mdtreports
+</pre>
+<h4>GET response</h4>
+<pre>
+    {
+        dateOfMeeting:1455062400000
+        dateOfRequest:1458739933006
+        serviceTeam:""
+        source:"marand"
+        sourceId:"5836b208-160f-4925-b2b1-a26626432940"
+    }
+</pre>
+
 {% include image.html file="mdt/mdtdetail.png" url="#" alt="MDT Detail" caption="MDT Detail" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/mdtreports/{sourceId}
+</pre>
+<h4>GET response</h4>
+<pre>
+    {
+        dateOfMeeting:1451779200000
+        dateOfRequest:1459497013278
+        notes:"Discussion abc"
+        question:"Question abc"
+        servicePageLink:null
+        serviceTeam:""
+        source:"Marand"
+        sourceId:"7148406b-90dd-4ffe-899e-0b86a3943a91"
+        timeOfMeeting:0
+    }
+</pre>
+
 {% include image.html file="mdt/mdtedit.png" url="#" alt="MDT Edit" caption="MDT Edit" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/mdtreports
+</pre>
+<h4>PUT data</h4>
+<pre>
+    {
+        dateOfMeeting:1451779200000
+        dateOfRequest:1459497013278
+        dateSubmitted:"2017-04-07T12:45:45.707Z"
+        notes:"Discussion abc"
+        question:"Question abc"
+        servicePageLink:"qqqq"
+        serviceTeam:"qqqq"
+        source:"Marand"
+        sourceId:"7148406b-90dd-4ffe-899e-0b86a3943a91"
+        timeOfMeeting:0
+    }
+</pre>
+
 {% include image.html file="mdt/mdtcreate.png" url="#" alt="MDT Create" caption="MDT Create" %}
+
+<h4>API URL</h4>
+<pre>
+    /api/patients/{patientId}/mdtreports
+</pre>
+<h4>POST data</h4>
+<pre>
+    {
+        dateOfMeeting:"2017-04-07T21:00:00.000Z"
+        dateOfRequest:"2017-04-06T21:00:00.000Z"
+        dateSubmitted:"2017-04-07T12:46:17.372Z"
+        relationshipCode:"at0039"
+        relationshipTerminology:"local"
+        servicePageLink:"qqqq"
+        serviceTeam:"qqqqq"
+    }
+</pre>
