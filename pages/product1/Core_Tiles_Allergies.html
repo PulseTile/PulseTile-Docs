@@ -8,14 +8,14 @@ permalink: Core_Tiles_Allergies.html
 folder: product1
 ---
 
-
+<h4>Allergies List</h4>
 {% include image.html file="allergies/allergiesgeneral.png" url="#" alt="Allergy list view" caption="Allergies List" %}
 
-<h4>API URL</h4>
+<h5>API URL</h5>
 <pre>
     /api/patients/{patientId}/allergies
 </pre>
-<h4>GET response</h4>
+<h5>GET response</h5>
 <pre>
     {
         cause:"New paracetamol"
@@ -25,13 +25,14 @@ folder: product1
     }
 </pre>
 
+https://github.com/PulseTile/PulseTile/blob/master/src/app/rippleui/pages/allergies/allergies-list.component.js
 <pre>
     //component template
     let templateAllergiesList = require('./allergies-list.html');
 
     //controller init
     class AllergiesListController {
-        constructor($scope, $state, $stateParams, $ngRedux, allergiesActions, serviceRequests, usSpinnerService) {
+        constructor($scope, $state, $stateParams, $ngRedux, allergiesActions) {
         //your code for module functionality
         }
 
@@ -39,22 +40,23 @@ folder: product1
         const AllergiesListComponent = {
           template: templateAllergiesList,
           controller: AllergiesListController
-    };
+        };
 
     //inject services/modules to controller
-    AllergiesListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'allergiesActions', 'serviceRequests', 'usSpinnerService'];
+    AllergiesListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'allergiesActions'];
 
     //es6 export for component
     export default AllergiesListComponent;
 </pre>
 
+<h4>Allergies Detail</h4>
 {% include image.html file="allergies/allergiesdetail.png" url="#" alt="Allergy Detail" caption="Allergies Detail" %}
 
-<h4>API URL</h4>
+<h5>API URL</h5>
 <pre>
     /api/patients/{patientId}/allergies/{sourceId}
 </pre>
-<h4>GET response</h4>
+<h5>GET response</h5>
 <pre>
     {
         author:"Dr Tony Shannon"
@@ -69,13 +71,38 @@ folder: product1
     }
 </pre>
 
+https://github.com/PulseTile/PulseTile/blob/master/src/app/rippleui/pages/allergies/allergies-detail.component.js
+<pre>
+    //component template
+    let templateAllergiesList = require('./allergies-detail.html');
+
+    //controller init
+    class AllergiesDetailController {
+        constructor($scope, $state, $stateParams, $ngRedux, allergiesActions) {
+        //your code for module functionality
+        }
+
+    //component init
+        const AllergiesDetailComponent = {
+          template: templateAllergiesDetail,
+          controller: AllergiesDetailController
+        };
+
+    //inject services/modules to controller
+    AllergiesDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'allergiesActions'];
+
+    //es6 export for component
+    export default AllergiesDetailComponent;
+</pre>
+
+<h4>Allergies Edit</h4>
 {% include image.html file="allergies/allergiesedit.png" url="#" alt="Allergy Edit" caption="Allergies Edit" %}
 
-<h4>API URL</h4>
+<h5>API URL</h5>
 <pre>
     /api/patients/{patientId}/allergies/{sourceId}
 </pre>
-<h4>PUT data</h4>
+<h5>PUT data</h5>
 <pre>
     {
         cause:"ww test 01 edit"
@@ -87,13 +114,14 @@ folder: product1
     }
 </pre>
 
+<h4>Allergies Create</h4>
 {% include image.html file="allergies/allergiescreate.png" url="#" alt="Allergy Create" caption="Allergies Create" %}
 
-<h4>API URL</h4>
+<h5>API URL</h5>
 <pre>
     /api/patients/{patientId}/allergies
 </pre>
-<h4>POST data</h4>
+<h5>POST data</h5>
 <pre>
     {
         cause:"create new test"
@@ -104,5 +132,89 @@ folder: product1
     }
 </pre>
 
+https://github.com/PulseTile/PulseTile/blob/master/src/app/rippleui/pages/allergies/allergies-create.component.js
+<pre>
+    //component template
+    let templateAllergiesCreate = require('./allergies-create.html');
+
+    //controller init
+    class AllergiesCreateController {
+        constructor($scope, $state, $stateParams, $ngRedux, allergiesActions) {
+        //your code for module functionality
+        }
+
+    //component init
+        const AllergiesCreateComponent = {
+          template: templateAllergiesCreate,
+          controller: AllergiesCreateController
+        };
+
+    //inject services/modules to controller
+    AllergiesCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'allergiesActions'];
+
+    //es6 export for component
+    export default AllergiesCreateComponent;
+</pre>
+
 {% include image.html file="allergies/allergiesfilter.png" url="#" alt="Allergy Filter" caption="Allergies Filter" %}
+
+<h4>Allergies Actions</h4>
+https://github.com/PulseTile/PulseTile/blob/master/src/app/rippleui/pages/allergies/allergies-actions.js
+
+<pre>
+    //es6 import modules
+    import {bindActionCreators} from 'redux';
+    import * as types from '../../../constants/ActionTypes';
+
+    //es6 export function
+    export function all(patientId) {
+      return {
+        types: [types.ALLERGIES, types.ALLERGIES_SUCCESS, types.ALLERGIES_ERROR],
+
+        shouldCallAPI: (state) => !state.allergies.response,
+
+        config: {
+          method: 'get',
+          url: '/api/patients/' + patientId + '/allergies'
+        },
+
+        meta: {
+          timestamp: Date.now()
+        }
+      };
+    }
+</pre>
+
+<h4>Allergies Reducer</h4>
+https://github.com/PulseTile/PulseTile/blob/master/src/app/rippleui/pages/allergies/allergies-reducer-all.js
+
+<pre>
+    //es6 import modules
+    import * as types from '../../../constants/ActionTypes';
+
+    const INITIAL_STATE = {
+      isFetching: false,
+      error: false,
+      data: null,
+      dataGet: null,
+      dataCreate: null,
+      dataUpdate: null
+    };
+
+    //es6 export function
+    export default function allergies(state = INITIAL_STATE, action) {
+      const {payload} = action;
+
+    //redux action for Allergies requests
+      var actions = {
+        [types.ALLERGIES]: (state) => {
+          state.dataCreate = null;
+          state.dataUpdate = null;
+          return Object.assign({}, state, {
+            isFetching: true,
+            error: false
+          });
+        }
+    }
+</pre>
 
