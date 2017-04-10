@@ -8,13 +8,14 @@ permalink: Core_Tiles_Multipatients.html
 folder: product1
 ---
 
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/master/src/app/rippleui/pages/patients-list-full/patients-list-full.component.js">Multipatients view</a></h4>
 {% include image.html file="multipatientsview/multipatientslist.png" url="#" alt="Charts view" caption="Multipatients view" %}
 
-<h4>API URL</h4>
+<h5>API URL</h5>
 <pre>
     /api/patients
 </pre>
-<h4>GET data</h4>
+<h5>GET data</h5>
 <pre>
     {
         address:"6948 Et St., Halesowen, Worcestershire, VX27 5DV"
@@ -29,6 +30,27 @@ folder: product1
         pasNo:"352541"
         phone:"(011981) 32362"
     }
+</pre>
+
+<pre>
+    //component template
+    let templatePatientsListFull = require('./patients-list-full.html');
+
+    //controller init
+    class PatientsListFullController {
+        constructor($scope, $window, $rootScope, $state, $stateParams, $ngRedux) {
+
+        }
+
+        const PatientsSummaryComponent = {
+          template: templatePatientsListFull,
+          controller: PatientsListFullController
+        };
+
+    //inject services/modules to controller
+    PatientsListFullController.$inject = ['$scope', '$window', '$rootScope', '$state', '$stateParams', '$ngRedux'];
+    //es6 export for component
+    export default PatientsSummaryComponent;
 </pre>
 
 {% include image.html file="multipatientsview/listsfilter.png" url="#" alt="Charts view" caption="Multipatients filters" %}
