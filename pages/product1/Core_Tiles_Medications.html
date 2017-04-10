@@ -8,13 +8,14 @@ permalink: Core_Tiles_Medications.html
 folder: product1
 ---
 
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/master/src/app/rippleui/pages/medications/medications-list.component.js">Medications List</a></h4>
 {% include image.html file="medications/medicationlist.png" url="#" alt="Medications list view" caption="Medications List" %}
 
-<h4>API URL</h4>
+<h5>API URL</h5>
 <pre>
     /api/patients/{patientId}/medications
 </pre>
-<h4>GET data</h4>
+<h5>GET data</h5>
 <pre>
     {
         dateCreated:1460741442000
@@ -24,14 +25,35 @@ folder: product1
         sourceId:"dd51f0f9-8ab0-40f6-969f-87d4af5edcd8"
     }
 </pre>
+<pre>
+    //component template
+    let templateMedicationsList = require('./medications-list.html');
 
+    //controller init
+    class MedicationsListController {
+        constructor($scope, $state, $stateParams, $ngRedux, medicationsActions, serviceRequests, usSpinnerService) {
+        }
+
+        //component init
+        const MedicationsListComponent = {
+          template: templateMedicationsList,
+          controller: MedicationsListController
+        };
+
+    //inject services/modules to controller
+    MedicationsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'medicationsActions', 'serviceRequests', 'usSpinnerService'];
+    //es6 export for component
+    export default MedicationsListComponent;
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/master/src/app/rippleui/pages/medications/medications-detail.component.js">Medications Detail</a></h4>
 {% include image.html file="medications/medicationdetail.png" url="#" alt="Medications Detail" caption="Medications Detail" %}
 
-<h4>API URL</h4>
+<h5>API URL</h5>
 <pre>
     /api/patients/{patientId}/medications/{sourceId}
 </pre>
-<h4>GET data</h4>
+<h5>GET data</h5>
 <pre>
     {
         author:"c4h_ripple_osi"
@@ -49,14 +71,35 @@ folder: product1
         startTime:46800000
     }
 </pre>
+<pre>
+    //component template
+    let templateMedicationsDetail= require('./medications-detail.html');
 
+    //controller init
+    class MedicationsDetailController {
+        constructor($scope, $state, $stateParams, $ngRedux, medicationsActions, usSpinnerService, serviceRequests) {
+        }
+
+        //component init
+        const MedicationsDetailComponent = {
+          template: templateMedicationsDetail,
+          controller: MedicationsDetailController
+        };
+
+    //inject services/modules to controller
+    MedicationsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'medicationsActions', 'usSpinnerService', 'serviceRequests'];
+    //es6 export for component
+    export default MedicationsDetailComponent;
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/master/src/app/rippleui/pages/medications/medications-create.component.js">Medications Create</a></h4>
 {% include image.html file="medications/medicationprescription.png" url="#" alt="Medications Create" caption="Medications Prescription" %}
 
-<h4>API URL</h4>
+<h5>API URL</h5>
 <pre>
     /api/patients/{patientId}/medications/{sourceId}
 </pre>
-<h4>POST data</h4>
+<h5>POST data</h5>
 <pre>
     {
         doseAmount:"22"
@@ -69,14 +112,35 @@ folder: product1
         startDate:"2017-04-07T07:02:47.576Z"
     }
 </pre>
+<pre>
+    //component template
+    let templateMedicationsCreate = require('./medications-create.html');
+
+    //controller init
+    class MedicationsCreateController {
+        constructor($scope, $state, $stateParams, $ngRedux, medicationsActions, serviceRequests, usSpinnerService) {
+        }
+
+        //component init
+        const MedicationsCreateComponent = {
+          template: templateMedicationsCreate,
+          controller: MedicationsCreateController
+        };
+
+    //inject services/modules to controller
+    MedicationsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'medicationsActions', 'serviceRequests', 'usSpinnerService'];
+    //es6 export for component
+    export default MedicationsCreateComponent;
+
+</pre>
 
 {% include image.html file="medications/medicationedit.png" url="#" alt="Medications Edit" caption="Medications Edit" %}
 
-<h4>API URL</h4>
+<h5>API URL</h5>
 <pre>
     /api/patients/{patientId}/medications/{sourceId}
 </pre>
-<h4>PUT data</h4>
+<h5>PUT data</h5>
 <pre>
     {
         author:"c4h_ripple_osi"
