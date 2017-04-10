@@ -8,6 +8,7 @@ permalink: Core_Tiles_PatientSummary.html
 folder: product1
 ---
 
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/master/src/app/rippleui/pages/patient-summary/patients-summary.component.js">Patient Summary</a></h4>
 {% include image.html file="patientsummary/patientsummary.png" url="#" alt="Patient Summary list view" caption="Patient Summary List" %}
 
 <h4>API URL</h4>
@@ -45,4 +46,26 @@ folder: product1
         telephone:"07624 647524"
         transfers:[]
     }
+</pre>
+
+<pre>
+    //component template
+    let templatePatientsSummary = require('./patients-summary.html');
+
+    //controller init
+    class PatientsSummaryController {
+        constructor($scope, $state, $stateParams, $ngRedux, $location, patientsActions) {
+        }
+
+    //component init
+    const PatientsSummaryComponent = {
+      template: templatePatientsSummary,
+      controller: PatientsSummaryController
+    };
+
+    //inject services/modules to controller
+    PatientsSummaryController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', '$location', 'patientsActions'];
+
+    //es6 export for component
+    export default PatientsSummaryComponent;
 </pre>
