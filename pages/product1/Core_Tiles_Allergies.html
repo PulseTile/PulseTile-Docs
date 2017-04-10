@@ -25,6 +25,29 @@ folder: product1
     }
 </pre>
 
+<pre>
+    //component template
+    let templateAllergiesList = require('./allergies-list.html');
+
+    //controller init
+    class AllergiesListController {
+        constructor($scope, $state, $stateParams, $ngRedux, allergiesActions, serviceRequests, usSpinnerService) {
+        //your code for module functionality
+        }
+
+    //component init
+        const AllergiesListComponent = {
+          template: templateAllergiesList,
+          controller: AllergiesListController
+    };
+
+    //inject services/modules to controller
+    AllergiesListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'allergiesActions', 'serviceRequests', 'usSpinnerService'];
+
+    //es6 export for component
+    export default AllergiesListComponent;
+</pre>
+
 {% include image.html file="allergies/allergiesdetail.png" url="#" alt="Allergy Detail" caption="Allergies Detail" %}
 
 <h4>API URL</h4>
