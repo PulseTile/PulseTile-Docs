@@ -8,13 +8,14 @@ permalink: Core_Tiles_Procedures.html
 folder: product2
 ---
 
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/procedures/procedures-list.component.js">Procedures List</a></h4>
 {% include image.html file="procedures/procedureslist.png" url="#" alt="Procedures list view" caption="Procedures List" %}
 
-<h4>API URL</h4>
+<h5>API URL</h5>
 <pre>
     /api/patients/{patientId}/procedures
 </pre>
-<h4>GET response</h4>
+<h5>GET response</h5>
 <pre>
     {
         date:1436969493829
@@ -25,13 +26,36 @@ folder: product2
     }
 </pre>
 
+<h5>Component structure</h5>
+<pre>
+    //component template
+    let templateProceduresList = require('./procedures-list.html');
+
+    //controller init
+    class ProceduresListController {
+        constructor($scope, $state, $stateParams, $ngRedux, proceduresActions, serviceRequests, usSpinnerService, serviceFormatted) {
+        }
+
+    //component init
+    const ProceduresListComponent = {
+      template: templateProceduresList,
+      controller: ProceduresListController
+    };
+
+    //inject services/modules to controller
+    ProceduresListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'proceduresActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
+    //es6 export for component
+    export default ProceduresListComponent;
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/procedures/procedures-detail.component.js">Procedures Detail</a></h4>
 {% include image.html file="procedures/proceduresdetail.png" url="#" alt="Procedures Detail" caption="Procedures Detail" %}
 
-<h4>API URL</h4>
+<h5>API URL</h5>
 <pre>
     /api/patients/{patientId}/procedures/{sourceId}
 </pre>
-<h4>GET response</h4>
+<h5>GET response</h5>
 <pre>
     {
         author:"Dr Ian Shannon"
@@ -48,15 +72,37 @@ folder: product2
         sourceId:"bab412c3-132f-487a-b63b-0cb99dbe4358"
         time:35100000
     }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+    //component template
+    let templateProceduresDetail= require('./procedures-detail.html');
+
+    //controller init
+    class ProceduresDetailController {
+        constructor($scope, $state, $stateParams, $ngRedux, proceduresActions, usSpinnerService, serviceRequests) {
+        }
+
+    //component init
+    const ProceduresDetailComponent = {
+      template: templateProceduresDetail,
+      controller: ProceduresDetailController
+    };
+
+    //inject services/modules to controller
+    ProceduresDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'proceduresActions', 'usSpinnerService', 'serviceRequests'];
+    //es6 export for component
+    export default ProceduresDetailComponent;
 </pre>
 
 {% include image.html file="procedures/proceduresedit.png" url="#" alt="Procedures Edit" caption="Procedures Edit" %}
 
-<h4>API URL</h4>
+<h5>API URL</h5>
 <pre>
     /api/patients/{patientId}/procedures
 </pre>
-<h4>PUT data</h4>
+<h5>PUT data</h5>
 <pre>
     {
         author:"Dr Ian Shannon"
@@ -75,15 +121,95 @@ folder: product2
     }
 </pre>
 
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/procedures/procedures-create.component.js">Procedures Create</a></h4>
 {% include image.html file="procedures/procedurescreate.png" url="#" alt="Procedures Create" caption="Procedures Create" %}
 
-<h4>API URL</h4>
+<h5>API URL</h5>
 <pre>
     /api/patients/{patientId}/procedures
 </pre>
-<h4>POST data</h4>
+<h5>POST data</h5>
 <pre>
     {
         procedureName:"Performer"
     }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+    //component template
+    let templateProceduresCreate = require('./procedures-create.html');
+
+    //controller init
+    class ProceduresCreateController {
+        constructor($scope, $state, $stateParams, $ngRedux, patientsActions, proceduresActions, serviceRequests) {
+        }
+
+    //component init
+    const ProceduresCreateComponent = {
+      template: templateProceduresCreate,
+      controller: ProceduresCreateController
+    };
+
+    //inject services/modules to controller
+    ProceduresCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'proceduresActions', 'serviceRequests'];
+    //es6 export for component
+    export default ProceduresCreateComponent;
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/procedures/procedures-actions.js">Procedures Actions</a></h4>
+
+<h5>Component structure</h5>
+<pre>
+    //es6 import modules
+    import {bindActionCreators} from 'redux';
+    import * as types from '../../../constants/ActionTypes';
+
+    //es6 export function
+    export function all(patientId) {
+      return {
+        types: [types.PROCEDURES, types.PROCEDURES_SUCCESS, types.PROCEDURES_ERROR],
+
+        shouldCallAPI: (state) => !state.procedures.response,
+
+        config: {
+          method: 'get',
+          url: '/api/patients/' + patientId + '/procedures'
+        },
+
+        meta: {
+          timestamp: Date.now()
+        }
+      };
+    }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/procedures/procedures-reducer-all.js">Procedures Reducer</a></h4>
+
+<h5>Component structure</h5>
+<pre>
+    //es6 import modules
+    import * as types from '../../../constants/ActionTypes';
+
+    const INITIAL_STATE = {
+      isFetching: false,
+      error: false,
+      data: null,
+      dataGet: null,
+      dataCreate: null,
+      dataUpdate: null
+    };
+
+    //es6 export function
+    export default function procedures(state = INITIAL_STATE, action) {
+      const {payload} = action;
+
+    //redux action for Procedures requests
+      var actions = {
+        [[types.PROCEDURES]: (state) => {
+          return Object.assign({}, state, {
+            isFetching: true,
+            error: false
+          });
+        }
 </pre>

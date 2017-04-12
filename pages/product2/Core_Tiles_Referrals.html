@@ -8,30 +8,54 @@ permalink: Core_Tiles_Referrals.html
 folder: product2
 ---
 
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/referrals/referrals-list.component.js">Referrals List</a></h4>
 {% include image.html file="referrals/referralslist.png" url="#" alt="Referrals list view" caption="Referrals List" %}
 
-<h4>API URL</h4>
+<h5>API URL</h5>
 <pre>
     /api/patients/{patientId}/referrals
 </pre>
-<h4>GET response</h4>
+<h5>GET response</h5>
 <pre>
     {
         dateOfReferral:1458792662000
-referralFrom:"Tony Shannon"
-referralTo:"Ripplefields Optometry service"
-source:"ethercis"
-sourceId:"94133578-f505-4e76-b4ed-762462508801"
+        referralFrom:"Tony Shannon"
+        referralTo:"Ripplefields Optometry service"
+        source:"ethercis"
+        sourceId:"94133578-f505-4e76-b4ed-762462508801"
     }
 </pre>
 
+<h5>Component structure</h5>
+<pre>
+    //component template
+    let templateReferralsList = require('./referrals-list.html');
+
+    //controller init
+    class ReferralsListController {
+        constructor($scope, $state, $stateParams, $ngRedux, referralsActions, serviceRequests, usSpinnerService, serviceFormatted) {
+        }
+
+    //component init
+    const ReferralsListComponent = {
+      template: templateReferralsList,
+      controller: ReferralsListController
+    };
+
+    //inject services/modules to controller
+    ReferralsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'referralsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
+    //es6 export for component
+    export default ReferralsListComponent;
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/referrals/referrals-detail.component.js">Referrals Detail</a></h4>
 {% include image.html file="referrals/referralsdetail.png" url="#" alt="Referrals Detail" caption="Referrals Detail" %}
 
-<h4>API URL</h4>
+<h5>API URL</h5>
 <pre>
     /api/patients/{patientId}/referrals/{sourceId}
 </pre>
-<h4>GET response</h4>
+<h5>GET response</h5>
 <pre>
     {
         author:"c4h_ripple_osi"
@@ -49,15 +73,37 @@ sourceId:"94133578-f505-4e76-b4ed-762462508801"
         source:"Marand"
         sourceId:"aef53554-8e59-4c26-b4c3-b82ae1d2ddc4"
     }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+    //component template
+    let templateReferralsDetail= require('./referrals-detail.html');
+
+    //controller init
+    class ReferralsDetailController {
+        constructor($scope, $state, $stateParams, $ngRedux, referralsActions, usSpinnerService, serviceRequests) {
+        }
+
+    //component init
+    const ReferralsDetailComponent = {
+      template: templateReferralsDetail,
+      controller: ReferralsDetailController
+    };
+
+    //inject services/modules to controller
+    ReferralsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'referralsActions', 'usSpinnerService', 'serviceRequests'];
+    //es6 export for component
+    export default ReferralsDetailComponent;
 </pre>
 
 {% include image.html file="referrals/referralsedit.png" url="#" alt="Referrals Edit" caption="Referrals Edit" %}
 
-<h4>API URL</h4>
+<h5>API URL</h5>
 <pre>
     /api/patients/{patientId}/referrals
 </pre>
-<h4>PUT data</h4>
+<h5>PUT data</h5>
 <pre>
     {
         author:"c4h_ripple_osi"
@@ -80,13 +126,14 @@ sourceId:"94133578-f505-4e76-b4ed-762462508801"
     }
 </pre>
 
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/referrals/referrals-create.component.js">Referrals Create</a></h4>
 {% include image.html file="referrals/referralscreate.png" url="#" alt="Referrals Create" caption="Referrals Create" %}
 
-<h4>API URL</h4>
+<h5>API URL</h5>
 <pre>
     /api/patients/{patientId}/referrals
 </pre>
-<h4>POST data</h4>
+<h5>POST data</h5>
 <pre>
     {
         author:"c4h_ripple_osi"
@@ -106,4 +153,83 @@ sourceId:"94133578-f505-4e76-b4ed-762462508801"
         referralType:"Refer to Thoracic Surgeon"
         source:"Marand"
     }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+    //component template
+    let templateCreate= require('./referrals-create.html');
+
+    //controller init
+    class ReferralsCreateController {
+        constructor($scope, $state, $stateParams, $ngRedux, referralsActions, usSpinnerService, serviceRequests) {
+        }
+
+    //component init
+    const ReferralsCreateComponent = {
+      template: templateCreate,
+      controller: ReferralsCreateController
+    };
+
+    //inject services/modules to controller
+    ReferralsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'referralsActions', 'usSpinnerService', 'serviceRequests'];
+    //es6 export for component
+    export default ReferralsCreateComponent;
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/referrals/referrals-actions.js">Referrals Actions</a></h4>
+
+<h5>Component structure</h5>
+<pre>
+    //es6 import modules
+    import {bindActionCreators} from 'redux';
+    import * as types from '../../../constants/ActionTypes';
+
+    //es6 export function
+    export function all(patientId) {
+      return {
+        types: [types.REFERRALS, types.REFERRALS_SUCCESS, types.REFERRALS_ERROR],
+
+        shouldCallAPI: (state) => !state.referrals.response,
+
+        config: {
+          method: 'get',
+          url: '/api/patients/' + patientId + '/referrals'
+        },
+
+        meta: {
+          timestamp: Date.now()
+        }
+      };
+    }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/referrals/referrals-reducer-all.js">Referrals Reducer</a></h4>
+
+<h5>Component structure</h5>
+<pre>
+    //es6 import modules
+    import * as types from '../../../constants/ActionTypes';
+
+    const INITIAL_STATE = {
+      isFetching: false,
+      error: false,
+      data: null,
+      dataGet: null,
+      dataCreate: null,
+      dataUpdate: null
+    };
+
+    //es6 export function
+    export default function referrals(state = INITIAL_STATE, action) {
+      const {payload} = action;
+
+    //redux action for Referrals requests
+      var actions = {
+        [[types.REFERRALS]: (state) => {
+          return Object.assign({}, state, {
+            isFetching: true,
+            error: false
+          });
+        }
 </pre>
