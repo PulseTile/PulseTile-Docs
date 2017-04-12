@@ -47,24 +47,24 @@ entries:
       output: web, pdf
 
   - title: Technologies
+    output: web, pdf
+
+    folderitems:
+    - title: Redux
+      url: /redux-technology.html
       output: web, pdf
 
-      folderitems:
-      - title: Redux
-        url: /redux-technology.html
-        output: web, pdf
+    - title: Angular
+      url: /angular-technology.html
+      output: web, pdf
 
-      - title: Angular
-        url: /angular-technology.html
-        output: web, pdf
+    - title: Webpack
+      url: /webpack-technology.html
+      output: web, pdf
 
-      - title: Webpack
-        url: /webpack-technology.html
-        output: web, pdf
-
-      - title: Bower
-        url: /bower-technology.html
-        output: web, pdf
+    - title: Bower
+      url: /bower-technology.html
+      output: web, pdf
 
 
 
