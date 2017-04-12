@@ -3,18 +3,18 @@ title: Vitals module
 keywords: sample
 summary: "Vitals module"
 sidebar: product2_sidebar
-toc: false
 permalink: Core_Tiles_Vitals.html
 folder: product2
 ---
 
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/vitals/vitals-list.component.js">Vitals List</a></h4>
 {% include image.html file="vitals/vitalslist.png" url="#" alt="Vitals list view" caption="Vitals List" %}
 
-<h4>API URL</h4>
+<h5>API URL</h5>
 <pre>
     /api/patients/{patientId}/vitalsigns
 </pre>
-<h4>GET response</h4>
+<h5>GET response</h5>
 <pre>
     {
         author:"Dr Tony Shannon"
@@ -33,13 +33,36 @@ folder: product2
     }
 </pre>
 
+<h5>Component structure</h5>
+<pre>
+    //component template
+    let templateVitalsList = require('./vitals-list.html');
+
+    //controller init
+    class VitalsListController {
+        constructor($scope, $state, $stateParams, $ngRedux, vitalsActions, serviceRequests, usSpinnerService, $window, $timeout, serviceVitalsSigns, serviceFormatted) {
+        }
+
+    //component init
+    const VitalsListComponent = {
+      template: templateVitalsList,
+      controller: VitalsListController
+    };
+
+    //inject services/modules to controller
+    VitalsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'vitalsActions', 'serviceRequests', 'usSpinnerService', '$window', '$timeout', 'serviceVitalsSigns', 'serviceFormatted'];
+    //es6 export for component
+    export default VitalsListComponent;
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/vitals/vitals-detail.component.js">Vitals Detail</a></h4>
 {% include image.html file="vitals/vitalsdetail.png" url="#" alt="Vitals Detail" caption="Vitals Detail" %}
 
-<h4>API URL</h4>
+<h5>API URL</h5>
 <pre>
     /api/patients/{patientId}/vitalsigns/{sourceId}
 </pre>
-<h4>GET response</h4>
+<h5>GET response</h5>
 <pre>
     {
         author:"Dr Tony Shannon"
@@ -58,13 +81,35 @@ folder: product2
     }
 </pre>
 
+<h5>Component structure</h5>
+<pre>
+    //component template
+    let templateVitalsDetail = require('./vitals-detail.html');
+
+    //controller init
+    class VitalsDetailController {
+        constructor($scope, $state, $stateParams, $ngRedux, patientsActions, vitalsActions, serviceRequests, usSpinnerService, serviceVitalsSigns) {
+        }
+
+    //component init
+    const VitalsDetailComponent = {
+      template: templateVitalsDetail,
+      controller: VitalsDetailController
+    };
+
+    //inject services/modules to controller
+    VitalsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'vitalsActions', 'serviceRequests', 'usSpinnerService', 'serviceVitalsSigns'];
+    //es6 export for component
+    export default VitalsDetailComponent;
+</pre>
+
 {% include image.html file="vitals/vitalsedit.png" url="#" alt="Vitals Edit" caption="Vitals Edit" %}
 
-<h4>API URL</h4>
+<h5>API URL</h5>
 <pre>
     /api/patients/{patientId}/vitalsigns
 </pre>
-<h4>GET response</h4>
+<h5>GET response</h5>
 <pre>
     {
         author:"Dr Tony Shannon"
@@ -83,13 +128,14 @@ folder: product2
     }
 </pre>
 
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/vitals/vitals-create.component.js">Vitals Create</a></h4>
 {% include image.html file="vitals/vitalscreate.png" url="#" alt="Vitals Create" caption="Vitals Create" %}
 
-<h4>API URL</h4>
+<h5>API URL</h5>
 <pre>
     /api/patients/{patientId}/vitalsigns
 </pre>
-<h4>GET response</h4>
+<h5>GET response</h5>
 <pre>
     {
         author:"ripple_osi"
@@ -106,5 +152,84 @@ folder: product2
     }
 </pre>
 
+<h5>Component structure</h5>
+<pre>
+    //component template
+    let templateVitalsCreate = require('./vitals-create.html');
+
+    //controller init
+    class VitalsCreateController {
+        constructor($scope, $state, $stateParams, $ngRedux, patientsActions, vitalsActions, serviceRequests, serviceVitalsSigns) {
+        }
+
+    //component init
+    const VitalsCreateComponent = {
+      template: templateVitalsCreate,
+      controller: VitalsCreateController
+    };
+
+    //inject services/modules to controller
+    VitalsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'vitalsActions', 'serviceRequests', 'serviceVitalsSigns'];
+    //es6 export for component
+    export default VitalsCreateComponent;
+</pre>
+
 {% include image.html file="vitals/vitalscharts.png" url="#" alt="Vitals Create" caption="Vitals Chart" %}
 {% include image.html file="vitals/vitalschartdetail.png" url="#" alt="Vitals Create" caption="Vitals Chart Detail" %}
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/vitals/vitals-actions.js">Vitals Actions</a></h4>
+
+<h5>Component structure</h5>
+<pre>
+    //es6 import modules
+    import {bindActionCreators} from 'redux';
+    import * as types from '../../../constants/ActionTypes';
+
+    //es6 export function
+    export function all(patientId) {
+      return {
+        types: [types.VITALS, types.VITALS_SUCCESS, types.VITALS_ERROR],
+
+        shouldCallAPI: (state) => !state.vitals.response,
+
+        config: {
+          method: 'get',
+          url: '/api/patients/' + patientId + '/vitalsigns'
+        },
+
+        meta: {
+          timestamp: Date.now()
+        }
+      };
+    }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/vitals/vitals-reducer-all.js">Vitals Reducer</a></h4>
+
+<h5>Component structure</h5>
+<pre>
+    //es6 import modules
+    import * as types from '../../../constants/ActionTypes';
+
+    const INITIAL_STATE = {
+      isFetching: false,
+      error: false,
+      data: null,
+      dataGet: null,
+      dataCreate: null,
+      dataUpdate: null
+    };
+
+    //es6 export function
+    export default function vitals(state = INITIAL_STATE, action) {
+      const {payload} = action;
+
+    //redux action for Vitals requests
+      var actions = {
+        [[types.VITALS]: (state) => {
+          return Object.assign({}, state, {
+            isFetching: true,
+            error: false
+          });
+        }
+</pre>
