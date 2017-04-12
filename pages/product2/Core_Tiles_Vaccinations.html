@@ -7,7 +7,203 @@ permalink: Core_Tiles_Vaccinations.html
 folder: product2
 ---
 
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/vaccinations/vaccinations-list.component.js">Vaccinations List</a></h4>
 {% include image.html file="vaccinations/vaccinationslist.png" url="#" alt="Vaccinations list view" caption="Vaccinations List" %}
+
+<h5>API URL</h5>
+<pre>
+    /api/patients/{patientId}/vaccinations
+</pre>
+<h5>GET response</h5>
+<pre>
+    {
+        dateCreated:1356149462000
+        source:"ethercis"
+        sourceId:"3e13f196-2334-41b6-b788-660464e7436a"
+        vaccinationName:"Influenza"
+    }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+    //component template
+    let templateVaccinationsList = require('./vaccinations-list.html');
+
+    //controller init
+    class VaccinationsListController {
+        constructor($scope, $state, $stateParams, $ngRedux, vaccinationsActions, serviceRequests, usSpinnerService, serviceFormatted) {
+        }
+
+    //component init
+    const VaccinationsListComponent = {
+      template: templateVaccinationsList,
+      controller: VaccinationsListController
+    };
+
+    //inject services/modules to controller
+    VaccinationsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'vaccinationsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
+    //es6 export for component
+    export default VaccinationsListComponent;
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/vaccinations/vaccinations-detail.component.js">Vaccinations Detail</a></h4>
 {% include image.html file="vaccinations/vaccinationsdetail.png" url="#" alt="Vaccinations Detail" caption="Vaccinations Detail" %}
+
+<h5>API URL</h5>
+<pre>
+    /api/patients/{patientId}/vaccinations/{sourceId}
+</pre>
+<h5>GET response</h5>
+<pre>
+    {
+        author:"Dr Tony Shannon"
+        comment:"Yet Another test"
+        dateCreated:1485286012000
+        series:1
+        source:"EtherCIS"
+        sourceId:"5fc517aa-1c88-46f3-ad83-60aea8ccce0f"
+        vaccinationDateTime:1485257206618
+        vaccinationName:"Test Vacs2"
+    }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+    //component template
+    let templateVaccinationsDetail = require('./vaccinations-detail.html');
+
+    //controller init
+    class VaccinationsDetailController {
+        constructor($scope, $state, $stateParams, $ngRedux, patientsActions, vaccinationsActions, serviceRequests, usSpinnerService) {
+        }
+
+    //component init
+    const VaccinationsDetailComponent = {
+      template: templateVaccinationsDetail,
+      controller: VaccinationsDetailController
+    };
+
+    //inject services/modules to controller
+    VaccinationsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'vaccinationsActions', 'serviceRequests', 'usSpinnerService'];
+    //es6 export for component
+    export default VaccinationsDetailComponent;
+</pre>
+
 {% include image.html file="vaccinations/vaccinationsedit.png" url="#" alt="Vaccinations Edit" caption="Vaccinations Edit" %}
+
+<h5>API URL</h5>
+<pre>
+    /api/patients/{patientId}/vaccinations
+</pre>
+<h5>GET response</h5>
+<pre>
+    {
+        author:"Dr Tony Shannon"
+        comment:"Yet Another test 1"
+        dateCreated:1485286012000
+        series:1
+        source:"EtherCIS"
+        sourceId:"5fc517aa-1c88-46f3-ad83-60aea8ccce0f"
+        vaccinationDateTime:1485257206618
+        vaccinationName:"Test Vacs2"
+    }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/vaccinations/vaccinations-create.component.js">Vaccinations Create</a></h4>
 {% include image.html file="vaccinations/vaccinationscreate.png" url="#" alt="Vaccinations Create" caption="Vaccinations Create" %}
+
+<h5>API URL</h5>
+<pre>
+    /api/patients/{patientId}/vaccinations
+</pre>
+<h5>POST data</h5>
+<pre>
+    {
+        comment:"Vaccination"
+        dateCreated:"2017-04-12T11:46:04.619Z"
+        series:"1"
+        source:"Marand"
+        vaccinationDateTime:"2017-04-12T21:00:00.000Z"
+        vaccinationName:"Vaccination qwe"
+    }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+    //component template
+    let templateVaccinationsCreate = require('./vaccinations-create.html');
+
+    //controller init
+    class VaccinationsCreateController {
+        constructor($scope, $state, $stateParams, $ngRedux, patientsActions, vaccinationsActions, serviceRequests) {
+        }
+
+    //component init
+    const VaccinationsCreateComponent = {
+      template: templateVaccinationsCreate,
+      controller: VaccinationsCreateController
+    };
+
+    //inject services/modules to controller
+    VaccinationsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'vaccinationsActions', 'serviceRequests'];
+    //es6 export for component
+    export default VaccinationsCreateComponent;
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/vaccinations/vaccinations-actions.js">Vaccinations Actions</a></h4>
+
+<h5>Component structure</h5>
+<pre>
+    //es6 import modules
+    import {bindActionCreators} from 'redux';
+    import * as types from '../../../constants/ActionTypes';
+
+    //es6 export function
+    export function all(patientId) {
+      return {
+        types: [types.VACCINATIONS, types.VACCINATIONS_SUCCESS, types.VACCINATIONS_ERROR],
+
+        shouldCallAPI: (state) => !state.vaccinations.response,
+
+        config: {
+          method: 'get',
+          url: '/api/patients/' + patientId + '/vaccinations'
+        },
+
+        meta: {
+          timestamp: Date.now()
+        }
+      };
+    }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/vaccinations/vaccinations-reducer-all.js">Vaccinations Reducer</a></h4>
+
+<h5>Component structure</h5>
+<pre>
+    //es6 import modules
+    import * as types from '../../../constants/ActionTypes';
+
+    const INITIAL_STATE = {
+      isFetching: false,
+      error: false,
+      data: null,
+      dataGet: null,
+      dataCreate: null,
+      dataUpdate: null
+    };
+
+    //es6 export function
+    export default function vaccinations(state = INITIAL_STATE, action) {
+      const {payload} = action;
+
+    //redux action for Vaccinations statements requests
+      var actions = {
+        [types.VACCINATIONS]: (state) => {
+          return Object.assign({}, state, {
+            isFetching: true,
+            error: false
+          });
+        }
+    }
+</pre>
