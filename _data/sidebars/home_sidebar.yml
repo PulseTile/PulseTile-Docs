@@ -2,6 +2,7 @@
 
 entries:
 - title: Sidebar
+  product: Sidebar
   levels: one
   folders:
 
@@ -20,3 +21,222 @@ entries:
     - title: Product 2
       url: /p2_landing_page.html
       output: web
+
+  - title: Getting Started
+    output: web, pdf
+    folderitems:
+    - title: PulseTile Home
+      url: /p1_landing_page.html
+      output: web
+
+  - title: Background / Decision-making process
+    output: web, pdf
+
+    folderitems:
+    - title: Initial Q&A
+      url: /initial-QA.html
+      output: web, pdf
+
+    - title: Technologies
+      url: /technologies.html
+      output: web, pdf
+
+  - title: Technologies
+    output: web, pdf
+
+    folderitems:
+    - title: Redux
+      url: /redux-technology.html
+      output: web, pdf
+
+    - title: Angular
+      url: /angular-technology.html
+      output: web, pdf
+
+    - title: Webpack
+      url: /webpack-technology.html
+      output: web, pdf
+
+    - title: Bower
+      url: /bower-technology.html
+      output: web, pdf
+
+  - title: Other
+    output: web, pdf
+
+    folderitems:
+    - title: Automated links bookmark
+      url: /mydoc_hyperlinks.html#automatedlinks
+
+    - title: Bookmark links
+      url: /mydoc_hyperlinks.html#bookmarklinks
+
+    - title: Some link bookmark
+      url: /mydoc_pages.html#someIdTag
+
+  - title: Getting Started
+    output: web, pdf
+    folderitems:
+    - title: Background
+      url: /p1_landing_page.html
+      output: web
+
+    - title: Licensing
+      url: /coreuiproject.html
+      output: web, pdf
+
+
+  - title: Core Tiles
+    output: web, pdf
+    folderitems:
+    - title: Patient Summary
+      url: /Core_Tiles_PatientSummary.html
+      output: web, pdf
+
+    - title: Search
+      url: /Core_Tiles_Search.html
+      output: web, pdf
+
+    - title: Multipatients View
+      url: /Core_Tiles_Multipatients.html
+      output: web, pdf
+
+    - title: Charts
+      url: /Core_Tiles_Charts.html
+      output: web, pdf
+
+    - title: Allergies
+      url: /Core_Tiles_Allergies.html
+      output: web, pdf
+
+    - title: Contacts
+      url: /Core_Tiles_Contacts.html
+      output: web, pdf
+
+    - title: Medictions
+      url: /Core_Tiles_Medications.html
+      output: web, pdf
+
+
+  - title: API endpoints - JSON data
+    output: web, pdf
+
+
+    folderitems:
+    - title: JSON Array Allergies data
+      url: /JSON_Allergies.html
+      output: web, pdf
+
+    - title: JSON Array Contacts information
+      url: /JSON_Contacts.html
+      output: web, pdf
+
+    - title: JSON Array MDT
+      url: /JSON_MDT.html
+      output: web, pdf
+
+    - title: JSON Array Medications data
+      url: /JSON_Medication.html
+      output: web, pdf
+
+    - title: JSON Array Patient information
+      url: /JSON_Patient_Information.html
+      output: web, pdf
+
+    - title: JSON Array Patient list
+      url: /JSON_Patient_Lists.html
+      output: web, pdf
+
+    - title: JSON Array Personal Notes
+      url: /JSON_Personal_Notes.html
+      output: web, pdf
+
+    - title: JSON Array Procedures
+      url: /JSON_Procedures.html
+      output: web, pdf
+
+    - title: JSON Array Referrals
+      url: /JSON_Referrals.html
+      output: web, pdf
+
+    - title: JSON Array Test Results
+      url: /JSON_Results.html
+      output: web, pdf
+
+    - title: JSON array Vitals NEWS
+      url: /JSON_Vitals.html
+      output: web, pdf
+
+  - title: Getting Started
+    output: web, pdf
+    folderitems:
+
+    - title: Plugins Background
+      url: /plugins.html
+      output: web, pdf
+
+
+    - title: Guide to plugins development process
+      url: /plugin_process.html
+      output: web, pdf
+
+
+  - title: Plugins catalogue
+    output: web, pdf
+
+    folderitems:
+    - title: Clinical Notes
+      url: /Core_Tiles_ClinicalNotes.html
+      output: web, pdf
+
+    - title: Problems Diagnosis
+      url: /Core_Tiles_Problems_Diagnosis.html
+      output: web, pdf
+
+    - title: Images
+      url: /Core_Tiles_Images.html
+      output: web, pdf
+
+    - title: Documents
+      url: /Core_Tiles_Documents.html
+      output: web, pdf
+
+    - title: MDT
+      url: /Core_Tiles_MDT.html
+      output: web, pdf
+
+    - title: Orders
+      url: /Core_Tiles_Orders.html
+      output: web, pdf
+
+    - title: Personal Notes
+      url: /Core_Tiles_PersonalNotes.html
+      output: web, pdf
+
+    - title: Procedures
+      url: /Core_Tiles_Procedures.html
+      output: web, pdf
+
+    - title: Referrals
+      url: /Core_Tiles_Referrals.html
+      output: web, pdf
+
+    - title: Test Results
+      url: /Core_Tiles_TestResults.html
+      output: web, pdf
+
+    - title: Vaccinations
+      url: /Core_Tiles_Vaccinations.html
+      output: web, pdf
+
+    - title: Vitals
+      url: /Core_Tiles_Vitals.html
+      output: web, pdf
+
+    - title: Clinical Statements
+      url: /Core_Tiles_ClinicalStatements.html
+      output: web, pdf
+
+    - title: Events
+      url: /Core_Tiles_Events.html
+      output: web, pdf
