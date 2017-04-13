@@ -2,7 +2,7 @@
 title: JSON Array Medications data
 keywords: sample
 summary: "JSON for Medications module"
-sidebar: product1_sidebar
+sidebar: home_sidebar
 permalink: JSON_Medication.html
 folder: product1
 ---

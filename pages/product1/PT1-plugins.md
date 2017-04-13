@@ -2,7 +2,7 @@
 title: Plugins
 keywords: plugins
 summary: "Approach being taken with Plugins"
-sidebar: product1_sidebar
+sidebar: home_sidebar
 permalink: plugins.html
 folder: product1
 ---

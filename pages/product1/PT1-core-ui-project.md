@@ -2,7 +2,7 @@
 title: Core UI Project
 keywords: licensing copyright documentation
 summary: "licensing copyright documentation"
-sidebar: product1_sidebar
+sidebar: home_sidebar
 permalink: coreuiproject.html
 folder: product1
 ---

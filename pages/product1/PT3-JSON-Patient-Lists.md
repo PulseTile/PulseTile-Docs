@@ -2,7 +2,7 @@
 title: JSON Array Patient list
 keywords: Patient Lists
 summary: "JSON for Patient Lists"
-sidebar: product1_sidebar
+sidebar: home_sidebar
 permalink: JSON_Patient_Lists.html
 folder: product1
 ---

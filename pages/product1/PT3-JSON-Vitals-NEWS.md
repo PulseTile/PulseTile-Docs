@@ -2,7 +2,7 @@
 title: JSON array Vitals NEWS
 keywords: MDT
 summary: "JSON for Vitals module"
-sidebar: product1_sidebar
+sidebar: home_sidebar
 permalink: JSON_Vitals.html
 folder: product1
 ---

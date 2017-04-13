@@ -2,7 +2,7 @@
 title: JSON Array Contacts information
 keywords: Contacts
 summary: "JSON for Contacts module"
-sidebar: product1_sidebar
+sidebar: home_sidebar
 permalink: JSON_Contacts.html
 folder: product1
 ---

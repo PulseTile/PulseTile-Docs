@@ -2,7 +2,7 @@
 title: JSON Array Referrals
 keywords: Referrals
 summary: "JSON for Referrals module"
-sidebar: product1_sidebar
+sidebar: home_sidebar
 permalink: JSON_Referrals.html
 folder: product1
 ---

@@ -2,7 +2,7 @@
 title: JSON Array Personal Notes
 keywords: Personal Notes
 summary: "JSON for Personal Notes module"
-sidebar: product1_sidebar
+sidebar: home_sidebar
 permalink: JSON_Personal_Notes.html
 folder: product1
 ---

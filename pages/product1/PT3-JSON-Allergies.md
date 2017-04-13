@@ -2,7 +2,7 @@
 title: JSON Array Allergies data
 keywords: Allergies
 summary: "JSON for Allergies module"
-sidebar: product1_sidebar
+sidebar: home_sidebar
 permalink: JSON_Allergies.html
 folder: product1
 
