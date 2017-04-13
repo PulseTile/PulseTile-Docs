@@ -2,13 +2,19 @@
 title: Redux technology
 sidebar: home_sidebar
 toc: false
-permalink: redux-technology.md
+permalink: redux-technology.html
 folder: mydoc
 ---
+# Redux
 
-# Actions
+## Redux general information
 
-First, let's define some actions.
+**Redux** is a predictable state container for JavaScript apps.
+
+It helps you write applications that behave consistently, run in different environments (client, server, and native), and are easy to test. On top of that, it provides a great developer experience, such as live code editing combined with a time traveling debugger.
+We use redux module for Angular - https://github.com/angular-redux/ng-redux
+
+# Actions in redux
 
 **Actions** are payloads of information that send data from your application to your store. They are the *only* source of information for the store. You send them to the store using [`store.dispatch()`](../api/Store.md#dispatch).
 
@@ -31,32 +37,6 @@ Actions are plain JavaScript objects. Actions must have a `type` property that i
 import { ADD_TODO, REMOVE_TODO } from '../actionTypes'
 ```
 
->##### Note on Boilerplate
-
->You don't have to define action type constants in a separate file, or even to define them at all. For a small project, it might be easier to just use string literals for action types. However, there are some benefits to explicitly declaring constants in larger codebases. Read [Reducing Boilerplate](../recipes/ReducingBoilerplate.md) for more practical tips on keeping your codebase clean.
-
-Other than `type`, the structure of an action object is really up to you. If you're interested, check out [Flux Standard Action](https://github.com/acdlite/flux-standard-action) for recommendations on how actions could be constructed.
-
-We'll add one more action type to describe a user ticking off a todo as completed. We refer to a particular todo by `index` because we store them in an array. In a real app, it is wiser to generate a unique ID every time something new is created.
-
-```js
-{
-type: TOGGLE_TODO,
-index: 5
-}
-```
-
-It's a good idea to pass as little data in each action as possible. For example, it's better to pass `index` than the whole todo object.
-
-Finally, we'll add one more action type for changing the currently visible todos.
-
-```js
-{
-type: SET_VISIBILITY_FILTER,
-filter: SHOW_COMPLETED
-}
-```
-
 ## Action Creators
 
 **Action creators** are exactly that—functions that create actions. It's easy to conflate the terms “action” and “action creator,” so do your best to use the proper term.
@@ -74,20 +54,7 @@ text
 
 This makes them portable and easy to test.
 
-In [traditional Flux](http://facebook.github.io/flux), action creators often trigger a dispatch when invoked, like so:
-
-```js
-function addTodoWithDispatch(text) {
-const action = {
-type: ADD_TODO,
-text
-}
-dispatch(action)
-}
-```
-
-In Redux this is *not* the case.
-Instead, to actually initiate a dispatch, pass the result to the `dispatch()` function:
+To actually initiate a dispatch, pass the result to the `dispatch()` function:
 
 ```js
 dispatch(addTodo(text))
@@ -152,6 +119,10 @@ return { type: SET_VISIBILITY_FILTER, filter }
 }
 ```
 
-## Next Steps
+## Usage within PulseTile
 
-Now let's [define some reducers](Reducers.md) to specify how the state updates when you dispatch these actions!
+We are using redux architecture and especially reducers and actions in order to unify the data flow within the project.
+The goal we are achieving this way is, basically, the unification of the application's state and data flows in terms of responses we're proceeding on the front-end.
+You can see the examples of <a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/redux/reducer.js">Main reducer file</a>, where all the other reducers are included.
+As well, module-specific <a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/allergies/allergies-reducer-all.js">reducer file </a>, where the state management is handled.
+Here is a module-specific example of <a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/allergies/allergies-actions.js"> action file</a>, where all the actions that should be taken care of by redux is described.

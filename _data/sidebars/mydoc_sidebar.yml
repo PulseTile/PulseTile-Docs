@@ -51,7 +51,7 @@ entries:
 
     folderitems:
     - title: Redux
-      url: /redux-technology.md
+      url: /redux-technology.html
       output: web, pdf
 
     - title: Angular
