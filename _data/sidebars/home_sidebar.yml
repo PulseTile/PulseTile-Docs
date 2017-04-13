@@ -2,7 +2,7 @@
 
 entries:
 - title: Sidebar
-  product: Sidebar
+  product: Table of contents
   levels: one
   folders:
 
@@ -28,6 +28,22 @@ entries:
     - title: PulseTile Home
       url: /p1_landing_page.html
       output: web
+
+    - title: Background
+      url: /p1_landing_page.html
+      output: web
+
+    - title: Licensing
+      url: /coreuiproject.html
+      output: web, pdf
+
+    - title: Plugins Background
+      url: /plugins.html
+      output: web, pdf
+
+    - title: Guide to plugins development process
+      url: /plugin_process.html
+      output: web, pdf
 
   - title: Background / Decision-making process
     output: web, pdf
@@ -59,30 +75,6 @@ entries:
 
     - title: Bower
       url: /bower-technology.html
-      output: web, pdf
-
-  - title: Other
-    output: web, pdf
-
-    folderitems:
-    - title: Automated links bookmark
-      url: /mydoc_hyperlinks.html#automatedlinks
-
-    - title: Bookmark links
-      url: /mydoc_hyperlinks.html#bookmarklinks
-
-    - title: Some link bookmark
-      url: /mydoc_pages.html#someIdTag
-
-  - title: Getting Started
-    output: web, pdf
-    folderitems:
-    - title: Background
-      url: /p1_landing_page.html
-      output: web
-
-    - title: Licensing
-      url: /coreuiproject.html
       output: web, pdf
 
 
@@ -165,19 +157,6 @@ entries:
 
     - title: JSON array Vitals NEWS
       url: /JSON_Vitals.html
-      output: web, pdf
-
-  - title: Getting Started
-    output: web, pdf
-    folderitems:
-
-    - title: Plugins Background
-      url: /plugins.html
-      output: web, pdf
-
-
-    - title: Guide to plugins development process
-      url: /plugin_process.html
       output: web, pdf
 
 
