@@ -9,7 +9,7 @@ folder: product2
 
 This section contains description for UI elements.
 
-##Button with drop-down selector
+## Button with drop-down selector
 {% include image.html file="ui-kit/drop-down.png" alt="drop-down selector" caption="" %}
 ```
     <div uib-dropdown="" class="control-group left control-search-select dropdown">
