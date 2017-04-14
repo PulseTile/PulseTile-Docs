@@ -9,10 +9,8 @@ folder: product2
 
 This section contains description for UI elements.
 
-##Button with drop-down selector##
-
-{% include image.html file="ui-kit/drop-down.png" url="#" alt="drop-down selector" caption="" %}
-
+##Button with drop-down selector
+{% include image.html file="ui-kit/drop-down.png" alt="drop-down selector" caption="" %}
 ```
     <div uib-dropdown="" class="control-group left control-search-select dropdown">
       <button uib-dropdown-toggle="" class="btn btn-success btn-inverse btn-dropdown-toggle btn-search-toggle dropdown-toggle" ng-click="$ctrl.closeSearchOptions()" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bars"></i></button>
