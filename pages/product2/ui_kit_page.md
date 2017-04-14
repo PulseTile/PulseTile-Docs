@@ -76,3 +76,90 @@ This section contains description for UI elements.
           Patient Info
     </h3>
 ```
+
+## Patient list single entity
+{% include image.html file="ui-kit/patient_list.png" alt="drop-down selector" caption="" %}
+```
+    <table class="table table-striped table-bordered rwd-table table-sorted table-hover table-fixedcol table-patients-full">
+        <thead>
+          <tr>
+              <th></th>
+              <th>&nbsp;</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr dir-paginate="">
+              <td></td>
+          </tr>
+
+          <tr ng-if="!$ctrl.patients.length">
+              <td colspan="6"><span class="label label-default">No patients found</span></td>
+          </tr>
+        </tbody>
+  </table>
+```
+
+## Agreement popup
+{% include image.html file="ui-kit/agreement_popup.png" alt="drop-down selector" caption="" %}
+```
+    <div class="panel panel-secondary without-margin">
+        <div class="panel-heading">
+          <h3 class="panel-title">Patient Access Disclaimer</h3>
+        </div>
+
+        <div class="panel-body">
+          <div class="panel-body-inner">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec lobortis elit. Aenean mi nunc, feugiat ut aliquet non, iaculis vel tellus. Donec semper felis placerat, posuere nisi a, suscipit turpis. Integer sit amet lacus pellentesque, vestibulum libero id, sagittis nisi. Phasellus eleifend, neque eget vulputate semper, enim dui dictum neque, non iaculis felis augue at nunc.
+          </div>
+          <div class="panel-control">
+            <div class="wrap-control-group hide-indent-bottom">
+              <div class="control-group with-indent right">
+                <button class="btn btn-danger btn-icon-normal" ng-click="cancel()"><i class="fa fa-ban"></i> <span>Decline</span></button>
+                <button class="btn btn-success" ng-click="ok()"><span>Agree</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+  </div>
+```
+
+## Patient banner
+{% include image.html file="ui-kit/patient_banner.png" alt="drop-down selector" caption="" %}
+```
+   <div class="header-toolbar">
+       <div class="wrap-patient-info" ng-class="mobileShowInfo">
+         <div class="patient-info-caption">
+           <div class="patient-info-caption-btn btn-dropdown-toggle" ng-click="$ctrl.showInfo()"></div>
+           <div class="patient-info-caption-text text-truncate ng-binding">Avram Miller</div>
+         </div>
+         <div class="patient-info">
+           <div class="patient-info-group-2">
+             <div class="column-1">
+               <div class="patient-info-item ng-binding"><span class="key">D.O.B.</span> 25-Jan-1974</div>
+               <div class="patient-info-item ng-binding"><span class="key">Phone:</span> 0845 46 47</div>
+             </div>
+             <div class="column-2">
+               <div class="patient-info-item ng-binding"><span class="key">Gender:</span> Female</div>
+               <div class="patient-info-item"><span class="key">NHS No.</span> <span ng-bind="$ctrl.patient.nhsNumber | formatNHSNumber" class="ng-binding">999 999 9050</span></div>
+             </div>
+           </div>
+           <div class="patient-info-group-1">
+             <div class="patient-info-item significant hidden-xs ng-binding">Avram Miller</div>
+             <div class="patient-info-item ng-binding"><span class="key">Doctor:</span> Hawkins Sonya T.</div>
+           </div>
+           <div class="patient-info-item ng-binding"><span class="key">Address:</span> Port Glasgow Practice, 4872 Cubilia St., Port Glasgow, Renfrewshire, TQ3J 4JG</div>
+         </div>
+       </div></patients-banner-component></div>
+   </div>
+```
+
+## Left-hand menu button / heading list
+{% include image.html file="ui-kit/menu.png" alt="drop-down selector" caption="" %}
+```
+    <ul class="nav">
+      <li class="navigation-menu" ng-repeat="link in $ctrl.linksCollection">
+        <a ng-click="$ctrl.goTo(link.link)" ng-class="{active: isActiveItem(link.link)}">{{link.title}}</a>
+      </li>
+    </ul>
+```
