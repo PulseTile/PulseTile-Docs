@@ -24,3 +24,35 @@ This section contains description for UI elements.
       </div>
     </div>
 ```
+
+## Input field
+{% include image.html file="ui-kit/input_field.png" alt="drop-down selector" caption="" %}
+```
+    <input key-bind="" class="form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="Search" type="text">
+```
+
+## Button with icon
+{% include image.html file="ui-kit/button_with_icon.png" alt="drop-down selector" caption="" %}
+```
+   <button ng-show="!searchActive &amp;&amp; !isOpenSearch" class="btn btn-success btn-search" ng-click="$ctrl.searchFunction();"><i class="fa fa-search"></i></button>
+```
+
+## Back button, Logo icon, Logo text
+{% include image.html file="ui-kit/logo.png" alt="drop-down selector" caption="" %}
+```
+    <a ng-click="$ctrl.goBack()" class="btn-header btn-header-prev ng-scope" ng-if="isShowPreviousBtn"><i class="fa fa-arrow-left"></i></a>
+    <div class="wrap-logo">
+      <div class="logo">
+        <div class="logo-icon">
+          <a ng-click="$ctrl.goChart()">
+            <span class="img"></span>
+          </a>
+        </div>
+        <div class="logo-text">
+          <a ng-click="$ctrl.goPatientList()">
+            <span class="ng-binding">IDCR</span> <span class="logo-mobile-hidden"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+```
