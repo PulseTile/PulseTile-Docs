@@ -8,3 +8,18 @@ folder: product2
 ---
 
 <p>This section contains description for UI elements.</p>
+
+<p>Button with drop-down selector:</p>
+<pre>
+    <div uib-dropdown="" class="control-group left control-search-select dropdown">
+      <button uib-dropdown-toggle="" class="btn btn-success btn-inverse btn-dropdown-toggle btn-search-toggle dropdown-toggle" ng-click="$ctrl.closeSearchOptions()" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bars"></i></button>
+      <div uib-dropdown-menu="" class="dropdown-menu dm-panel dm-left dm-tables dm-search-select">
+        <div class="heading">Search Options</div>
+        <div class="dm-wrap-list">
+          <div class="dm-list">
+                <div class="dm-item" ng-repeat="item in searchOptionsList" ng-click="$ctrl.openAdvancedSearch($index)"><span>{{item.name}}</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+</pre>
