@@ -163,3 +163,77 @@ This section contains description for UI elements.
       </li>
     </ul>
 ```
+
+## Patient banner single block
+{% include image.html file="ui-kit/single_block.png" alt="drop-down selector" caption="" %}
+```
+    <div class="board">
+          <div class="board-header">
+            <div class="control-group right">
+              <button class="btn btn-success btn-inverse btn-board-more" ng-click="$ctrl.goToSection(dashboard.toState)"><i class="fa fa-caret-right"></i></button>
+            </div>
+            <h3 class="board-title ng-binding">Problems</h3>
+          </div>
+          <div class="board-body">
+            <ul class="board-list">
+               <li></li>
+            </ul>
+          </div>
+    </div>
+```
+
+## Heading table node
+{% include image.html file="ui-kit/table_node.png" alt="drop-down selector" caption="" %}
+```
+    <table class="table table-striped table-hover table-bordered rwd-table table-sorted table-fixedcol">
+          <thead>
+            <tr>
+                <th>Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr></tr>
+            <tr ng-if="!$ctrl.medications.length" class="ng-scope">
+                <td colspan="4"><span class="label label-default">No medications</span></td>
+            </tr>
+          </tbody>
+    </table>
+```
+
+## Heading table header / filter / settings
+{% include image.html file="ui-kit/table_header.png" alt="drop-down selector" caption="" %}
+```
+    <div class="panel-heading">
+        <div class="control-group right">
+          <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="fa fa-filter"></i></button>
+        </div>
+        <h3 class="panel-title">All Medications</h3>
+        <div class="panel-filter ng-hide" ng-show="isFilterOpen">
+          <div class="inner-addon addon-left">
+            <div class="addon">
+              <i class="fa fa-filter"></i>
+            </div>
+            <input type="text" id="filter" class="form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="Filter..." ng-model="queryFilter">
+          </div>
+        </div>
+    </div>
+```
+
+## Details heading
+{% include image.html file="ui-kit/details_heading.png" alt="drop-down selector" caption="" %}
+```
+    <div class="panel-heading">
+        <div class="control-group right">
+          <button class="btn btn-success btn-inverse btn-filter" ng-click="toggleFilter()"><i class="fa fa-filter"></i></button>
+        </div>
+        <h3 class="panel-title">All Medications</h3>
+        <div class="panel-filter ng-hide" ng-show="isFilterOpen">
+          <div class="inner-addon addon-left">
+            <div class="addon">
+              <i class="fa fa-filter"></i>
+            </div>
+            <input type="text" id="filter" class="form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="Filter..." ng-model="queryFilter">
+          </div>
+        </div>
+    </div>
+```
