@@ -12,7 +12,7 @@ topnav_dropdowns:
         - title: Core UX Framework
           url: /mydoc_introduction.html
         - title: Core UI Framework
-          url: /ui_kit_page.html
+          url: /ui_kit_page.md
         - title: Core Tiles
           url: /core_tiles_landing.html
         - title: Plugin Tiles
