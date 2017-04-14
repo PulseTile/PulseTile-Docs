@@ -14,6 +14,6 @@ topnav_dropdowns:
         - title: Core UI Framework
           url: /ui_kit_page.html
         - title: Core Tiles
-          url: /p1_landing_page.html
+          url: /core_tiles_landing.html
         - title: Plugin Tiles
-          url: /p2_landing_page.html
+          url: /plugin_tiles_landing.html
