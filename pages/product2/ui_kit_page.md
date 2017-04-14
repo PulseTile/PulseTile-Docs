@@ -56,3 +56,23 @@ This section contains description for UI elements.
       </div>
     </div>
 ```
+
+## Heading bar
+{% include image.html file="ui-kit/heading_bar.png" alt="drop-down selector" caption="" %}
+```
+    <div class="header-title ng-binding">Patients Lists</div>
+```
+
+## Breadcrumbs
+{% include image.html file="ui-kit/breadcrumbs.png" alt="drop-down selector" caption="" %}
+```
+    <div class="breadcrumbs"></div>
+```
+
+## Information / settings bar
+{% include image.html file="ui-kit/settings_bar.png" alt="drop-down selector" caption="" %}
+```
+    <h3 class="panel-title">
+          Patient Info
+    </h3>
+```
