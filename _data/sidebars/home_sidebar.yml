@@ -43,6 +43,10 @@ entries:
     output: web, pdf
 
     folderitems:
+    - title: Background
+      url: /background.html
+      output: web
+
     - title: Initial Q&A
       url: /initial-QA.html
       output: web, pdf
