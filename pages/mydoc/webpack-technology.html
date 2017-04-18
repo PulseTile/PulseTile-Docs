@@ -17,3 +17,32 @@ You determine what Webpack does and how it does it with a JavaScript configurati
 <p>We are using WebPack to create a bundle file from all the src's we do have, to create a single HTML and JS file, that the application uses while built.
     Example of our webpack.config.js is found within the <a href="https://github.com/PulseTile/PulseTile/blob/develop/webpack.config.js">sources root folder</a>
 </p>
+
+<p>Q: Why was webpack chosen?</p>
+<p>A: Why?:</p>
+<ul>
+    <li>Useful for a modular architecture, because it has the concept of a dependency tree, unlike Grunt/Gulp</li>
+    <li>Performs better than Grunt (the previous choice of build system)</li>
+    <li>Gets rid of the need for RequireJS and tools like Browserify</li>
+</ul>
+
+
+<p>Q: Why is webpack better than using npm or bower to import Ripple plugins?</p>
+<p>A: Webpack is a build tool and its purpose is to transpile the code (like in case with Babel and ES6) and compile bundles
+    for production usage and it does it really well and fast as it has a clear syntax and good documentation
+</p>
+
+<p>Q: Webpack takes care of a lot of configuration for you, which of course makes things easier, but it means that changing configuration may
+    not be as flexible as desired. Could this present problems if configuration becomes more complex?</p>
+<p>A: Related to this point, we discussed whether there are any problems that could be faced from having a complex dependency tree that
+    Webpack may struggle to digest. SliceArt reassured the group that in their experience, they have never gotten to a point where webpack will
+    struggle in this scenario, even with applications that become much more complex.</p>
+
+<p>Are there any performance figures that you’ve recorded that show the difference in loading times using webpack?</p>
+<p>Webpack performs much faster than Grunt, and is about equal to Gulp, so that is a perfectly reasonable performance gain.</p>
+
+<p>Currently all modules seem to be very standalone, so it looks as though webpack is not being used to its full potential.
+    Is this just part of a step-by-step implementation process, or has it been by design?</p>
+<p>Related to this point - we discussed how at present Webpack isn't being used in the standard way to send up module bundles to the client,
+    instead of sending the vendor and Ripple bundles in two large files. SliceArt have already noticed this and are planning to send separate,
+    smaller bundles to the client in this way, which will mean less network traffic and higher performance.</p>

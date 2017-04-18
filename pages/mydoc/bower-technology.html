@@ -12,4 +12,13 @@ folder: mydoc
     and saving the stuff you’re looking for. Bower keeps track of these packages in a manifest file,
     <a href="https://github.com/PulseTile/PulseTile/blob/develop/bower.json">bower.json</a>.</p>
 
+<p>Q: What are the long term plans for Bower?</p>
+<p>Bower will stay, because it serves a very particular purpose. Bower isn't being replaced by npm, and nor should it be.
+    The 3rd party web components that the system needs should be provided by Bower, even if npm can provide them.</p>
+
+<p>Will all Bower components be removed and replaced by npm modules?</p>
+<p>We mentioned the dependency tree of imported 3rd part components, and whether the Ripple UI is importing transient dependencies (dependencies of dependencies),
+    and whether these should be defined within the package.json or bower.json files. SliceArt are keen to analyse the dependency tree to try
+    to determine whether there are any problems that may be encountered by transient dependencies.</p>
+
 
