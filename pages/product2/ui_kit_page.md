@@ -418,68 +418,69 @@ This section contains description for UI elements.
 ## Patient Advanced Search popup
 {% include image.html file="ui-kit/patient_advanced_search.png" alt="drop-down selector" caption="" %}
 ```
-    <div mc-datepicker="" class="panel panel-secondary without-margin">
+    <div mc-datepicker class="panel panel-secondary without-margin">
       <div class="panel-heading">
         <div class="control-group right">
           <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="cancel()"><i class="fa fa-chevron-up"></i></button>
         </div>
         <h3 class="panel-title">
-          <span class="ng-binding">Patient Search - Advanced:</span>
-          <!-- ngIf: searchParams.nhsNumber -->
+          <span>{{$ctrl.option.name}}:</span>
+          <span ng-if="searchParams.nhsNumber">NHS Number: {{searchParams.nhsNumber}}</span>
         </h3>
       </div>
       <div class="panel-body">
         <div class="panel-body-inner">
-          <form name="advancedSearchForm" class="form ng-pristine ng-invalid ng-invalid-required">
+          <form name="advancedSearchForm" class="form">
             <div class="form-group-wrapper">
                 <div class="row">
-                    <!-- ngIf: $ctrl.option.type === 'advanced' --><div class="col-xs-12 col-sm-6 ng-scope" ng-if="$ctrl.option.type === 'advanced'">
-                      <div class="form-group has-error" ng-class="{'has-error': !$ctrl.detailsFocused &amp;&amp; isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber) &amp;&amp; areDetailsFieldsClean(advancedSearchForm),
-                        'has-success': !$ctrl.detailsFocused &amp;&amp; advancedSearchForm.nhsNumber.$valid &amp;&amp; advancedSearchForm.nhsNumber.$dirty}">
+                    <div class="col-xs-12 col-sm-6">
+                      <div class="form-group"
+                        ng-class="{'has-error': !$ctrl.detailsFocused && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber) && areDetailsFieldsClean(advancedSearchForm),
+                        'has-success': !$ctrl.detailsFocused && advancedSearchForm.nhsNumber.$valid && advancedSearchForm.nhsNumber.$dirty}">
                           <label for="nhsNumber" class="control-label">NHS Number</label>
                           <div class="input-holder">
-                              <input type="text" tabindex="1" class="form-control input-sm ng-pristine ng-empty ng-invalid ng-invalid-required ng-touched" id="nhsNumber" name="nhsNumber" ng-model="searchParams.nhsNumber" focus-element="nhsNumberFocus" is-valid-nhs-number="" ng-focus="$ctrl.detailsFocused=false" ng-required="!$ctrl.detailsFocused" placeholder="e.g. 123 456 7890" required="required">
+                              <input type="text" tabindex="1" class="form-control input-sm" id="nhsNumber" name="nhsNumber" ng-model="searchParams.nhsNumber" focus-element="nhsNumberFocus" is-valid-nhs-number ng-focus="$ctrl.detailsFocused=false" ng-required="!$ctrl.detailsFocused" placeholder="e.g. 123 456 7890"/>
                           </div>
-                          <span class="help-block animate-fade ng-hide" ng-show="formSubmitted &amp;&amp; advancedSearchForm.nhsNumber.$invalid &amp;&amp; !$ctrl.detailsFocused">You must enter a value.</span>
-                          <span class="required-label" ng-show="!$ctrl.detailsFocused &amp;&amp; isNhsNumberRequired(advancedSearchForm)">*Required</span>
-                          <span class="required-label ng-hide" ng-show="!$ctrl.detailsFocused &amp;&amp; isNhsNumberTooShort(advancedSearchForm.nhsNumber.$viewValue)">*NHS Number too short</span>
-                          <span class="required-label ng-hide" ng-show="!$ctrl.detailsFocused &amp;&amp; isNhsNumberTooLong(advancedSearchForm.nhsNumber.$viewValue)">*NHS Number too long</span>
+                          <span class="help-block animate-fade" ng-show="formSubmitted && advancedSearchForm.nhsNumber.$invalid && !$ctrl.detailsFocused">You must enter a value.</span>
+                          <span class="required-label" ng-show="!$ctrl.detailsFocused && isNhsNumberRequired(advancedSearchForm)">*Required</span>
+                          <span class="required-label" ng-show="!$ctrl.detailsFocused && isNhsNumberTooShort(advancedSearchForm.nhsNumber.$viewValue)">*NHS Number too short</span>
+                          <span class="required-label" ng-show="!$ctrl.detailsFocused && isNhsNumberTooLong(advancedSearchForm.nhsNumber.$viewValue)">*NHS Number too long</span>
                       </div>
-                    </div><!-- end ngIf: $ctrl.option.type === 'advanced' -->
-                    <!-- ngIf: $ctrl.option.type === 'clinicalQuery' -->
+                    </div>
+                    <div>
                 </div>
                 <div class="row">
-                    <!-- ngIf: $ctrl.option.type === 'advanced' --><div class="col-xs-12 col-sm-6 ng-scope" ng-if="$ctrl.option.type === 'advanced'">
-                      <div class="form-group" ng-class="{'has-error': advancedSearchForm.surname.$error.required &amp;&amp; advancedSearchForm.surname.$invalid &amp;&amp; isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber),
-                        'has-success': $ctrl.detailsFocused &amp;&amp; advancedSearchForm.surname.$valid &amp;&amp; advancedSearchForm.surname.$dirty &amp;&amp; isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber)}">
+                    <div class="col-xs-12 col-sm-6">
+                      <div class="form-group"
+                        ng-class="{'has-error': advancedSearchForm.surname.$error.required && advancedSearchForm.surname.$invalid && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber),
+                        'has-success': $ctrl.detailsFocused && advancedSearchForm.surname.$valid && advancedSearchForm.surname.$dirty && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber)}">
                           <label for="surname" class="control-label">Last Name</label>
                           <div class="input-holder">
-                              <input type="text" tabindex="2" class="form-control input-sm ng-pristine ng-untouched ng-empty ng-valid ng-valid-required" id="surname" name="surname" ng-model="searchParams.surname" focus-element="surnameFocus" ng-focus="$ctrl.detailsFocused=true" ng-required="$ctrl.detailsFocused" placeholder="e. g. Smith">
+                              <input type="text" tabindex="2" class="form-control input-sm" id="surname" name="surname" ng-model="searchParams.surname" focus-element="surnameFocus" ng-focus="$ctrl.detailsFocused=true" ng-required='$ctrl.detailsFocused' placeholder="e. g. Smith"/>
                           </div>
-                          <span class="help-block animate-fade ng-hide" ng-show="formSubmitted &amp;&amp; advancedSearchForm.surname.$error.required &amp;&amp; isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber)">You must enter a value.</span>
-                          <span class="required-label ng-hide" ng-show="$ctrl.detailsFocused &amp;&amp; isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber) &amp;&amp; (advancedSearchForm.surname.$invalid || advancedSearchForm.forename.$invalid || advancedSearchForm.dateOfBirth.$invalid)">*Required</span>
+                          <span class="help-block animate-fade" ng-show="formSubmitted && advancedSearchForm.surname.$error.required && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber)">You must enter a value.</span>
+                          <span class="required-label" ng-show="$ctrl.detailsFocused && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber) && (advancedSearchForm.surname.$invalid || advancedSearchForm.forename.$invalid || advancedSearchForm.dateOfBirth.$invalid)">*Required</span>
                       </div>
-                    </div><!-- end ngIf: $ctrl.option.type === 'advanced' -->
-                    <!-- ngIf: $ctrl.option.type === 'clinicalQuery' -->
-                    <!-- ngIf: $ctrl.option.type === 'advanced' --><div class="col-xs-12 col-sm-6 ng-scope" ng-if="$ctrl.option.type === 'advanced'">
-                      <div class="form-group" ng-class="{'has-error': advancedSearchForm.forename.$error.required &amp;&amp; advancedSearchForm.forename.$invalid &amp;&amp; isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber),
-                        'has-success': $ctrl.detailsFocused &amp;&amp; advancedSearchForm.forename.$valid &amp;&amp; advancedSearchForm.forename.$dirty &amp;&amp; isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber)}">
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                      <div class="form-group"
+                        ng-class="{'has-error': advancedSearchForm.forename.$error.required && advancedSearchForm.forename.$invalid && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber),
+                        'has-success': $ctrl.detailsFocused && advancedSearchForm.forename.$valid && advancedSearchForm.forename.$dirty && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber)}">
                           <label for="forename" class="control-label">First Name</label>
                           <div class="input-holder">
-                              <input type="text" tabindex="3" class="form-control input-sm ng-pristine ng-untouched ng-empty ng-valid ng-valid-required" id="forename" name="forename" ng-model="searchParams.forename" ng-focus="$ctrl.detailsFocused=true" ng-required="$ctrl.detailsFocused" placeholder="e.g. John">
+                              <input type="text" tabindex="3" class="form-control input-sm" id="forename" name="forename" ng-model="searchParams.forename" ng-focus="$ctrl.detailsFocused=true" ng-required='$ctrl.detailsFocused' placeholder="e.g. John"/>
                           </div>
-                          <span class="help-block animate-fade ng-hide" ng-show="formSubmitted &amp;&amp; advancedSearchForm.forename.$error.required &amp;&amp; (advancedSearchForm.nhsNumber.$invalid || advancedSearchForm.nhsNumber.$pristine)">You must enter a value.</span>
-                          <span class="required-label ng-hide" ng-show="$ctrl.detailsFocused &amp;&amp; isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber) &amp;&amp; (advancedSearchForm.surname.$invalid || advancedSearchForm.forename.$invalid || advancedSearchForm.dateOfBirth.$invalid)">*Required</span>
+                          <span class="help-block animate-fade" ng-show="formSubmitted && advancedSearchForm.forename.$error.required && (advancedSearchForm.nhsNumber.$invalid || advancedSearchForm.nhsNumber.$pristine)">You must enter a value.</span>
+                          <span class="required-label" ng-show="$ctrl.detailsFocused && isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber) && (advancedSearchForm.surname.$invalid || advancedSearchForm.forename.$invalid || advancedSearchForm.dateOfBirth.$invalid)">*Required</span>
                       </div>
-                    </div><!-- end ngIf: $ctrl.option.type === 'advanced' -->
-                    <!-- ngIf: $ctrl.option.type === 'clinicalQuery' -->
+                    </div>
                 </div>
 
                 <div class="row">
                   <div class="col-xs-12 col-sm-4">
                       <div class="form-group">
                           <label for="selectAgeField" class="control-label">Select Age Params</label>
-                          <select class="form-control input-sm ng-pristine ng-untouched ng-valid ng-not-empty" tabindex="5" id="selectAgeField" name="selectAgeField" ng-model="selectAgeField">
+                          <select class="form-control input-sm" tabindex="5" id="selectAgeField" name="selectAgeField" ng-model="selectAgeField">
                               <option value="range">Age Range</option>
                               <option value="birthday">Birthday</option>
                           </select>
@@ -487,40 +488,6 @@ This section contains description for UI elements.
                   </div>
                 </div>
 
-                <!-- ngIf: selectAgeField == 'range' --><div class="form-group ng-scope" ng-if="selectAgeField == 'range'">
-                  <label for="" class="control-label">Age Range (Years)</label>
-                  <div class="wrap-rzslider-search">
-                      <div class="mc-rz-slider rzslider ng-isolate-scope" rz-slider-model="sliderRange.minValue" rz-slider-high="sliderRange.maxValue" rz-slider-options="sliderRange.options"><span class="rz-bar-wrapper"><span class="rz-bar"></span></span> <span class="rz-bar-wrapper" style="visibility: visible; width: 809px; left: 6px;"><span class="rz-bar rz-selection" ng-style="barStyle"></span></span> <span class="rz-pointer rz-pointer-min" ng-style="minPointerStyle" role="slider" aria-valuenow="0" aria-valuetext="0" aria-valuemin="0" aria-valuemax="20" tabindex="0" style="left: 0px;"></span> <span class="rz-pointer rz-pointer-max" ng-style="maxPointerStyle" aria-valuenow="100" aria-valuetext="100" aria-valuemin="0" aria-valuemax="20" role="slider" tabindex="0" style="left: 809px;"></span> <span class="rz-bubble rz-limit rz-floor" style="visibility: visible; left: 0px;">0</span> <span class="rz-bubble rz-limit rz-ceil" style="visibility: visible; left: 821px;">100</span> <span class="rz-bubble" style="visibility: visible; left: 6px;">0</span> <span class="rz-bubble" style="visibility: visible; left: 815px;">100</span> <span class="rz-bubble" style="visibility: hidden;"></span><ul ng-show="showTicks" class="rz-ticks"><!-- ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(0px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --><span ng-if="t.legend != null" class="rz-tick-legend ng-binding ng-scope">0</span><!-- end ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(40px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(81px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --><span ng-if="t.legend != null" class="rz-tick-legend ng-binding ng-scope">10</span><!-- end ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(121px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(162px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --><span ng-if="t.legend != null" class="rz-tick-legend ng-binding ng-scope">20</span><!-- end ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(202px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(243px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --><span ng-if="t.legend != null" class="rz-tick-legend ng-binding ng-scope">30</span><!-- end ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(283px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(324px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --><span ng-if="t.legend != null" class="rz-tick-legend ng-binding ng-scope">40</span><!-- end ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(364px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(405px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --><span ng-if="t.legend != null" class="rz-tick-legend ng-binding ng-scope">50</span><!-- end ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(445px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(485px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --><span ng-if="t.legend != null" class="rz-tick-legend ng-binding ng-scope">60</span><!-- end ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(526px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(566px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --><span ng-if="t.legend != null" class="rz-tick-legend ng-binding ng-scope">70</span><!-- end ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(607px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(647px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --><span ng-if="t.legend != null" class="rz-tick-legend ng-binding ng-scope">80</span><!-- end ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(688px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(728px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --><span ng-if="t.legend != null" class="rz-tick-legend ng-binding ng-scope">90</span><!-- end ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(769px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(809px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --><span ng-if="t.legend != null" class="rz-tick-legend ng-binding ng-scope">100+</span><!-- end ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --></ul></div>
-                  </div>
-                </div><!-- end ngIf: selectAgeField == 'range' -->
-
-                <!-- ngIf: selectAgeField == 'birthday' -->
-
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6">
-                      <div class="form-group" ng-class="{'has-error': (formSubmitted || advancedSearchForm.route.$dirty) &amp;&amp; medicationForm.route.$invalid, 'has-success': medicationForm.route.$valid &amp;&amp; medicationForm.route.$dirty}">
-                          <label for="gender" class="control-label">Gender</label>
-                          <div class="input-holder">
-                              <div class="wrap-fcustominps-inline">
-                                  <div class="wrap-fcustominp">
-                                      <div class="fcustominp">
-                                          <input type="checkbox" id="gender-male" name="gender-male" ng-model="searchParams.sexMale" class="ng-pristine ng-untouched ng-valid ng-empty">
-                                          <label for="gender-male"></label>
-                                      </div>
-                                      <label for="gender-male" class="fcustominp-label ng-binding">Male</label>
-                                  </div>
-                                  <div class="wrap-fcustominp">
-                                      <div class="fcustominp">
-                                          <input type="checkbox" id="gender-female" name="gender-female" ng-model="searchParams.sexFemale" class="ng-pristine ng-untouched ng-valid ng-empty">
-                                          <label for="gender-female"></label>
-                                      </div>
-                                      <label for="gender-female" class="fcustominp-label ng-binding">Female</label>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                    </div>
-                </div>
             </div>
           </form>
 
@@ -535,4 +502,18 @@ This section contains description for UI elements.
         </div>
       </div>
     </div>
+```
+
+## Footer
+{% include image.html file="ui-kit/footer.png" alt="drop-down selector" caption="" %}
+```
+    <footer class="footer">
+      <div class="container-fluid">
+        <div class="footer-povered">
+          <span>Powered By</span>
+          <a href="#" class="footer-logo"><img src="data:image/png;base64,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" alt="Ripple Icon" class="footer-logo-img"></a>
+        </div>
+        <p class="footer-text">IDCR POC</p>
+      </div>
+    </footer>
 ```
