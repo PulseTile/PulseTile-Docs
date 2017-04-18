@@ -41,10 +41,6 @@ entries:
       url: /initial-QA.html
       output: web, pdf
 
-    - title: Technologies
-      url: /technologies.html
-      output: web, pdf
-
   - title: Technologies
     output: web, pdf
 
