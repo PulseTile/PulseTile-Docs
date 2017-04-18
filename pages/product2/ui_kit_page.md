@@ -285,3 +285,69 @@ This section contains description for UI elements.
       <span class="help-block animate-fade ng-hide" ng-show="formSubmitted &amp;&amp; diagnosisForm.author.$error.required">You must enter a value.</span>
     </div>
 ```
+
+## Cancel / Complete buttons
+{% include image.html file="ui-kit/complete_buttons.png" alt="drop-down selector" caption="" %}
+```
+    <div class="panel-control">
+        <div class="wrap-control-group hide-indent-bottom">
+          <div class="control-group with-indent right">
+            <button class="btn btn-danger" ng-click="$ctrl.cancel()"><i class="fa fa-ban"></i> Cancel</button>
+            <button class="btn btn-success" ng-click="create(diagnosisForm, diagnosis)"><i class="fa fa-check"></i> Complete</button>
+          </div>
+        </div>
+    </div>
+```
+
+## Edit button
+{% include image.html file="ui-kit/edit_button.png" alt="drop-down selector" caption="" %}
+```
+    <div class="panel-control ng-scope" ng-if="diagnosis.source !== 'vista'">
+        <div class="wrap-control-group">
+          <div class="control-group right">
+            <button class="btn btn-success btn-inverse btn-edit" ng-click="$ctrl.edit();"><i class="fa fa-edit"></i> Edit</button>
+          </div>
+        </div>
+    </div>
+```
+
+## Image details
+{% include image.html file="ui-kit/image_details.png" alt="drop-down selector" caption="" %}
+```
+    <div class="panel-body">
+      <div class="panel-body-inner">
+        <div class="form">
+          <div class="form-group-wrapper">
+              <div class="form-control-static">
+                <cornerstone-image imageid="http://138.68.134.7:8086/instances/ecd967b0-aaec17a2-860b3925-91d8ef8b-1932d1c7/preview" class="ng-isolate-scope"><div id="dicomImage" oncontextmenu="return false" unselectable="on" onselectstart="return false;" onmousedown="return false;" style="width: 100%; height: 512px; margin: auto"><canvas width="464" height="512" style="width: 464px; height: 512px;"></canvas></div></cornerstone-image>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel-control">
+        <div class="control-group center">
+          <button id="play" type="button" class="btn btn-inverse btn-success btn-none-border"><i class="fa fa-play"></i></button>
+          <button id="stop" type="button" class="btn btn-inverse btn-success btn-none-border"><i class="fa fa-stop"></i></button>
+          <div class="control-separate"></div>
+          <button id="zoomIn" type="button" class="btn btn-inverse btn-success btn-none-border" ng-click="zoomOut()"><i class="fa fa-search-minus"></i></button>
+          <button id="zoomOut" type="button" class="btn btn-inverse btn-success btn-none-border" ng-click="zoomIn()"><i class="fa fa-search-plus"></i></button>
+          <div class="control-separate"></div>
+          <button id="arrows" type="button" class="btn btn-inverse btn-success btn-none-border"><i class="fa fa-arrows"></i></button>
+          <button id="verticalArrows" type="button" class="btn btn-inverse btn-success btn-none-border"><i class="fa fa-arrows-v"></i></button>
+        </div>
+      </div>
+    </div>
+```
+
+## Document import field
+{% include image.html file="ui-kit/document_import.png" alt="drop-down selector" caption="" %}
+```
+    <div class="fgs-control">
+        <div class="wrap-control-group">
+            <div class="control-group right">
+                <button class="btn btn-primary" ng-click="importToCreate('diagnoses', $ctrl.clinicalDocument.diagnosisList[0])"><span>Import Data</span></button>
+            </div>
+        </div>
+    </div>
+```
