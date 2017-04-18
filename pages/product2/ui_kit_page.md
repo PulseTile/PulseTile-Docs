@@ -237,3 +237,51 @@ This section contains description for UI elements.
         </div>
     </div>
 ```
+
+## Details single instance
+{% include image.html file="ui-kit/details_single_instance.png" alt="drop-down selector" caption="" %}
+```
+    <div class="form-group">
+        <label class="control-label">Problem / Diagnosis</label>
+        <div class="form-control-static ng-binding">2E2</div>
+    </div>
+```
+
+## Pagination / Create button
+{% include image.html file="ui-kit/pagination.png" alt="drop-down selector" caption="" %}
+```
+    <div class="panel-control">
+      <div class="wrap-control-group">
+        <div class="control-group with-indent left">
+          <dir-pagination-controls max-size="6" on-page-change="pageChangeHandler(newPageNumber)" boundary-links="false"></dir-pagination-controls>
+        </div>
+        <div class="control-group with-indent right" ng-if="$ctrl.currentUser.permissions.indexOf('WRITE') !== -1 && $ctrl.isShowCreateBtn">
+          <button class="btn btn-success btn-inverse btn-create" ng-click="$ctrl.create();"><i class="fa fa-plus"></i> <span>Create</span></button>
+        </div>
+      </div>
+    </div>
+```
+
+## Creation dialogue input
+{% include image.html file="ui-kit/creation_dialogue_input.png" alt="drop-down selector" caption="" %}
+```
+    <div class="form-group">
+      <label for="text" class="control-label">Problem / Diagnosis</label>
+      <div class="input-holder">
+        <input type="text" class="form-control input-sm ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" id="problem" name="problem" ng-model="diagnosis.problem" required="">
+      </div>
+      <span class="help-block animate-fade ng-hide" ng-show="formSubmitted &amp;&amp; diagnosisForm.problem.$error.required">You must enter a value.</span>
+    </div>
+```
+
+## Non-editable creation input field
+{% include image.html file="ui-kit/author_input.png" alt="drop-down selector" caption="" %}
+```
+    <div class="form-group">
+      <label for="author" class="control-label">Author</label>
+      <div class="input-holder">
+        <input type="text" value="bob.smith@gmail.com" placeholder="bob.smith@gmail.com" class="form-control input-sm ng-pristine ng-untouched ng-valid ng-not-empty" id="author" name="author" ng-model="diagnosis.author" disabled="">
+      </div>
+      <span class="help-block animate-fade ng-hide" ng-show="formSubmitted &amp;&amp; diagnosisForm.author.$error.required">You must enter a value.</span>
+    </div>
+```
