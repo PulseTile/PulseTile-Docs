@@ -79,10 +79,6 @@ entries:
   - title: Core Tiles
     output: web, pdf
     folderitems:
-    - title: Plugin tiles
-      url: /plugin_tiles_landing.html
-      output: web
-
     - title: Patient Summary
       url: /Core_Tiles_PatientSummary.html
       output: web, pdf
@@ -166,6 +162,10 @@ entries:
     output: web, pdf
 
     folderitems:
+    - title: Plugin tiles
+      url: /plugin_tiles_landing.html
+      output: web
+
     - title: Clinical Notes
       url: /Core_Tiles_ClinicalNotes.html
       output: web, pdf
