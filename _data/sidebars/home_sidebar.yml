@@ -12,23 +12,20 @@ entries:
     - title: News
       url: /news.html
       output: web
-    - title: Product 1
-      url: /core_tiles_landing.html
-      output: web
-    - title: Product 2
-      url: /plugin_tiles_landing.html
-      output: web
+#    - title: Product 1
+#      url: /core_tiles_landing.html
+#      output: web
 
   - title: Getting Started
     output: web, pdf
     folderitems:
-    - title: PulseTile Home
+    - title: Coe Tiles
       url: /core_tiles_landing.html
       output: web
 
-    - title: Background
-      url: /core_tiles_landing.html
-      output: web
+#    - title: Background
+#      url: /core_tiles_landing.html
+#      output: web
 
     - title: Licensing
       url: /coreuiproject.html
@@ -82,6 +79,10 @@ entries:
   - title: Core Tiles
     output: web, pdf
     folderitems:
+    - title: Plugin tiles
+      url: /plugin_tiles_landing.html
+      output: web
+
     - title: Patient Summary
       url: /Core_Tiles_PatientSummary.html
       output: web, pdf
