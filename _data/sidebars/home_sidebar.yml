@@ -6,16 +6,6 @@ entries:
   levels: one
   folders:
 
-  - title: Products
-    output: web
-    folderitems:
-    - title: News
-      url: /news.html
-      output: web
-#    - title: Product 1
-#      url: /core_tiles_landing.html
-#      output: web
-
   - title: Getting Started
     output: web, pdf
     folderitems:
