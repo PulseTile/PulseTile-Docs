@@ -351,3 +351,188 @@ This section contains description for UI elements.
         </div>
     </div>
 ```
+
+## Vitals details
+{% include image.html file="ui-kit/vitals-details.png" alt="drop-down selector" caption="" %}
+```
+    <div class="row">
+      <div class="col-xs-12 col-md-6">
+        <div class="vitals-group highlighter-wrapper">
+          <span ng-class="getHighlighterClass('respirationRate')"></span>
+          <label class="vitals-label">Respiration Rate</label>
+          <div class="input-group vitals-holder popover-wrap" ng-class="vitalStatuses.respirationRate.type">
+            <div class="form-control input-sm">{{vital.respirationRate}}</div>
+            <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">resps/min</span>
+            <mc-popover-vital title="Respiration Rate" labels="{{popoverLabels.respirationRate}}"></mc-popover-vital>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-md-6">
+        <div class="vitals-group highlighter-wrapper">
+          <span ng-class="getHighlighterClass('oxygenSaturation')"></span>
+          <label class="vitals-label">Oxygen Saturation</label>
+          <div class="input-group vitals-holder popover-wrap" ng-class="vitalStatuses.oxygenSaturation.type">
+            <div class="form-control input-sm">{{vital.oxygenSaturation}}</div>
+            <span class="vitals-addon popover-toggle" ng-click="togglePopover($event)">%</span>
+            <mc-popover-vital title="Oxygen Saturation" labels="{{popoverLabels.oxygenSaturation}}"></mc-popover-vital>
+          </div>
+        </div>
+      </div>
+    </div>
+```
+
+## Vitals tooltip
+{% include image.html file="ui-kit/vitals_tooltip.png" alt="drop-down selector" caption="" %}
+```
+    <div class="popover-inner">
+        <h3 class="popover-title ng-binding">Respiration Rate</h3>
+        <div class="popover-content">
+          <div class="range-vital-labels">
+            <img src="data:image/jpeg;base64 />
+          </div>
+        </div>
+    </div>
+```
+
+## Clinical Statements Tag
+{% include image.html file="ui-kit/statements_tag.png" alt="drop-down selector" caption="" %}
+```
+    <span class="label label-success ng-binding ng-scope" ng-repeat="(key, val) in $ctrl.clinicalStatement.tags track by $index">chestpain</span>
+```
+
+## Clinical Statement creation popup
+{% include image.html file="ui-kit/statement_creation_popup.png" alt="drop-down selector" caption="" %}
+```
+    <div class="dropdown-menu dm-panel dm-statements dm-small dm-top-left ng-scope" ng-if="!statements.length">
+        <div class="heading wrap-overflow">
+          <div class="pagination-heading">Tags</div>
+        </div>
+        <div class="dm-wrap-list">
+          <div class="dm-list">
+            <div class="dm-item ng-scope"><span class="ng-binding">acutesob</span></div>
+          </div>
+        </div>
+    </div>
+```
+
+## Patient Advanced Search popup
+{% include image.html file="ui-kit/patient_advanced_search.png" alt="drop-down selector" caption="" %}
+```
+    <div mc-datepicker="" class="panel panel-secondary without-margin">
+      <div class="panel-heading">
+        <div class="control-group right">
+          <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="cancel()"><i class="fa fa-chevron-up"></i></button>
+        </div>
+        <h3 class="panel-title">
+          <span class="ng-binding">Patient Search - Advanced:</span>
+          <!-- ngIf: searchParams.nhsNumber -->
+        </h3>
+      </div>
+      <div class="panel-body">
+        <div class="panel-body-inner">
+          <form name="advancedSearchForm" class="form ng-pristine ng-invalid ng-invalid-required">
+            <div class="form-group-wrapper">
+                <div class="row">
+                    <!-- ngIf: $ctrl.option.type === 'advanced' --><div class="col-xs-12 col-sm-6 ng-scope" ng-if="$ctrl.option.type === 'advanced'">
+                      <div class="form-group has-error" ng-class="{'has-error': !$ctrl.detailsFocused &amp;&amp; isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber) &amp;&amp; areDetailsFieldsClean(advancedSearchForm),
+                        'has-success': !$ctrl.detailsFocused &amp;&amp; advancedSearchForm.nhsNumber.$valid &amp;&amp; advancedSearchForm.nhsNumber.$dirty}">
+                          <label for="nhsNumber" class="control-label">NHS Number</label>
+                          <div class="input-holder">
+                              <input type="text" tabindex="1" class="form-control input-sm ng-pristine ng-empty ng-invalid ng-invalid-required ng-touched" id="nhsNumber" name="nhsNumber" ng-model="searchParams.nhsNumber" focus-element="nhsNumberFocus" is-valid-nhs-number="" ng-focus="$ctrl.detailsFocused=false" ng-required="!$ctrl.detailsFocused" placeholder="e.g. 123 456 7890" required="required">
+                          </div>
+                          <span class="help-block animate-fade ng-hide" ng-show="formSubmitted &amp;&amp; advancedSearchForm.nhsNumber.$invalid &amp;&amp; !$ctrl.detailsFocused">You must enter a value.</span>
+                          <span class="required-label" ng-show="!$ctrl.detailsFocused &amp;&amp; isNhsNumberRequired(advancedSearchForm)">*Required</span>
+                          <span class="required-label ng-hide" ng-show="!$ctrl.detailsFocused &amp;&amp; isNhsNumberTooShort(advancedSearchForm.nhsNumber.$viewValue)">*NHS Number too short</span>
+                          <span class="required-label ng-hide" ng-show="!$ctrl.detailsFocused &amp;&amp; isNhsNumberTooLong(advancedSearchForm.nhsNumber.$viewValue)">*NHS Number too long</span>
+                      </div>
+                    </div><!-- end ngIf: $ctrl.option.type === 'advanced' -->
+                    <!-- ngIf: $ctrl.option.type === 'clinicalQuery' -->
+                </div>
+                <div class="row">
+                    <!-- ngIf: $ctrl.option.type === 'advanced' --><div class="col-xs-12 col-sm-6 ng-scope" ng-if="$ctrl.option.type === 'advanced'">
+                      <div class="form-group" ng-class="{'has-error': advancedSearchForm.surname.$error.required &amp;&amp; advancedSearchForm.surname.$invalid &amp;&amp; isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber),
+                        'has-success': $ctrl.detailsFocused &amp;&amp; advancedSearchForm.surname.$valid &amp;&amp; advancedSearchForm.surname.$dirty &amp;&amp; isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber)}">
+                          <label for="surname" class="control-label">Last Name</label>
+                          <div class="input-holder">
+                              <input type="text" tabindex="2" class="form-control input-sm ng-pristine ng-untouched ng-empty ng-valid ng-valid-required" id="surname" name="surname" ng-model="searchParams.surname" focus-element="surnameFocus" ng-focus="$ctrl.detailsFocused=true" ng-required="$ctrl.detailsFocused" placeholder="e. g. Smith">
+                          </div>
+                          <span class="help-block animate-fade ng-hide" ng-show="formSubmitted &amp;&amp; advancedSearchForm.surname.$error.required &amp;&amp; isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber)">You must enter a value.</span>
+                          <span class="required-label ng-hide" ng-show="$ctrl.detailsFocused &amp;&amp; isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber) &amp;&amp; (advancedSearchForm.surname.$invalid || advancedSearchForm.forename.$invalid || advancedSearchForm.dateOfBirth.$invalid)">*Required</span>
+                      </div>
+                    </div><!-- end ngIf: $ctrl.option.type === 'advanced' -->
+                    <!-- ngIf: $ctrl.option.type === 'clinicalQuery' -->
+                    <!-- ngIf: $ctrl.option.type === 'advanced' --><div class="col-xs-12 col-sm-6 ng-scope" ng-if="$ctrl.option.type === 'advanced'">
+                      <div class="form-group" ng-class="{'has-error': advancedSearchForm.forename.$error.required &amp;&amp; advancedSearchForm.forename.$invalid &amp;&amp; isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber),
+                        'has-success': $ctrl.detailsFocused &amp;&amp; advancedSearchForm.forename.$valid &amp;&amp; advancedSearchForm.forename.$dirty &amp;&amp; isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber)}">
+                          <label for="forename" class="control-label">First Name</label>
+                          <div class="input-holder">
+                              <input type="text" tabindex="3" class="form-control input-sm ng-pristine ng-untouched ng-empty ng-valid ng-valid-required" id="forename" name="forename" ng-model="searchParams.forename" ng-focus="$ctrl.detailsFocused=true" ng-required="$ctrl.detailsFocused" placeholder="e.g. John">
+                          </div>
+                          <span class="help-block animate-fade ng-hide" ng-show="formSubmitted &amp;&amp; advancedSearchForm.forename.$error.required &amp;&amp; (advancedSearchForm.nhsNumber.$invalid || advancedSearchForm.nhsNumber.$pristine)">You must enter a value.</span>
+                          <span class="required-label ng-hide" ng-show="$ctrl.detailsFocused &amp;&amp; isNhsNumberFieldInvalid(advancedSearchForm.nhsNumber) &amp;&amp; (advancedSearchForm.surname.$invalid || advancedSearchForm.forename.$invalid || advancedSearchForm.dateOfBirth.$invalid)">*Required</span>
+                      </div>
+                    </div><!-- end ngIf: $ctrl.option.type === 'advanced' -->
+                    <!-- ngIf: $ctrl.option.type === 'clinicalQuery' -->
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-12 col-sm-4">
+                      <div class="form-group">
+                          <label for="selectAgeField" class="control-label">Select Age Params</label>
+                          <select class="form-control input-sm ng-pristine ng-untouched ng-valid ng-not-empty" tabindex="5" id="selectAgeField" name="selectAgeField" ng-model="selectAgeField">
+                              <option value="range">Age Range</option>
+                              <option value="birthday">Birthday</option>
+                          </select>
+                      </div>
+                  </div>
+                </div>
+
+                <!-- ngIf: selectAgeField == 'range' --><div class="form-group ng-scope" ng-if="selectAgeField == 'range'">
+                  <label for="" class="control-label">Age Range (Years)</label>
+                  <div class="wrap-rzslider-search">
+                      <div class="mc-rz-slider rzslider ng-isolate-scope" rz-slider-model="sliderRange.minValue" rz-slider-high="sliderRange.maxValue" rz-slider-options="sliderRange.options"><span class="rz-bar-wrapper"><span class="rz-bar"></span></span> <span class="rz-bar-wrapper" style="visibility: visible; width: 809px; left: 6px;"><span class="rz-bar rz-selection" ng-style="barStyle"></span></span> <span class="rz-pointer rz-pointer-min" ng-style="minPointerStyle" role="slider" aria-valuenow="0" aria-valuetext="0" aria-valuemin="0" aria-valuemax="20" tabindex="0" style="left: 0px;"></span> <span class="rz-pointer rz-pointer-max" ng-style="maxPointerStyle" aria-valuenow="100" aria-valuetext="100" aria-valuemin="0" aria-valuemax="20" role="slider" tabindex="0" style="left: 809px;"></span> <span class="rz-bubble rz-limit rz-floor" style="visibility: visible; left: 0px;">0</span> <span class="rz-bubble rz-limit rz-ceil" style="visibility: visible; left: 821px;">100</span> <span class="rz-bubble" style="visibility: visible; left: 6px;">0</span> <span class="rz-bubble" style="visibility: visible; left: 815px;">100</span> <span class="rz-bubble" style="visibility: hidden;"></span><ul ng-show="showTicks" class="rz-ticks"><!-- ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(0px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --><span ng-if="t.legend != null" class="rz-tick-legend ng-binding ng-scope">0</span><!-- end ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(40px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(81px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --><span ng-if="t.legend != null" class="rz-tick-legend ng-binding ng-scope">10</span><!-- end ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(121px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(162px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --><span ng-if="t.legend != null" class="rz-tick-legend ng-binding ng-scope">20</span><!-- end ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(202px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(243px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --><span ng-if="t.legend != null" class="rz-tick-legend ng-binding ng-scope">30</span><!-- end ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(283px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(324px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --><span ng-if="t.legend != null" class="rz-tick-legend ng-binding ng-scope">40</span><!-- end ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(364px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(405px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --><span ng-if="t.legend != null" class="rz-tick-legend ng-binding ng-scope">50</span><!-- end ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(445px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(485px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --><span ng-if="t.legend != null" class="rz-tick-legend ng-binding ng-scope">60</span><!-- end ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(526px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(566px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --><span ng-if="t.legend != null" class="rz-tick-legend ng-binding ng-scope">70</span><!-- end ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(607px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(647px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --><span ng-if="t.legend != null" class="rz-tick-legend ng-binding ng-scope">80</span><!-- end ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(688px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(728px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --><span ng-if="t.legend != null" class="rz-tick-legend ng-binding ng-scope">90</span><!-- end ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(769px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --><li ng-repeat="t in ticks track by $index" class="rz-tick ng-scope rz-selected" ng-class="{'rz-selected': t.selected}" ng-style="t.style" ng-attr-uib-tooltip="{{ t.tooltip }}" ng-attr-tooltip-placement="{{t.tooltipPlacement}}" ng-attr-tooltip-append-to-body="{{ t.tooltip ? true : undefined}}" style="transform: translateX(809px);"><!-- ngIf: t.value != null --> <!-- ngIf: t.legend != null --><span ng-if="t.legend != null" class="rz-tick-legend ng-binding ng-scope">100+</span><!-- end ngIf: t.legend != null --></li><!-- end ngRepeat: t in ticks track by $index --></ul></div>
+                  </div>
+                </div><!-- end ngIf: selectAgeField == 'range' -->
+
+                <!-- ngIf: selectAgeField == 'birthday' -->
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                      <div class="form-group" ng-class="{'has-error': (formSubmitted || advancedSearchForm.route.$dirty) &amp;&amp; medicationForm.route.$invalid, 'has-success': medicationForm.route.$valid &amp;&amp; medicationForm.route.$dirty}">
+                          <label for="gender" class="control-label">Gender</label>
+                          <div class="input-holder">
+                              <div class="wrap-fcustominps-inline">
+                                  <div class="wrap-fcustominp">
+                                      <div class="fcustominp">
+                                          <input type="checkbox" id="gender-male" name="gender-male" ng-model="searchParams.sexMale" class="ng-pristine ng-untouched ng-valid ng-empty">
+                                          <label for="gender-male"></label>
+                                      </div>
+                                      <label for="gender-male" class="fcustominp-label ng-binding">Male</label>
+                                  </div>
+                                  <div class="wrap-fcustominp">
+                                      <div class="fcustominp">
+                                          <input type="checkbox" id="gender-female" name="gender-female" ng-model="searchParams.sexFemale" class="ng-pristine ng-untouched ng-valid ng-empty">
+                                          <label for="gender-female"></label>
+                                      </div>
+                                      <label for="gender-female" class="fcustominp-label ng-binding">Female</label>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+          </form>
+
+        </div>
+        <div class="panel-control">
+          <div class="wrap-control-group hide-indent-bottom">
+            <div class="control-group with-indent right">
+              <button class="btn btn-danger btn-icon-normal" ng-click="cancel()"><i class="fa fa-times"></i> Close</button>
+              <button class="btn btn-success btn-icon-normal" ng-click="ok(advancedSearchForm)"><i class="fa fa-search"></i> Search</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+```
