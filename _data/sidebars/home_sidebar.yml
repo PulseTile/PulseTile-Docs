@@ -9,7 +9,7 @@ entries:
   - title: Getting Started
     output: web, pdf
     folderitems:
-    - title: Coe Tiles
+    - title: Core Tiles
       url: /core_tiles_landing.html
       output: web
 
