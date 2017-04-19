@@ -3,11 +3,12 @@ title: Plugin development brief
 keywords: plugins process structure
 summary: "Guide to plugins development process"
 sidebar: home_sidebar
+toc: false
 permalink: plugin_process.html
 folder: product1
 ---
 
-#### Plugin's development:
+## Plugin's development:
 To get started, copy the core project (https://github.com/PulseTile/PulseTile) for creating your functionality environment.
 
 ### We will use next 10 files in our plugin, below explanations of that files:

@@ -9,10 +9,6 @@ entries:
   - title: Getting Started
     output: web, pdf
     folderitems:
-    - title: Core Tiles
-      url: /core_tiles_landing.html
-      output: web
-
 #    - title: Background
 #      url: /core_tiles_landing.html
 #      output: web
@@ -69,6 +65,10 @@ entries:
   - title: Core Tiles
     output: web, pdf
     folderitems:
+    - title: Core Tiles
+      url: /core_tiles_landing.html
+      output: web
+
     - title: Patient Summary
       url: /Core_Tiles_PatientSummary.html
       output: web, pdf
