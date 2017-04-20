@@ -1,6 +1,6 @@
 ---
-title: Introduction
-sidebar: home_sidebar
+title: Technologies introduction
+sidebar: technologies_sidebar
 permalink: mydoc_introduction.html
 folder: mydoc
 ---
