@@ -1,29 +1,29 @@
- This is your sidebar TOC. The sidebar code loops through sections here and provides the appropriate formatting.
-
-
-
 
 entries:
-- title: Technologies introduction
+- title: Technologies Stack
   product: Technologies introduction
-  version:
-  folderitems:
-  - title: Technologies introduction
-    url: /mydoc_introduction.html
-    output: web
+  levels: one
+  folders:
 
-  - title: Redux
-    url: /redux-technology.html
+  - title: Technologies
     output: web, pdf
+    folderitems:
+    - title: Technologies introduction
+      url: /mydoc_introduction.html
+      output: web
 
-  - title: Angular
-    url: /angular-technology.html
-    output: web, pdf
+    - title: Redux
+      url: /redux-technology.html
+      output: web, pdf
 
-  - title: Webpack
-    url: /webpack-technology.html
-    output: web, pdf
+    - title: Angular
+      url: /angular-technology.html
+      output: web, pdf
 
-  - title: Bower
-    url: /bower-technology.html
-    output: web, pdf
+    - title: Webpack
+      url: /webpack-technology.html
+      output: web, pdf
+
+    - title: Bower
+      url: /bower-technology.html
+      output: web, pdf
