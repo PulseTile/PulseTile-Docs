@@ -9,7 +9,7 @@ topnav_dropdowns:
   folders:
     - title: Documentation
       folderitems:
-        - title: Core UX Framework
+        - title: Technologies Stack
           url: /mydoc_introduction.html
         - title: Core UI Framework
           url: /ui_kit_page.html
