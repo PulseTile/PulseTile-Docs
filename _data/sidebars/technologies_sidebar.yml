@@ -1,14 +1,14 @@
 
 entries:
 - title: Technologies Stack
-  product: Technologies introduction
+  product: Technologies Stack
   levels: one
   folders:
 
   - title: Technologies
     output: web, pdf
     folderitems:
-    - title: Technologies introduction
+    - title: Technologies Stack
       url: /mydoc_introduction.html
       output: web
 
