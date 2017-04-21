@@ -1,6 +1,6 @@
 ---
 title: Technologies Stack
-sidebar: technologies_sidebar
+sidebar: mydoc_technologies_sidebar
 permalink: mydoc_introduction.html
 folder: mydoc
 ---
