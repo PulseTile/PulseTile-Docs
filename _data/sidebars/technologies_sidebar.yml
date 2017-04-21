@@ -23,24 +23,24 @@ entries:
       type: frontmatter
 
   - title: Technologies
-    output: web, pdf
+    output: web-mc, pdf
     folderitems:
     - title: Technologies Stack
       url: /mydoc_introduction.html
-      output: web
+      output: web-mc
 
     - title: Redux
       url: /redux-technology.html
-      output: web, pdf
+      output: web-mc, pdf
 
     - title: Angular
       url: /angular-technology.html
-      output: web, pdf
+      output: web-mc, pdf
 
     - title: Webpack
       url: /webpack-technology.html
-      output: web, pdf
+      output: web-mc, pdf
 
     - title: Bower
       url: /bower-technology.html
-      output: web, pdf
+      output: web-mc, pdf

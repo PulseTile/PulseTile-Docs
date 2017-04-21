@@ -43,12 +43,28 @@
         {% endif %}
         {% endfor %}
         {% endfor %}
-        <p class="external">
-            <a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
-        </p>
         <!-- if you aren't using the accordion, uncomment this block:
+           <p class="external">
+               <a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
+           </p>
            -->
     </li>
+    {% if folder.output contains "web-mc" %}
+    <li>
+        <a href="#">{{ folder.title }}</a>
+        <ul>
+            {% for folderitem in folder.folderitems %}
+            {% if folderitem.output contains "web" %}
+            {% if folderitem.external_url %}
+            <li><a href="{{folderitem.external_url}}" target="_blank">{{folderitem.title}}</a></li>
+            {% elsif page.url == folderitem.url %}
+            <li class="active"><a href="{{folderitem.url | remove: "/"}}">{{folderitem.title}}</a></li>
+            {% else %}
+            <li><a href="{{folderitem.url | remove: "/"}}">{{folderitem.title}}</a></li>
+            {% endif %}
+            </ul>
+    </li>
+    {% endif %}
 </ul>
 </div>
 
