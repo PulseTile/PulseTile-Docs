@@ -62,6 +62,8 @@
             {% else %}
             <li><a href="{{folderitem.url | remove: "/"}}">{{folderitem.title}}</a></li>
             {% endif %}
+            {% endfor %}
+            {% endif %}
             </ul>
     </li>
     {% endif %}
