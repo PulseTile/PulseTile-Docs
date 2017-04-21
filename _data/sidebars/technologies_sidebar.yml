@@ -1,9 +1,26 @@
+# This is your sidebar TOC. The sidebar code loops through sections here and provides the appropriate formatting.
+
+
+
 
 entries:
 - title: Sidebar
   product: Technologies Stack
   version:
   folders:
+
+  - title:
+    output: pdf
+    type: frontmatter
+    folderitems:
+    - title:
+      url: /titlepage
+      output: pdf
+      type: frontmatter
+    - title:
+      url: /tocpage
+      output: pdf
+      type: frontmatter
 
   - title: Technologies
     output: web, pdf
