@@ -5,7 +5,7 @@
 
 entries:
 - title: Sidebar
-  product: Core UI Framework
+  product: Core Tiles
   version:
   folders:
 
@@ -24,19 +24,6 @@ entries:
       type: frontmatter
 
 
-  - title: Getting Started
-    output: web, pdf
-    folderitems:
-    - title: Background
-      url: /p1_landing_page.html
-      output: web
-
-
-    - title: Licensing 
-      url: /coreuiproject.html
-      output: web, pdf
-
-    
   - title: Core Tiles
     output: web, pdf
     folderitems:
@@ -67,53 +54,3 @@ entries:
     - title: Medictions
       url: /Core_Tiles_Medications.html
       output: web, pdf
-
-
-  - title: API endpoints - JSON data
-    output: web, pdf
-
-
-    folderitems:    
-    - title: JSON Array Allergies data
-      url: /JSON_Allergies.html
-      output: web, pdf  
-       
-    - title: JSON Array Contacts information
-      url: /JSON_Contacts.html
-      output: web, pdf   
-   
-    - title: JSON Array MDT
-      url: /JSON_MDT.html
-      output: web, pdf   
-      
-    - title: JSON Array Medications data
-      url: /JSON_Medication.html
-      output: web, pdf   
-      
-    - title: JSON Array Patient information
-      url: /JSON_Patient_Information.html
-      output: web, pdf   
-      
-    - title: JSON Array Patient list
-      url: /JSON_Patient_Lists.html
-      output: web, pdf   
-      
-    - title: JSON Array Personal Notes
-      url: /JSON_Personal_Notes.html
-      output: web, pdf   
-            
-    - title: JSON Array Procedures
-      url: /JSON_Procedures.html
-      output: web, pdf   
-            
-    - title: JSON Array Referrals
-      url: /JSON_Referrals.html
-      output: web, pdf   
-            
-    - title: JSON Array Test Results
-      url: /JSON_Results.html
-      output: web, pdf   
-            
-    - title: JSON array Vitals NEWS
-      url: /JSON_Vitals.html
-      output: web, pdf   
