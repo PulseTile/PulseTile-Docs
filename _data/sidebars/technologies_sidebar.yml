@@ -10,16 +10,16 @@ entries:
   folders:
 
   - title:
-    output: pdf
+    output: web-mc
     type: frontmatter
     folderitems:
     - title:
       url: /titlepage
-      output: pdf
+      output: web-mc
       type: frontmatter
     - title:
       url: /tocpage
-      output: pdf
+      output: web-mc
       type: frontmatter
 
   - title: Technologies
