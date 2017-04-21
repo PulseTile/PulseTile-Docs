@@ -10,18 +10,18 @@ entries:
   flag: mc
   folders:
 
-  - title:
-    output: web-mc
-    type: frontmatter
-    folderitems:
-    - title:
-      url: /titlepage
-      output: web-mc
-      type: frontmatter
-    - title:
-      url: /tocpage
-      output: web-mc
-      type: frontmatter
+#  - title:
+#    output: web-mc
+#    type: frontmatter
+#    folderitems:
+#    - title:
+#      url: /titlepage
+#      output: web-mc
+#      type: frontmatter
+#    - title:
+#      url: /tocpage
+#      output: web-mc
+#      type: frontmatter
 
   - title: Technologies
     output: web-mc, pdf

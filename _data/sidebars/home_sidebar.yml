@@ -4,6 +4,7 @@ entries:
 - title: Sidebar
   product: Table of contents
   levels: one
+  flag: main
   folders:
 
   - title: Getting Started
