@@ -7,6 +7,7 @@ entries:
 - title: Sidebar
   product: Technologies Stack
   version:
+  flagSidebar: accordeon
   folders:
 
   - title:

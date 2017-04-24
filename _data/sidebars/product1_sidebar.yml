@@ -7,7 +7,7 @@ entries:
 - title: Sidebar
   product: Core Tiles
   version:
-  flagSidebar: accordeon
+  flagSidebar: mc
   folders:
 
 
