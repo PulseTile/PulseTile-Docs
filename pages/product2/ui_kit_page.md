@@ -1,7 +1,7 @@
 ---
 title: Core UI
 keywords: mydoc
-sidebar: home_sidebar
+sidebar: ui_kit_sidebar
 toc: false
 permalink: ui_kit_page.html
 folder: product2
