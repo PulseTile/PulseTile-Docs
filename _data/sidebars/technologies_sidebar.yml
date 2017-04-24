@@ -7,8 +7,7 @@ entries:
 - title: Sidebar
   product: Technologies Stack
   version:
-  flag: mc
-  flagSidebar: accordeon
+  flagSidebar: mc
   folders:
 
 #  - title:
