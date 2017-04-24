@@ -20,7 +20,7 @@
         {% endfor %}
     </ul>
 {% endif %}
-{% elsif %}
+{% elsif sidebar[0].flagSidebar contains "accordeon" %}
 <ul id="mysidebar" class="nav">
     <li class="sidebarTitle">{{sidebar[0].product}} {{sidebar[0].version}}</li>
 

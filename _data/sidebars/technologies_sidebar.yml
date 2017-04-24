@@ -8,6 +8,7 @@ entries:
   product: Technologies Stack
   version:
   flag: mc
+  flagSidebar: accordeon
   folders:
 
 #  - title:
