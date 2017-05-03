@@ -1182,7 +1182,7 @@ h4.panel-title {
 /* SG Toolbar Additions */
 
 #rs-navbar.navbar {
-	height: 88px;
+	/*height: 88px;*/
 }
 
 	#rs-navbar .navbar-brand {
@@ -1231,7 +1231,7 @@ h4.panel-title {
 		}
 	
 	#rs-navbar .navbar-nav.main {
-		border-right: 1px solid #e1e1e1;
+		/*border-right: 1px solid #e1e1e1;*/
 		padding-right: 10px;
 		margin-right: 10px;
 	}
