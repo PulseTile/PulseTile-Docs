@@ -951,6 +951,11 @@ a[href^="http://"]:after, a[href^="https://"]:after {
     padding-left: 3px;
 }
 
+	nav a[href^="http://"]:after, 
+	nav a[href^="https://"]:after {
+		content: none;
+	}
+
 /* Strip the outbound icon when this class is present */
 a[href].noCrossRef::after,
 a.no_icon:after
@@ -1231,7 +1236,7 @@ h4.panel-title {
 		}
 	
 	#rs-navbar .navbar-nav.main {
-		/*border-right: 1px solid #e1e1e1;*/
+
 		padding-right: 10px;
 		margin-right: 10px;
 	}
@@ -1265,14 +1270,29 @@ h4.panel-title {
 		#rs-navbar .nav > li li:first-child {
 			margin-top: 0;
 		}
-		
+	
+	
+	#mysidebar #search-input {
+		float: none;
+		margin: 20px 0 0 0;
+		width: 100%;
+	}
+	
 	#search-input {
 		margin-top: 29px;
 		margin-left: 10px;
 		margin-right: 15px;
 	}
 	
+		#search-demo-container {
+			position: relative;
+		}
+	
 		#search-demo-container ul#results-container {
-			top: 61px;
+			position: absolute;
+			top: 57px;
+			left: 0;
+			z-index: 1;
+			display: block !important;
 		}
 		

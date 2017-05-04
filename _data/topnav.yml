@@ -3,6 +3,13 @@
 topnav:
 - title: Topnav
   items:
+    - title: Home
+      external_url: http://www.pulsetile.com/
+    - title: Features
+      external_url: http://www.pulsetile.com/features/
+    - title: About
+      external_url: http://www.pulsetile.com/about/
+  
 #Topnav dropdowns
 topnav_dropdowns:
 - title: Topnav dropdowns
@@ -17,3 +24,12 @@ topnav_dropdowns:
           url: /core_tiles_landing.html
         - title: Plugin Tiles
           url: /plugin_tiles_landing.html
+  items:
+    - title: News3
+      url: /news3
+      
+contact:
+- title: Contact
+  items:
+    - title: Contact
+      external_url: http://www.pulsetile.com/contact/
