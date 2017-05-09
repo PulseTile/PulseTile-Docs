@@ -1236,7 +1236,7 @@ h4.panel-title {
 		text-align: center;
 	}
 		
-		#rs-navbar.navbar .navbar-nav > li.active a {
+		#rs-navbar.navbar .navbar-nav > li.active > a {
 		    color: #ff5e00;
 		}
 	
@@ -1277,9 +1277,9 @@ h4.panel-title {
 	
 	#rs-navbar .dropdown-menu {
 		border: none;
-		border-top: 2px solid #007336;
+		border-top: 2px solid #3481ed;
 		background-color: #fff;
-		top: 84px;
+		top: 42px;
 	}
 	
 		#rs-navbar .dropdown-menu li,
