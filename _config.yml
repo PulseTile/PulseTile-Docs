@@ -1,9 +1,11 @@
-repository: tomjohnson1492/documentation-theme-jekyll
+baseurl: /    # /agency-jekyll-theme/
+
+#repository: tomjohnson1492/documentation-theme-jekyll
 
 output: web
 # this property is useful for conditional filtering of content that is separate from the PDF.
 
-topnav_title: PulseTile
+#topnav_title: PulseTile
 # this appears on the top navigation bar next to the home button
 
 site_title: PulseTile
@@ -12,10 +14,10 @@ site_title: PulseTile
 company_name: PulseTile
 # this appears in the footer
 
-github_editme_path: tomjohnson1492/documentation-theme-jekyll/blob/gh-pages/
+#github_editme_path: tomjohnson1492/documentation-theme-jekyll/blob/gh-pages/
 # if you're using Github, provide the basepath to the branch you've created for reviews, following the sample here. if not, leave this value blank.
 
-disqus_shortname: idrbwjekyll
+#disqus_shortname: idrbwjekyll
 # if you're using disqus for comments, add the shortname here. if not, leave this value blank.
 
 host: 127.0.0.1
@@ -105,4 +107,4 @@ description: "Intended as a documentation theme based on Jekyll for technical wr
 # the description is used in the feed.xml file
 
 # needed for sitemap.xml file only
-url: http://idratherbewriting.com
+#url: http://idratherbewriting.com

@@ -3,10 +3,11 @@
 		<div class="navbar-header">
 			<a class="navbar-brand" href="http://b51.cc4.myftpupload.com">
 				<!--<img src="{{ "images/PulseTile_symbol_only-80x80.png" }}" alt="PulseTile">  -->
-				<img height="100" width="300" src="http://b51.cc4.myftpupload.com/wp-content/uploads/2017/03/pulsetileheader-1.png" alt="PulseTile" style="max-height: 88px;">
+				<img src="{{ "images/pulsetileheader-1.png" | prepend: site.baseurl }}" alt="PulseTile">
 				 
 			</a>
 		</div>
+		
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -33,7 +34,7 @@
 	            <!-- conditional logic to control which topnav appears for the audience defined in the configuration file.-->
 	            {% for entry in site.data.topnav.topnav_dropdowns %}
 	                {% for folder in entry.folders %}
-	                <li class="dropdown">
+	                <li class="dropdown active">
 	                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ folder.title }}<b class="caret"></b></a>
 	                    <ul class="dropdown-menu">
 	                        {% for folderitem in folder.folderitems %}

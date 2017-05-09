@@ -1187,16 +1187,23 @@ h4.panel-title {
 /* SG Toolbar Additions */
 
 #rs-navbar.navbar {
-	/*height: 88px;*/
+	min-height: 45px;
+	height: 45px;
 }
 
 	#rs-navbar .navbar-brand {
-		padding-top: 15px;
+		padding-top: 11px;
 		padding-bottom: 0;
+		padding-left: 24px;
 	}
+	
+		#rs-navbar .navbar-brand img {
+			width: 95px; 
+			height: auto;
+		}
 
 	#rs-navbar.navbar > .container {
-		
+		padding: 0 60px;
 	}
 
 	#rs-navbar.navbar-default {
@@ -1205,14 +1212,14 @@ h4.panel-title {
 	}
 
 	#rs-navbar.navbar .navbar-nav > li {
-		height: 88px;
+		height: 44px;
 		display: table;
 		background: transparent;
 		
 	}
 	
 	#rs-navbar.navbar .navbar-nav > li.active {
-		border-bottom: 2px solid #007336;
+		border-bottom: 2px solid #3481ed;
 		box-sizing: border-box;
 	}
 
@@ -1224,19 +1231,42 @@ h4.panel-title {
 		color: #454545;
 		font-weight: 600;
 		background: transparent;
+		padding-left: 11px;
+		padding-right: 11px;
+		text-align: center;
 	}
+		
+		#rs-navbar.navbar .navbar-nav > li.active a {
+		    color: #ff5e00;
+		}
 	
 		#rs-navbar.navbar-default .navbar-nav>li>a:focus, 
 		#rs-navbar.navbar-default .navbar-nav>li>a:hover {
-			color: #007336;
+			color: #ff5e00;
 		}
 		
 		#rs-navbar.navbar-default .navbar-nav > li.twitter a {
 			font-size: 16px;
+			display: block;
+			width: 30px;
+			height: 30px;
+			margin-top: 8px;
+			padding-left: 0;
+			padding-right: 0;
+			border-radius: 50%;
+			transition: all 0.3s ease-out;
 		}
+		
+			#rs-navbar.navbar-default .navbar-nav > li.twitter a:hover {
+				background-color: #46d4fe;
+			}
+			
+				#rs-navbar.navbar-default .navbar-nav > li.twitter a:hover i {
+					color: #fff;
+				}
 	
 	#rs-navbar .navbar-nav.main {
-
+		border-right: 1px solid #e6e6e6;
 		padding-right: 10px;
 		margin-right: 10px;
 	}
