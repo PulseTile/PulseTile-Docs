@@ -1,0 +1,60 @@
+# This is your sidebar TOC. The sidebar code loops through sections here and provides the appropriate formatting.
+
+entries:
+- title: Sidebar
+  product: Table of contents
+  levels: one
+  flagSidebar: accordeon
+  folders:
+
+  - title: Getting Started
+    output: web, pdf
+    folderitems:
+
+    - title: Licensing
+      url: /coreuiproject.html
+      output: web, pdf
+
+    - title: Plugins Background
+      url: /plugins.html
+      output: web, pdf
+
+    - title: Guide to plugins development process
+      url: /plugin_process.html
+      output: web, pdf
+
+  - title: Background / Decision-making process
+    output: web, pdf
+
+    folderitems:
+    - title: Background
+      url: /background.html
+      output: web
+
+
+  - title: Technologies
+    output: web, pdf
+
+    folderitems:
+    - title: Technologies introduction
+      url: /mydoc_introduction.html
+      output: web
+
+    - title: Redux
+      url: /redux-technology.html
+      output: web, pdf
+
+    - title: Angular
+      url: /angular-technology.html
+      output: web, pdf
+
+    - title: Webpack
+      url: /webpack-technology.html
+      output: web, pdf
+
+    - title: Bower
+      url: /bower-technology.html
+      output: web, pdf
+
+
+ 
