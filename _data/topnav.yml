@@ -17,7 +17,7 @@ topnav_dropdowns:
     - title: Documentation
       folderitems:
         - title: Getting Started
-          url: /landing.html
+          url: /index.html    #could be /landing.html etc
         - title: Technologies Stack
           url: /mydoc_introduction.html
         - title: Core UI Framework
