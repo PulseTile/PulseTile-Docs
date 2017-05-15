@@ -2,9 +2,9 @@
 title: Plugins
 keywords: plugins
 summary: "Approach being taken with Plugins"
-sidebar: home_sidebar
+sidebar: plugin_tiles_sidebar
 permalink: plugins.html
-folder: product1
+folder: plugin_tiles
 ---
 
 ### Contract  
