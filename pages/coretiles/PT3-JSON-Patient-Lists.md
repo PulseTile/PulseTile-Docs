@@ -2,9 +2,9 @@
 title: JSON Array Patient list
 keywords: Patient Lists
 summary: "JSON for Patient Lists"
-sidebar: home_sidebar
+sidebar: coretiles_sidebar
 permalink: JSON_Patient_Lists.html
-folder: product1
+folder: coretiles
 ---
 Sample JSON array for an element of patient's list (MPV) - single patient. 
 
