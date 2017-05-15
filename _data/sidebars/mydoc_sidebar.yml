@@ -26,7 +26,7 @@ entries:
   - title: Technologies
     output: web, pdf
     folderitems:
-    - title: Technologies Stack
+    - title: Technologies Stack MyDOCSB
       url: /mydoc_introduction.html
       output: web
 
