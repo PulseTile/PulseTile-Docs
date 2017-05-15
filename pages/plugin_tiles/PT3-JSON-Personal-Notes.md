@@ -2,9 +2,9 @@
 title: JSON Array Personal Notes
 keywords: Personal Notes
 summary: "JSON for Personal Notes module"
-sidebar: home_sidebar
+sidebar: plugin_tiles_sidebar
 permalink: JSON_Personal_Notes.html
-folder: product1
+folder: plugin_tiles
 ---
 
 Sample data source for Personal Notes module as a JSON array.
