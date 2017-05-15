@@ -30,59 +30,59 @@ entries:
       output: web, pdf
 
     - title: Clinical Notes
-      url: /Core_Tiles_ClinicalNotes.html
+      url: /ClinicalNotes.html
       output: web, pdf
 
     - title: Problems Diagnosis
-      url: /Core_Tiles_Problems_Diagnosis.html
+      url: /Problems_Diagnosis.html
       output: web, pdf
 
     - title: Images
-      url: /Core_Tiles_Images.html
+      url: /Images.html
       output: web, pdf
 
     - title: Documents
-      url: /Core_Tiles_Documents.html
+      url: /Documents.html
       output: web, pdf
 
     - title: MDT
-      url: /Core_Tiles_MDT.html
+      url: /MDT.html
       output: web, pdf
 
     - title: Orders
-      url: /Core_Tiles_Orders.html
+      url: /Orders.html
       output: web, pdf
 
     - title: Personal Notes
-      url: /Core_Tiles_PersonalNotes.html
+      url: /PersonalNotes.html
       output: web, pdf
 
     - title: Procedures
-      url: /Core_Tiles_Procedures.html
+      url: /Procedures.html
       output: web, pdf
 
     - title: Referrals
-      url: /Core_Tiles_Referrals.html
+      url: /Referrals.html
       output: web, pdf
 
     - title: Test Results
-      url: /Core_Tiles_TestResults.html
+      url: /TestResults.html
       output: web, pdf
 
     - title: Vaccinations
-      url: /Core_Tiles_Vaccinations.html
+      url: /Vaccinations.html
       output: web, pdf
 
     - title: Vitals
-      url: /Core_Tiles_Vitals.html
+      url: /Vitals.html
       output: web, pdf
 
     - title: Clinical Statements
-      url: /Core_Tiles_ClinicalStatements.html
+      url: /ClinicalStatements.html
       output: web, pdf
 
     - title: Events
-      url: /Core_Tiles_Events.html
+      url: /Events.html
       output: web, pdf
 
     #- title: Example Page for Allergy
