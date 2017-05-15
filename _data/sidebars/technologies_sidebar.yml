@@ -9,15 +9,12 @@ entries:
   version:
   flagSidebar: mc
   folders:
-  - title: Background / Decision-making process
+  - title: Technologies
     output: web, pdf
     folderitems:
     - title: Background
       url: /background.html
       output: web
-  - title: Technologies
-    output: web-mc, pdf
-    folderitems:
     - title: Technologies Stack
       url: tech_intro.html # /mydoc_introduction.html
       output: web-mc
