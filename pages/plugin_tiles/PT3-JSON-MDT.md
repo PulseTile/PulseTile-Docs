@@ -2,9 +2,9 @@
 title: JSON Array MDT
 keywords: MDT
 summary: "JSON for MDT module"
-sidebar: home_sidebar
+sidebar: plugin_tiles_sidebar
 permalink: JSON_MDT.html
-folder: product1
+folder: plugin_tiles
 ---
 Sample JSON data array for MDT (MultiDisciplinaryTeams) module.  
 ```
