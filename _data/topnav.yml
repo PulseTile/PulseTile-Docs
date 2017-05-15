@@ -19,7 +19,7 @@ topnav_dropdowns:
         - title: Getting Started
           url: /index.html    #could be /landing.html etc
         - title: Technologies Stack
-          url: /tech_intro.html   #was /mydoc_introduction.html
+          url: /background.html   #was /mydoc_introduction.html
         - title: Core UI Framework
           url: /ui_kit_page.html
         - title: Core Tiles
