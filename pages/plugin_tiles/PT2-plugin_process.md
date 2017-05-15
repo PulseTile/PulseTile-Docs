@@ -2,10 +2,10 @@
 title: Plugin development brief
 keywords: plugins process structure
 summary: "Guide to plugins development process"
-sidebar: home_sidebar
+sidebar: plugin_tiles_sidebar
 toc: false
 permalink: plugin_process.html
-folder: product1
+folder: plugin_tiles
 ---
 
 ## Plugin's development:
