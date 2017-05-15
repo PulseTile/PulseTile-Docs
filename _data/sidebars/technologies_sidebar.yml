@@ -23,6 +23,17 @@ entries:
 #      output: web-mc
 #      type: frontmatter
 
+
+  - title: Background / Decision-making process
+    output: web, pdf
+
+    folderitems:
+    - title: Background
+      url: /background.html
+      output: web
+
+
+
   - title: Technologies
     output: web-mc, pdf
     folderitems:
