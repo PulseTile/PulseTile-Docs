@@ -5,6 +5,8 @@ permalink: tech_intro.html
 folder: mydoc
 ---
 
+
+
 ## Redux
 
 Redux is a predictable state container for JavaScript apps.
