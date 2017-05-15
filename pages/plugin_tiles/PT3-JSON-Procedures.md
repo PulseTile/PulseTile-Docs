@@ -2,9 +2,9 @@
 title: JSON Array Procedures
 keywords: Procedures
 summary: "JSON for Procedures module"
-sidebar: home_sidebar
+sidebar: plugin_tiles_sidebar
 permalink: JSON_Procedures.html
-folder: product1
+folder: plugin_tiles
 ---
 Sample JSON data to work with Procedures page: 
 ```
