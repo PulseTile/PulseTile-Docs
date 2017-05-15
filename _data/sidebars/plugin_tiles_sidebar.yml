@@ -1,7 +1,7 @@
 # This is your sidebar TOC. The sidebar code loops through sections here and provides the appropriate formatting.
 entries:
 - title: PlugIn Tiles
-  product: plugin_tiles
+  product: PlugIn Tiles 
   version:
   flagSidebar: mc
   folders:
