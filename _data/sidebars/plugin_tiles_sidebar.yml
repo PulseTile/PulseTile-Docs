@@ -24,9 +24,6 @@ entries:
     - title: Clinical Notes
       url: /ClinicalNotes.html
       output: web, pdf
-    - title: Problems Diagnosis
-      url: /Problems_Diagnosis.html
-      output: web, pdf
     - title: Images
       url: /Images.html
       output: web, pdf
