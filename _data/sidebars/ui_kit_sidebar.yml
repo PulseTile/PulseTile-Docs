@@ -5,7 +5,7 @@
 
 entries:
 - title: Sidebar
-  product: Core UI
+  product: Core UI Framework
   version:
   flagSidebar: mc
   folders:
