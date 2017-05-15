@@ -2,9 +2,9 @@
 title: JSON Array Medications data
 keywords: sample
 summary: "JSON for Medications module"
-sidebar: home_sidebar
+sidebar: coretiles_sidebar
 permalink: JSON_Medication.html
-folder: product1
+folder: coretiles
 ---
 Sample data in JSON array for Medications module.    
 ```
