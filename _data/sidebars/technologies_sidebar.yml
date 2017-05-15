@@ -27,7 +27,7 @@ entries:
     output: web-mc, pdf
     folderitems:
     - title: Technologies Stack
-      url: /mydoc_introduction.html
+      url: tech_intro.html # /mydoc_introduction.html
       output: web-mc
 
     - title: Redux
