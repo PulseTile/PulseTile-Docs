@@ -21,9 +21,6 @@ entries:
     - title: Plugin Catalogue
       url: /plugin_tiles_landing.html
       output: web, pdf
-    - title: Clinical Notes
-      url: /ClinicalNotes.html
-      output: web, pdf
     - title: Images
       url: /Images.html
       output: web, pdf
