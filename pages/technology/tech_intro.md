@@ -3,6 +3,7 @@ title: Technologies Stack
 sidebar: technologies_sidebar
 permalink: tech_intro.html
 folder: technologies
+toc: false
 ---
 
 
