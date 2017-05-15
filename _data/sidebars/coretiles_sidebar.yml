@@ -5,18 +5,6 @@ entries:
   version:
   flagSidebar: mc
   folders:
- # - title:
- #   output: pdf
- #   type: frontmatter
- #   folderitems:
- #   - title:
- #     url: /titlepage
- #     output: pdf
- #     type: frontmatter
- #   - title:
- #     url: /tocpage
- #     output: pdf
- #     type: frontmatter
   - title: Core Tiles
     output: web, pdf
     folderitems:
