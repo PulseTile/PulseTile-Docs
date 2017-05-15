@@ -16,7 +16,7 @@ entries:
     folderitems:
     - title: Background
       url: /background.html
-      output: web
+      output: web-mc
     - title: Technologies Stack
       url: tech_intro.html # /mydoc_introduction.html
       output: web-mc
