@@ -18,10 +18,10 @@ entries:
       url: /background.html
       output: web-mc
     - title: Technologies Stack
-      url: tech_intro.html # /mydoc_introduction.html
+      url: tech_intro.md # /mydoc_introduction.html
       output: web-mc
     - title: More on the tech
-      url: technologies.html 
+      url: PT1-technologies.md 
       output: web-mc
     - title: Redux
       url: /redux-technology.html
