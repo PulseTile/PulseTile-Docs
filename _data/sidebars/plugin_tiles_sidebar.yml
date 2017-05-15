@@ -1,16 +1,10 @@
 # This is your sidebar TOC. The sidebar code loops through sections here and provides the appropriate formatting.
-
-
-
-
 entries:
-- title: Sidebar
+- title: PlugIn Tiles
   product: plugin_tiles
   version:
   flagSidebar: mc
   folders:
-
-
   - title:
     output: pdf
     type: frontmatter
@@ -23,69 +17,49 @@ entries:
       url: /tocpage
       output: pdf
       type: frontmatter
-
     folderitems:
     - title: Plugin Catalogue
       url: /plugin_tiles_landing.html
       output: web, pdf
-
     - title: Clinical Notes
       url: /ClinicalNotes.html
       output: web, pdf
-
     - title: Problems Diagnosis
       url: /Problems_Diagnosis.html
       output: web, pdf
-
     - title: Images
       url: /Images.html
       output: web, pdf
-
     - title: Documents
       url: /Documents.html
       output: web, pdf
-
     - title: MDT
       url: /MDT.html
       output: web, pdf
-
     - title: Orders
       url: /Orders.html
       output: web, pdf
-
     - title: Personal Notes
       url: /PersonalNotes.html
       output: web, pdf
-
     - title: Procedures
       url: /Procedures.html
       output: web, pdf
-
     - title: Referrals
       url: /Referrals.html
       output: web, pdf
-
     - title: Test Results
       url: /TestResults.html
       output: web, pdf
-
     - title: Vaccinations
       url: /Vaccinations.html
       output: web, pdf
-
     - title: Vitals
       url: /Vitals.html
       output: web, pdf
-
     - title: Clinical Statements
       url: /ClinicalStatements.html
       output: web, pdf
-
     - title: Events
       url: /Events.html
       output: web, pdf
-
-    #- title: Example Page for Allergy
-    #  url: /plugins.html
-    # output: web, pdf
-  
