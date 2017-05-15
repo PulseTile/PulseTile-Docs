@@ -34,5 +34,8 @@ entries:
       url: /bower-technology.html
       output: web-mc, pdf
   - title: Initial Q&A
-    url: /initial-QA.html
-    output: web, pdf   
+    output: web, pdf  
+    folderitems:
+    - title: Q&A on tech
+      url: /initial-QA.html
+      output: web-mc
