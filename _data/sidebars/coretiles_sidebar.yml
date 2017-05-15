@@ -1,16 +1,10 @@
 # This is your sidebar TOC. The sidebar code loops through sections here and provides the appropriate formatting.
-
-
-
-
 entries:
 - title: Core Tiles Sidebar
   product: coretiles
   version:
   flagSidebar: mc
   folders:
-
-
  # - title:
  #   output: pdf
  #   type: frontmatter
@@ -23,39 +17,30 @@ entries:
  #     url: /tocpage
  #     output: pdf
  #     type: frontmatter
-
-
-#  - title: Core Tiles
-#    output: web, pdf
-#    folderitems:
-#    - title: Core Tiles
-#      url: /core_tiles_landing.html
-#      output: web, pdf
-
+  - title: Core Tiles
+    output: web, pdf
+    folderitems:
+    - title: Core Tiles
+      url: /core_tiles_landing.html
+      output: web, pdf
 #    - title: Patient Summary
 #      url: /PatientSummary.html
 #      output: web, pdf
-
 #    - title: Search
 #      url: /Search.html
 #      output: web, pdf
-
 #   - title: Multipatients View
 #      url: /Multipatients.html
 #      output: web, pdf
-
 #    - title: Charts
 #      url: /Charts.html
 #      output: web, pdf
-
 #    - title: Allergies
 #      url: /Allergies.html
 #      output: web, pdf
-
 #    - title: Contacts
 #      url: /Contacts.html
 #      output: web, pdf
-
 #    - title: Medictions
 #      url: /Medications.html
 #      output: web, pdf
