@@ -24,12 +24,16 @@ entries:
     - title: Charts
       url: /Charts.html
       output: web, pdf
+    - title: Problems/Diagnosis
+      url: /Problems_Diagnosis.html
+      output: web, pdf  
+    - title: Medications
+      url: /Medications.html
+      output: web, pdf
     - title: Allergies
       url: /Allergies.html
       output: web, pdf
     - title: Contacts
       url: /Contacts.html
       output: web, pdf
-    - title: Medictions
-      url: /Medications.html
-      output: web, pdf
+   
