@@ -2,9 +2,9 @@
 title: JSON Array Patient information
 keywords: Patient information
 summary: "JSON for Patients information"
-sidebar: home_sidebar
+sidebar: coretiles_sidebar
 permalink: JSON_Patient_Information.html
-folder: product1
+folder: coretiles
 ---
 
 Example of JSON object to work obtain patient information and data for patient summary page.  
