@@ -5,7 +5,7 @@
 
 entries:
 - title: Sidebar
-  product: Plugin Tiles
+  product: plugin_tiles
   version:
   flagSidebar: mc
   folders:
