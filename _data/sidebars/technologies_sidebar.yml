@@ -10,8 +10,9 @@ entries:
   version:
   flagSidebar: mc
   folders:
-  - title: Technologies
+  - title: 
     output: web, pdf
+    type: frontmatter
     folderitems:
     - title: Background
       url: /background.html
@@ -34,9 +35,6 @@ entries:
     - title: Bower
       url: /bower-technology.html
       output: web-mc, pdf
-  - title: Initial Q&A
-    output: web, pdf  
-    folderitems:
     - title: Q&A on tech
       url: /initial-QA.html
       output: web-mc
