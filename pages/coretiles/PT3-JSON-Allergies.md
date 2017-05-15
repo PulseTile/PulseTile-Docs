@@ -2,9 +2,9 @@
 title: JSON Array Allergies data
 keywords: Allergies
 summary: "JSON for Allergies module"
-sidebar: home_sidebar
+sidebar: coretiles_sidebar
 permalink: JSON_Allergies.html
-folder: product1
+folder: coretiles
 
 ---
 Sample JSON for Allergies data simulation.  
