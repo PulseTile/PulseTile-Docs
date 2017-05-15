@@ -9,55 +9,30 @@ entries:
   version:
   flagSidebar: mc
   folders:
-
-#  - title:
-#    output: web-mc
-#    type: frontmatter
-#    folderitems:
-#    - title:
-#      url: /titlepage
-#      output: web-mc
-#      type: frontmatter
-#    - title:
-#      url: /tocpage
-#      output: web-mc
-#      type: frontmatter
-
-
   - title: Background / Decision-making process
     output: web, pdf
-
     folderitems:
     - title: Background
       url: /background.html
       output: web
-
-
-
   - title: Technologies
     output: web-mc, pdf
     folderitems:
     - title: Technologies Stack
       url: tech_intro.html # /mydoc_introduction.html
       output: web-mc
-
     - title: Redux
       url: /redux-technology.html
       output: web-mc, pdf
-
     - title: Angular
       url: /angular-technology.html
       output: web-mc, pdf
-
     - title: Webpack
       url: /webpack-technology.html
       output: web-mc, pdf
-
     - title: Bower
       url: /bower-technology.html
       output: web-mc, pdf
-      
-      
   - title: Initial Q&A
     url: /initial-QA.html
     output: web, pdf   
