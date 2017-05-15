@@ -33,29 +33,29 @@ entries:
       output: web, pdf
 
     - title: Patient Summary
-      url: /Core_Tiles_PatientSummary.html
+      url: /PatientSummary.html
       output: web, pdf
 
     - title: Search
-      url: /Core_Tiles_Search.html
+      url: /Search.html
       output: web, pdf
 
     - title: Multipatients View
-      url: /Core_Tiles_Multipatients.html
+      url: /Multipatients.html
       output: web, pdf
 
     - title: Charts
-      url: /Core_Tiles_Charts.html
+      url: /Charts.html
       output: web, pdf
 
     - title: Allergies
-      url: /Core_Tiles_Allergies.html
+      url: /Allergies.html
       output: web, pdf
 
     - title: Contacts
-      url: /Core_Tiles_Contacts.html
+      url: /Contacts.html
       output: web, pdf
 
     - title: Medictions
-      url: /Core_Tiles_Medications.html
+      url: /Medications.html
       output: web, pdf
