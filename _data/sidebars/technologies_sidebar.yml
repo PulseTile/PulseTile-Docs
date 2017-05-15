@@ -6,6 +6,7 @@
 entries:
 - title: Sidebar
   product: Technologies Stack
+  url: /background.html
   version:
   flagSidebar: mc
   folders:
