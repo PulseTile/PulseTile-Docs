@@ -56,3 +56,8 @@ entries:
     - title: Bower
       url: /bower-technology.html
       output: web-mc, pdf
+      
+      
+  - title: Initial Q&A
+      url: /initial-QA.html
+      output: web, pdf   
