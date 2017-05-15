@@ -2,9 +2,9 @@
 title: JSON Array Contacts information
 keywords: Contacts
 summary: "JSON for Contacts module"
-sidebar: home_sidebar
+sidebar: coretiles_sidebar
 permalink: JSON_Contacts.html
-folder: product1
+folder: coretiles
 ---
 
 Sample JSON for Contacts module displaying sample contacts: first example - without 'Next of Kin' checkmark, second - with the 'Next of Kin' checkmark.  
