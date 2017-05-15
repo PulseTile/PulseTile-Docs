@@ -26,6 +26,24 @@ entries:
   - title: Technologies
     output: web, pdf
     folderitems:
-    - title: Technologies Stack MyDOCSCD2
+    - title: Technologies Stack MyDOCSB999
       url: /mydoc_introduction.html
       output: web
+
+    - title: Redux
+      url: /redux-technology.html
+      output: web, pdf
+
+    - title: Angular
+      url: /angular-technology.html
+      output: web, pdf
+
+    - title: Webpack
+      url: /webpack-technology.html
+      output: web, pdf
+
+    - title: Bower
+      url: /bower-technology.html
+      output: web, pdf
+
+
