@@ -23,13 +23,6 @@ entries:
       url: /plugin_process.html
       output: web, pdf
 
-  - title: Background / Decision-making process
-    output: web, pdf
-
-    folderitems:
-    - title: Background
-      url: /background.html
-      output: web
 
 
 
