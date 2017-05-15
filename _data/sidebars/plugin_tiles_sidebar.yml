@@ -9,15 +9,6 @@ entries:
     output: pdf
     type: frontmatter
     folderitems:
-    - title:
-      url: /titlepage
-      output: pdf
-      type: frontmatter
-    - title:
-      url: /tocpage
-      output: pdf
-      type: frontmatter
-    folderitems:
     - title: Plugin Catalogue
       url: /plugin_tiles_landing.html
       output: web, pdf
