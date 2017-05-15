@@ -2,9 +2,9 @@
 title: JSON array Vitals NEWS
 keywords: MDT
 summary: "JSON for Vitals module"
-sidebar: home_sidebar
+sidebar: plugin_tiles_sidebar
 permalink: JSON_Vitals.html
-folder: product1
+folder: plugin_tiles
 ---
 The example JSON object used to dummy the data within Vitals module
 ```
