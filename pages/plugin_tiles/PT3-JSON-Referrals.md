@@ -2,9 +2,9 @@
 title: JSON Array Referrals
 keywords: Referrals
 summary: "JSON for Referrals module"
-sidebar: home_sidebar
+sidebar: plugin_tiles_sidebar
 permalink: JSON_Referrals.html
-folder: product1
+folder: plugin_tiles
 ---
 Sample JSON array to display data for Referrals module.  
 
