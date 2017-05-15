@@ -1,5 +1,5 @@
 ---
-title: Core UI Project
+title: Licensing
 keywords: licensing copyright documentation
 summary: "licensing copyright documentation"
 sidebar: home_sidebar
