@@ -4,44 +4,37 @@
 
 
 entries:
-- title: Sidebar
+- title: Technologies Sidebar
   product: Technologies Stack
+  url: /background.html
   version:
   flagSidebar: mc
   folders:
-
-#  - title:
-#    output: web-mc
-#    type: frontmatter
-#    folderitems:
-#    - title:
-#      url: /titlepage
-#      output: web-mc
-#      type: frontmatter
-#    - title:
-#      url: /tocpage
-#      output: web-mc
-#      type: frontmatter
-
-  - title: Technologies
-    output: web-mc, pdf
+  - title: 
+    output: web, pdf
+    type: frontmatter
     folderitems:
-    - title: Technologies Stack
-      url: /mydoc_introduction.html
+    - title: Background
+      url: /background.html
       output: web-mc
-
+    - title: Technologies Stack
+      url: tech_intro.html # /mydoc_introduction.html
+      output: web-mc
+    - title: More on the tech
+      url: technologies.html 
+      output: web-mc
     - title: Redux
       url: /redux-technology.html
       output: web-mc, pdf
-
     - title: Angular
       url: /angular-technology.html
       output: web-mc, pdf
-
     - title: Webpack
       url: /webpack-technology.html
       output: web-mc, pdf
-
     - title: Bower
       url: /bower-technology.html
       output: web-mc, pdf
+    - title: Q&A on tech
+      url: /initial-QA.html
+      output: web-mc

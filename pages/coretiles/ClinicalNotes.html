@@ -1,0 +1,208 @@
+---
+title: Clinical Notes module
+keywords: sample
+summary: "Clinical Notes module"
+sidebar: coretiles_sidebar
+permalink: ClinicalNotes.html
+folder: coretiles
+---
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/clinical-notes/clinicalnotes-list.component.js">Clinical Notes List</a></h4>
+{% include image.html file="clinicalnotes/clinicalnoteslist.png" url="#" alt="Clinical Notes list view" caption="Clinical Notes List" %}
+
+<h5>API URL</h5>
+<pre>
+    /api/patients/{patientId}/clinicalnotes
+</pre>
+<h5>GET response</h5>
+<pre>
+    {
+        author:"Dr Tony Shannon"
+        clinicalNotesType:"Clinical Synopsis"
+        dateCreated:1487072396000
+        source:"ethercis"
+        sourceId:"699160c0-e80e-466a-900c-2184a937bb57"
+    }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+    //component template
+    let templateMedicationsCreate = require('./medications-create.html');
+
+    //controller init
+    class MedicationsCreateController {
+        constructor($scope, $state, $stateParams, $ngRedux, medicationsActions, serviceRequests, usSpinnerService) {
+        }
+
+        //component init
+        const MedicationsCreateComponent = {
+          template: templateMedicationsCreate,
+          controller: MedicationsCreateController
+        };
+
+    //inject services/modules to controller
+    MedicationsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'medicationsActions', 'serviceRequests', 'usSpinnerService'];
+    //es6 export for component
+    export default MedicationsCreateComponent;
+
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/clinical-notes/clinicalnotes-detail.component.js">Clinical Notes Detail</a></h4>
+{% include image.html file="clinicalnotes/clinicalnotesdetail.png" url="#" alt="Clinical Notes Detail" caption="Clinical Notes Detail" %}
+
+<h5>API URL</h5>
+<pre>
+    /api/patients/{patientId}/clinicalnotes/{sourceId}
+</pre>
+<h5>GET response</h5>
+<pre>
+    {
+        author:"Dr Tony Shannon"
+        clinicalNotesType:"SOAP Note"
+        dateCreated:1456287062000
+        note:"S: Patient was very concerned about her welfare"
+        source:"EtherCIS"
+        sourceId:"3e93aeb5-1d5d-4e5c-b249-4ce34eec6d84"
+    }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+    //component template
+    let templateMedicationsCreate = require('./medications-create.html');
+
+    //controller init
+    class MedicationsCreateController {
+        constructor($scope, $state, $stateParams, $ngRedux, medicationsActions, serviceRequests, usSpinnerService) {
+        }
+
+        //component init
+        const MedicationsCreateComponent = {
+          template: templateMedicationsCreate,
+          controller: MedicationsCreateController
+        };
+
+    //inject services/modules to controller
+    MedicationsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'medicationsActions', 'serviceRequests', 'usSpinnerService'];
+    //es6 export for component
+    export default MedicationsCreateComponent;
+
+</pre>
+
+{% include image.html file="clinicalnotes/clinicalnotesedit.png" url="#" alt="Clinical Notes Edit" caption="Clinical Notes Edit" %}
+
+<h5>API URL</h5>
+<pre>
+    /api/patients/{patientId}/clinicalnotes
+</pre>
+<h5>PUT data</h5>
+<pre>
+    {
+        author:"Dr Tony Shannon"
+        noteType:"SOAP Note t"
+        notes:"S: Patient was very concerned about her welfare"
+        source:"EtherCIS"
+        sourceId:"3e93aeb5-1d5d-4e5c-b249-4ce34eec6d84"
+    }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/clinical-notes/clinicalnotes-create.component.js">Clinical Notes Create</a></h4>
+{% include image.html file="clinicalnotes/clinicalnotescreate.png" url="#" alt="Clinical Notes Create" caption="Clinical Notes Create" %}
+
+<h5>API URL</h5>
+<pre>
+    /api/patients/{patientId}/clinicalnotes
+</pre>
+<h5>POST data</h5>
+<pre>
+    {
+        dateCreated:"2017-04-07"
+        noteType:"test note"
+        notes:"qwerty"
+        source:"openehr"
+    }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+    //component template
+    let templateMedicationsCreate = require('./medications-create.html');
+
+    //controller init
+    class MedicationsCreateController {
+        constructor($scope, $state, $stateParams, $ngRedux, medicationsActions, serviceRequests, usSpinnerService) {
+        }
+
+        //component init
+        const MedicationsCreateComponent = {
+          template: templateMedicationsCreate,
+          controller: MedicationsCreateController
+        };
+
+    //inject services/modules to controller
+    MedicationsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'medicationsActions', 'serviceRequests', 'usSpinnerService'];
+    //es6 export for component
+    export default MedicationsCreateComponent;
+
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/clinical-notes/clinicalnotes-actions.js">Clinical Notes Actions</a></h4>
+
+<h5>Component structure</h5>
+<pre>
+    //es6 import modules
+    import {bindActionCreators} from 'redux';
+    import * as types from '../../../constants/ActionTypes';
+
+    //es6 export function
+    export function all(patientId) {
+      return {
+        types: [types.CLINICALNOTES, types.CLINICALNOTES_SUCCESS, types.CLINICALNOTES_ERROR],
+
+        shouldCallAPI: (state) => !state.clinicalnotes.response,
+
+        config: {
+          method: 'get',
+          url: '/api/patients/' + patientId + '/clinicalnotes'
+        },
+
+        meta: {
+          timestamp: Date.now()
+        }
+      };
+    }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/clinical-notes/clinicalnotes-reducer-all.js">Clinical Notes Reducer</a></h4>
+
+<h5>Component structure</h5>
+<pre>
+    //es6 import modules
+    import * as types from '../../../constants/ActionTypes';
+
+    const INITIAL_STATE = {
+      isFetching: false,
+      error: false,
+      data: null,
+      dataGet: null,
+      dataCreate: null,
+      dataUpdate: null
+    };
+
+    //es6 export function
+    export default function clinicalnotes(state = INITIAL_STATE, action) {
+      const {payload} = action;
+
+    //redux action for Clinical notes requests
+      var actions = {
+        [types.CLINICALNOTES]: (state) => {
+          state.dataCreate = null;
+          state.dataUpdate = null;
+          return Object.assign({}, state, {
+            isFetching: true,
+            error: false
+          });
+        }
+    }
+</pre>

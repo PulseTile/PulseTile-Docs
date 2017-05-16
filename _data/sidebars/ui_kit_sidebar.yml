@@ -5,7 +5,7 @@
 
 entries:
 - title: Sidebar
-  product: Core UI
+  product: Core UI Framework
   version:
   flagSidebar: mc
   folders:
@@ -30,10 +30,6 @@ entries:
       url: /ui_kit_page.html
       output: web
 
-    - title: Background
-      url: /background.html
-      output: web
+ 
 
-    - title: Initial Q&A
-      url: /initial-QA.html
-      output: web, pdf
+  

@@ -1,0 +1,202 @@
+---
+title: Personal Notes module
+keywords: sample
+summary: "Personal Notes module"
+sidebar: plugin_tiles_sidebar
+permalink: PersonalNotes.html
+folder: plugin_tiles
+---
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/personal-notes/personalnotes-list.component.js">Personal Notes List</a></h4>
+{% include image.html file="personalnotes/personalnoteslist.png" url="#" alt="Personal Notes list view" caption="Personal Notes List" %}
+
+<h5>API URL</h5>
+<pre>
+    /api/patients/{patientId}/personalnotes
+</pre>
+<h5>GET response</h5>
+<pre>
+    {
+        author:"Dr Tony Shannon"
+        dateCreated:1456287062000
+        noteType:"Personal Notes"
+        source:"ethercis"
+        sourceId:"23dbda9d-7688-426c-8cb8-312a4f351071"
+    }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+    //component template
+    let templatePersonalnotesList = require('./personalnotes-list.html');
+
+    //controller init
+    class PersonalnotesListController {
+        constructor($scope, $state, $stateParams, $ngRedux, personalnotesActions, serviceRequests, usSpinnerService, serviceFormatted) {
+        }
+
+    //component init
+    const PersonalnotesListComponent = {
+      template: templatePersonalnotesList,
+      controller: PersonalnotesListController
+    };
+
+    //inject services/modules to controller
+    PersonalnotesListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'personalnotesActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
+    //es6 export for component
+    export default PersonalnotesListComponent;
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/personal-notes/personalnotes-detail.component.js">Personal Notes Detail</a></h4>
+{% include image.html file="personalnotes/personalnotesdetail.png" url="#" alt="Personal Notes Detail" caption="Personal Notes Detail" %}
+
+<h5>API URL</h5>
+<pre>
+    /api/patients/{patientId}/personalnotes/{sourceId}
+</pre>
+<h5>GET response</h5>
+<pre>
+    {
+        author:"Dr Tony Shannon"
+        dateCreated:1482196404000
+        noteType:"Personal Note"
+        notes:"undefined"
+        source:"EtherCIS"
+        sourceId:"b6c198be-2c37-4494-89c3-4fc5a7a92eff"
+    }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+    //component template
+    let templatePersonalnotesDetail = require('./personalnotes-detail.html');
+
+    //controller init
+    class PersonalnotesDetailController {
+        constructor($scope, $state, $stateParams, $ngRedux, personalnotesActions, serviceRequests, usSpinnerService) {
+        }
+
+    //component init
+    const PersonalnotesDetailComponent = {
+      template: templatePersonalnotesDetail,
+      controller: PersonalnotesDetailController
+    };
+
+    //inject services/modules to controller
+    PersonalnotesDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'personalnotesActions', 'serviceRequests', 'usSpinnerService'];
+    //es6 export for component
+    export default PersonalnotesDetailComponent;
+</pre>
+
+{% include image.html file="personalnotes/personalnotesedit.png" url="#" alt="Personal Notes Edit" caption="Personal Notes Edit" %}
+
+<h5>API URL</h5>
+<pre>
+    /api/patients/{patientId}/personalnotes
+</pre>
+<h5>PUT data</h5>
+<pre>
+    {
+        author:"Dr Tony Shannon"
+        noteType:"Personal Note"
+        notes:"Personal Note"
+        source:"EtherCIS"
+        sourceId:"b6c198be-2c37-4494-89c3-4fc5a7a92eff"
+    }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/personal-notes/personalnotes-create.component.js">Personal Notes Create</a></h4>
+{% include image.html file="personalnotes/personalnotescreate.png" url="#" alt="Personal Notes Create" caption="Personal Notes Create" %}
+
+<h5>API URL</h5>
+<pre>
+    /api/patients/{patientId}/personalnotes
+</pre>
+<h5>POST data</h5>
+<pre>
+    {
+        dateCreated:"2017-04-07"
+        noteType:"Personal Note 33"
+        notes:Personal Note t
+        source:"openehr"
+    }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+    //component template
+    let templatePersonalnotesCreate = require('./personalnotes-create.html');
+
+    //controller init
+    class PersonalnotesCreateController {
+        constructor($scope, $state, $stateParams, $ngRedux, personalnotesActions, serviceRequests) {
+        }
+
+    //component init
+    const PersonalnotesCreateComponent = {
+      template: templatePersonalnotesCreate,
+      controller: PersonalnotesCreateController
+    };
+
+    //inject services/modules to controller
+    PersonalnotesCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'personalnotesActions', 'serviceRequests'];
+    //es6 export for component
+    export default PersonalnotesCreateComponent;
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/personal-notes/personalnotes-actions.js">Personal Notes Actions</a></h4>
+
+<h5>Component structure</h5>
+<pre>
+    //es6 import modules
+    import {bindActionCreators} from 'redux';
+    import * as types from '../../../constants/ActionTypes';
+
+    //es6 export function
+    export function all(patientId) {
+      return {
+        types: [types.PERSONALNOTES, types.PERSONALNOTES_SUCCESS, types.PERSONALNOTES_ERROR],
+
+        shouldCallAPI: (state) => !state.contacts.response,
+
+        config: {
+          method: 'get',
+          url: '/api/patients/' + patientId + '/personalnotes'
+        },
+
+        meta: {
+          timestamp: Date.now()
+        }
+      };
+    }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/orders/orders-reducer-all.js">Personal Notes Reducer</a></h4>
+
+<h5>Component structure</h5>
+<pre>
+    //es6 import modules
+    import * as types from '../../../constants/ActionTypes';
+
+    const INITIAL_STATE = {
+      isFetching: false,
+      error: false,
+      data: null,
+      dataGet: null,
+      dataCreate: null,
+      dataUpdate: null
+    };
+
+    //es6 export function
+    export default function personalnotes(state = INITIAL_STATE, action) {
+      const {payload} = action;
+
+    //redux action for Personal Notes requests
+      var actions = {
+        [[types.PERSONALNOTES]: (state) => {
+          return Object.assign({}, state, {
+            isFetching: true,
+            error: false
+          });
+      }
+</pre>

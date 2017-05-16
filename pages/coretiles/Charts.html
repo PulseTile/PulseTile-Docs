@@ -1,0 +1,55 @@
+---
+title: Charts module
+keywords: sample
+summary: "Charts module"
+sidebar: coretiles_sidebar
+permalink: Charts.html
+folder: coretiles
+---
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/master/src/app/rippleui/search/report-chart.component.js">Report Chart</a></h4>
+{% include image.html file="charts/charts.png" url="#" alt="Charts view" caption="Charts" %}
+
+<h5>API URL</h5>
+<pre>
+    /api/patients
+</pre>
+<h5>GET response</h5>
+<pre>
+    {
+        address:"6948 Et St., Halesowen, Worcestershire, VX27 5DV"
+        dateOfBirth:-806976000000
+        department:"Neighbourhood"
+        gender:"Male"
+        gpAddress:"Hamilton Practice, 5544 Ante Street, Hamilton, Lanarkshire, N06 5LP"
+        gpName:"Goff Carolyn D."
+        id:"9999999000"
+        name:"Ivor Cox"nhsNumber:"9999999000"
+        pasNo:"352541"
+        phone:"(011981) 32362"
+    }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+    //component template
+    let templateReportChart = require('./report-chart.html');
+
+    //controller init
+    class ReportChartController {
+        constructor($scope, $rootScope, $window, $uibModal, $state) {
+        }
+
+    //component init
+    const ReportChartComponent = {
+      template: templateReportChart,
+      controller: ReportChartController
+    };
+
+     //inject services/modules to controller
+    ReportChartController.$inject = ['$scope', '$rootScope', '$window', '$uibModal', '$state'];
+    //es6 export for component
+    export default ReportChartComponent;
+</pre>
+
+{% include image.html file="charts/charts2.png" url="#" alt="Charts view" caption="Charts By Geography" %}

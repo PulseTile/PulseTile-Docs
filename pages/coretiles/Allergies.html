@@ -1,0 +1,219 @@
+---
+title: Allergies module
+keywords: sample
+summary: "Allergies module"
+sidebar: coretiles_sidebar
+permalink: Allergies.html
+folder: coretiles
+---
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/master/src/app/rippleui/pages/allergies/allergies-list.component.js">Allergies List</a></h4>
+{% include image.html file="allergies/allergiesgeneral.png" url="#" alt="Allergy list view" caption="Allergies List" %}
+
+<h5>API URL</h5>
+<pre>
+    /api/patients/{patientId}/allergies
+</pre>
+<h5>GET response</h5>
+<pre>
+    {
+        cause:"New paracetamol"
+        reaction:"New"
+        source:"ethercis"
+        sourceId:"f08cac13-362d-4b31-b3cc-76bd1e51c75d"
+    }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+    //component template
+    let templateAllergiesList = require('./allergies-list.html');
+
+    //controller init
+    class AllergiesListController {
+        constructor($scope, $state, $stateParams, $ngRedux, allergiesActions) {
+        //your code for module functionality
+        }
+
+    //component init
+        const AllergiesListComponent = {
+          template: templateAllergiesList,
+          controller: AllergiesListController
+        };
+
+    //inject services/modules to controller
+    AllergiesListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'allergiesActions'];
+
+    //es6 export for component
+    export default AllergiesListComponent;
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/master/src/app/rippleui/pages/allergies/allergies-detail.component.js">Allergies Detail</a></h4>
+{% include image.html file="allergies/allergiesdetail.png" url="#" alt="Allergy Detail" caption="Allergies Detail" %}
+
+<h5>API URL</h5>
+<pre>
+    /api/patients/{patientId}/allergies/{sourceId}
+</pre>
+<h5>GET response</h5>
+<pre>
+    {
+        author:"Dr Tony Shannon"
+        cause:"ww test 01"
+        causeCode:"SNOMED-CT"
+        causeTerminology:1239085
+        dateCreated:1484349982000
+        reaction:"ww test 01"
+        source:"EtherCIS"
+        sourceId:"01fc6ad3-3d10-4bbf-98ce-99c81113ff9c"
+        terminologyCode:"SNOMED-CT"
+    }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+    //component template
+    let templateAllergiesList = require('./allergies-detail.html');
+
+    //controller init
+    class AllergiesDetailController {
+        constructor($scope, $state, $stateParams, $ngRedux, allergiesActions) {
+        //your code for module functionality
+        }
+
+    //component init
+        const AllergiesDetailComponent = {
+          template: templateAllergiesDetail,
+          controller: AllergiesDetailController
+        };
+
+    //inject services/modules to controller
+    AllergiesDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'allergiesActions'];
+
+    //es6 export for component
+    export default AllergiesDetailComponent;
+</pre>
+
+<h4>Allergies Edit</h4>
+{% include image.html file="allergies/allergiesedit.png" url="#" alt="Allergy Edit" caption="Allergies Edit" %}
+
+<h5>API URL</h5>
+<pre>
+    /api/patients/{patientId}/allergies/{sourceId}
+</pre>
+<h5>PUT data</h5>
+<pre>
+    {
+        cause:"ww test 01 edit"
+        causeCode:"SNOMED-CT"
+        causeTerminology:1239085
+        reaction:"ww test 01"
+        source:"EtherCIS"
+        sourceId:"sourceId"
+    }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/master/src/app/rippleui/pages/allergies/allergies-create.component.js">Allergies Create</a></h4>
+{% include image.html file="allergies/allergiescreate.png" url="#" alt="Allergy Create" caption="Allergies Create" %}
+
+<h5>API URL</h5>
+<pre>
+    /api/patients/{patientId}/allergies
+</pre>
+<h5>POST data</h5>
+<pre>
+    {
+        cause:"create new test"
+        causeCode:"1239085"
+        causeTerminology:"test"
+        reaction:"test"
+        sourceId:""
+    }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+    //component template
+    let templateAllergiesCreate = require('./allergies-create.html');
+
+    //controller init
+    class AllergiesCreateController {
+        constructor($scope, $state, $stateParams, $ngRedux, allergiesActions) {
+        //your code for module functionality
+        }
+
+    //component init
+        const AllergiesCreateComponent = {
+          template: templateAllergiesCreate,
+          controller: AllergiesCreateController
+        };
+
+    //inject services/modules to controller
+    AllergiesCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'allergiesActions'];
+
+    //es6 export for component
+    export default AllergiesCreateComponent;
+</pre>
+
+{% include image.html file="allergies/allergiesfilter.png" url="#" alt="Allergy Filter" caption="Allergies Filter" %}
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/master/src/app/rippleui/pages/allergies/allergies-actions.js">Allergies Actions</a></h4>
+
+<h5>Component structure</h5>
+<pre>
+    //es6 import modules
+    import {bindActionCreators} from 'redux';
+    import * as types from '../../../constants/ActionTypes';
+
+    //es6 export function
+    export function all(patientId) {
+      return {
+        types: [types.ALLERGIES, types.ALLERGIES_SUCCESS, types.ALLERGIES_ERROR],
+
+        shouldCallAPI: (state) => !state.allergies.response,
+
+        config: {
+          method: 'get',
+          url: '/api/patients/' + patientId + '/allergies'
+        },
+
+        meta: {
+          timestamp: Date.now()
+        }
+      };
+    }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/master/src/app/rippleui/pages/allergies/allergies-reducer-all.js">Allergies Reducer</a></h4>
+
+<h5>Component structure</h5>
+<pre>
+    //es6 import modules
+    import * as types from '../../../constants/ActionTypes';
+
+    const INITIAL_STATE = {
+      isFetching: false,
+      error: false,
+      data: null,
+      dataGet: null,
+      dataCreate: null,
+      dataUpdate: null
+    };
+
+    //es6 export function
+    export default function allergies(state = INITIAL_STATE, action) {
+      const {payload} = action;
+
+    //redux action for Allergies requests
+      var actions = {
+        [types.ALLERGIES]: (state) => {
+          state.dataCreate = null;
+          state.dataUpdate = null;
+          return Object.assign({}, state, {
+            isFetching: true,
+            error: false
+          });
+        }
+    }
+</pre>
+

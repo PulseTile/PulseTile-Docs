@@ -1,0 +1,214 @@
+---
+title: Events module
+keywords: sample
+summary: "Events module"
+sidebar: plugin_tiles_sidebar
+permalink: Events.html
+folder: plugin_tiles
+---
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/events/events-list.component.js">Events List</a></h4>
+{% include image.html file="events/eventslist.png" url="#" alt="Events list view" caption="Events List" %}
+
+<h5>API URL</h5>
+<pre>
+    /api/patients/{patientId}/appointments
+</pre>
+<h5>GET response</h5>
+<pre>
+    {
+        dateOfAppointment:1423440000000
+        serviceTeam:"Performance20160818-10:22:44.980"
+        source:"marand"
+        sourceId:"6ba725c8-9a61-41e9-82c0-d4c6788d9ec8"
+        timeOfAppointment:32400000
+    }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+    //component template
+    let templateEventsList = require('./events-list.html');
+
+    //controller init
+    class EventsListController {
+        constructor($scope, $state, $stateParams, $ngRedux, eventsActions, serviceRequests) {
+        }
+
+    //component init
+    const EventsListComponent = {
+      template: templateEventsList,
+      controller: EventsListController
+    };
+
+    //inject services/modules to controller
+    EventsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'eventsActions', 'serviceRequests'];
+    //es6 export for component
+    export default EventsListComponent;
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/events/events-detail.component.js">Events Detail</a></h4>
+{% include image.html file="events/eventsdetail.png" url="#" alt="Events Detail" caption="Events Detail" %}
+
+<h5>API URL</h5>
+<pre>
+    /api/patients/{patientId}/appointments/{sourceId}
+</pre>
+<h5>GET response</h5>
+<pre>
+    {
+        author:"c4h_ripple_osi"
+        dateCreated:1471513613105
+        dateOfAppointment:1423440000000
+        location:"Leeds General"
+        serviceTeam:"${uniqueName}"
+        source:"Marand"
+        sourceId:"f12c293d-6edb-4c38-b52a-d086c23d0d3f"
+        status:"Scheduled"
+        timeOfAppointment:32400000
+    }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+    //component template
+    let templateEventsDetail = require('./events-detail.html');
+
+    //controller init
+    class EventsDetailController {
+        constructor($scope, $state, $stateParams, $ngRedux, eventsActions, serviceRequests, usSpinnerService) {
+        }
+
+    //component init
+    const EventsDetailComponent = {
+      template: templateEventsDetail,
+      controller: EventsDetailController
+    };
+
+    //inject services/modules to controller
+    EventsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'eventsActions', 'serviceRequests', 'usSpinnerService'];
+    //es6 export for component
+    export default EventsDetailComponent;
+</pre>
+
+{% include image.html file="events/eventschat.png" url="#" alt="Events Chat" caption="Events Chat" %}
+
+<h5>socket channel</h5>
+<pre>
+    socket.emit('appointment:messages', {appointmentId: sourceId});
+</pre>
+<h5>response</h5>
+<pre>
+    {
+        $$hashKey:"object:12432"
+        appointment_id:"12164779-2c69-4a67-89bb-ac6620c77475"
+        author:""
+        message:"<8B@89 @82>H5O has left the chat room"
+        timestamp:"11:12"
+    }
+</pre>
+
+{% include image.html file="events/eventsstart.png" url="#" alt="Events Start Appointment" caption="Events Start Appointment" %}
+{% include image.html file="events/eventsline.png" url="#" alt="Events Time line" caption="Events Time line" %}
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/events/events-create.component.js">Events Create</a></h4>
+{% include image.html file="events/eventscreate.png" url="#" alt="Events Create" caption="Events Create" %}
+
+<h5>API URL</h5>
+<pre>
+    /api/patients/{patientId}/appointments
+</pre>
+<h5>POST data</h5>
+<pre>
+    {
+        dateCreated:"2017-04-07T11:33:43.037Z"
+        dateOfAppointment:"2017-04-24T21:00:00.000Z"
+        location:"qwert"
+        serviceTeam:"test appt"
+        status:"Scheduled"
+        timeOfAppointment:"2017-02-10T14:00:00.000Z"
+    }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+    //component template
+    let templateEventsCreate = require('./events-create.html');
+
+    //controller init
+    class EventsCreateController {
+        constructor($scope, $state, $stateParams, $ngRedux, patientsActions, eventsActions, serviceRequests, ScheduleModal) {
+        }
+
+    //component init
+    const EventsCreateComponent = {
+      template: templateEventsCreate,
+      controller: EventsCreateController
+    };
+
+     //inject services/modules to controller
+    EventsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'eventsActions', 'serviceRequests', 'ScheduleModal'];
+    //es6 export for component
+    export default EventsCreateComponent;
+</pre>
+
+{% include image.html file="events/eventscreatecalendar.png" url="#" alt="Events Calendar" caption="Events Calendar" %}
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/events/events-actions.js">Events Actions</a></h4>
+
+<h5>Component structure</h5>
+<pre>
+    //es6 import modules
+    import {bindActionCreators} from 'redux';
+    import * as types from '../../../constants/ActionTypes';
+
+    //es6 export function
+    export function all(patientId) {
+      return {
+        types: [types.APPOINTMENTS, types.APPOINTMENTS_SUCCESS, types.APPOINTMENTS_ERROR],
+    
+        shouldCallAPI: (state) => !state.events.response,
+    
+        config: {
+          method: 'get',
+          url: '/api/patients/' + patientId + '/appointments'
+        },
+    
+        meta: {
+          timestamp: Date.now()
+        }
+      };
+    }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/events/events-reducer-all.js">Events Reducer</a></h4>
+
+<h5>Component structure</h5>
+<pre>
+    //es6 import modules
+    import * as types from '../../../constants/ActionTypes';
+
+    const INITIAL_STATE = {
+      isFetching: false,
+      error: false,
+      data: null,
+      dataGet: null,
+      dataCreate: null,
+      dataUpdate: null
+    };
+
+    //es6 export function
+    export default function events(state = INITIAL_STATE, action) {
+      const {payload} = action;
+
+    //redux action for Events requests
+      var actions = {
+        [types.APPOINTMENTS]: (state) => {
+          state.dataCreate = null;
+          state.dataUpdate = null;
+          return Object.assign({}, state, {
+            isFetching: true,
+            error: false
+          });
+        }
+</pre>
