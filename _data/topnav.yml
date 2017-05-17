@@ -20,8 +20,8 @@ topnav_dropdowns:
           url: /index.html    #could be /landing.html etc
         - title: Technologies Stack
           url: /background.html   #was /mydoc_introduction.html
-        - title: Core UI Framework
-          url: /ui_kit_page.html
+        - title: UX/UI Principles/Framework
+          url: /ui_principles.html
         - title: Core Tiles
           url: /core_tiles_landing.html
         - title: Plugin Tiles
