@@ -26,6 +26,9 @@ entries:
   - title: UI Kit
     output: web-mc, pdf
     folderitems:
+    - title: UX Principles
+      url: /ui_principles.html
+      output: web
     - title: UI Kit
       url: /ui_kit_page.html
       output: web
