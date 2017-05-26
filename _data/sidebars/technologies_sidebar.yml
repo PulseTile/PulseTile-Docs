@@ -20,7 +20,7 @@ entries:
     - title: Technologies Stack
       url: tech_intro.html # /mydoc_introduction.html
       output: web-mc
-    - title: More on the tech
+    - title: Q & A on the tech
       url: technologies.html 
       output: web-mc
     - title: Redux
