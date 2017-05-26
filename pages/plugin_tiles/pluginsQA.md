@@ -3,7 +3,7 @@ title: Plugins
 keywords: plugins
 summary: "Approach being taken with Plugins"
 sidebar: plugin_tiles_sidebar
-permalink: plugins.html
+permalink: pluginsQA.html
 folder: plugin_tiles
 ---
 
