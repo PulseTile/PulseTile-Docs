@@ -17,15 +17,7 @@ entries:
     - title: Core UX/UI Framework Principles
       url: /ui_principles.html
       output: web, pdf
-    
-    - title: Plugins Background
-      url: /plugins.html
-      output: web, pdf
 
-    - title: Guide to plugins development process
-      url: /plugin_process.html
-      output: web, pdf
-      
     - title: Licensing
       url: /licensing.html
       output: web, pdf
