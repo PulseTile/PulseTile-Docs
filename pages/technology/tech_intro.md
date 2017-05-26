@@ -6,7 +6,14 @@ folder: technologies
 toc: false
 ---
 
+##PulseTile uses the following technology stack:
 
+* Angular 1.5
+* Redux
+* Bower
+* Webpack
+* CodeCov
+* Karma
 
 ## Redux
 
