@@ -10,7 +10,10 @@ entries:
   - title: Getting Started
     output: web, pdf
     folderitems:
-
+    - title: Origins & Directions
+      url: /start.html
+      output: web, pdf
+    
     - title: Licensing
       url: /licensing.html
       output: web, pdf
