@@ -6,7 +6,7 @@ folder: technologies
 toc: false
 ---
 
-##PulseTile uses the following technology stack:
+## PulseTile uses the following technology stack:
 
 * Angular 1.5
 * Redux
