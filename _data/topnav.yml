@@ -18,10 +18,10 @@ topnav_dropdowns:
       folderitems:
         - title: Getting Started
           url: /index.html    #could be /landing.html etc
-        - title: UX/UI Principles/Framework
-          url: /ui_principles.html
         - title: Technologies Stack
-          url: /background.html   #was /mydoc_introduction.html      
+          url: /background.html   #was /mydoc_introduction.html   
+        - title: UI Kit 
+          url: /ui_kit_page.html
         - title: Core Tiles
           url: /core_tiles_landing.html
         - title: Plugin Tiles
