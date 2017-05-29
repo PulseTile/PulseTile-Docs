@@ -12,17 +12,17 @@ entries:
     - title: Core Tiles
       url: /core_tiles_landing.html
       output: web, pdf
-    - title: Patient Summary
-      url: /PatientSummary.html
+    - title: Intelligenge & Charts
+      url: /Charts.html
       output: web, pdf
     - title: Search
       url: /Search.html
-      output: web, pdf
+      output: web, pdf 
     - title: Multipatients View
       url: /Multipatients.html
       output: web, pdf
-    - title: Charts
-      url: /Charts.html
+    - title: Person/Patient Summary
+      url: /PatientSummary.html
       output: web, pdf
     - title: Problems/Diagnosis
       url: /Problems_Diagnosis.html
