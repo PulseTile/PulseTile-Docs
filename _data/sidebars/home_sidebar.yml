@@ -18,6 +18,10 @@ entries:
       url: /start.html
       output: web, pdf
       
+    - title: Core UX/UI Framework- 3 tiers
+      url: /ui_principles_3tierIntro.html
+      output: web, pdf
+          
     - title: Core UX/UI Framework Principles
       url: /ui_principles.html
       output: web, pdf
