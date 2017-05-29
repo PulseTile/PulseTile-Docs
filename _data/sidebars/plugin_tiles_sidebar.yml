@@ -9,11 +9,11 @@ entries:
     output: pdf
     type: frontmatter
     folderitems:
-    - title: Plugin Process
-      url: /plugin_process.html
-      output: web, pdf
     - title: Plugin Catalogue
       url: /plugin_tiles_landing.html
+      output: web, pdf
+    - title: Plugin Process
+      url: /plugin_process.html
       output: web, pdf
     - title: Plugins Q&A
       url: /pluginsQA.html
