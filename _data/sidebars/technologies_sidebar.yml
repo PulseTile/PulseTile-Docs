@@ -20,12 +20,11 @@ entries:
     - title: Technologies Stack
       url: tech_intro.html # /mydoc_introduction.html
       output: web-mc
-    
-    - title: Redux
-      url: /redux-technology.html
-      output: web-mc, pdf
     - title: Angular
       url: /angular-technology.html
+      output: web-mc, pdf
+    - title: Redux
+      url: /redux-technology.html
       output: web-mc, pdf
     - title: Webpack
       url: /webpack-technology.html
