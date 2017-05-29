@@ -12,7 +12,7 @@ entries:
     - title: Core Tiles
       url: /core_tiles_landing.html
       output: web, pdf
-    - title: Intelligenge & Charts
+    - title: Intelligence & Charts
       url: /Charts.html
       output: web, pdf
     - title: Search
