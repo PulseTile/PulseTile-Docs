@@ -18,11 +18,11 @@ entries:
       url: /start.html
       output: web, pdf
       
-    - title: Core UX/UI Framework- 3 tiers
-      url: /ui_principles_3tiers.html
+    - title: Core UX/UI Framework- 3 Key tiers
+      url: /ux_principles_3layers.html
       output: web, pdf
           
-    - title: Core UX/UI Framework Principles
+    - title: Core UX/UI Framework - Single Patient View
       url: /ui_principles.html
       output: web, pdf
 
