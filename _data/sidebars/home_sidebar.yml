@@ -19,7 +19,7 @@ entries:
       output: web, pdf
       
     - title: Core UX/UI Framework- 3 tiers
-      url: /ui_principles_3tierIntro.html
+      url: /ui_principles_3tiers.html
       output: web, pdf
           
     - title: Core UX/UI Framework Principles
