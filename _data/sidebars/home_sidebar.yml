@@ -22,7 +22,7 @@ entries:
       url: /ux_principles_3layers.html
       output: web, pdf
           
-    - title: Core UX/UI Framework - Single Patient View
+    - title: Core UX/UI Framework - Single Person View
       url: /ui_principles.html
       output: web, pdf
 
