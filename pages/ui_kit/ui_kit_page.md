@@ -3,7 +3,7 @@ title: Core UI
 keywords: mydoc
 sidebar: ui_kit_sidebar
 toc: false
-permalink: ui_kit_page.html
+permalink: ui_kit_original.html
 folder: product2
 ---
 
