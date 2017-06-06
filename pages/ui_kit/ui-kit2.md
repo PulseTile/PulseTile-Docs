@@ -11,8 +11,8 @@ We link from here to our UI kit that is derived from our working showcase applic
 
 ## Welcome to the PulseTile UI Kit
 
-[PulseTile UI Kit]http://showcase2.ripple.foundation/ui-kit.html
-opens in an external window
+Click here to explore the [PulseTile UI Kit](http://showcase2.ripple.foundation/ui-kit.html)
+which opens in an external window
 
 Allows you to explore the PulseTile Components -inc. up close in the console!
 
