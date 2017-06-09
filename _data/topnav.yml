@@ -21,7 +21,7 @@ topnav_dropdowns:
         - title: Technologies Stack
           url: /background.html   #was /mydoc_introduction.html   
         - title: UI Kit 
-          url: http://showcase2.ripple.foundation/ui-kit.html
+          external_url: http://showcase2.ripple.foundation/ui-kit.html
         - title: Core Tiles
           url: /core_tiles_landing.html
         - title: Plugin Tiles
