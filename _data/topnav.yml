@@ -23,7 +23,7 @@ topnav_dropdowns:
         - title: UI Kit 
           url: /ui_kit_page.html
         - title: Core Tiles
-          url: /core_tiles_landing.html
+          url: http://46.101.95.245/ui-kit.html
         - title: Plugin Tiles
           url: /plugin_tiles_landing.html
   items:
