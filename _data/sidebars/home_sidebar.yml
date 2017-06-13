@@ -10,17 +10,24 @@ entries:
   - title: Getting Started
     output: web, pdf
     folderitems:
+    - title: Start Here
+      url: /index.html
+      output: web, pdf
+    
+    - title: Origins & Directions
+      url: /start.html
+      output: web, pdf
+      
+    - title: Core UX/UI Framework- 3 Key tiers
+      url: /ux_principles_3layers.html
+      output: web, pdf
+          
+    - title: Core UX/UI Framework - Single Person View
+      url: /ui_principles.html
+      output: web, pdf
 
     - title: Licensing
       url: /licensing.html
-      output: web, pdf
-
-    - title: Plugins Background
-      url: /plugins.html
-      output: web, pdf
-
-    - title: Guide to plugins development process
-      url: /plugin_process.html
       output: web, pdf
 
 

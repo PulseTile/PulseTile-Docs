@@ -19,9 +19,9 @@ topnav_dropdowns:
         - title: Getting Started
           url: /index.html    #could be /landing.html etc
         - title: Technologies Stack
-          url: /background.html   #was /mydoc_introduction.html
-        - title: Core UI Framework
-          url: /ui_kit_page.html
+          url: /background.html   #was /mydoc_introduction.html   
+        - title: UI Kit 
+          external_url: http://showcase2.ripple.foundation/ui-kit.html
         - title: Core Tiles
           url: /core_tiles_landing.html
         - title: Plugin Tiles

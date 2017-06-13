@@ -6,7 +6,26 @@ folder: technologies
 toc: false
 ---
 
+## PulseTile - Making Technical Choices in the fast world of frontend JS
 
+So one of the most difficult choices to make when crafting a frontend framework is which tools to use.
+We have been over this many times and gone for a mix that makes sense for now.
+We'll be keeping our eyes open as the trends develop, will React/Angular/Vue/Aurelia/other win the day?
+We'll follow them closely and follow the leader from the pack.
+
+
+## PulseTile uses the following technology stack:
+
+* Angular 1.5
+* Redux
+* Webpack
+* Bower
+* CodeCov
+* Karma
+
+## Angular
+
+AngularJS is a toolset for building the framework most suited to your application development. It is fully extensible and works well with other libraries. Every feature can be modified or replaced to suit your unique development workflow and feature needs. Read on to find out how.
 
 ## Redux
 
@@ -16,9 +35,6 @@ It helps you write applications that behave consistently, run in different envir
 
 We use redux module for Angular - https://github.com/angular-redux/ng-redux
 
-## Angular
-
-AngularJS is a toolset for building the framework most suited to your application development. It is fully extensible and works well with other libraries. Every feature can be modified or replaced to suit your unique development workflow and feature needs. Read on to find out how.
 
 ## WebPack
 
