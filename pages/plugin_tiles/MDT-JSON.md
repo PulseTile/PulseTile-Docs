@@ -2,7 +2,7 @@
 title: JSON Array MDT
 keywords: MDT
 summary: "JSON for MDT module"
-sidebar: plugin_tiles_sidebar
+sidebar: home_sidebar
 permalink: JSON_MDT.html
 folder: plugin_tiles
 ---
