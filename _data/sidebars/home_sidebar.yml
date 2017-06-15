@@ -89,5 +89,58 @@ entries:
     - title: Clinical Notes
       url: /ClinicalNotes.html
       output: web, pdf
-   
+  - title: Plugin Tiles
+    output: web, pdf
+    folderitems:
+    - title: Plugin Catalogue
+      url: /plugin_tiles_landing.html
+      output: web, pdf
+    - title: Plugin Process
+      url: /plugin_process.html
+      output: web, pdf
+    - title: Plugins Q&A
+      url: /pluginsQA.html
+      output: web, pdf
+    - title: Images
+      url: /Images.html
+      output: web, pdf
+    - title: Documents
+      url: /Documents.html
+      output: web, pdf
+    - title: MDT
+      url: /MDT.html
+      output: web, pdf
+    - title: Orders
+      url: /Orders.html
+      output: web, pdf
+    - title: Personal Notes
+      url: /PersonalNotes.html
+      output: web, pdf
+    - title: Procedures
+      url: /Procedures.html
+      output: web, pdf
+    - title: Referrals
+      url: /Referrals.html
+      output: web, pdf
+    - title: Test Results
+      url: /TestResults.html
+      output: web, pdf
+    - title: Vaccinations
+      url: /Vaccinations.html
+      output: web, pdf
+    - title: Vitals
+      url: /Vitals.html
+      output: web, pdf
+    - title: Clinical Statements
+      url: /ClinicalStatements.html
+      output: web, pdf
+    - title: Events
+      url: /Events.html
+      output: web, pdf
+    - title: Drawings
+      url: /Drawings.html
+      output: web, pdf
+    - title: Transfers Of Care
+      url: /TransfersOfCare.html
+      output: web, pdf
 
