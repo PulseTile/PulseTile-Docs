@@ -2,7 +2,7 @@
 title: Initial Q & A session
 keywords: Q&A
 summary: "Initial Q&A Session"
-sidebar: technologies_sidebar
+sidebar: home_sidebar
 permalink: initial-QA.html
 folder: technologies
 ---
