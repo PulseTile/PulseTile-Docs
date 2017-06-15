@@ -1,7 +1,7 @@
 # This is your sidebar TOC. The sidebar code loops through sections here and provides the appropriate formatting.
 entries:
 - title: Sidebar
-  product: Getting Started
+  product: Pulse Docs v2
   levels: one
   flagSidebar: accordeon
   folders:
@@ -23,9 +23,9 @@ entries:
     - title: Licensing
       url: /licensing.html
       output: web, pdf
-- title: Technologies Sidebar
-  output: web, pdf
-  folderitems:
+  - title: Technologies Sidebar
+    output: web, pdf
+    folderitems:
     - title: Background
       url: /background.html
       output: web-mc
