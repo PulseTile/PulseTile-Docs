@@ -56,3 +56,38 @@ entries:
     - title: UI Kit
       url: /ui_kit_page.html
       output: web
+  - title: Core Tiles
+    output: web, pdf
+    folderitems:
+    - title: Core Tiles
+      url: /core_tiles_landing.html
+      output: web, pdf
+    - title: Intelligence & Charts
+      url: /Charts.html
+      output: web, pdf
+    - title: Search
+      url: /Search.html
+      output: web, pdf 
+    - title: Multipatients View
+      url: /Multipatients.html
+      output: web, pdf
+    - title: Person/Patient Summary
+      url: /PatientSummary.html
+      output: web, pdf
+    - title: Problems/Diagnosis
+      url: /Problems_Diagnosis.html
+      output: web, pdf  
+    - title: Medications
+      url: /Medications.html
+      output: web, pdf
+    - title: Allergies
+      url: /Allergies.html
+      output: web, pdf
+    - title: Contacts
+      url: /Contacts.html
+      output: web, pdf
+    - title: Clinical Notes
+      url: /ClinicalNotes.html
+      output: web, pdf
+   
+
