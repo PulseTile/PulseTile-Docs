@@ -1,7 +1,7 @@
 ---
 title: PulseTile - Core - UI Kit
 keywords: mydoc
-sidebar: ui_kit_sidebar
+sidebar: home_sidebar
 toc: false
 permalink: ui_kit_page.html
 folder: product2
