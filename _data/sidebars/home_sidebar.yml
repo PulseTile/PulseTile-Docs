@@ -50,3 +50,9 @@ entries:
     - title: More Q & A on the tech
       url: technologies.html 
       output: web-mc
+  - title: UI Kit
+    output: web-mc, pdf
+    folderitems:
+    - title: UI Kit
+      url: /ui_kit_page.html
+      output: web
