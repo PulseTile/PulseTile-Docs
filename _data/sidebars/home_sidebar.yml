@@ -1,36 +1,146 @@
 # This is your sidebar TOC. The sidebar code loops through sections here and provides the appropriate formatting.
-
 entries:
 - title: Sidebar
-  product: Getting Started
+  product: PulseTile Documentation
   levels: one
   flagSidebar: accordeon
   folders:
-
   - title: Getting Started
     output: web, pdf
     folderitems:
     - title: Start Here
       url: /index.html
       output: web, pdf
-    
     - title: Origins & Directions
       url: /start.html
       output: web, pdf
-      
     - title: Core UX/UI Framework- 3 Key tiers
       url: /ux_principles_3layers.html
       output: web, pdf
-          
     - title: Core UX/UI Framework - Single Person View
       url: /ui_principles.html
       output: web, pdf
-
     - title: Licensing
       url: /licensing.html
       output: web, pdf
+  - title: Technologies 
+    output: web, pdf
+    folderitems:
+    - title: Background
+      url: /background.html
+      output: web-mc
+    - title: Technologies Stack
+      url: tech_intro.html # /mydoc_introduction.html
+      output: web-mc
+    - title: Angular
+      url: /angular-technology.html
+      output: web-mc, pdf
+    - title: Redux
+      url: /redux-technology.html
+      output: web-mc, pdf
+    - title: Webpack
+      url: /webpack-technology.html
+      output: web-mc, pdf
+    - title: Bower
+      url: /bower-technology.html
+      output: web-mc, pdf
+    - title: Q&A on tech
+      url: /initial-QA.html
+      output: web-mc
+    - title: More Q & A on the tech
+      url: technologies.html 
+      output: web-mc
+  - title: UI Kit
+    output: web-mc, pdf
+    folderitems:
+    - title: UI Kit
+      url: /ui_kit_page.html
+      output: web
+  - title: Core Tiles
+    output: web, pdf
+    folderitems:
+    - title: Core Tiles
+      url: /core_tiles_landing.html
+      output: web, pdf
+    - title: Intelligence & Charts
+      url: /Charts.html
+      output: web, pdf
+    - title: Search
+      url: /Search.html
+      output: web, pdf 
+    - title: Multipatients View
+      url: /Multipatients.html
+      output: web, pdf
+    - title: Person/Patient Summary
+      url: /PatientSummary.html
+      output: web, pdf
+    - title: Problems/Diagnosis
+      url: /Problems_Diagnosis.html
+      output: web, pdf  
+    - title: Medications
+      url: /Medications.html
+      output: web, pdf
+    - title: Allergies
+      url: /Allergies.html
+      output: web, pdf
+    - title: Contacts
+      url: /Contacts.html
+      output: web, pdf
+    - title: Clinical Notes
+      url: /ClinicalNotes.html
+      output: web, pdf
+  - title: Plugin Tiles
+    output: web, pdf
+    folderitems:
+    - title: Plugin Catalogue
+      url: /plugin_tiles_landing.html
+      output: web, pdf
+    - title: Plugin Process
+      url: /plugin_process.html
+      output: web, pdf
+    - title: Plugins Q&A
+      url: /pluginsQA.html
+      output: web, pdf
+    - title: Images
+      url: /Images.html
+      output: web, pdf
+    - title: Documents
+      url: /Documents.html
+      output: web, pdf
+    - title: MDT
+      url: /MDT.html
+      output: web, pdf
+    - title: Orders
+      url: /Orders.html
+      output: web, pdf
+    - title: Personal Notes
+      url: /PersonalNotes.html
+      output: web, pdf
+    - title: Procedures
+      url: /Procedures.html
+      output: web, pdf
+    - title: Referrals
+      url: /Referrals.html
+      output: web, pdf
+    - title: Test Results
+      url: /TestResults.html
+      output: web, pdf
+    - title: Vaccinations
+      url: /Vaccinations.html
+      output: web, pdf
+    - title: Vitals
+      url: /Vitals.html
+      output: web, pdf
+    - title: Clinical Statements
+      url: /ClinicalStatements.html
+      output: web, pdf
+    - title: Events
+      url: /Events.html
+      output: web, pdf
+    - title: Drawings
+      url: /Drawings.html
+      output: web, pdf
+    - title: Transfers Of Care
+      url: /TransfersOfCare.html
+      output: web, pdf
 
-
-
-
- 

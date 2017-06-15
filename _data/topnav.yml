@@ -8,7 +8,7 @@ topnav:
     - title: Features
       external_url: http://www.pulsetile.com/features/
     - title: About
-      external_url: http://www.pulsetile.com/about/
+      url: http://www.pulsetile.com/about/
   
 #Topnav dropdowns
 topnav_dropdowns:
@@ -21,7 +21,7 @@ topnav_dropdowns:
         - title: Technologies Stack
           url: /background.html   #was /mydoc_introduction.html   
         - title: UI Kit 
-          external_url: http://showcase2.ripple.foundation/ui-kit.html
+          external_url: /ui_kit_page.html
         - title: Core Tiles
           url: /core_tiles_landing.html
         - title: Plugin Tiles
