@@ -11,7 +11,7 @@ output: web
 site_title: PulseTile
 # this appears in the html browser tab for the site title (seen mostly by search engines, not users)
 
-company_name: PulseTile
+company_name: Ripple Foundation CIC Ltd
 # this appears in the footer
 
 github_editme_path: PulseTile/PulseTile-Docs/edit/gh-pages/
