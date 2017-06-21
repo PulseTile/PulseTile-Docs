@@ -96,7 +96,7 @@ entries:
       url: /plugin_tiles_landing.html
       output: web, pdf
     - title: Plugin Process
-      url: /plugin_process.html
+      url: /Plugin_Process.html
       output: web, pdf
     - title: Plugins Q&A
       url: /pluginsQA.html
