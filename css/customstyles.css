@@ -1190,6 +1190,14 @@ body {
 	padding-top: 46px;
 }
 
+.logo-header img {
+	margin-top: 20px;
+}
+
+h1.post-title-main.with-logo {
+	margin-top: 20px;
+}
+
 #rs-navbar .navbar-brand img {
 	width: 95px; 
 	height: auto;

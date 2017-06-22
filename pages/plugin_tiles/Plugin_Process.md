@@ -6,7 +6,7 @@ sidebar: home_sidebar
 toc: false
 permalink: Plugin_Process.html
 folder: plugin_tiles
-extension: .md
+filename: Plugin_Process.md
 ---
 
 ## Plugin's development:

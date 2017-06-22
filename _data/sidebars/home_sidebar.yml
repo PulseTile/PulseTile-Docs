@@ -30,7 +30,7 @@ entries:
       url: /background.html
       output: web-mc
     - title: Technologies Stack
-      url: tech_intro.html # /mydoc_introduction.html
+      url: /tech_intro.html
       output: web-mc
     - title: Angular
       url: /angular-technology.html
@@ -48,7 +48,7 @@ entries:
       url: /initial-QA.html
       output: web-mc
     - title: More Q & A on the tech
-      url: technologies.html 
+      url: /technologies.html 
       output: web-mc
   - title: UI Kit
     output: web-mc, pdf

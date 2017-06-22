@@ -5,13 +5,13 @@ layout: default
 {% if page.showlogo == true %}
 <div class="row">
     <div class="col-lg-12">
-        <h2 class="page-header"><img src="{{ "images/pulsetileheader-1.png" | prepend: site.baseurl }}" alt="PulseTile Logo"></h2>
+        <h2 class="page-header logo-header"><img src="{{ "/images/pulsetileheader-1.png" | prepend: site.baseurl }}" alt="PulseTile Logo"></h2>
     </div>
 </div>
 {% endif %}
 
 <div class="post-header">
-   <h1 class="post-title-main">{{ page.title }}</h1>
+   <h1 class="post-title-main {% if page.showlogo == true %}with-logo{% endif %}">{{ page.title }}</h1>
 </div>
 
 
@@ -49,8 +49,12 @@ layout: default
 
 
     {% if site.github_editme_path %}
-
-    <a target="_blank" href="https://github.com/{{site.github_editme_path}}{{page.folder}}{{page.url | remove: ".html" | remove: ".md" | append: page.extension }}" class="btn btn-default githubEditButton" role="button"><i class="fa fa-github fa-lg"></i> Edit me</a>
+	
+	<div class="row">
+		<div class="col-lg-12">
+		    <a target="_blank" href="https://github.com/{{site.github_editme_path}}{{page.folder}}/{{page.filename}}" class="btn btn-default githubEditButton" role="button"><i class="fa fa-github fa-lg"></i> Edit me</a>
+		</div>
+	</div>
 
     {% endif %}
 

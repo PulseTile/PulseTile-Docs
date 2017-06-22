@@ -4,7 +4,8 @@ keywords: Q&A
 summary: "Initial Q&A Session"
 sidebar: home_sidebar
 permalink: initial-QA.html
-folder: technologies
+folder: technology
+filename: Initial-QA.md
 ---
 
 [//]: # (Question-answer session dated 27.10.2016)
