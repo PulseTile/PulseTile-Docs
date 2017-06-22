@@ -5,6 +5,7 @@ summary: "Approach being taken with Plugins"
 sidebar: home_sidebar
 permalink: pluginsQA.html
 folder: plugin_tiles
+filename: pluginsQA.md
 ---
 
 ### Contract  

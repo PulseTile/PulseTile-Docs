@@ -424,7 +424,7 @@ This section contains description for UI elements.
           <button class="btn btn-success btn-inverse btn-square btn-toggle-rotate" ng-click="cancel()"><i class="fa fa-chevron-up"></i></button>
         </div>
         <h3 class="panel-title">
-          <span>{{$ctrl.option.name}}:</span>
+          <span>{{ctrl.option.name}}:</span>
           <span ng-if="searchParams.nhsNumber">NHS Number: {{searchParams.nhsNumber}}</span>
         </h3>
       </div>
