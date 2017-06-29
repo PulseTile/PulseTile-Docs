@@ -33,6 +33,9 @@ entries:
     - title: Personal Notes
       url: /PersonalNotes.html
       output: web, pdf
+    - title: Generic Plugin
+      url: /GenericPlugin.html
+      output: web, pdf
     - title: Procedures
       url: /Procedures.html
       output: web, pdf
