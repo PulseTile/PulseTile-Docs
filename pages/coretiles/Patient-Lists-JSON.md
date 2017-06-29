@@ -5,6 +5,7 @@ summary: "JSON for Patient Lists"
 sidebar: home_sidebar
 permalink: JSON_Patient_Lists.html
 folder: coretiles
+filename: Patient-Lists-JSON.md
 ---
 Sample JSON array for an element of patient's list (MPV) - single patient. 
 

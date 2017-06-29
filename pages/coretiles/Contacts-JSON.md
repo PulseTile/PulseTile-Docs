@@ -5,6 +5,7 @@ summary: "JSON for Contacts module"
 sidebar: home_sidebar
 permalink: JSON_Contacts.html
 folder: coretiles
+filename: Contacts-JSON.md
 ---
 
 Sample JSON for Contacts module displaying sample contacts: first example - without 'Next of Kin' checkmark, second - with the 'Next of Kin' checkmark.  

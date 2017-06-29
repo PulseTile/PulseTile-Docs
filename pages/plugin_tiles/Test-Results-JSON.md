@@ -5,6 +5,7 @@ summary: "JSON for Test Results module"
 sidebar: home_sidebar
 permalink: JSON_Results.html
 folder: plugin_tiles
+filename: Test-Results-JSON.md
 ---
 Sample JSON data for Test Results module.  
 ```

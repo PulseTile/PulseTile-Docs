@@ -5,6 +5,7 @@ summary: "JSON for Referrals module"
 sidebar: home_sidebar
 permalink: JSON_Referrals.html
 folder: plugin_tiles
+filename: Referrals-JSON.md
 ---
 Sample JSON array to display data for Referrals module.  
 

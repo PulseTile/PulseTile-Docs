@@ -5,6 +5,7 @@ summary: "JSON for Medications module"
 sidebar: home_sidebar
 permalink: JSON_Medication.html
 folder: coretiles
+filename: Medication-JSON.md
 ---
 Sample data in JSON array for Medications module.    
 ```

@@ -5,6 +5,7 @@ summary: "JSON for Patients information"
 sidebar: home_sidebar
 permalink: JSON_Patient_Information.html
 folder: coretiles
+filename: Patient-Summary-JSON.md
 ---
 
 Example of JSON object to work obtain patient information and data for patient summary page.  

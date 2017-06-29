@@ -5,7 +5,7 @@ summary: "JSON for Allergies module"
 sidebar: home_sidebar
 permalink: JSON_Allergies.html
 folder: coretiles
-
+filename: Allergies-JSON.md
 ---
 Sample JSON for Allergies data simulation.  
 ```
