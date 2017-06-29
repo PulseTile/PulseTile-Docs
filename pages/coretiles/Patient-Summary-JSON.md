@@ -2,7 +2,7 @@
 title: JSON Array Patient information
 keywords: Patient information
 summary: "JSON for Patients information"
-sidebar: coretiles_sidebar
+sidebar: home_sidebar
 permalink: JSON_Patient_Information.html
 folder: coretiles
 ---

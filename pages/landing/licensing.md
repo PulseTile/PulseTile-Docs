@@ -4,7 +4,8 @@ keywords: licensing copyright documentation
 summary: "licensing copyright documentation"
 sidebar: home_sidebar
 permalink: licensing.html
-folder: product1
+folder: landing
+filename: licensing.md
 ---
 
 ### Licensing  

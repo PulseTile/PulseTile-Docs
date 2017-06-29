@@ -1,9 +1,10 @@
 ---
 title: Technologies Stack
-sidebar: technologies_sidebar
+sidebar: home_sidebar
 permalink: tech_intro.html
-folder: technologies
+folder: technology
 toc: false
+filename: tech_intro.md
 ---
 
 ## PulseTile - Making Technical Choices in the fast world of frontend JS

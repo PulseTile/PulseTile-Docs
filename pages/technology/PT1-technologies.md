@@ -2,9 +2,10 @@
 title: Technologies
 keywords: Technologies
 summary: "Brief rationale behind some of the technology choices"
-sidebar: technologies_sidebar
+sidebar: home_sidebar
 permalink: technologies.html
 folder: technology
+filename: PT1-technologies.md
 ---
 
 ### Redux

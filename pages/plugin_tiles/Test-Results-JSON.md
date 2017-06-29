@@ -2,7 +2,7 @@
 title: JSON Array Test Results
 keywords: Test Results
 summary: "JSON for Test Results module"
-sidebar: plugin_tiles_sidebar
+sidebar: home_sidebar
 permalink: JSON_Results.html
 folder: plugin_tiles
 ---
