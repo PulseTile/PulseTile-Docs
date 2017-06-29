@@ -5,6 +5,7 @@ summary: "JSON for Procedures module"
 sidebar: home_sidebar
 permalink: JSON_Procedures.html
 folder: plugin_tiles
+filename: Procedures-JSON.md
 ---
 Sample JSON data to work with Procedures page: 
 ```

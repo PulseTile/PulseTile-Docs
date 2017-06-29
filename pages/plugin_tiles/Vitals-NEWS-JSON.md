@@ -5,6 +5,7 @@ summary: "JSON for Vitals module"
 sidebar: home_sidebar
 permalink: JSON_Vitals.html
 folder: plugin_tiles
+filename: Vitals-NEWS-JSON.md
 ---
 The example JSON object used to dummy the data within Vitals module
 ```

@@ -5,6 +5,7 @@ summary: "JSON for Personal Notes module"
 sidebar: home_sidebar
 permalink: JSON_Personal_Notes.html
 folder: plugin_tiles
+filename: Personal-Notes-JSON.md
 ---
 
 Sample data source for Personal Notes module as a JSON array.
