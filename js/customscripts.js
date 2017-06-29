@@ -20,6 +20,13 @@ $( document ).ready(function() {
      * AnchorJS
      */
     anchors.add('h2,h3,h4,h5');
+    
+    // Image Zoom
+	$('figure img, .post-content img')
+	    .wrap('<span style="display:inline-block"></span>')
+	    .css('display', 'block')
+	    .parent()
+	    .zoom();
 
 });
 
