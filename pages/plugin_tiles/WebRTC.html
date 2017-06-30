@@ -1,0 +1,75 @@
+---
+title: WebRTC module
+keywords: sample
+summary: "WebRTC module"
+sidebar: home_sidebar
+permalink: WebRTC.html
+folder: plugin_tiles
+filename: WebRTC.html
+---
+
+<h4>Documentation of WebRTC components within Ripple stack </h4>
+<h5>Videochat flow:</h5>
+<ol>
+<li> After the doctor starts the appointment videochat window is appeared and requests user camera and microphone. 
+<li> App makes ajax request to /api/user to get user info and resend it to videochat node js server by emitting user:init .
+<li> App emits call:init event to notify server that the peer is ready for webrtc communication.
+<li> Server responds with call:text:message:history, call:getPatientInfo and call:timer events to notify client about the text chat history, the patient info and the current duration of the videochat session.
+<li> If the doctor and the patient is already sent call:init event then server emits call:webrtc:init event as establish webrtc command. The isInitiator field of event parameter is set to true for doctor and false for patient to differentiate who need to do webrtc offer and who need to do webrtc answer.
+<li> After the patient joins appointment videochat window is appeared, requests user camera and micropohone and after that step 2-5 are repeated. Note that step 5 is executed only once when both opponents are join videochat.
+<li> The doctor make webrtc offer and emit call:webrtc:message. The server always retransmits this event to call opponent.
+<li> The patient receives webrtc offer from the doctor, make webrtc answer and emit call:webrtc:message .
+<li> The same event is used for retransmitting ice candidates between peers.
+<li> When videochat should be finished one opponent emit call:close event, server retransmits it to another opponent and webrtc connection stops
+</ol>
+
+<h5>Integration instructions:</h5>
+<ol>
+<li>In appointment detail component one need establish or reuse socket connection to video chat node js server.
+<li>On component first appearing one should login on video chat node js server by emitting user:init event with such fields - userName, nhsNumber, role, name, surname. First 3 fields are critical for videochat logic, last 2 fields is used only for text chat or ui purpose.
+<li>To retrieve appointment videochat details one need emit appointment:status event and listen to the same event to request state of appointment - closed or not yet. This event has one argument with one field - appointmentId.
+<li>To retrieve textchat message history one should emit appointment:messages event and listen to the same event
+<li>After login (step 2) server can send appointment:init event to the patient if there is the started videochat. Otherwise, if the patient is already on the site when the doctor started appointment then the server sends the same event in that moment. In both cases the patient client side should listen to appointment:init event. In this event server sends appointmentId.
+<li>One need show Start Appointment button if the current user is a doctor and appointment is not closed yet (see step 3). One need show Join Appointment button if the current user is a patient, the appointment is not closed and id of the selected appointment is the same the server sent on step 5.
+<li>When doctor clicks on Start Appointment button one need send appointment:init event to server. Server sends the same event to the patient if he is in the site or save call and send event when patient make login request (see step 2, step 5).
+<li>After that one should show videochat window with GET parameter - appointmentId.
+<li>When patient clicks on Join Appointment button one need show videochat window with GET parameter - appointmentId.
+</ol>
+
+<h4>TURN server installation instructions on ubuntu-based machine</h4>
+<i>(based on <a href="https://www.webrtc-experiment.com/docs/TURN-server-installation-guide.html#coturn">this information</a>)</i>
+<ol>
+<li><h5>Installation script:</h5>
+<a href="https://drive.google.com/file/d/0ByCdQPYzVIpfVEVQcW1vT2dYelE/view?usp=sharing">Get script here </a> 
+<p><i>Copy, extract to a server folder and run ./setup_coturn.sh </i>
+
+<h5>Instructions:</h5>
+<li>Add debian repository line deb http://ftp.us.debian.org/debian jessie main to /etc/apt/sources.list or /etc/apt/sources.list.d/coturn.list
+<li>Add missed gpg keys for new repository by running commands:
+<pre>
+gpg --keyserver pgpkeys.mit.edu --recv-key 8B48AD6246925553
+gpg -a --export 8B48AD6246925553 | apt-key add -
+gpg --keyserver pgpkeys.mit.edu --recv-key 7638D0442B90D010
+gpg -a --export 7638D0442B90D010 | apt-key add -
+gpg --keyserver pgpkeys.mit.edu --recv-key CBF8D6FD518E17E1
+gpg -a --export CBF8D6FD518E17E1 | apt-key add -
+</pre>
+<li>Install coturn package. Be sure that package from debian repository (version is 4.2):
+<pre>apt-get update && apt-get install coturn=4.2.1.2-1</pre>
+<li>Edit /etc/turnserver.conf and replace content by this lines:
+<pre>listening-port=3478
+realm=rippleosi.org
+server-name=rippleosi.org
+lt-cred-mech
+userdb=/etc/turnuserdb.conf
+no-stdout-log
+</pre>
+<li>Add /etc/turnuserdb.conf and add user:password lines
+<li>Edit /etc/default/coturn file to make it an automatic system service daemon. Replace TURNSERVER_ENABLED=0 to TURNSERVER_ENABLED=1
+<li>Run turn server by command: service coturn start 
+</ol>
+<h5>To check for TURN is working:</h5>
+<p><a href="https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice/">Follow this link</a>
+To do so, add TURN server IP, username, password, click on Add server. <br>
+After that select relay option and click on Gather candidates button. <br>
+If there will be ip addresses of TURN server then it works. <br>
