@@ -10,7 +10,7 @@ filename: PT1-technologies.md
 
 ### Redux
 **Q: Why was Redux chosen?**   
-**A:** Sergey chose the technology first:  
+**A:** 
 - An acceptable choice, with equal benefits to Angular's state management system  
 - Not really gaining benefits at this stage, but as the system grows it could prove very useful  
 
@@ -23,8 +23,8 @@ filename: PT1-technologies.md
 
 ***
 
-**Q: Do we know what the driver was for Sergey to choose Redux? It seems we are tied to that technology now, so although it may be a great fit we are still unclear what drove that decision and whether it was the right one.**  
-**A:** It seems the Redux code is clearly delineated from the Ripple code, meaning that we aren't completely tied to the technology choice if it proves to be more of a hindrance than a benefit.
+**Q: Do we know what the driver  to choose Redux? It seems we are tied to that technology now, so although it may be a great fit we are still unclear what drove that decision and whether it was the right one.**  
+**A:** It seems the Redux code is clearly delineated from the PulseTile code, meaning that we aren't completely tied to the technology choice if it proves to be more of a hindrance than a benefit.
 
 ### WebPack
 **Q: Why was webpack chosen?**  
@@ -35,13 +35,13 @@ filename: PT1-technologies.md
 
 ***
 
-**Q: Why is webpack better than using npm or bower to import Ripple plugins?**  
+**Q: Why is webpack better than using npm or bower to import PulseTile plugins?**  
 **A:** Webpack is a build tool and its purpose is to transpile the code (like in case with Babel and ES6) and compile bundles for production usage and it does it really well and fast as it has a clear syntax and good documentation  
 
 ***
 
 **Q: Webpack takes care of a lot of configuration for you, which of course makes things easier, but it means that changing configuration may not be as flexible as desired. Could this present problems if configuration becomes more complex?**  
-**A:** Related to this point, we discussed whether there are any problems that could be faced from having a complex dependency tree that Webpack may struggle to digest. SliceArt reassured the group that in their experience, they have never gotten to a point where webpack will struggle in this scenario, even with applications that become much more complex.  
+**A:** Related to this point, we discussed whether there are any problems that could be faced from having a complex dependency tree that Webpack may struggle to digest. In our experience, they have never gotten to a point where webpack will struggle in this scenario, even with applications that become much more complex.  
 
 ***
 
@@ -51,7 +51,7 @@ filename: PT1-technologies.md
 ***
 
 **Q: Currently all modules seem to be very standalone, so it looks as though webpack is not being used to its full potential. Is this just part of a step-by-step implementation process, or has it been by design?**  
-**A:** Related to this point - we discussed how at present Webpack isn't being used in the standard way to send up module bundles to the client, instead of sending the vendor and Ripple bundles in two large files. SliceArt have already noticed this and are planning to send separate, smaller bundles to the client in this way, which will mean less network traffic and higher performance.  
+**A:** Related to this point - we discussed how at present Webpack isn't being used in the standard way to send up module bundles to the client, instead of sending the vendor and PulseTile bundles in two large files. We have already noticed this and are planning to send separate, smaller bundles to the client in this way, which will mean less network traffic and higher performance.  
 
 ### Bower
 **Q: What are the long term plans for Bower?**  
@@ -60,4 +60,4 @@ filename: PT1-technologies.md
 ***
 
 **Q: Will all Bower components be removed and replaced by npm modules?**
-**A:** We mentioned the dependency tree of imported 3rd part components, and whether the Ripple UI is importing transient dependencies (dependencies of dependencies), and whether these should be defined within the package.json or bower.json files. SliceArt are keen to analyse the dependency tree to try to determine whether there are any problems that may be encountered by transient dependencies.  
+**A:** We mentioned the dependency tree of imported 3rd part components, and whether the PulseTile UI is importing transient dependencies (dependencies of dependencies), and whether these should be defined within the package.json or bower.json files. SliceArt are keen to analyse the dependency tree to try to determine whether there are any problems that may be encountered by transient dependencies.  
