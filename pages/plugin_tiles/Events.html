@@ -8,6 +8,8 @@ folder: plugin_tiles
 filename: Events.html
 ---
 
+<h5>Please note, that the functionality for events (in particular - webRTC chat-related tool) is located within the separate repository, and can be found <a href="https://github.com/PulseTile-Plugins/Carbon-Plugin-WebRTC"> here </a></h5>
+
 <h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/events/events-list.component.js">Events List</a></h4>
 {% include image.html file="events/eventslist.png" url="#" alt="Events list view" caption="Events List" %}
 
@@ -214,4 +216,19 @@ filename: Events.html
         }
 </pre>
 
-Please note, that the functionality for events (in particular - webRTC chat-related tool) is located within the separate repository, and can be found <a href="https://github.com/PulseTile-Plugins/Carbon-Plugin-WebRTC"> here </a>
+<h4>Documentation of WebRTC components within Ripple stack </h4>
+<h5>Videochat flow:</h5>
+<ol>
+<li> After the doctor starts the appointment videochat window is appeared and requests user camera and microphone. 
+<li> App makes ajax request to /api/user to get user info and resend it to videochat node js server by emitting user:init .
+<li> App emits call:init event to notify server that the peer is ready for webrtc communication.
+<li> Server responds with call:text:message:history, call:getPatientInfo and call:timer events to notify client about the text chat history, the patient info and the current duration of the videochat session.
+<li> If the doctor and the patient is already sent call:init event then server emits call:webrtc:init event as establish webrtc command. The isInitiator field of event parameter is set to true for doctor and false for patient to differentiate who need to do webrtc offer and who need to do webrtc answer.
+<li> After the patient joins appointment videochat window is appeared, requests user camera and micropohone and after that step 2-5 are repeated. Note that step 5 is executed only once when both opponents are join videochat.
+<li> The doctor make webrtc offer and emit call:webrtc:message. The server always retransmits this event to call opponent.
+<li> The patient receives webrtc offer from the doctor, make webrtc answer and emit call:webrtc:message .
+<li> The same event is used for retransmitting ice candidates between peers.
+<li> When videochat should be finished one opponent emit call:close event, server retransmits it to another opponent and webrtc connection stops
+</ol>
+
+
