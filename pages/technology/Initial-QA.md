@@ -21,14 +21,10 @@ filename: Initial-QA.md
 **A:** As we were playing around with different ways of connecting a plugin, Bower was most likely missed out from read.me file. Eventually, there are two active plugins left in Bower now, others are moved to its modules    
 
 ***
- 
-**Q: What underpins the decision to opt for the ISC licence? It seems the right choice, but I’m interested to understand the choices available.**    
-**A:** This license is created while initializing package.json (npm init command).  
 
-***
 
 **Q: If we are building individual components, how to we ensure overall build quality of the project? (e.g. does component 1 work with component 2, and what about when we add component 3)**    
-**A:** At this point modules are independent, however, if there is an error in a particular module, it can be a typo or a wrong function usage, resulting build will fail. We discussed with Tony, that we should verify that module works with the core application functionality and only after this we notify users in some way that this can be used.  
+**A:** At this point modules are independent, however, if there is an error in a particular module, it can be a typo or a wrong function usage, resulting build will fail. We should verify that module works with the core application functionality and only after this we notify users in some way that this can be used.  
 
 ***
 
@@ -37,13 +33,10 @@ filename: Initial-QA.md
 
 ***
  
-**Q: Currently Nexus stores middleware components completely separately so that importing is easy. Will this be the same for UI components, or will individual components be imported out of the full “plugins” repo?**    
-**A:** Yes, each component can have its own repository  
 
-***
 
 **Q: Is using Redux outside of its normal use-case (with Angular rather than React) bending the way it’s used? i.e. are we configuring it to work with Angular, as opposed to allowing it to “do its own thing.”**    
-**A:** It is the topic we have been discussing with Tony at the start of our refactoring work. We agree that using Redux with React in terms of the normal use-case of Redux architecture is a more common practice, but, as this stack (Angular and Redux) was initial choice at the start of the project, we have adapted them to work together.  
+**A:** . We agree that using Redux with React in terms of the normal use-case of Redux architecture is a more common practice, but, as this stack (Angular and Redux) was initial choice at the start of the project, we have adapted them to work together.  
 
 ***
 
