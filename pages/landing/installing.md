@@ -6,7 +6,7 @@ permalink: install.html
 toc: false
 folder: landing
 showlogo: false
-filename: install.html
+filename: install.md
 ---
 
 Basic instructions to get PulseTile installed on your local machine to explore is available here in [https://github.com/PulseTile/PulseTile/blob/master/README.md](https://github.com/PulseTile/PulseTile/blob/master/README.md)
