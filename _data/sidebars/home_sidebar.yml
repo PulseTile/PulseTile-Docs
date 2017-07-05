@@ -20,6 +20,9 @@ entries:
     - title: Core UX/UI Framework - Single Person View
       url: /ui_principles.html
       output: web, pdf
+    - title: Installing PulseTile
+      url: /install.html
+      output: web, pdf  
     - title: Licensing
       url: /licensing.html
       output: web, pdf
