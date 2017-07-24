@@ -14,7 +14,7 @@ To get started, copy the core project (https://github.com/PulseTile/PulseTile) f
 
 ### We will use next 10 files in our plugin, below explanations of that files:
 
-#### example-list.component.js (Link to test file: [clinicalnotes-list.component.js](https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/clinical-notes/clinicalnotes-actions.js))
+#### example-list.component.js (Link to test file: [clinicalnotes-list.component.js](https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/clinical-notes/clinicalnotes-actions.js))
 *It's a list.component functionality file (angular 1.5 component)*
     
 ```
@@ -58,7 +58,7 @@ export default ClinicalnotesListComponent;
 //injected services end here
 ```
 
-#### example-list.html (Link to test file: [clinicalnotes-list.html](https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/clinical-notes/clinicalnotes-list.html))
+#### example-list.html (Link to test file: [clinicalnotes-list.html](https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/clinical-notes/clinicalnotes-list.html))
 *It is a HTML template file for the list.component - basically, an HTML template for the page. Pretty self-explanatory if you are familiar with HTML*
 
 #### example-detail.component.js
@@ -131,7 +131,7 @@ ClinicalnotesModal.$inject = ['$uibModal', 'clinicalnotesActions', '$stateParams
 })
 ```
 
-#### example-actions.js (Link to file: [clinicalnotes-actions.js](https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/clinical-notes/clinicalnotes-actions.js))
+#### example-actions.js (Link to file: [clinicalnotes-actions.js](https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/clinical-notes/clinicalnotes-actions.js))
 *This file contains actions functions for redux architecture*
 
 ```
