@@ -15,16 +15,18 @@ filename: Events.html
 
 <h5>API URL</h5>
 <pre>
-    /api/patients/{patientId}/appointments
+    /api/patients/{patientId}/events
 </pre>
 <h5>GET response</h5>
 <pre>
     {
-        dateOfAppointment:1423440000000
-        serviceTeam:"Performance20160818-10:22:44.980"
-        source:"marand"
-        sourceId:"6ba725c8-9a61-41e9-82c0-d4c6788d9ec8"
-        timeOfAppointment:32400000
+        dateCreated: 1494586220000
+        dateTime: 1494496220958
+        description: "Needs nursing and supervisory care"
+        name: "Discharge to care home"
+        source: "ethercis"
+        sourceId: "93ac376d-3ff4-4e0b-b080-47eb3fe81750"
+        type: "Appointment"
     }
 </pre>
 
@@ -35,7 +37,7 @@ filename: Events.html
 
     //controller init
     class EventsListController {
-        constructor($scope, $state, $stateParams, $ngRedux, eventsActions, serviceRequests) {
+        constructor($scope, $state, $stateParams, $ngRedux, eventsActions, serviceRequests, usSpinnerService, serviceFormatted, $timeout, serviceStateManager) {
         }
 
     //component init
@@ -45,7 +47,7 @@ filename: Events.html
     };
 
     //inject services/modules to controller
-    EventsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'eventsActions', 'serviceRequests'];
+    EventsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'eventsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted', '$timeout', 'serviceStateManager'];
     //es6 export for component
     export default EventsListComponent;
 </pre>
@@ -55,20 +57,19 @@ filename: Events.html
 
 <h5>API URL</h5>
 <pre>
-    /api/patients/{patientId}/appointments/{sourceId}
+    /api/patients/{patientId}/events/{sourceId}
 </pre>
 <h5>GET response</h5>
 <pre>
     {
-        author:"c4h_ripple_osi"
-        dateCreated:1471513613105
-        dateOfAppointment:1423440000000
-        location:"Leeds General"
-        serviceTeam:"${uniqueName}"
-        source:"Marand"
-        sourceId:"f12c293d-6edb-4c38-b52a-d086c23d0d3f"
-        status:"Scheduled"
-        timeOfAppointment:32400000
+        author: "c4h_ripple_osi"
+        dateCreated: 1500896270000
+        dateTime: 1500896400000
+        description: "testing"
+        name: "24.07-10"
+        source: "ethercis"
+        sourceId: "bb5352e6-33a5-4c17-b80f-aa77a8047519"
+        type: "Appointment"
     }
 </pre>
 
@@ -79,7 +80,7 @@ filename: Events.html
 
     //controller init
     class EventsDetailController {
-        constructor($scope, $state, $stateParams, $ngRedux, eventsActions, serviceRequests, usSpinnerService) {
+        constructor($scope, $state, $stateParams, $ngRedux, eventsActions, serviceRequests, usSpinnerService, serviceDateTimePicker) {
         }
 
     //component init
@@ -89,7 +90,7 @@ filename: Events.html
     };
 
     //inject services/modules to controller
-    EventsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'eventsActions', 'serviceRequests', 'usSpinnerService'];
+    EventsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'eventsActions', 'serviceRequests', 'usSpinnerService', 'serviceDateTimePicker'];
     //es6 export for component
     export default EventsDetailComponent;
 </pre>
@@ -119,17 +120,16 @@ filename: Events.html
 
 <h5>API URL</h5>
 <pre>
-    /api/patients/{patientId}/appointments
+    /api/patients/{patientId}/events
 </pre>
 <h5>POST data</h5>
 <pre>
     {
-        dateCreated:"2017-04-07T11:33:43.037Z"
-        dateOfAppointment:"2017-04-24T21:00:00.000Z"
-        location:"qwert"
-        serviceTeam:"test appt"
-        status:"Scheduled"
-        timeOfAppointment:"2017-02-10T14:00:00.000Z"
+        author: "c4h_ripple_osi"
+        dateTime: "2017-07-26T02:30:00.000Z"
+        description: "Test description"
+        name: "Test name"
+        type: "Appointment"
     }
 </pre>
 
@@ -140,7 +140,7 @@ filename: Events.html
 
     //controller init
     class EventsCreateController {
-        constructor($scope, $state, $stateParams, $ngRedux, patientsActions, eventsActions, serviceRequests, ScheduleModal) {
+        constructor($scope, $state, $stateParams, $ngRedux, patientsActions, eventsActions, serviceRequests, serviceDateTimePicker) {
         }
 
     //component init
@@ -150,12 +150,10 @@ filename: Events.html
     };
 
      //inject services/modules to controller
-    EventsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'eventsActions', 'serviceRequests', 'ScheduleModal'];
+    EventsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'eventsActions', 'serviceRequests', 'serviceDateTimePicker'];
     //es6 export for component
     export default EventsCreateComponent;
 </pre>
-
-{% include image.html file="events/eventscreatecalendar.png" url="#" alt="Events Calendar" caption="Events Calendar" %}
 
 <h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/rippleui/pages/events/events-actions.js">Events Actions</a></h4>
 
@@ -168,13 +166,13 @@ filename: Events.html
     //es6 export function
     export function all(patientId) {
       return {
-        types: [types.APPOINTMENTS, types.APPOINTMENTS_SUCCESS, types.APPOINTMENTS_ERROR],
+        types: [types.EVENTS, types.EVENTS_SUCCESS, types.EVENTS_ERROR],
     
         shouldCallAPI: (state) => !state.events.response,
     
         config: {
           method: 'get',
-          url: '/api/patients/' + patientId + '/appointments'
+          url: '/api/patients/' + patientId + '/events'
         },
     
         meta: {
@@ -206,7 +204,7 @@ filename: Events.html
 
     //redux action for Events requests
       var actions = {
-        [types.APPOINTMENTS]: (state) => {
+        [types.EVENTS]: (state) => {
           state.dataCreate = null;
           state.dataUpdate = null;
           return Object.assign({}, state, {
