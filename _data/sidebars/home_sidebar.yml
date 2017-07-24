@@ -20,6 +20,9 @@ entries:
     - title: Core UX/UI Framework - Single Person View
       url: /ui_principles.html
       output: web, pdf
+    - title: Installing PulseTile
+      url: /install.html
+      output: web, pdf  
     - title: Licensing
       url: /licensing.html
       output: web, pdf
@@ -92,10 +95,19 @@ entries:
   - title: Plugin Tiles
     output: web, pdf
     folderitems:
+    - title: Plugin Catalogue
+      url: /plugin_tiles_landing.html
+      output: web, pdf
+    - title: Plugin Process
+      url: /Plugin_Process.html
+      output: web, pdf
+    - title: Plugins Q&A
+      url: /pluginsQA.html
+      output: web, pdf
     - title: Events
       url: /Events.html
       output: web, pdf
-    - title: WebRTC
+    - title: TeleHealth (WebRTC)
       url: /WebRTC.html
       output: web, pdf
     - title: Documents
@@ -106,13 +118,13 @@ entries:
       output: web, pdf
     - title: Test Results
       url: /TestResults.html
-      output: web, pdf
+      output: web, pdf 
     - title: Procedures
       url: /Procedures.html
       output: web, pdf
     - title: Clinical Statements
       url: /ClinicalStatements.html
-      output: web, pdf
+      output: web, pdf 
     - title: Personal Notes
       url: /PersonalNotes.html
       output: web, pdf
@@ -121,7 +133,7 @@ entries:
       output: web, pdf
     - title: Vitals
       url: /Vitals.html
-      output: web, pdf
+      output: web, pdf  
     - title: Images
       url: /Images.html
       output: web, pdf
@@ -140,12 +152,4 @@ entries:
     - title: Generic Plugin
       url: /GenericPlugin.html
       output: web, pdf
-    - title: Plugin Catalogue
-      url: /plugin_tiles_landing.html
-      output: web, pdf
-    - title: Plugin Process
-      url: /Plugin_Process.html
-      output: web, pdf
-    - title: Plugins Q&A
-      url: /pluginsQA.html
-      output: web, pdf
+    

@@ -36,7 +36,7 @@ filename: Initial-QA.md
 
 
 **Q: Is using Redux outside of its normal use-case (with Angular rather than React) bending the way it’s used? i.e. are we configuring it to work with Angular, as opposed to allowing it to “do its own thing.”**    
-**A:** . We agree that using Redux with React in terms of the normal use-case of Redux architecture is a more common practice, but, as this stack (Angular and Redux) was initial choice at the start of the project, we have adapted them to work together.  
+**A:** We agree that using Redux with React in terms of the normal use-case of Redux architecture is a more common practice, but, as this stack (Angular and Redux) was initial choice at the start of the project, we have adapted them to work together.  
 
 ***
 
@@ -46,7 +46,7 @@ filename: Initial-QA.md
 ***
 
 **Q: Does using webpack to import modules allow for the extension/editing of source files? This is important if an organisation wants to use a core module but wishes to change functionality.**    
-**A:**  Yes, Webpack can build the project– either it is modified or not.  
+**A:** Yes, Webpack can build the project– either it is modified or not.  
 
 ***
  
