@@ -44,7 +44,7 @@ We introduce key elements in the UI framework, based on earlier <a href="http://
 In the context of our PulseTile implementation of this design pattern we can see these principles in action:
 <br>
 
-<a href="http://rippleosi.org/wp-content/uploads/2015/10/IDCR_allergy_v2.jpg"><img class="alignnone wp-image-1325 size-large" src="http://rippleosi.org/wp-content/uploads/2015/10/IDCR_allergy_v2-1024x510.jpg" alt="" width="1024" height="510" /></a>
+{% include image.html file="ui-patterns/SinglePatientView.png" alt="Single Patient View" caption="Single Patient View" %}
 
 <br><br>
 <strong>North - Context</strong>
@@ -82,15 +82,15 @@ In this panel any/all detail can be made available to the clinician. Much of the
 
 <br><br>
 <strong>Edit/Modal- Data Entry/Edit</strong>
-For data entry/edit purposes, we offer a Edit/modal window for real time entry/editing. We commend this design choice for two reasons:
+For data entry/edit purposes, we have done work on both an Inline and Modal approach to Edits for real time entry/editing. We've explored these options for two reasons:
 <ul>
- 	<li>A Edit/Modal approach allows us to accommodate a wide range of UI widgets for the challenging of effective data entry, including external components.</li>
- 	<li>A Modal approach allows us to hook/harness any number of UI widgets together in any particular sequence to accommodate the diversity of clinical pathways seen in healthcare.</li>
+  <li>An Inline approach allows us to accommodate most all of our needs within our current UX framework in a neat and tidy way and seems to work well. </li>
+ 	<li>A Modal approach also allows us to accommodate a wide range of UI widgets for the challenging of effective data entry, including external components.</li>
+ 	<li>A Modal approach may allow us to hook/harness any number of UI widgets together in any particular sequence to accommodate the diversity of clinical pathways seen in healthcare.</li>
 </ul>
-<a href="http://rippleosi.org/wp-content/uploads/2015/10/IDCR_allergy_modal-e1445505717569.jpg"><img class="alignnone wp-image-1320 size-large" src="http://rippleosi.org/wp-content/uploads/2015/10/IDCR_allergy_modal-e1445505717569-1024x499.jpg" alt="IDCR_allergy_modal" width="1024" height="499" /></a>
-
 <br>
 <br>
+As you can see, we are continually reviewing and refining the approach to improve the PulseTile UX framework.
 <br>
 <p>
 Hopefully further detail on the rationale behind our UI framework helps explains the simple yet scalable principles involved in the PulseTile UX/UI framework.
