@@ -26,7 +26,7 @@ entries:
     - title: Licensing
       url: /licensing.html
       output: web, pdf
-  - title: Technologies Angular
+  - title: Technologies
     output: web, pdf
     folderitems:
     - title: Background
@@ -53,27 +53,6 @@ entries:
     - title: More Q & A on the tech
       url: /technologies.html 
       output: web-mc
-  - title: Technologies React
-    output: web, pdf
-    folderitems:
-    - title: Background
-      url: /react-background.html
-      output: web-mc
-    - title: Technologies Stack
-      url: /react-tech_intro.html
-      output: web-mc
-    - title: React
-      url: /react-technology.html
-      output: web-mc, pdf
-    - title: Redux
-      url: /react-redux-technology.html
-      output: web-mc, pdf
-    - title: Webpack
-      url: /react-webpack-technology.html
-      output: web-mc, pdf
-    - title: RxJS
-      url: /react-rxjs-technology.html
-      output: web-mc, pdf
   - title: UI Kit
     output: web-mc, pdf
     folderitems:
