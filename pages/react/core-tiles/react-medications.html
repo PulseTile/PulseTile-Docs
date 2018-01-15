@@ -1,0 +1,425 @@
+---
+title: Medications module
+keywords: sample
+summary: "Medications module"
+sidebar: react_sidebar
+permalink: react-medications.html
+folder: react/core-tiles
+filename: react-medications.html
+---
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Medications/Medications.js">Medications</a></h4>
+{% include image.html file="medications/medicationlist.png" url="#" alt="Medications list view" caption="Medications" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/medications
+</pre>
+<h5>GET data</h5>
+<pre>
+  {
+    dateCreated:1460741442000
+    doseAmount:"20mg"
+    name:"Avelox"
+    source:"ethercis"
+    sourceId:"dd51f0f9-8ab0-40f6-969f-87d4af5edcd8"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import PropTypes from 'prop-types';
+  import { Row, Col } from 'react-bootstrap';
+  import classNames from 'classnames';
+  import _ from 'lodash/fp';
+  import { bindActionCreators } from 'redux';
+  import { connect } from 'react-redux';
+  import { lifecycle, compose } from 'recompose';
+
+  import PluginListHeader from '../../plugin-page-component/PluginListHeader';
+  import PluginMainPanel from '../../plugin-page-component/PluginMainPanel';
+
+  import { columnsConfig, defaultColumnsSelected } from './medications-table-columns.config'
+  import { fetchPatientMedicationsRequest } from './ducks/fetch-patient-medications.duck';
+  import { fetchPatientMedicationsCreateRequest } from './ducks/fetch-patient-medications-create.duck';
+  import { fetchPatientMedicationsDetailRequest } from './ducks/fetch-patient-medications-detail.duck';
+  import { fetchPatientMedicationsDetailEditRequest } from './ducks/fetch-patient-medications-detail-edit.duck';
+  import { fetchPatientMedicationsOnMount, fetchPatientMedicationsDetailOnMount } from '../../../utils/HOCs/fetch-patients.utils';
+  import { patientMedicationsSelector, medicationsDetailFormStateSelector, medicationsCreateFormStateSelector, prescriptionPanelFormStateSelector, patientMedicationsDetailSelector } from './selectors';
+  import { clientUrls } from '../../../config/client-urls.constants';
+  import { checkIsValidateForm, operationsOnCollection } from '../../../utils/plugin-helpers.utils';
+  import MedicationsDetail from './MedicationsDetail/MedicationsDetail';
+  import PluginCreate from '../../plugin-page-component/PluginCreate';
+  import MedicationsCreateForm from './MedicationsCreate/MedicationsCreateForm'
+  import { valuesNames } from './forms.config';
+
+  // map dispatch to Properties
+  const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ fetchPatientMedicationsRequest, fetchPatientMedicationsCreateRequest, fetchPatientMedicationsDetailRequest, fetchPatientMedicationsDetailEditRequest }, dispatch) });
+
+  // Higher-Order Components (HOC) for get some data
+  @connect(patientMedicationsSelector, mapDispatchToProps)
+  @connect(patientMedicationsDetailSelector, mapDispatchToProps)
+  @connect(medicationsDetailFormStateSelector)
+  @connect(medicationsCreateFormStateSelector)
+  @connect(prescriptionPanelFormStateSelector)
+  @compose(lifecycle(fetchPatientMedicationsOnMount), lifecycle(fetchPatientMedicationsDetailOnMount))
+  export default class Medications extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Medications/MedicationsDetail/MedicationsDetail.js">Medications Detail</a></h4>
+{% include image.html file="medications/medicationdetail.png" url="#" alt="Medications Detail" caption="Medications Detail" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/medications/{sourceId}
+</pre>
+<h5>GET data</h5>
+<pre>
+  {
+    author:"c4h_ripple_osi"
+    dateCreated:1446482102197
+    doseAmount:"1000mg"
+    doseDirections:"Orally"
+    doseTiming:"Orally Daily"
+    medicationCode:"DefaultCode"
+    medicationTerminology:"SNOMED-CT"
+    name:"Amoxicillin"
+    route:"RouteValue"
+    source:"Marand"
+    sourceId:"ba75d477-5ad4-4ad6-b126-94bd2324c101"
+    startDate:1448629200000
+    startTime:46800000
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import PluginDetailPanel from '../../../plugin-page-component/PluginDetailPanel'
+  import MedicationsDetailPanel from './MedicationsDetailPanel'
+  import MedicationsDetailForm from './MedicationsDetailForm'
+  import MedicationsPrescriptionForm from './MedicationsPrescriptionForm'
+  import { valuesNames, valuesLabels } from '../forms.config';
+  import PTButton from '../../../ui-elements/PTButton/PTButton';
+
+  export default class MedicationsDetail extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Medications/MedicationsDetail/MedicationsDetailForm.js">Medications Detail Edit Form</a></h4>
+{% include image.html file="medications/medicationedit.png" url="#" alt="Medications Edit" caption="Medications Edit" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/medications/{sourceId}
+</pre>
+<h5>PUT data</h5>
+<pre>
+  {
+    author:""
+    dateCreated:
+    doseAmount:""
+    doseDirections:""
+    doseTiming:""
+    medicationCode:""
+    medicationTerminology:""
+    name:"Test"
+    route:""
+    sourceId:"a7007401-837f-471c-8f73-cbb53c0eb1a1"
+    startDate:1513772090583
+    startTime:51290583
+    userId:"9999999000"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { Field, reduxForm } from 'redux-form'
+
+  import ValidatedInput from '../../../form-fields/ValidatedInputFormGroup';
+  import ValidatedTextareaFormGroup from '../../../form-fields/ValidatedTextareaFormGroup';
+  import CustomInputInline from '../../../form-fields/CustomInputInline';
+  import DateInput from '../../../form-fields/DateInput';
+  import StaticFormField from '../../../form-fields/StaticFormField';
+  import { validateMedicationsForm } from '../forms.validation';
+  import { valuesNames, valuesLabels } from '../forms.config';
+
+  // decorator to connect its form component to Redux
+  @reduxForm({
+  	form: 'medicationsDetailFormSelector',
+  	validate: validateMedicationsForm,
+  })
+  export default class MedicationsDetailForm extends PureComponent {
+  // React component
+
+  	// component template
+  	render() {
+  		return ()
+  	}
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Medications/MedicationsDetail/MedicationsDetailPanel.js">Medications Detail Prescription</a></h4>
+{% include image.html file="medications/medicationprescription.png" url="#" alt="Medications Prescription" caption="Medications Prescription" %}
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import PropTypes from 'prop-types';
+  import classNames from 'classnames';
+  import _ from 'lodash/fp';
+  import PTButton from '../../../ui-elements/PTButton/PTButton';
+  import PluginDetailHeader from '../../../plugin-page-component/PluginDetailHeader';
+
+  export default class MedicationsDetailPanel extends PureComponent {
+  // React component
+
+  	// component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Medications/MedicationsDetail/MedicationsPrescriptionForm.js">Medications Detail Prescription Edit Form</a></h4>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { Field, reduxForm } from 'redux-form'
+  import DateInput from '../../../form-fields/DateInput';
+  import CustomInputInline from '../../../form-fields/CustomInputInline';
+  import StaticFormField from '../../../form-fields/StaticFormField';
+  import SelectFormGroup from '../../../form-fields/SelectFormGroup';
+  import { valuesNames, valuesLabels, routeOptions } from '../forms.config';
+  import { validateMedicationsPrescriptionForm } from '../forms.validation';
+
+  // decorator to connect its form component to Redux
+  @reduxForm({
+    form: 'medicationsPrescriptionFormSelector',
+    validate: validateMedicationsPrescriptionForm,
+  })
+  export default class MedicationsPrescriptionForm extends PureComponent {
+  // React component
+
+  	// component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Medications/MedicationsCreate/MedicationsCreateForm.js">Medications Create Form</a></h4>
+{% include image.html file="medications/medicationcreate.jpg" url="#" alt="Medications Create" caption="Medications Create" %}
+
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/medications/{sourceId}
+</pre>
+<h5>POST data</h5>
+<pre>
+  {
+    author:"bob.smith@gmail.com"
+    doseAmount:"200"
+    doseDirections:"200"
+    doseTiming:"2x"
+    isImport:false
+    medicationCode:"173134014"
+    name:"panadol"
+    Route: “Po Per Oral"
+    sourceId:""
+    startDate:1513771707064
+    startTime:50907064
+    userId:"9999999000"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { Field, reduxForm } from 'redux-form'
+  import ValidatedInput from '../../../form-fields/ValidatedInputFormGroup';
+  import ValidatedTextareaFormGroup from '../../../form-fields/ValidatedTextareaFormGroup';
+  import SelectFormGroup from '../../../form-fields/SelectFormGroup';
+  import DateInput from '../../../form-fields/DateInput';
+  import CustomInputInline from '../../../form-fields/CustomInputInline';
+  import { validateMedicationsCreateForm } from '../forms.validation';
+  import { valuesNames, valuesLabels, routeOptions } from '../forms.config';
+  import { defaultFormValues } from './default-values.config';
+
+  // decorator to connect its form component to Redux
+  @reduxForm({
+    form: 'medicationsCreateFormSelector',
+    validate: validateMedicationsCreateForm,
+  })
+  export default class MedicationsCreateForm extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Medications/ducks/fetch-patient-medications.duck.js">Medications List Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientMedicationsDetailRequest } from './fetch-patient-medications-detail.duck';
+
+  // Actions names
+  export const FETCH_PATIENT_MEDICATIONS_REQUEST = 'FETCH_PATIENT_MEDICATIONS_REQUEST';
+  export const FETCH_PATIENT_MEDICATIONS_SUCCESS = 'FETCH_PATIENT_MEDICATIONS_SUCCESS';
+  export const FETCH_PATIENT_MEDICATIONS_FAILURE = 'FETCH_PATIENT_MEDICATIONS_FAILURE';
+  export const FETCH_PATIENT_MEDICATIONS_UPDATE_REQUEST = 'FETCH_PATIENT_MEDICATIONS_UPDATE_REQUEST';
+
+  // Actions
+  export const fetchPatientMedicationsRequest = createAction(FETCH_PATIENT_MEDICATIONS_REQUEST);
+  export const fetchPatientMedicationsSuccess = createAction(FETCH_PATIENT_MEDICATIONS_SUCCESS);
+  export const fetchPatientMedicationsFailure = createAction(FETCH_PATIENT_MEDICATIONS_FAILURE);
+  export const fetchPatientMedicationsUpdateRequest = createAction(FETCH_PATIENT_MEDICATIONS_UPDATE_REQUEST);
+
+  // Epics for async actions
+  export const fetchPatientMedicationsEpic = (action$, store) => {};
+  export const fetchPatientMedicationsUpdateEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(patientsMedications = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_MEDICATIONS_SUCCESS:
+        return _.set(action.payload.userId, action.payload.medications, patientsMedications);
+      default:
+        return patientsMedications;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Medications/ducks/fetch-patient-medications-detail.duck.js">Medications Detail Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+
+  // Actions names
+  export const FETCH_PATIENT_MEDICATIONS_DETAIL_REQUEST = 'FETCH_PATIENT_MEDICATIONS_DETAIL_REQUEST';
+  export const FETCH_PATIENT_MEDICATIONS_DETAIL_SUCCESS = 'FETCH_PATIENT_MEDICATIONS_DETAIL_SUCCESS';
+  export const FETCH_PATIENT_MEDICATIONS_DETAIL_FAILURE = 'FETCH_PATIENT_MEDICATIONS_DETAIL_FAILURE';
+
+  // Actions
+  export const fetchPatientMedicationsDetailRequest = createAction(FETCH_PATIENT_MEDICATIONS_DETAIL_REQUEST);
+  export const fetchPatientMedicationsDetailSuccess = createAction(FETCH_PATIENT_MEDICATIONS_DETAIL_SUCCESS);
+  export const fetchPatientMedicationsDetailFailure = createAction(FETCH_PATIENT_MEDICATIONS_DETAIL_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientMedicationsDetailEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(medicationsDetail = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_MEDICATIONS_DETAIL_SUCCESS:
+        return _.set(action.payload.userId, action.payload.medicationsDetail, medicationsDetail);
+      default:
+        return medicationsDetail;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Medications/ducks/fetch-patient-medications-detail-edit.duck.js">Medications Detail Edit Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientMedicationsUpdateRequest } from './fetch-patient-medications.duck'
+
+  // Actions names
+  export const FETCH_PATIENT_MEDICATIONS_DETAIL_EDIT_REQUEST = 'FETCH_PATIENT_MEDICATIONS_DETAIL_EDIT_REQUEST';
+  export const FETCH_PATIENT_MEDICATIONS_DETAIL_EDIT_SUCCESS = 'FETCH_PATIENT_MEDICATIONS_DETAIL_EDIT_SUCCESS';
+  export const FETCH_PATIENT_MEDICATIONS_DETAIL_EDIT_FAILURE = 'FETCH_PATIENT_MEDICATIONS_DETAIL_EDIT_FAILURE';
+
+  // Actions
+  export const fetchPatientMedicationsDetailEditRequest = createAction(FETCH_PATIENT_MEDICATIONS_DETAIL_EDIT_REQUEST);
+  export const fetchPatientMedicationsDetailEditSuccess = createAction(FETCH_PATIENT_MEDICATIONS_DETAIL_EDIT_SUCCESS);
+  export const fetchPatientMedicationsDetailEditFailure = createAction(FETCH_PATIENT_MEDICATIONS_DETAIL_EDIT_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientMedicationsDetailEditEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(medicationsDetailEdit = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_MEDICATIONS_DETAIL_EDIT_SUCCESS:
+        return action.payload;
+      default:
+        return medicationsDetailEdit;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Medications/ducks/fetch-patient-medications-create.duck.js">Medications Create Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientMedicationsRequest } from './fetch-patient-medications.duck'
+
+  // Actions names
+  export const FETCH_PATIENT_MEDICATIONS_CREATE_REQUEST = 'FETCH_PATIENT_MEDICATIONS_CREATE_REQUEST';
+  export const FETCH_PATIENT_MEDICATIONS_CREATE_SUCCESS = 'FETCH_PATIENT_MEDICATIONS_CREATE_SUCCESS';
+  export const FETCH_PATIENT_MEDICATIONS_CREATE_FAILURE = 'FETCH_PATIENT_MEDICATIONS_CREATE_FAILURE';
+
+  // Actions
+  export const fetchPatientMedicationsCreateRequest = createAction(FETCH_PATIENT_MEDICATIONS_CREATE_REQUEST);
+  export const fetchPatientMedicationsCreateSuccess = createAction(FETCH_PATIENT_MEDICATIONS_CREATE_SUCCESS);
+  export const fetchPatientMedicationsCreateFailure = createAction(FETCH_PATIENT_MEDICATIONS_CREATE_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientMedicationsCreateEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(patientMedicationsCreate = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_MEDICATIONS_CREATE_SUCCESS:
+        return action.payload;
+      default:
+        return patientMedicationsCreate
+    }
+  }
+</pre>

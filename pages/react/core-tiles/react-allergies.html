@@ -1,0 +1,344 @@
+---
+title: Allergies module
+keywords: sample
+summary: "Allergies module"
+sidebar: react_sidebar
+permalink: react-allergies.html
+folder: react/core-tiles
+filename: react-allergies.html
+---
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Allergies/Allergies.js">Allergies</a></h4>
+{% include image.html file="allergies/allergiesgeneral.png" url="#" alt="Allergy list view" caption="Allergies" %}
+{% include image.html file="allergies/allergiesfilter.png" url="#" alt="Allergy Filter" caption="Allergies Filter" %}
+
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/allergies
+</pre>
+<h5>GET response</h5>
+<pre>
+  {
+    cause:"New paracetamol"
+    reaction:"New"
+    source:"ethercis"
+    sourceId:"f08cac13-362d-4b31-b3cc-76bd1e51c75d"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { bindActionCreators } from 'redux';
+  import { connect } from 'react-redux';
+  import { lifecycle, compose } from 'recompose';
+
+  import PluginListHeader from '../../plugin-page-component/PluginListHeader';
+  import { valuesNames } from './forms.config';
+  import { fetchPatientAllergiesRequest } from './ducks/fetch-patient-allergies.duck';
+  import { fetchPatientAllergiesCreateRequest } from './ducks/fetch-patient-allergies-create.duck';
+  import { fetchPatientAllergiesDetailRequest } from './ducks/fetch-patient-allergies-detail.duck';
+  import { fetchPatientAllergiesDetailEditRequest } from './ducks/fetch-patient-allergies-detail-edit.duck';
+  import { fetchPatientAllergiesOnMount, fetchPatientAllergiesDetailOnMount } from '../../../utils/HOCs/fetch-patients.utils';
+  import { patientAllergiesSelector, allergiePanelFormStateSelector, allergiesCreateFormStateSelector, metaPanelFormStateSelector, patientAllergiesDetailSelector } from './selectors';
+  import AllergiesDetail from './AllergiesDetail/AllergiesDetail';
+  import PluginCreate from '../../plugin-page-component/PluginCreate';
+  import AllergiesCreateForm from './AllergiesCreate/AllergiesCreateForm'
+  import PluginMainPanel from '../../plugin-page-component/PluginMainPanel';
+  import { checkIsValidateForm, operationsOnCollection } from '../../../utils/plugin-helpers.utils';
+
+  // map dispatch to Properties
+  const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ fetchPatientAllergiesRequest, fetchPatientAllergiesCreateRequest, fetchPatientAllergiesDetailRequest, fetchPatientAllergiesDetailEditRequest }, dispatch) });
+
+  // Higher-Order Components (HOC) for get some data
+  @connect(patientAllergiesSelector, mapDispatchToProps)
+  @connect(patientAllergiesDetailSelector, mapDispatchToProps)
+  @connect(allergiePanelFormStateSelector)
+  @connect(allergiesCreateFormStateSelector)
+  @connect(metaPanelFormStateSelector)
+  @compose(lifecycle(fetchPatientAllergiesOnMount), lifecycle(fetchPatientAllergiesDetailOnMount))
+  export default class Allergies extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Allergies/AllergiesDetail/AllergiesDetail.js">Allergies Detail</a></h4>
+{% include image.html file="allergies/allergiesdetail.png" url="#" alt="Allergy Detail" caption="Allergies Detail" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/allergies/{sourceId}
+</pre>
+<h5>GET response</h5>
+<pre>
+  {
+    author:"Dr George Shannon"
+    cause:"allergy to penicillin"
+    causeCode:"SNOMED-CT"
+    causeTerminology:91936005
+    dateCreated:1482178262000
+    originalComposition:""
+    originalSource:""
+    reaction:"eruption due to drug"
+    source:"ethercis"
+    sourceId:"74d1e386-5c2e-404c-bf65-29e3344285ef"
+    terminologyCode:"SNOMED-CT
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import PluginDetailPanel from '../../../plugin-page-component/PluginDetailPanel';
+  import AllergyDetailMainForm from './AllergyDetailMainForm';
+
+  export default class AllergiesDetail extends PureComponent {
+  // React component
+
+    // component template
+  	render() {
+      return ()
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Allergies/AllergiesDetail/AllergyDetailMainForm.js">Allergies Detail Edit Form</a></h4>
+{% include image.html file="allergies/allergiesedit.png" url="#" alt="Allergy Edit" caption="Allergies Edit" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/allergies/{sourceId}
+</pre>
+<h5>PUT data</h5>
+<pre>
+  {
+    cause:"allergy to penicillin"
+    causeCode:""
+    causeTerminology:""
+    reaction:"erupton due to drug"
+    source:"ethercis"
+    sourceId:"741a04a9-fe0e-457d-84b6-bab263abffb3"
+    userId:"9999999000"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { Field, reduxForm } from 'redux-form'
+  import ValidatedInput from '../../../form-fields/ValidatedInputFormGroup';
+  import ValidatedTextareaFormGroup from '../../../form-fields/ValidatedTextareaFormGroup';
+  import DateInput from '../../../form-fields/DateInput';
+  import { validateAllergiesPanel } from '../forms.validation';
+  import { valuesNames, valuesLabels } from '../forms.config';
+
+  // decorator to connect its form component to Redux
+  @reduxForm({
+    form: 'allergiePanelFormSelector',
+    validate: validateAllergiesPanel,
+  })
+  export default class AllergyDetailMainForm extends PureComponent {
+  // React component
+
+  	// component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Allergies/AllergiesCreate/AllergiesCreateForm.js">Allergies Create Form</a></h4>
+{% include image.html file="allergies/allergiescreate.png" url="#" alt="Allergy Create" caption="Allergies Create" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/allergies
+</pre>
+<h5>POST data</h5>
+<pre>
+  {
+    cause:"create new test"
+    causeCode:"1239085"
+    causeTerminology:"test"
+    reaction:"test"
+    sourceId:""
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { Field, reduxForm } from 'redux-form'
+  import ValidatedInput from '../../../form-fields/ValidatedInputFormGroup';
+  import ValidatedTextareaFormGroup from '../../../form-fields/ValidatedTextareaFormGroup';
+  import DateInput from '../../../form-fields/DateInput';
+  import StaticFormField from '../../../form-fields/StaticFormField';
+  import { validateAllergiesCreateForm } from '../forms.validation';
+  import { valuesNames, valuesLabels } from '../forms.config';
+  import { defaultFormValues } from './default-values.config';
+
+  // decorator to connect its form component to Redux
+  @reduxForm({
+    form: 'allergiesCreateFormSelector',
+    validate: validateAllergiesCreateForm,
+  })
+  export default class AllergiesCreateForm extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Allergies/ducks/fetch-patient-allergies.duck.js">Allergies List Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientAllergiesDetailRequest } from './fetch-patient-allergies-detail.duck';
+
+  // Actions names
+  export const FETCH_PATIENT_ALLERGIES_REQUEST = 'FETCH_PATIENT_ALLERGIES_REQUEST';
+  export const FETCH_PATIENT_ALLERGIES_SUCCESS = 'FETCH_PATIENT_ALLERGIES_SUCCESS';
+  export const FETCH_PATIENT_ALLERGIES_FAILURE = 'FETCH_PATIENT_ALLERGIES_FAILURE';
+  export const FETCH_PATIENT_ALLERGIES_UPDATE_REQUEST = 'FETCH_PATIENT_ALLERGIES_UPDATE_REQUEST';
+
+  // Actions
+  export const fetchPatientAllergiesRequest = createAction(FETCH_PATIENT_ALLERGIES_REQUEST);
+  export const fetchPatientAllergiesSuccess = createAction(FETCH_PATIENT_ALLERGIES_SUCCESS);
+  export const fetchPatientAllergiesFailure = createAction(FETCH_PATIENT_ALLERGIES_FAILURE);
+  export const fetchPatientAllergiesUpdateRequest = createAction(FETCH_PATIENT_ALLERGIES_UPDATE_REQUEST);
+
+  // Epics for async actions
+  export const fetchPatientAllergiesEpic = (action$, store) => {};
+  export const fetchPatientAllergiesUpdateEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(patientsAllergies = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_ALLERGIES_SUCCESS:
+        return _.set(action.payload.userId, action.payload.allergies, patientsAllergies);
+      default:
+        return patientsAllergies;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Allergies/ducks/fetch-patient-allergies-detail.duck.js">Allergies Detail Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+
+  // Actions names
+  export const FETCH_PATIENT_ALLERGIES_DETAIL_REQUEST = 'FETCH_PATIENT_ALLERGIES_DETAIL_REQUEST';
+  export const FETCH_PATIENT_ALLERGIES_DETAIL_SUCCESS = 'FETCH_PATIENT_ALLERGIES_DETAIL_SUCCESS';
+  export const FETCH_PATIENT_ALLERGIES_DETAIL_FAILURE = 'FETCH_PATIENT_ALLERGIES_DETAIL_FAILURE';
+
+  // Actions
+  export const fetchPatientAllergiesDetailRequest = createAction(FETCH_PATIENT_ALLERGIES_DETAIL_REQUEST);
+  export const fetchPatientAllergiesDetailSuccess = createAction(FETCH_PATIENT_ALLERGIES_DETAIL_SUCCESS);
+  export const fetchPatientAllergiesDetailFailure = createAction(FETCH_PATIENT_ALLERGIES_DETAIL_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientAllergiesDetailEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(allergiesDetail = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_ALLERGIES_DETAIL_SUCCESS:
+        return _.set(action.payload.userId, action.payload.allergiesDetail, allergiesDetail);
+      default:
+        return allergiesDetail;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Allergies/ducks/fetch-patient-allergies-detail-edit.duck.js">Allergies Detail Edit Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientAllergiesUpdateRequest } from './fetch-patient-allergies.duck'
+
+  // Actions names
+  export const FETCH_PATIENT_ALLERGIES_DETAIL_EDIT_REQUEST = 'FETCH_PATIENT_ALLERGIES_DETAIL_EDIT_REQUEST';
+  export const FETCH_PATIENT_ALLERGIES_DETAIL_EDIT_SUCCESS = 'FETCH_PATIENT_ALLERGIES_DETAIL_EDIT_SUCCESS';
+  export const FETCH_PATIENT_ALLERGIES_DETAIL_EDIT_FAILURE = 'FETCH_PATIENT_ALLERGIES_DETAIL_EDIT_FAILURE';
+
+  // Actions
+  export const fetchPatientAllergiesDetailEditRequest = createAction(FETCH_PATIENT_ALLERGIES_DETAIL_EDIT_REQUEST);
+  export const fetchPatientAllergiesDetailEditSuccess = createAction(FETCH_PATIENT_ALLERGIES_DETAIL_EDIT_SUCCESS);
+  export const fetchPatientAllergiesDetailEditFailure = createAction(FETCH_PATIENT_ALLERGIES_DETAIL_EDIT_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientAllergiesDetailEditEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(allergiesDetailEdit = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_ALLERGIES_DETAIL_EDIT_SUCCESS:
+        return action.payload;
+      default:
+        return allergiesDetailEdit;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Allergies/ducks/fetch-patient-allergies-create.duck.js">Allergies Create Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientAllergiesRequest } from './fetch-patient-allergies.duck'
+
+  // Actions names
+  export const FETCH_PATIENT_ALLERGIES_CREATE_REQUEST = 'FETCH_PATIENT_ALLERGIES_CREATE_REQUEST';
+  export const FETCH_PATIENT_ALLERGIES_CREATE_SUCCESS = 'FETCH_PATIENT_ALLERGIES_CREATE_SUCCESS';
+  export const FETCH_PATIENT_ALLERGIES_CREATE_FAILURE = 'FETCH_PATIENT_ALLERGIES_CREATE_FAILURE';
+
+  // Actions
+  export const fetchPatientAllergiesCreateRequest = createAction(FETCH_PATIENT_ALLERGIES_CREATE_REQUEST);
+  export const fetchPatientAllergiesCreateSuccess = createAction(FETCH_PATIENT_ALLERGIES_CREATE_SUCCESS);
+  export const fetchPatientAllergiesCreateFailure = createAction(FETCH_PATIENT_ALLERGIES_CREATE_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientAllergiesCreateEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(patientAllergiesCreate = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_ALLERGIES_CREATE_SUCCESS:
+        return action.payload;
+      default:
+        return patientAllergiesCreate
+    }
+  }
+</pre>
+

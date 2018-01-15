@@ -1,0 +1,281 @@
+---
+title: Orders module
+keywords: sample
+summary: "Orders module"
+sidebar: react_sidebar
+permalink: react-orders.html
+folder: react/plugin-tiles
+filename: react-orders.html
+---
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Orders/Orders.js">Orders</a></h4>
+{% include image.html file="orders/orderslist.png" url="#" alt="Orders view" caption="Orders" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/laborders
+</pre>
+<h5>GET response</h5>
+<pre>
+  {
+    name:"Cardiac-ECG"
+    orderDate:1458738936944
+    source:"ethercis"
+    sourceId:"4c4df65d-98d4-4f62-998f-fe0d9eeca9a0"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { bindActionCreators } from 'redux';
+  import { connect } from 'react-redux';
+  import { lifecycle, compose } from 'recompose';
+
+  import PluginListHeader from '../../plugin-page-component/PluginListHeader';
+  import PluginCreate from '../../plugin-page-component/PluginCreate';
+  import PluginMainPanel from '../../plugin-page-component/PluginMainPanel';
+  import OrdersCreateForm from './OrdersCreate/OrdersCreateForm';
+  import { columnsConfig, defaultColumnsSelected } from './table-columns.config'
+  import { valuesNames } from './forms.config';
+  import { fetchPatientOrdersRequest } from './ducks/fetch-patient-orders.duck';
+  import { fetchPatientOrdersDetailRequest } from './ducks/fetch-patient-orders-detail.duck';
+  import { fetchPatientOrdersCreateRequest } from './ducks/fetch-patient-orders-create.duck';
+  import { fetchListOrdersRequest } from './ducks/fetch-list-orders.duck';
+  import { fetchPatientOrdersOnMount, fetchPatientOrdersDetailOnMount, fetchListOrdersOnMount } from '../../../utils/HOCs/fetch-patients.utils';
+  import { patientOrdersSelector, patientOrdersDetailSelector, orderPanelFormSelector, ordersCreateFormStateSelector, listOrderSelector } from './selectors';
+  import { clientUrls } from '../../../config/client-urls.constants';
+  import OrdersDetail from './OrdersDetail/OrdersDetail';
+  import { checkIsValidateForm, operationsOnCollection } from '../../../utils/plugin-helpers.utils';
+
+  // map dispatch to Properties
+  const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ fetchPatientOrdersRequest, fetchPatientOrdersDetailRequest, fetchPatientOrdersCreateRequest, fetchListOrdersRequest }, dispatch) });
+
+  // Higher-Order Components (HOC) for get some data
+  @connect(patientOrdersSelector, mapDispatchToProps)
+  @connect(patientOrdersDetailSelector, mapDispatchToProps)
+  @connect(orderPanelFormSelector)
+  @connect(ordersCreateFormStateSelector)
+  @connect(listOrderSelector)
+  @compose(lifecycle(fetchPatientOrdersOnMount), lifecycle(fetchPatientOrdersDetailOnMount), lifecycle(fetchListOrdersOnMount))
+  export default class Orders extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Orders/OrdersDetail/OrdersDetail.js">Orders Detail</a></h4>
+{% include image.html file="orders/ordersdetail.png" url="#" alt="Orders Detail" caption="Orders Detail" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/laborders/{sourceId}
+</pre>
+<h5>GET response</h5>
+<pre>
+  {
+    author:"Dr John Smith"
+    code:"order4"
+    dateCreated:1458738026000
+    name:"Physio-crutches"
+    orderDate:1458738023504
+    source:"EtherCIS"
+    sourceId:"cc690d51-223f-4f54-afb5-c4ede9f781aa"
+    terminology:"SNOMED-CT"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import PluginDetailPanel from '../../../plugin-page-component/PluginDetailPanel'
+  import { getDDMMMYYYY } from '../../../../utils/time-helpers.utils';
+  import { valuesNames, valuesLabels } from '../forms.config';
+
+  export default class OrdersDetail extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Orders/OrdersCreate/OrdersCreateForm.js">Orders Create Form</a></h4>
+{% include image.html file="orders/orderscreate.png" url="#" alt="Orders Edit" caption="Orders Create" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/laborders
+</pre>
+<h5>POST data</h5>
+<pre>
+  {
+    code:"order1"
+    text:"Xray Chest X-ray"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { Field, reduxForm } from 'redux-form'
+  import ValidatedInput from '../../../form-fields/ValidatedInputFormGroup';
+  import DateInput from '../../../form-fields/DateInput';
+  import { valuesNames, valuesLabels } from '../forms.config';
+  import { defaultFormValues } from './default-values.config';
+  import OrdersSelectable from './OrdersSelectable'
+
+  // decorator to connect its form component to Redux
+  @reduxForm({ form: 'ordersCreateFormSelector' })
+  export default class OrdersCreateForm extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Orders/ducks/fetch-patient-orders.duck.js">Orders List Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+
+  // Actions names
+  export const FETCH_PATIENT_ORDERS_REQUEST = 'FETCH_PATIENT_ORDERS_REQUEST';
+  export const FETCH_PATIENT_ORDERS_SUCCESS = 'FETCH_PATIENT_ORDERS_SUCCESS';
+  export const FETCH_PATIENT_ORDERS_FAILURE = 'FETCH_PATIENT_ORDERS_FAILURE';
+
+  // Actions
+  export const fetchPatientOrdersRequest = createAction(FETCH_PATIENT_ORDERS_REQUEST);
+  export const fetchPatientOrdersSuccess = createAction(FETCH_PATIENT_ORDERS_SUCCESS);
+  export const fetchPatientOrdersFailure = createAction(FETCH_PATIENT_ORDERS_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientOrdersEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(patientsOrders = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_ORDERS_SUCCESS:
+        return _.set(action.payload.userId, action.payload.orders, patientsOrders);
+      default:
+        return patientsOrders;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Orders/ducks/fetch-patient-orders-detail.duck.js">Orders Detail Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+
+  // Actions names
+  export const FETCH_PATIENT_ORDERS_DETAIL_REQUEST = 'FETCH_PATIENT_ORDERS_DETAIL_REQUEST';
+  export const FETCH_PATIENT_ORDERS_DETAIL_SUCCESS = 'FETCH_PATIENT_ORDERS_DETAIL_SUCCESS';
+  export const FETCH_PATIENT_ORDERS_DETAIL_FAILURE = 'FETCH_PATIENT_ORDERS_DETAIL_FAILURE';
+
+  // Actions
+  export const fetchPatientOrdersDetailRequest = createAction(FETCH_PATIENT_ORDERS_DETAIL_REQUEST);
+  export const fetchPatientOrdersDetailSuccess = createAction(FETCH_PATIENT_ORDERS_DETAIL_SUCCESS);
+  export const fetchPatientOrdersDetailFailure = createAction(FETCH_PATIENT_ORDERS_DETAIL_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientOrdersDetailEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(ordersDetail = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_ORDERS_DETAIL_SUCCESS:
+        return _.set(action.payload.userId, action.payload.ordersDetail, ordersDetail);
+      default:
+        return ordersDetail;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Orders/ducks/fetch-patient-orders-create.duck.js">Orders Create Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientOrdersRequest } from './fetch-patient-orders.duck'
+
+  // Actions names
+  export const FETCH_PATIENT_ORDERS_CREATE_REQUEST = 'FETCH_PATIENT_ORDERS_CREATE_REQUEST';
+  export const FETCH_PATIENT_ORDERS_CREATE_SUCCESS = 'FETCH_PATIENT_ORDERS_CREATE_SUCCESS';
+  export const FETCH_PATIENT_ORDERS_CREATE_FAILURE = 'FETCH_PATIENT_ORDERS_CREATE_FAILURE';
+
+  // Actions
+  export const fetchPatientOrdersCreateRequest = createAction(FETCH_PATIENT_ORDERS_CREATE_REQUEST);
+  export const fetchPatientOrdersCreateSuccess = createAction(FETCH_PATIENT_ORDERS_CREATE_SUCCESS);
+  export const fetchPatientOrdersCreateFailure = createAction(FETCH_PATIENT_ORDERS_CREATE_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientOrdersCreateEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(patientOrdersCreate = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_ORDERS_CREATE_SUCCESS:
+        return action.payload;
+      default:
+        return patientOrdersCreate
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Orders/ducks/fetch-list-orders.duck.js">Orders List Of Available Orders Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+
+  // Actions names
+  export const FETCH_LIST_ORDERS_REQUEST = 'FETCH_LIST_ORDERS_REQUEST';
+  export const FETCH_LIST_ORDERS_SUCCESS = 'FETCH_LIST_ORDERS_SUCCESS';
+  export const FETCH_LIST_ORDERS_FAILURE = 'FETCH_LIST_ORDERS_FAILURE';
+
+  // Actions
+  export const fetchListOrdersRequest = createAction(FETCH_LIST_ORDERS_REQUEST);
+  export const fetchListOrdersSuccess = createAction(FETCH_LIST_ORDERS_SUCCESS);
+  export const fetchListOrdersFailure = createAction(FETCH_LIST_ORDERS_FAILURE);
+
+  // Epics for async actions
+  export const fetchListOrdersEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(listOrders = {}, action) {
+    switch (action.type) {
+      case FETCH_LIST_ORDERS_SUCCESS:
+        return action.payload;
+      default:
+        return listOrders
+    }
+  }
+</pre>

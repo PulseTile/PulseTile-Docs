@@ -1,0 +1,215 @@
+---
+title: Events module
+keywords: sample
+summary: "Events module"
+sidebar: angular_sidebar
+permalink: angular-events.html
+folder: angular/plugin-tiles
+filename: angular-events.html
+---
+
+<p>Please note, that the functionality for events (in particular - webRTC chat-related tool) is located within the separate repository, and can be found <a href="https://github.com/PulseTile-Plugins/Carbon-Plugin-WebRTC"> here </a>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/events/events-list.component.js">Events List</a></h4>
+{% include image.html file="events/eventslist.png" url="#" alt="Events list view" caption="Events List" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/events
+</pre>
+<h5>GET response</h5>
+<pre>
+  {
+    dateCreated: 1494586220000
+    dateTime: 1494496220958
+    description: "Needs nursing and supervisory care"
+    name: "Discharge to care home"
+    source: "ethercis"
+    sourceId: "93ac376d-3ff4-4e0b-b080-47eb3fe81750"
+    type: "Appointment"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  //component template
+  let templateEventsList = require('./events-list.html');
+
+  //controller init
+  class EventsListController {
+    constructor($scope, $state, $stateParams, $ngRedux, eventsActions, serviceRequests, usSpinnerService, serviceFormatted, $timeout, serviceStateManager) {
+  }
+
+  //component init
+  const EventsListComponent = {
+    template: templateEventsList,
+    controller: EventsListController
+  };
+
+  //inject services/modules to controller
+  EventsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'eventsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted', '$timeout', 'serviceStateManager'];
+  //es6 export for component
+  export default EventsListComponent;
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/events/events-detail.component.js">Events Detail</a></h4>
+{% include image.html file="events/eventsdetail.png" url="#" alt="Events Detail" caption="Events Detail" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/events/{sourceId}
+</pre>
+<h5>GET response</h5>
+<pre>
+  {
+    author: "c4h_ripple_osi"
+    dateCreated: 1500896270000
+    dateTime: 1500896400000
+    description: "testing"
+    name: "24.07-10"
+    source: "ethercis"
+    sourceId: "bb5352e6-33a5-4c17-b80f-aa77a8047519"
+    type: "Appointment"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  //component template
+  let templateEventsDetail = require('./events-detail.html');
+
+  //controller init
+  class EventsDetailController {
+    constructor($scope, $state, $stateParams, $ngRedux, eventsActions, serviceRequests, usSpinnerService, serviceDateTimePicker) {
+  }
+
+  //component init
+  const EventsDetailComponent = {
+    template: templateEventsDetail,
+    controller: EventsDetailController
+  };
+
+  //inject services/modules to controller
+  EventsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'eventsActions', 'serviceRequests', 'usSpinnerService', 'serviceDateTimePicker'];
+  //es6 export for component
+  export default EventsDetailComponent;
+</pre>
+
+{% include image.html file="events/eventschat.png" url="#" alt="Events Chat" caption="Events Chat" %}
+
+<h5>socket channel</h5>
+<pre>
+  socket.emit('appointment:messages', {appointmentId: sourceId});
+</pre>
+<h5>response</h5>
+<pre>
+  {
+    $$hashKey:"object:12432"
+    appointment_id:"12164779-2c69-4a67-89bb-ac6620c77475"
+    author:""
+    message:"H5O has left the chat room"
+    timestamp:"11:12"
+  }
+</pre>
+
+{% include image.html file="events/eventsstart.png" url="#" alt="Events Start Appointment" caption="Events Start Appointment" %}
+{% include image.html file="events/eventsline.png" url="#" alt="Events Time line" caption="Events Time line" %}
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/events/events-create.component.js">Events Create</a></h4>
+{% include image.html file="events/eventscreate.png" url="#" alt="Events Create" caption="Events Create" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/events
+</pre>
+<h5>POST data</h5>
+<pre>
+  {
+    author: "c4h_ripple_osi"
+    dateTime: "2017-07-26T02:30:00.000Z"
+    description: "Test description"
+    name: "Test name"
+    type: "Appointment"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  //component template
+  let templateEventsCreate = require('./events-create.html');
+
+  //controller init
+  class EventsCreateController {
+    constructor($scope, $state, $stateParams, $ngRedux, patientsActions, eventsActions, serviceRequests, serviceDateTimePicker) {
+  }
+
+  //component init
+  const EventsCreateComponent = {
+    template: templateEventsCreate,
+    controller: EventsCreateController
+  };
+
+   //inject services/modules to controller
+  EventsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'eventsActions', 'serviceRequests', 'serviceDateTimePicker'];
+  //es6 export for component
+  export default EventsCreateComponent;
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/events/events-actions.js">Events Actions</a></h4>
+
+<h5>Component structure</h5>
+<pre>
+  //es6 import modules
+  import {bindActionCreators} from 'redux';
+  import * as types from '../../../constants/ActionTypes';
+
+  //es6 export function
+  export function all(patientId) {
+    return {
+      types: [types.EVENTS, types.EVENTS_SUCCESS, types.EVENTS_ERROR],
+
+      shouldCallAPI: (state) => !state.events.response,
+
+      config: {
+        method: 'get',
+        url: '/api/patients/' + patientId + '/events'
+      },
+
+      meta: {
+        timestamp: Date.now()
+      }
+    };
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/events/events-reducer-all.js">Events Reducer</a></h4>
+
+<h5>Component structure</h5>
+<pre>
+  //es6 import modules
+  import * as types from '../../../constants/ActionTypes';
+
+  const INITIAL_STATE = {
+    isFetching: false,
+    error: false,
+    data: null,
+    dataGet: null,
+    dataCreate: null,
+    dataUpdate: null
+  };
+
+  //es6 export function
+  export default function events(state = INITIAL_STATE, action) {
+    const {payload} = action;
+
+  //redux action for Events requests
+    var actions = {
+      [types.EVENTS]: (state) => {
+        state.dataCreate = null;
+        state.dataUpdate = null;
+        return Object.assign({}, state, {
+          isFetching: true,
+          error: false
+        });
+      }
+</pre>

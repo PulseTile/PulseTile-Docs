@@ -1,0 +1,184 @@
+---
+title: Orders module
+keywords: sample
+summary: "Orders module"
+sidebar: angular_sidebar
+permalink: angular-orders.html
+folder: angular/plugin-tiles
+filename: angular-orders.html
+---
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/orders/orders-list.component.js">Orders List</a></h4>
+{% include image.html file="orders/orderslist.png" url="#" alt="Orders list view" caption="Orders List" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/laborders
+</pre>
+<h5>GET response</h5>
+<pre>
+  {
+    name:"Cardiac-ECG"
+    orderDate:1458738936944
+    source:"ethercis"
+    sourceId:"4c4df65d-98d4-4f62-998f-fe0d9eeca9a0"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  //component template
+  let templateOrdersList = require('./orders-list.html');
+
+  //controller init
+  class OrdersListController {
+    constructor($scope, $state, $stateParams, $ngRedux, ordersActions, serviceRequests, usSpinnerService, serviceFormatted) {
+	  }
+
+  //component init
+  const OrdersListComponent = {
+    template: templateOrdersList,
+    controller: OrdersListController
+  };
+
+  //inject services/modules to controller
+  OrdersListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'ordersActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
+  //es6 export for component
+  export default OrdersListComponent;
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/orders/orders-detail.component.js">Orders Detail</a></h4>
+{% include image.html file="orders/ordersdetail.png" url="#" alt="Orders Detail" caption="Orders Detail" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/laborders/{sourceId}
+</pre>
+<h5>GET response</h5>
+<pre>
+  {
+    author:"Dr John Smith"
+    code:"order4"
+    dateCreated:1458738026000
+    name:"Physio-crutches"
+    orderDate:1458738023504
+    source:"EtherCIS"
+    sourceId:"cc690d51-223f-4f54-afb5-c4ede9f781aa"
+    terminology:"SNOMED-CT"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  //component template
+  let templateOrdersDetail = require('./orders-detail.html');
+
+  //controller init
+  class OrdersDetailController {
+    constructor($scope, $state, $stateParams, $ngRedux, ordersActions, usSpinnerService, serviceRequests) {}
+  }
+
+  //component init
+  const OrdersDetailComponent = {
+    template: templateOrdersDetail,
+    controller: OrdersDetailController
+  };
+
+  //inject services/modules to controller
+  OrdersDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'ordersActions', 'usSpinnerService', 'serviceRequests'];
+  //es6 export for component
+  export default OrdersDetailComponent;
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/orders/orders-create.component.js">Orders Create</a></h4>
+{% include image.html file="orders/orderscreate.png" url="#" alt="Orders Edit" caption="Orders Create" %}
+
+<h5>API URL</h5>
+<pre>
+    /api/patients/{patientId}/laborders
+</pre>
+<h5>POST data</h5>
+<pre>
+    [{code: "order1", text: "Xray Chest X-ray"}]
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+    //component template
+    let templateOrdersCreate= require('./orders-create.html');
+
+    //controller init
+    class OrdersCreateController {
+        constructor($scope, $state, $stateParams, $ngRedux, ordersActions, serviceRequests) {
+        }
+
+    //component init
+    const OrdersCreateComponent = {
+        template: templateOrdersCreate,
+        controller: OrdersCreateController
+    };
+
+    //inject services/modules to controller
+    OrdersCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'ordersActions', 'serviceRequests'];
+    //es6 export for component
+    export default OrdersCreateComponent;
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/orders/orders-actions.js">Orders Actions</a></h4>
+
+<h5>Component structure</h5>
+<pre>
+    //es6 import modules
+    import {bindActionCreators} from 'redux';
+    import * as types from '../../../constants/ActionTypes';
+
+    //es6 export function
+    export function all(patientId) {
+      return {
+        types: [types.ORDERS, types.ORDERS_SUCCESS, types.ORDERS_ERROR],
+
+        shouldCallAPI: (state) => !state.orders.response,
+
+        config: {
+          method: 'get',
+          url: '/api/patients/' + patientId + '/laborders'
+        },
+
+        meta: {
+          timestamp: Date.now()
+        }
+      };
+    }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/orders/orders-reducer-all.js">Orders Reducer</a></h4>
+
+<h5>Component structure</h5>
+<pre>
+    //es6 import modules
+    import * as types from '../../../constants/ActionTypes';
+
+    const INITIAL_STATE = {
+      isFetching: false,
+      error: false,
+      data: null,
+      dataGet: null,
+      dataCreate: null,
+      dataUpdate: null
+    };
+
+    //es6 export function
+    export default function orders(state = INITIAL_STATE, action) {
+      const {payload} = action;
+
+    //redux action for Orders requests
+      var actions = {
+        [[types.ORDERS]: (state) => {
+          state.dataCreate = null;
+          state.dataUpdate = null;
+          return Object.assign({}, state, {
+            isFetching: true,
+            error: false
+        });
+      }
+</pre>

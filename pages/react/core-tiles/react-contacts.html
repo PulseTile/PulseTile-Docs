@@ -1,0 +1,360 @@
+---
+title: Contacts module
+keywords: sample
+summary: "Contacts module"
+sidebar: react_sidebar
+permalink: react-contacts.html
+folder: react/core-tiles
+filename: react-contacts.html
+---
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Contacts/Contacts.js">Contacts</a></h4>
+{% include image.html file="contacts/contactslist.png" url="#" alt="Contacts list view" caption="Contacts" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/contacts
+</pre>
+<h5>GET response</h5>
+<pre>
+  {
+    name:"Name"
+    nextOfKin:true
+    relationship:"Name"
+    source:"ethercis"
+    sourceId:"8f8d258c-9c6d-4b94-94f9-c38c58363bbb"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { bindActionCreators } from 'redux';
+  import { connect } from 'react-redux';
+  import { lifecycle, compose } from 'recompose';
+
+  import PluginListHeader from '../../plugin-page-component/PluginListHeader';
+  import PluginMainPanel from '../../plugin-page-component/PluginMainPanel';
+  import { defaultFormValues } from './ContactsCreate/default-values.config';
+  import { fetchPatientContactsRequest } from './ducks/fetch-patient-contacts.duck';
+  import { fetchPatientContactsCreateRequest } from './ducks/fetch-patient-contacts-create.duck';
+  import { fetchPatientContactsDetailRequest } from './ducks/fetch-patient-contacts-detail.duck';
+  import { fetchPatientContactsDetailEditRequest } from './ducks/fetch-patient-contacts-detail-edit.duck';
+  import { fetchPatientContactsOnMount, fetchPatientContactsDetailOnMount } from '../../../utils/HOCs/fetch-patients.utils';
+  import { patientContactsSelector, contactsDetailFormStateSelector, contactsCreateFormStateSelector, metaPanelFormStateSelector, patientContactsDetailSelector } from './selectors';
+  import { checkIsValidateForm, operationsOnCollection } from '../../../utils/plugin-helpers.utils';
+  import ContactsDetail from './ContactsDetail/ContactsDetail';
+  import PluginCreate from '../../plugin-page-component/PluginCreate';
+  import ContactsCreateForm from './ContactsCreate/ContactsCreateForm'
+
+  // map dispatch to Properties
+  const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ fetchPatientContactsRequest, fetchPatientContactsCreateRequest, fetchPatientContactsDetailRequest, fetchPatientContactsDetailEditRequest }, dispatch) });
+
+  // Higher-Order Components (HOC) for get some data
+  @connect(patientContactsSelector, mapDispatchToProps)
+  @connect(patientContactsDetailSelector, mapDispatchToProps)
+  @connect(contactsDetailFormStateSelector)
+  @connect(contactsCreateFormStateSelector)
+  @connect(metaPanelFormStateSelector)
+  @compose(lifecycle(fetchPatientContactsOnMount), lifecycle(fetchPatientContactsDetailOnMount))
+  export default class Contacts extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Contacts/ContactsDetail/ContactsDetail.js">Contacts Detail</a></h4>
+{% include image.html file="contacts/contactsdetail.png" url="#" alt="Contacts Detail" caption="Contacts Detail" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/contacts/{sourceId}
+</pre>
+<h5>GET response</h5>
+<pre>
+  {
+    author:"c4h_ripple_osi"
+    contactInformation:234525
+    dateCreated:1477267200000
+    name:"Bob McJim"
+    nextOfKin:""
+    notes:"sdasdada"
+    relationship:"Other Brother"
+    relationshipCode:""
+    relationshipTerminology:""
+    relationshipType:""
+    source:"Marand"
+    sourceId:"7b6bf9f1-d05b-4d4e-85e3-c120506bb7d3"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import PluginDetailPanel from '../../../plugin-page-component/PluginDetailPanel'
+  import ContactsDetailForm from './ContactsDetailForm'
+  import { valuesNames, valuesLabels } from '../forms.config';
+
+  export default class ContactsDetail extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Contacts/ContactsDetail/ContactsDetailForm.js">Contacts Detail Edit Form</a></h4>
+{% include image.html file="contacts/contactsedit.png" url="#" alt="Contacts Edit" caption="Contacts Edit" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/contacts/{sourceId}
+</pre>
+<h5>PUT data</h5>
+<pre>
+  {
+    author:"bob.smith@gmail.com"
+    contactInformation:"888 000 999"
+    dateSubmitted:"2017-12-20T14:19:38.501Z"
+    name:"Willy Logan"
+    nextOfKin:false
+    notes:"call after 6pm"
+    relationship:"Father"
+    relationshipCode:"at0036"
+    relationshipTerminology:"local"
+    source:"ethercis"
+    sourceId:"3bb39b15-f4fa-442e-9b02-5824b070a0e7"
+    userId:"9999999000"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { Field, reduxForm } from 'redux-form'
+
+  import ValidatedInput from '../../../form-fields/ValidatedInputFormGroup';
+  import ValidatedTextareaFormGroup from '../../../form-fields/ValidatedTextareaFormGroup';
+  import SelectFormGroup from '../../../form-fields/SelectFormGroup';
+  import DateInput from '../../../form-fields/DateInput';
+  import { validateForm } from '../forms.validation';
+  import { valuesNames, valuesLabels, relationshipOptions, relationshipTypeOptions } from '../forms.config';
+
+  // decorator to connect its form component to Redux
+  @reduxForm({
+    form: 'contactsDetailFormSelector',
+    validate: validateForm,
+  })
+  export default class ContactsDetailForm extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      const { detail, isSubmit } = this.props;
+      return ()
+    }
+  }
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Contacts/ContactsCreate/ContactsCreateForm.js">Contacts Create Form</a></h4>
+{% include image.html file="contacts/contactscreate.png" url="#" alt="Contacts Create" caption="Contacts Create" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/contacts/{sourceId}
+</pre>
+<h5>POST data</h5>
+<pre>
+  {
+    author:"bob.smith@gmail.com"
+    contactInformation:"119393-3333"
+    dateSubmitted:"2017-12-20T14:21:24.700Z"
+    name:"Nora Menny"
+    nextOfKin:true
+    notes:""
+    relationship:"Wife"
+    relationshipCode:"at0038"
+    relationshipTerminology:"local"
+    source:"ethercis"
+    userId:"9999999000"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { Field, reduxForm } from 'redux-form'
+  import ValidatedInput from '../../../form-fields/ValidatedInputFormGroup';
+  import ValidatedTextareaFormGroup from '../../../form-fields/ValidatedTextareaFormGroup';
+  import SelectFormGroup from '../../../form-fields/SelectFormGroup';
+  import DateInput from '../../../form-fields/DateInput';
+  import { validateForm } from '../forms.validation';
+  import { valuesNames, valuesLabels, relationshipOptions, relationshipTypeOptions } from '../forms.config';
+  import { defaultFormValues } from './default-values.config';
+
+  // decorator to connect its form component to Redux
+  @reduxForm({
+    form: 'contactsCreateFormSelector',
+    validate: validateForm,
+  })
+  export default class ContactsCreateForm extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Contacts/ducks/fetch-patient-contacts.duck.js">Contacts List Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import _ from 'lodash/fp';
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientContactsDetailRequest } from './fetch-patient-contacts-detail.duck';
+
+  // Actions names
+  export const FETCH_PATIENT_CONTACTS_REQUEST = 'FETCH_PATIENT_CONTACTS_REQUEST';
+  export const FETCH_PATIENT_CONTACTS_SUCCESS = 'FETCH_PATIENT_CONTACTS_SUCCESS';
+  export const FETCH_PATIENT_CONTACTS_FAILURE = 'FETCH_PATIENT_CONTACTS_FAILURE';
+  export const FETCH_PATIENT_CONTACTS_UPDATE_REQUEST = 'FETCH_PATIENT_CONTACTS_UPDATE_REQUEST';
+
+  // Actions
+  export const fetchPatientContactsRequest = createAction(FETCH_PATIENT_CONTACTS_REQUEST);
+  export const fetchPatientContactsSuccess = createAction(FETCH_PATIENT_CONTACTS_SUCCESS);
+  export const fetchPatientContactsFailure = createAction(FETCH_PATIENT_CONTACTS_FAILURE);
+  export const fetchPatientContactsUpdateRequest = createAction(FETCH_PATIENT_CONTACTS_UPDATE_REQUEST);
+
+  // Epics for async actions
+  export const fetchPatientContactsEpic = (action$, store) => {};
+  export const fetchPatientContactsUpdateEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(patientsContacts = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_CONTACTS_SUCCESS:
+        return _.set(action.payload.userId, action.payload.contacts, patientsContacts);
+      default:
+        return patientsContacts;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Contacts/ducks/fetch-patient-contacts-detail.duck.js">Contacts Detail Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+
+  // Actions names
+  export const FETCH_PATIENT_CONTACTS_DETAIL_REQUEST = 'FETCH_PATIENT_CONTACTS_DETAIL_REQUEST';
+  export const FETCH_PATIENT_CONTACTS_DETAIL_SUCCESS = 'FETCH_PATIENT_CONTACTS_DETAIL_SUCCESS';
+  export const FETCH_PATIENT_CONTACTS_DETAIL_FAILURE = 'FETCH_PATIENT_CONTACTS_DETAIL_FAILURE';
+
+  // Actions
+  export const fetchPatientContactsDetailRequest = createAction(FETCH_PATIENT_CONTACTS_DETAIL_REQUEST);
+  export const fetchPatientContactsDetailSuccess = createAction(FETCH_PATIENT_CONTACTS_DETAIL_SUCCESS);
+  export const fetchPatientContactsDetailFailure = createAction(FETCH_PATIENT_CONTACTS_DETAIL_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientContactsDetailEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(contactsDetail = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_CONTACTS_DETAIL_SUCCESS:
+        return _.set(action.payload.userId, action.payload.contactsDetail, contactsDetail);
+      default:
+        return contactsDetail;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Contacts/ducks/fetch-patient-contacts-detail-edit.duck.js">Contacts Detail Edit Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientContactsUpdateRequest } from './fetch-patient-contacts.duck'
+
+  // Actions names
+  export const FETCH_PATIENT_CONTACTS_DETAIL_EDIT_REQUEST = 'FETCH_PATIENT_CONTACTS_DETAIL_EDIT_REQUEST';
+  export const FETCH_PATIENT_CONTACTS_DETAIL_EDIT_SUCCESS = 'FETCH_PATIENT_CONTACTS_DETAIL_EDIT_SUCCESS';
+  export const FETCH_PATIENT_CONTACTS_DETAIL_EDIT_FAILURE = 'FETCH_PATIENT_CONTACTS_DETAIL_EDIT_FAILURE';
+
+  // Actions
+  export const fetchPatientContactsDetailEditRequest = createAction(FETCH_PATIENT_CONTACTS_DETAIL_EDIT_REQUEST);
+  export const fetchPatientContactsDetailEditSuccess = createAction(FETCH_PATIENT_CONTACTS_DETAIL_EDIT_SUCCESS);
+  export const fetchPatientContactsDetailEditFailure = createAction(FETCH_PATIENT_CONTACTS_DETAIL_EDIT_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientContactsDetailEditEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(contactsDetailEdit = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_CONTACTS_DETAIL_EDIT_SUCCESS:
+        return action.payload;
+      default:
+        return contactsDetailEdit;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Contacts/ducks/fetch-patient-contacts-create.duck.js">Contacts Create Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientContactsRequest } from './fetch-patient-contacts.duck'
+
+  // Actions names
+  export const FETCH_PATIENT_CONTACTS_CREATE_REQUEST = 'FETCH_PATIENT_CONTACTS_CREATE_REQUEST';
+  export const FETCH_PATIENT_CONTACTS_CREATE_SUCCESS = 'FETCH_PATIENT_CONTACTS_CREATE_SUCCESS';
+  export const FETCH_PATIENT_CONTACTS_CREATE_FAILURE = 'FETCH_PATIENT_CONTACTS_CREATE_FAILURE';
+
+  // Actions
+  export const fetchPatientContactsCreateRequest = createAction(FETCH_PATIENT_CONTACTS_CREATE_REQUEST);
+  export const fetchPatientContactsCreateSuccess = createAction(FETCH_PATIENT_CONTACTS_CREATE_SUCCESS);
+  export const fetchPatientContactsCreateFailure = createAction(FETCH_PATIENT_CONTACTS_CREATE_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientContactsCreateEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(patientContactsCreate = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_CONTACTS_CREATE_SUCCESS:
+        return action.payload;
+      default:
+        return patientContactsCreate
+    }
+  }
+</pre>

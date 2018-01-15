@@ -1,0 +1,366 @@
+---
+title: Events module
+keywords: sample
+summary: "Events module"
+sidebar: react_sidebar
+permalink: react-events.html
+folder: react/plugin-tiles
+filename: react-events.html
+---
+
+<!--<p>Please note, that the functionality for events (in particular - webRTC chat-related tool) is located within the separate repository, and can be found <a href="https://github.com/PulseTile-Plugins/Carbon-Plugin-WebRTC"> here </a>-->
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Events/Events.js">Events</a></h4>
+{% include image.html file="events/eventslist.png" url="#" alt="Events view" caption="Events" %}
+{% include image.html file="events/eventsline.png" url="#" alt="Events Time line" caption="Events Time line" %}
+
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/events
+</pre>
+<h5>GET response</h5>
+<pre>
+  {
+    dateCreated: 1494586220000
+    dateTime: 1494496220958
+    description: "Needs nursing and supervisory care"
+    name: "Discharge to care home"
+    source: "ethercis"
+    sourceId: "93ac376d-3ff4-4e0b-b080-47eb3fe81750"
+    type: "Appointment"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { bindActionCreators } from 'redux';
+  import { connect } from 'react-redux';
+  import { lifecycle, compose } from 'recompose';
+  import { debounce } from 'throttle-debounce';
+
+  import EventsListHeader from './events-page-component/EventsListHeader';
+  import EventsMainPanel from './events-page-component/EventsMainPanel';
+  import { fetchPatientEventsRequest } from './ducks/fetch-patient-events.duck';
+  import { fetchPatientEventsDetailRequest } from './ducks/fetch-patient-events-detail.duck';
+  import { fetchPatientEventsDetailEditRequest } from './ducks/fetch-patient-events-detail-edit.duck';
+  import { fetchPatientEventsCreateRequest } from './ducks/fetch-patient-events-create.duck';
+  import { fetchPatientEventsOnMount, fetchPatientEventsDetailOnMount } from '../../../utils/HOCs/fetch-patients.utils';
+  import { patientEventsSelector, patientEventsDetailSelector, eventsDetailFormStateSelector, eventsCreateFormStateSelector } from './selectors';
+  import { checkIsValidateForm, operationsOnCollection } from '../../../utils/plugin-helpers.utils';
+  import EventsDetail from './EventsDetail/EventsDetail';
+  import PluginCreate from '../../plugin-page-component/PluginCreate';
+  import { modificateEventsArr } from './events-helpers.utils';
+  import EventsCreateForm from './EventsCreate/EventsCreateForm'
+
+  // map dispatch to Properties
+  const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ fetchPatientEventsRequest, fetchPatientEventsDetailRequest, fetchPatientEventsDetailEditRequest, fetchPatientEventsCreateRequest }, dispatch) });
+
+  // Higher-Order Components (HOC) for get some data
+  @connect(patientEventsSelector, mapDispatchToProps)
+  @connect(patientEventsDetailSelector, mapDispatchToProps)
+  @connect(eventsDetailFormStateSelector)
+  @connect(eventsCreateFormStateSelector)
+  @compose(lifecycle(fetchPatientEventsOnMount), lifecycle(fetchPatientEventsDetailOnMount))
+  export default class Events extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Events/EventsDetail/EventsDetail.js">Events Detail</a></h4>
+{% include image.html file="events/eventsdetail.png" url="#" alt="Events Detail" caption="Events Detail" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/events/{sourceId}
+</pre>
+<h5>GET response</h5>
+<pre>
+  {
+    author: "c4h_ripple_osi"
+    dateCreated: 1500896270000
+    dateTime: 1500896400000
+    description: "testing"
+    name: "24.07-10"
+    source: "ethercis"
+    sourceId: "bb5352e6-33a5-4c17-b80f-aa77a8047519"
+    type: "Appointment"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import EventsDetailPanel from './EventsDetailPanel'
+  import EventsDetailForm from './EventsDetailForm'
+
+  export default class EventsDetail extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+{% include image.html file="events/eventschat.png" url="#" alt="Events Chat" caption="Events Chat" %}
+
+<!--<h5>socket channel</h5>-->
+<!--<pre>-->
+    <!--socket.emit('appointment:messages', {appointmentId: sourceId});-->
+<!--</pre>-->
+<!--<h5>response</h5>-->
+<!--<pre>-->
+    <!--{-->
+        <!--$$hashKey:"object:12432"-->
+        <!--appointment_id:"12164779-2c69-4a67-89bb-ac6620c77475"-->
+        <!--author:""-->
+        <!--message:"H5O has left the chat room"-->
+        <!--timestamp:"11:12"-->
+    <!--}-->
+<!--</pre>-->
+
+<!--{% include image.html file="events/eventsstart.png" url="#" alt="Events Start Appointment" caption="Events Start Appointment" %}-->
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Events/EventsDetail/EventsDetailForm.js">Events Detail Edit Form</a></h4>
+{% include image.html file="events/eventsdetailedit.jpg" url="#" alt="Events Detail Edit" caption="Events Detail Edit" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/events/{sourceId}
+</pre>
+<h5>PUT response</h5>
+<pre>
+  {
+    author:"bob.smith@gmail.com"
+    dateTime:"2017-12-27T13:44:00.000Z"
+    description:"test"
+    name:"Test"
+    type:"Appointment"
+    userId:"9999999000"
+    source:"ethercis"
+    sourceId:"a35d5c44-8275-484c-8bd4-ddc36f64005e"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+// import packages
+import React, { PureComponent } from 'react';
+import { Field, reduxForm } from 'redux-form'
+import ValidatedInput from '../../../form-fields/ValidatedInputFormGroup';
+import ValidatedTextareaFormGroup from '../../../form-fields/ValidatedTextareaFormGroup';
+import DateInput from '../../../form-fields/DateInput';
+import SelectFormGroup from '../../../form-fields/SelectFormGroup';
+import { validateEventsForm } from '../forms.validation';
+
+// decorator to connect its form component to Redux
+@reduxForm({
+  form: 'eventsDetailFormSelector',
+  validate: validateEventsForm,
+})
+export default class EventsDetailForm extends PureComponent {
+// React component
+
+  // component template
+  render() {
+    return ()
+  }
+}
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Events/EventsCreate/EventsCreateForm.js">Events Create Form</a></h4>
+{% include image.html file="events/eventscreate.png" url="#" alt="Events Create" caption="Events Create" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/events
+</pre>
+<h5>POST data</h5>
+<pre>
+  {
+    author:"bob.smith@gmail.com"
+    dateTime:"2017-12-27T13:44:00.000Z"
+    description:"test"
+    name:"Test"
+    type:"Appointment"
+    userId:"9999999000"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { Field, reduxForm } from 'redux-form'
+
+  import ValidatedInput from '../../../form-fields/ValidatedInputFormGroup';
+  import ValidatedTextareaFormGroup from '../../../form-fields/ValidatedTextareaFormGroup';
+  import SelectFormGroup from '../../../form-fields/SelectFormGroup';
+  import DateInput from '../../../form-fields/DateInput';
+  import { validateEventsForm } from '../forms.validation';
+  import { valuesNames, valuesLabels, connectionOptions, detailsOptions } from '../forms.config';
+
+  // decorator to connect its form component to Redux
+  @reduxForm({
+    form: 'eventsCreateFormSelector',
+    validate: validateEventsForm,
+  })
+  export default class EventsCreateForm extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Events/ducks/fetch-patient-events.duck.js">Events List Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientEventsDetailRequest } from './fetch-patient-events-detail.duck';
+
+  // Actions names
+  export const FETCH_PATIENT_EVENTS_REQUEST = 'FETCH_PATIENT_EVENTS_REQUEST';
+  export const FETCH_PATIENT_EVENTS_SUCCESS = 'FETCH_PATIENT_EVENTS_SUCCESS';
+  export const FETCH_PATIENT_EVENTS_FAILURE = 'FETCH_PATIENT_EVENTS_FAILURE';
+  export const FETCH_PATIENT_EVENTS_UPDATE_REQUEST = 'FETCH_PATIENT_EVENTS_UPDATE_REQUEST';
+
+  // Actions
+  export const fetchPatientEventsRequest = createAction(FETCH_PATIENT_EVENTS_REQUEST);
+  export const fetchPatientEventsSuccess = createAction(FETCH_PATIENT_EVENTS_SUCCESS);
+  export const fetchPatientEventsFailure = createAction(FETCH_PATIENT_EVENTS_FAILURE);
+  export const fetchPatientEventsUpdateRequest = createAction(FETCH_PATIENT_EVENTS_UPDATE_REQUEST);
+
+  // Epics for async actions
+  export const fetchPatientEventsEpic = (action$, store) => {};
+  export const fetchPatientEventsUpdateEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(patientsEvents = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_EVENTS_SUCCESS:
+        return _.set(action.payload.userId, action.payload.events, patientsEvents);
+      default:
+        return patientsEvents;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Events/ducks/fetch-patient-events-detail.duck.js">Events Detail Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+
+  // Actions names
+  export const FETCH_PATIENT_EVENTS_DETAIL_REQUEST = 'FETCH_PATIENT_EVENTS_DETAIL_REQUEST';
+  export const FETCH_PATIENT_EVENTS_DETAIL_SUCCESS = 'FETCH_PATIENT_EVENTS_DETAIL_SUCCESS';
+  export const FETCH_PATIENT_EVENTS_DETAIL_FAILURE = 'FETCH_PATIENT_EVENTS_DETAIL_FAILURE';
+
+  // Actions
+  export const fetchPatientEventsDetailRequest = createAction(FETCH_PATIENT_EVENTS_DETAIL_REQUEST);
+  export const fetchPatientEventsDetailSuccess = createAction(FETCH_PATIENT_EVENTS_DETAIL_SUCCESS);
+  export const fetchPatientEventsDetailFailure = createAction(FETCH_PATIENT_EVENTS_DETAIL_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientEventsDetailEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(eventsDetail = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_EVENTS_DETAIL_SUCCESS:
+        return _.set(action.payload.userId, action.payload.eventsDetail, eventsDetail);
+      default:
+        return eventsDetail;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Events/ducks/fetch-patient-events-detail-edit.duck.js">Events Detail Edit Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientEventsUpdateRequest } from './fetch-patient-events.duck'
+
+  // Actions names
+  export const FETCH_PATIENT_EVENTS_DETAIL_EDIT_REQUEST = 'FETCH_PATIENT_EVENTS_DETAIL_EDIT_REQUEST';
+  export const FETCH_PATIENT_EVENTS_DETAIL_EDIT_SUCCESS = 'FETCH_PATIENT_EVENTS_DETAIL_EDIT_SUCCESS';
+  export const FETCH_PATIENT_EVENTS_DETAIL_EDIT_FAILURE = 'FETCH_PATIENT_EVENTS_DETAIL_EDIT_FAILURE';
+
+  // Actions
+  export const fetchPatientEventsDetailEditRequest = createAction(FETCH_PATIENT_EVENTS_DETAIL_EDIT_REQUEST);
+  export const fetchPatientEventsDetailEditSuccess = createAction(FETCH_PATIENT_EVENTS_DETAIL_EDIT_SUCCESS);
+  export const fetchPatientEventsDetailEditFailure = createAction(FETCH_PATIENT_EVENTS_DETAIL_EDIT_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientEventsDetailEditEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(eventsDetailEdit = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_EVENTS_DETAIL_EDIT_SUCCESS:
+        return action.payload;
+      default:
+        return eventsDetailEdit;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Events/ducks/fetch-patient-events-create.duck.js">Events Create Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientEventsRequest } from './fetch-patient-events.duck'
+
+  // Actions names
+  export const FETCH_PATIENT_EVENTS_CREATE_REQUEST = 'FETCH_PATIENT_EVENTS_CREATE_REQUEST';
+  export const FETCH_PATIENT_EVENTS_CREATE_SUCCESS = 'FETCH_PATIENT_EVENTS_CREATE_SUCCESS';
+  export const FETCH_PATIENT_EVENTS_CREATE_FAILURE = 'FETCH_PATIENT_EVENTS_CREATE_FAILURE';
+
+  // Actions
+  export const fetchPatientEventsCreateRequest = createAction(FETCH_PATIENT_EVENTS_CREATE_REQUEST);
+  export const fetchPatientEventsCreateSuccess = createAction(FETCH_PATIENT_EVENTS_CREATE_SUCCESS);
+  export const fetchPatientEventsCreateFailure = createAction(FETCH_PATIENT_EVENTS_CREATE_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientEventsCreateEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(patientEventsCreate = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_EVENTS_CREATE_SUCCESS:
+        return action.payload;
+      default:
+        return patientEventsCreate
+    }
+  }
+</pre>

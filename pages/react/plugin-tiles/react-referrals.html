@@ -1,0 +1,351 @@
+---
+title: Referrals module
+keywords: sample
+summary: "Referrals module"
+sidebar: react_sidebar
+permalink: react-referrals.html
+folder: react/plugin-tiles
+filename: react-referrals.html
+---
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Referrals/Referrals.js">Referrals</a></h4>
+{% include image.html file="referrals/referralslist.png" url="#" alt="Referrals view" caption="Referrals" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/referrals
+</pre>
+<h5>GET response</h5>
+<pre>
+  {
+    dateOfReferral:1458792662000
+    referralFrom:"Tony Shannon"
+    referralTo:"Ripplefields Optometry service"
+    source:"ethercis"
+    sourceId:"94133578-f505-4e76-b4ed-762462508801"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { bindActionCreators } from 'redux';
+  import { connect } from 'react-redux';
+  import { lifecycle, compose } from 'recompose';
+
+  import PluginListHeader from '../../plugin-page-component/PluginListHeader';
+  import PluginMainPanel from '../../plugin-page-component/PluginMainPanel';
+  import { fetchPatientReferralsRequest } from './ducks/fetch-patient-referrals.duck';
+  import { fetchPatientReferralsCreateRequest } from './ducks/fetch-patient-referrals-create.duck';
+  import { fetchPatientReferralsDetailRequest } from './ducks/fetch-patient-referrals-detail.duck';
+  import { fetchPatientReferralsDetailEditRequest } from './ducks/fetch-patient-referrals-detail-edit.duck';
+  import { fetchPatientReferralsOnMount, fetchPatientReferralsDetailOnMount } from '../../../utils/HOCs/fetch-patients.utils';
+  import { patientReferralsSelector, referralsDetailFormStateSelector, referralsCreateFormStateSelector, metaPanelFormStateSelector, patientReferralsDetailSelector } from './selectors';
+  import { checkIsValidateForm, operationsOnCollection } from '../../../utils/plugin-helpers.utils';
+  import ReferralsDetail from './ReferralsDetail/ReferralsDetail';
+  import PluginCreate from '../../plugin-page-component/PluginCreate';
+  import ReferralsCreateForm from './ReferralsCreate/ReferralsCreateForm'
+
+  // map dispatch to Properties
+  const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ fetchPatientReferralsRequest, fetchPatientReferralsCreateRequest, fetchPatientReferralsDetailRequest, fetchPatientReferralsDetailEditRequest }, dispatch) });
+
+  // Higher-Order Components (HOC) for get some data
+  @connect(patientReferralsSelector, mapDispatchToProps)
+  @connect(patientReferralsDetailSelector, mapDispatchToProps)
+  @connect(referralsDetailFormStateSelector)
+  @connect(referralsCreateFormStateSelector)
+  @compose(lifecycle(fetchPatientReferralsOnMount), lifecycle(fetchPatientReferralsDetailOnMount))
+  export default class Referrals extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Referrals/ReferralsDetail/ReferralsDetail.js">Referrals Detail</a></h4>
+{% include image.html file="referrals/referralsdetail.png" url="#" alt="Referrals Detail" caption="Referrals Detail" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/referrals/{sourceId}
+</pre>
+<h5>GET response</h5>
+<pre>
+  {
+    author:"c4h_ripple_osi"
+    dateOfReferral:1477994812035
+    referralCareFlow:"Service request sent"
+    referralFrom:"Dr Mason"
+    referralOutcome:""
+    referralRef:"816d8873-ccae-4e2c-bf42-4aee7ffcb802"
+    referralServiceName:"Refer to Thoracic Surgeon"
+    referralState:"planned"
+    referralStateCode:526
+    referralStateDate:1477526400000
+    referralTo:"Royal Brompton"
+    referralType:"Refer to Thoracic Surgeon"
+    source:"Marand"
+    sourceId:"aef53554-8e59-4c26-b4c3-b82ae1d2ddc4"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import PluginDetailPanel from '../../../plugin-page-component/PluginDetailPanel'
+  import ReferralsDetailForm from './ReferralsDetailForm'
+  import { getDDMMMYYYY } from '../../../../utils/time-helpers.utils';
+  import { valuesNames, valuesLabels } from '../forms.config';
+
+  export default class ReferralsDetail extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Referrals/ReferralsDetail/ReferralsDetailForm.js">Referrals Detail Edit Form</a></h4>
+{% include image.html file="referrals/referralsedit.png" url="#" alt="Referrals Edit" caption="Referrals Edit" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/referrals/{sourceId}
+</pre>
+<h5>PUT data</h5>
+<pre>
+  {
+    author:"Gareth Crooks"
+    dateCreated:"2017-12-22T11:45:09.583Z"
+    dateOfReferral:"2017-11-22T09:33:01.690Z"
+    referralFrom:"A Gareth Crooks"
+    referralReason:"General frailty"
+    referralSummary:"test"
+    referralTo:"Calderdale"
+    source:"ethercis"
+    sourceId:"cf1125e7-4399-4c19-a72c-9f59fc5a9033"
+    userId:"9999999000"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { Field, reduxForm } from 'redux-form'
+  import ValidatedInput from '../../../form-fields/ValidatedInputFormGroup';
+  import ValidatedTextareaFormGroup from '../../../form-fields/ValidatedTextareaFormGroup';
+  import DateInput from '../../../form-fields/DateInput';
+  import { validateForm } from '../forms.validation';
+  import { valuesNames, valuesLabels } from '../forms.config';
+
+  // decorator to connect its form component to Redux
+  @reduxForm({
+    form: 'referralsDetailFormSelector',
+    validate: validateForm,
+  })
+  export default class ReferralDetailForm extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Referrals/ReferralsCreate/ReferralsCreateForm.js">Referrals Create Form</a></h4>
+{% include image.html file="referrals/referralscreate.png" url="#" alt="Referrals Create" caption="Referrals Create" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/referrals
+</pre>
+<h5>POST data</h5>
+<pre>
+  {
+    author:"bob.smith@gmail.com"
+    dateCreated:"2017-12-22T11:46:23.413Z"
+    dateOfReferral:"2017-12-11T22:00:00.000Z"
+    referralFrom:"Tony Shannon"
+    referralReason:"test"
+    referralSummary:"test"
+    referralTo:"test"
+    source:"ethercis"
+    userId:"9999999000"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { Field, reduxForm } from 'redux-form'
+  import ValidatedInput from '../../../form-fields/ValidatedInputFormGroup';
+  import ValidatedTextareaFormGroup from '../../../form-fields/ValidatedTextareaFormGroup';
+  import DateInput from '../../../form-fields/DateInput';
+  import { validateForm } from '../forms.validation';
+  import { valuesNames, valuesLabels } from '../forms.config';
+  import { defaultFormValues } from './default-values.config';
+
+  // decorator to connect its form component to Redux
+  @reduxForm({
+    form: 'referralsCreateFormSelector',
+    validate: validateForm,
+  })
+  export default class ReferralsCreateForm extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Referrals/ducks/fetch-patient-referrals.duck.js">Referrals List Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientReferralsDetailRequest } from './fetch-patient-referrals-detail.duck';
+
+  // Actions names
+  export const FETCH_PATIENT_REFERRALS_REQUEST = 'FETCH_PATIENT_REFERRALS_REQUEST';
+  export const FETCH_PATIENT_REFERRALS_SUCCESS = 'FETCH_PATIENT_REFERRALS_SUCCESS';
+  export const FETCH_PATIENT_REFERRALS_FAILURE = 'FETCH_PATIENT_REFERRALS_FAILURE';
+  export const FETCH_PATIENT_REFERRALS_UPDATE_REQUEST = 'FETCH_PATIENT_REFERRALS_UPDATE_REQUEST';
+
+  // Actions
+  export const fetchPatientReferralsRequest = createAction(FETCH_PATIENT_REFERRALS_REQUEST);
+  export const fetchPatientReferralsSuccess = createAction(FETCH_PATIENT_REFERRALS_SUCCESS);
+  export const fetchPatientReferralsFailure = createAction(FETCH_PATIENT_REFERRALS_FAILURE);
+  export const fetchPatientReferralsUpdateRequest = createAction(FETCH_PATIENT_REFERRALS_UPDATE_REQUEST);
+
+  // Epics for async actions
+  export const fetchPatientReferralsEpic = (action$, store) => {};
+  export const fetchPatientReferralsUpdateEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(patientsReferrals = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_REFERRALS_SUCCESS:
+        return _.set(action.payload.userId, action.payload.referrals, patientsReferrals);
+      default:
+        return patientsReferrals;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Referrals/ducks/fetch-patient-referrals-detail.duck.js">Referrals Detail Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+
+  // Actions names
+  export const FETCH_PATIENT_REFERRALS_DETAIL_REQUEST = 'FETCH_PATIENT_REFERRALS_DETAIL_REQUEST';
+  export const FETCH_PATIENT_REFERRALS_DETAIL_SUCCESS = 'FETCH_PATIENT_REFERRALS_DETAIL_SUCCESS';
+  export const FETCH_PATIENT_REFERRALS_DETAIL_FAILURE = 'FETCH_PATIENT_REFERRALS_DETAIL_FAILURE';
+
+  // Actions
+  export const fetchPatientReferralsDetailRequest = createAction(FETCH_PATIENT_REFERRALS_DETAIL_REQUEST);
+  export const fetchPatientReferralsDetailSuccess = createAction(FETCH_PATIENT_REFERRALS_DETAIL_SUCCESS);
+  export const fetchPatientReferralsDetailFailure = createAction(FETCH_PATIENT_REFERRALS_DETAIL_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientReferralsDetailEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(referralsDetail = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_REFERRALS_DETAIL_SUCCESS:
+        return _.set(action.payload.userId, action.payload.referralsDetail, referralsDetail);
+      default:
+        return referralsDetail;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Referrals/ducks/fetch-patient-referrals-detail-edit.duck.js">Referrals Detail Edit Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientReferralsUpdateRequest } from './fetch-patient-referrals.duck'
+
+  // Actions names
+  export const FETCH_PATIENT_REFERRALS_DETAIL_EDIT_REQUEST = 'FETCH_PATIENT_REFERRALS_DETAIL_EDIT_REQUEST';
+  export const FETCH_PATIENT_REFERRALS_DETAIL_EDIT_SUCCESS = 'FETCH_PATIENT_REFERRALS_DETAIL_EDIT_SUCCESS';
+  export const FETCH_PATIENT_REFERRALS_DETAIL_EDIT_FAILURE = 'FETCH_PATIENT_REFERRALS_DETAIL_EDIT_FAILURE';
+
+  // Actions
+  export const fetchPatientReferralsDetailEditRequest = createAction(FETCH_PATIENT_REFERRALS_DETAIL_EDIT_REQUEST);
+  export const fetchPatientReferralsDetailEditSuccess = createAction(FETCH_PATIENT_REFERRALS_DETAIL_EDIT_SUCCESS);
+  export const fetchPatientReferralsDetailEditFailure = createAction(FETCH_PATIENT_REFERRALS_DETAIL_EDIT_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientReferralsDetailEditEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(referralsDetailEdit = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_REFERRALS_DETAIL_EDIT_SUCCESS:
+        return action.payload;
+      default:
+        return referralsDetailEdit;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Referrals/ducks/fetch-patient-referrals-create.duck.js">Referrals Create Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientReferralsRequest } from './fetch-patient-referrals.duck'
+
+  // Actions names
+  export const FETCH_PATIENT_REFERRALS_CREATE_REQUEST = 'FETCH_PATIENT_REFERRALS_CREATE_REQUEST';
+  export const FETCH_PATIENT_REFERRALS_CREATE_SUCCESS = 'FETCH_PATIENT_REFERRALS_CREATE_SUCCESS';
+  export const FETCH_PATIENT_REFERRALS_CREATE_FAILURE = 'FETCH_PATIENT_REFERRALS_CREATE_FAILURE';
+
+  // Actions
+  export const fetchPatientReferralsCreateRequest = createAction(FETCH_PATIENT_REFERRALS_CREATE_REQUEST);
+  export const fetchPatientReferralsCreateSuccess = createAction(FETCH_PATIENT_REFERRALS_CREATE_SUCCESS);
+  export const fetchPatientReferralsCreateFailure = createAction(FETCH_PATIENT_REFERRALS_CREATE_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientReferralsCreateEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(patientReferralsCreate = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_REFERRALS_CREATE_SUCCESS:
+        return action.payload;
+      default:
+        return patientReferralsCreate
+    }
+  }
+</pre>

@@ -1,0 +1,334 @@
+---
+title: Generic Plugin module
+keywords: sample
+summary: "Generic Plugin module"
+sidebar: react_sidebar
+permalink: react-generic-plugin.html
+folder: react/plugin-tiles
+filename: react-generic-plugin.html
+---
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/GenericPlugin/GenericPlugin.js">Generic Plugin</a></h4>
+{% include image.html file="personalnotes/personalnoteslist.png" url="#" alt="Generic Plugin view" caption="Generic Plugin" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/personalnotes
+</pre>
+<h5>GET response</h5>
+<pre>
+  {
+    author:"Dr Tony Shannon"
+    dateCreated:1456287062000
+    noteType:"Generic Plugin "
+    source:"ethercis"
+    sourceId:"23dbda9d-7688-426c-8cb8-312a4f351071"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { bindActionCreators } from 'redux';
+  import { connect } from 'react-redux';
+  import { lifecycle, compose } from 'recompose';
+
+  import PluginListHeader from '../../plugin-page-component/PluginListHeader';
+  import PluginCreate from '../../plugin-page-component/PluginCreate';
+  import PluginMainPanel from '../../plugin-page-component/PluginMainPanel';
+  import GenericPluginCreateForm from './GenericPluginCreate/GenericPluginCreateForm';
+  import { fetchPatientGenericPluginRequest } from './ducks/fetch-patient-generic-plugin.duck';
+  import { fetchPatientGenericPluginDetailRequest } from './ducks/fetch-patient-generic-plugin-detail.duck';
+  import { fetchPatientGenericPluginDetailEditRequest } from './ducks/fetch-patient-generic-plugin-detail-edit.duck';
+  import { fetchPatientGenericPluginCreateRequest } from './ducks/fetch-patient-generic-plugin-create.duck';
+  import { fetchPatientGenericPluginOnMount } from '../../../utils/HOCs/fetch-patients.utils';
+  import { patientGenericPluginSelector, patientGenericPluginDetailSelector, genericPluginDetailFormSelector, genericPluginCreateFormStateSelector } from './selectors';
+  import GenericPluginDetail from './GenericPluginDetail/GenericPluginDetail';
+  import { checkIsValidateForm, operationsOnCollection } from '../../../utils/plugin-helpers.utils';
+
+  // map dispatch to Properties
+  const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ fetchPatientGenericPluginRequest, fetchPatientGenericPluginDetailRequest, fetchPatientGenericPluginDetailEditRequest, fetchPatientGenericPluginCreateRequest }, dispatch) });
+
+  // Higher-Order Components (HOC) for get some data
+  @connect(patientGenericPluginSelector, mapDispatchToProps)
+  @connect(patientGenericPluginDetailSelector, mapDispatchToProps)
+  @connect(genericPluginDetailFormSelector)
+  @connect(genericPluginCreateFormStateSelector)
+  @compose(lifecycle(fetchPatientGenericPluginOnMount))
+  export default class GenericPlugin extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/GenericPlugin/GenericPluginDetail/GenericPluginDetail.js">Generic Plugin Detail</a></h4>
+{% include image.html file="personalnotes/personalnotesdetail.png" url="#" alt="Generic Plugin Detail" caption="Generic Plugin Detail" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/personalnotes/{sourceId}
+</pre>
+<h5>GET response</h5>
+<pre>
+  {
+    author:"Dr Tony Shannon"
+    dateCreated:1482196404000
+    noteType:"Personal Note"
+    notes:"undefined"
+    source:"EtherCIS"
+    sourceId:"b6c198be-2c37-4494-89c3-4fc5a7a92eff"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import PluginDetailPanel from '../../../plugin-page-component/PluginDetailPanel'
+  import GenericPluginPanelForm from './GenericPluginDetailForm'
+
+  export default class GenericPluginDetail extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/GenericPlugin/GenericPluginDetail/GenericPluginDetailForm.js">Generic Plugin Detail Edit Form</a></h4>
+{% include image.html file="personalnotes/personalnotesedit.png" url="#" alt="Generic Plugin Edit" caption="Generic Plugin Edit" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/personalnotes/{sourceId}
+</pre>
+<h5>PUT data</h5>
+<pre>
+  {
+    author:"bob.smith@gmail.com"
+    noteType:"10"
+    notes:"20"
+    source:"ethercis"
+    sourceId:"3f59ed45-799a-4471-8dca-d7598edcb842"
+    userId:"9999999000"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { Field, reduxForm } from 'redux-form'
+  import ValidatedInput from '../../../form-fields/ValidatedInputFormGroup';
+  import ValidatedTextareaFormGroup from '../../../form-fields/ValidatedTextareaFormGroup';
+  import DateInput from '../../../form-fields/DateInput';
+  import { valuesNames, valuesLabels } from '../forms.config';
+  import { validateForm } from '../forms.validation';
+
+  // decorator to connect its form component to Redux
+  @reduxForm({
+    form: 'genericPluginsDetailFormSelector',
+    validate: validateForm,
+  })
+  export default class GenericPluginPanelForm extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/GenericPlugin/GenericPluginCreate/GenericPluginCreateForm.js">Generic Plugin Create Form</a></h4>
+{% include image.html file="personalnotes/personalnotescreate.png" url="#" alt="Generic Plugin Create" caption="Generic Plugin Create" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/personalnotes
+</pre>
+<h5>POST data</h5>
+<pre>
+  {
+    author:"bob.smith@gmail.com"
+    dateCreated:1513941744643
+    noteType:"a personal checknote"
+    notes:"a personal checknote"
+    source:"openehr"
+    userId:"9999999000"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { Field, reduxForm } from 'redux-form'
+  import ValidatedInput from '../../../form-fields/ValidatedInputFormGroup';
+  import ValidatedTextareaFormGroup from '../../../form-fields/ValidatedTextareaFormGroup';
+  import DateInput from '../../../form-fields/DateInput';
+  import { validateForm } from '../forms.validation';
+  import { valuesNames, valuesLabels } from '../forms.config';
+  import { defaultFormValues } from './default-values.config';
+
+  // decorator to connect its form component to Redux
+  @reduxForm({
+    form: 'genericPluginsCreateFormSelector',
+    validate: validateForm,
+  })
+  export default class GenericPluginCreateForm extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/GenericPlugin/ducks/fetch-patient-generic-plugin.duck.js">Generic Plugin List Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientGenericPluginDetailRequest } from './fetch-patient-generic-plugin-detail.duck';
+
+  // Actions names
+  export const FETCH_PATIENT_GENERIC_PLUGIN_REQUEST = 'FETCH_PATIENT_GENERIC_PLUGIN_REQUEST';
+  export const FETCH_PATIENT_GENERIC_PLUGIN_SUCCESS = 'FETCH_PATIENT_GENERIC_PLUGIN_SUCCESS';
+  export const FETCH_PATIENT_GENERIC_PLUGIN_FAILURE = 'FETCH_PATIENT_GENERIC_PLUGIN_FAILURE';
+  export const FETCH_PATIENT_GENERIC_PLUGIN_UPDATE_REQUEST = 'FETCH_PATIENT_GENERIC_PLUGIN_UPDATE_REQUEST';
+
+  // Actions
+  export const fetchPatientGenericPluginRequest = createAction(FETCH_PATIENT_GENERIC_PLUGIN_REQUEST);
+  export const fetchPatientGenericPluginSuccess = createAction(FETCH_PATIENT_GENERIC_PLUGIN_SUCCESS);
+  export const fetchPatientGenericPluginFailure = createAction(FETCH_PATIENT_GENERIC_PLUGIN_FAILURE);
+  export const fetchPatientGenericPluginUpdateRequest = createAction(FETCH_PATIENT_GENERIC_PLUGIN_UPDATE_REQUEST);
+
+  // Epics for async actions
+  export const fetchPatientGenericPluginEpic = (action$, store) => {};
+  export const fetchPatientGenericPluginUpdateEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(patientsGenericPlugin = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_GENERIC_PLUGIN_SUCCESS:
+        return _.set(action.payload.userId, action.payload.genericPlugin, patientsGenericPlugin);
+      default:
+        return patientsGenericPlugin;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/GenericPlugin/ducks/fetch-patient-generic-plugin-detail.duck.js">Generic Plugin Detail Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+
+  // Actions names
+  export const FETCH_PATIENT_GENERIC_PLUGIN_DETAIL_REQUEST = 'FETCH_PATIENT_GENERIC_PLUGIN_DETAIL_REQUEST';
+  export const FETCH_PATIENT_GENERIC_PLUGIN_DETAIL_SUCCESS = 'FETCH_PATIENT_GENERIC_PLUGIN_DETAIL_SUCCESS';
+  export const FETCH_PATIENT_GENERIC_PLUGIN_DETAIL_FAILURE = 'FETCH_PATIENT_GENERIC_PLUGIN_DETAIL_FAILURE';
+
+  // Actions
+  export const fetchPatientGenericPluginDetailRequest = createAction(FETCH_PATIENT_GENERIC_PLUGIN_DETAIL_REQUEST);
+  export const fetchPatientGenericPluginDetailSuccess = createAction(FETCH_PATIENT_GENERIC_PLUGIN_DETAIL_SUCCESS);
+  export const fetchPatientGenericPluginDetailFailure = createAction(FETCH_PATIENT_GENERIC_PLUGIN_DETAIL_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientGenericPluginDetailEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(genericPluginDetail = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_GENERIC_PLUGIN_DETAIL_SUCCESS:
+        return _.set(action.payload.userId, action.payload.genericPluginDetail, genericPluginDetail);
+      default:
+        return genericPluginDetail;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/GenericPlugin/ducks/fetch-patient-generic-plugin-detail-edit.duck.js">Generic Plugin Detail Edit Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientGenericPluginUpdateRequest } from './fetch-patient-generic-plugin.duck'
+
+  // Actions names
+  export const FETCH_PATIENT_GENERIC_PLUGIN_DETAIL_EDIT_REQUEST = 'FETCH_PATIENT_GENERIC_PLUGIN_DETAIL_EDIT_REQUEST';
+  export const FETCH_PATIENT_GENERIC_PLUGIN_DETAIL_EDIT_SUCCESS = 'FETCH_PATIENT_GENERIC_PLUGIN_DETAIL_EDIT_SUCCESS';
+  export const FETCH_PATIENT_GENERIC_PLUGIN_DETAIL_EDIT_FAILURE = 'FETCH_PATIENT_GENERIC_PLUGIN_DETAIL_EDIT_FAILURE';
+
+  // Actions
+  export const fetchPatientGenericPluginDetailEditRequest = createAction(FETCH_PATIENT_GENERIC_PLUGIN_DETAIL_EDIT_REQUEST);
+  export const fetchPatientGenericPluginDetailEditSuccess = createAction(FETCH_PATIENT_GENERIC_PLUGIN_DETAIL_EDIT_SUCCESS);
+  export const fetchPatientGenericPluginDetailEditFailure = createAction(FETCH_PATIENT_GENERIC_PLUGIN_DETAIL_EDIT_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientGenericPluginDetailEditEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(genericPluginDetailEdit = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_GENERIC_PLUGIN_DETAIL_EDIT_SUCCESS:
+        return action.payload;
+      default:
+        return genericPluginDetailEdit;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/GenericPlugin/ducks/fetch-patient-generic-plugin-create.duck.js">Generic Plugin Create Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientGenericPluginRequest } from './fetch-patient-generic-plugin.duck'
+
+  // Actions names
+  export const FETCH_PATIENT_GENERIC_PLUGIN_CREATE_REQUEST = 'FETCH_PATIENT_GENERIC_PLUGIN_CREATE_REQUEST';
+  export const FETCH_PATIENT_GENERIC_PLUGIN_CREATE_SUCCESS = 'FETCH_PATIENT_GENERIC_PLUGIN_CREATE_SUCCESS';
+  export const FETCH_PATIENT_GENERIC_PLUGIN_CREATE_FAILURE = 'FETCH_PATIENT_GENERIC_PLUGIN_CREATE_FAILURE';
+
+  // Actions
+  export const fetchPatientGenericPluginCreateRequest = createAction(FETCH_PATIENT_GENERIC_PLUGIN_CREATE_REQUEST);
+  export const fetchPatientGenericPluginCreateSuccess = createAction(FETCH_PATIENT_GENERIC_PLUGIN_CREATE_SUCCESS);
+  export const fetchPatientGenericPluginCreateFailure = createAction(FETCH_PATIENT_GENERIC_PLUGIN_CREATE_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientGenericPluginCreateEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(patientGenericPluginCreate = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_GENERIC_PLUGIN_CREATE_SUCCESS:
+        return action.payload;
+      default:
+        return patientGenericPluginCreate
+    }
+  }
+</pre>

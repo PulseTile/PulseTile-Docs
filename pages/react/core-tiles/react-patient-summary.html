@@ -1,0 +1,82 @@
+---
+title: Patient Summary module
+keywords: sample
+summary: "Patient Summary module"
+sidebar: react_sidebar
+permalink: react-patient-summary.html
+folder: react/core-tiles
+filename: react-patient-summary.html
+---
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/PatientsSummary/PatientsSummary.js">Patient Summary</a></h4>
+{% include image.html file="patientsummary/patientsummary.png" url="#" alt="Patient Summary list view" caption="Patient Summary List" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}
+</pre>
+
+<h5>GET data</h5>
+<pre>
+  {
+    address:"40, High Street, Dublin, D8"
+    allergies:[]
+    contacts:[]
+    dateOfBirth:318384000000
+    gender:"Female"
+    gpAddress:"Newport Practice, Ap #491-7493 Donec Ave, Newport, Hampshire, JB48 4EL"
+    gpName:"Bailey Demetrius B."
+    id:9999999003
+    medications:[
+      {
+        sourceId: "b693b071-d508-42dd-b114-d6cbd29c70bd",
+        source: "Marand",
+        text: "Aspirin"
+      }
+    ]
+    name:"Emma Gallagher"
+    nhsNumber:"9999999003"
+    pasNumber:332546
+    problems:[
+	    {
+	      sourceId: "05e6df7f-4dcc-46d1-8134-010835e61308",
+	      source: "EtherCIS",
+	      text: "angina pectoris"
+	    }
+    ]
+    telephone:"07624 647524"
+    transfers:[]
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import PropTypes from 'prop-types';
+  import { bindActionCreators } from 'redux';
+  import { connect } from 'react-redux';
+  import { lifecycle } from 'recompose';
+
+  import SimpleDashboardPanel from './SimpleDashboardPanel';
+  import ConfirmationModal from '../../ui-elements/ConfirmationModal/ConfirmationModal';
+  import PatientsSummaryListHeader from './header/PatientsSummaryListHeader';
+  import patientSummarySelector from './selectors';
+  import { fetchPatientSummaryRequest } from '../../../ducks/fetch-patient-summary.duck';
+  import { fetchPatientSummaryOnMount } from '../../../utils/HOCs/fetch-patients.utils';
+
+  // map dispatch to Properties
+  const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ fetchPatientSummaryRequest }, dispatch) });
+
+  // Higher-Order Components (HOC) for get some data
+  @connect(patientSummarySelector, mapDispatchToProps)
+  @lifecycle(fetchPatientSummaryOnMount)
+  export default class PatientsSummary extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>

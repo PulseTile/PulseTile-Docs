@@ -1,0 +1,344 @@
+---
+title: Diagnosis module
+keywords: sample
+summary: "Diagnosis module"
+sidebar: react_sidebar
+permalink: react-problems-diagnosis.html
+folder: react/core-tiles
+filename: react-problems_diagnosis.html
+---
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/ProblemsDiagnosis/ProblemsDiagnosis.js">Diagnosis</a></h4>
+{% include image.html file="diagnosis/diagnoseslist.png" url="#" alt="Diagnosis list view" caption="Diagnosis" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/problems
+</pre>
+<h5>GET response</h5>
+<pre>
+  {
+    problem:"asthma"
+    source:"ethercis"
+    sourceId:"08fd487b-765a-41b4-9501-334d48dc2b00"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { bindActionCreators } from 'redux';
+  import { connect } from 'react-redux';
+  import { lifecycle, compose } from 'recompose';
+
+  import PluginListHeader from '../../plugin-page-component/PluginListHeader';
+  import PluginMainPanel from '../../plugin-page-component/PluginMainPanel';
+  import { fetchPatientDiagnosesRequest } from './ducks/fetch-patient-diagnoses.duck';
+  import { fetchPatientDiagnosesDetailRequest } from './ducks/fetch-patient-diagnoses-detail.duck';
+  import { fetchPatientDiagnosesDetailEditRequest } from './ducks/fetch-patient-diagnoses-detail-edit.duck';
+  import { fetchPatientDiagnosesCreateRequest } from './ducks/fetch-patient-diagnoses-create.duck';
+  import { fetchPatientDiagnosesOnMount, fetchPatientDiagnosesDetailOnMount } from '../../../utils/HOCs/fetch-patients.utils';
+  import { patientDiagnosesSelector, patientDiagnosesDetailSelector, diagnosisPanelFormSelector, diagnosesCreateFormStateSelector } from './selectors';
+  import { checkIsValidateForm, operationsOnCollection } from '../../../utils/plugin-helpers.utils';
+  import ProblemsDiagnosisDetail from './ProblemsDiagnosisDetail/ProblemsDiagnosisDetail';
+  import PluginCreate from '../../plugin-page-component/PluginCreate';
+  import ProblemsDiagnosisCreateForm from './ProblemsDiagnosisCreate/ProblemsDiagnosisCreateForm'
+
+  // map dispatch to Properties
+  const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ fetchPatientDiagnosesRequest, fetchPatientDiagnosesDetailRequest, fetchPatientDiagnosesDetailEditRequest, fetchPatientDiagnosesCreateRequest }, dispatch) });
+
+  // Higher-Order Components (HOC) for get some data
+  @connect(patientDiagnosesSelector, mapDispatchToProps)
+  @connect(patientDiagnosesDetailSelector, mapDispatchToProps)
+  @connect(diagnosisPanelFormSelector)
+  @connect(diagnosesCreateFormStateSelector)
+  @compose(lifecycle(fetchPatientDiagnosesOnMount), lifecycle(fetchPatientDiagnosesDetailOnMount))
+  export default class ProblemsDiagnosis extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/ProblemsDiagnosis/ProblemsDiagnosisDetail/ProblemsDiagnosisDetail.js">Diagnosis Detail</a></h4>
+{% include image.html file="diagnosis/diagnosesdetail.jpg" url="#" alt="Diagnosis Detail" caption="Diagnosis Detail" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/problems/{sourceId}
+</pre>
+<h5>GET response</h5>
+<pre>
+  {
+    author:"Dr Tony Shannon"
+    code:299757012
+    dateCreated:1445458262000
+    dateOfOnset:963833437553
+    description:""
+    problem:"angina pectoris"
+    source:"EtherCIS"
+    sourceId:"12f02a05-a14f-4b35-be45-9e52bbe535ed"
+    terminology:"SNOMED-CT"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import PluginDetailPanel from '../../../plugin-page-component/PluginDetailPanel'
+  import ProblemsDiagnosisDetailForm from './ProblemsDiagnosisDetailForm'
+
+  export default class ProblemsDiagnosisDetail extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/ProblemsDiagnosis/ProblemsDiagnosisDetail/ProblemsDiagnosisDetailForm.js">Diagnosis Detail Edit Form</a></h4>
+{% include image.html file="diagnosis/diagnosesedit.png" url="#" alt="Diagnosis Edit" caption="Diagnosis Edit" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/problems/{sourceID}
+</pre>
+<h5>PUT data</h5>
+<pre>
+  {
+    code:"12393890"
+    dateOfOnset:"2017-10-14"
+    description:""
+    problem:"angina"
+    source:"ethercis"
+    sourceId:"a9d54b1c-4720-4486-9cbf-a60cfd22ad17"
+    terminology:"SNOMED-CT"
+    userId:"9999999000"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { Field, reduxForm } from 'redux-form'
+  import ValidatedInput from '../../../form-fields/ValidatedInputFormGroup';
+  import ValidatedTextareaFormGroup from '../../../form-fields/ValidatedTextareaFormGroup';
+  import DateInput from '../../../form-fields/DateInput';
+  import StaticFormField from '../../../form-fields/StaticFormField';
+  import { validateForm } from '../forms.validation';
+
+  // decorator to connect its form component to Redux
+  @reduxForm({
+    form: 'diagnosesPanelFormSelector',
+    validate: validateForm,
+  })
+  export default class ProblemsDiagnosisDetailForm extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/ProblemsDiagnosis/ProblemsDiagnosisCreate/ProblemsDiagnosisCreateForm.js">Diagnosis Create Form</a></h4>
+{% include image.html file="diagnosis/diagnosescreate.png" url="#" alt="Diagnosis Create" caption="Diagnosis Create" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/problems
+</pre>
+<h5>POST data</h5>
+<pre>
+  {
+    code:"12393890"
+    dateOfOnset:"2017-12-19"
+    description:""
+    isImport:false
+    problem:"Heart Disease"
+    sourceId:""
+    terminology:"SNOMED-CT"
+    userId:"9999999000"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { Field, reduxForm } from 'redux-form'
+  import ValidatedInput from '../../../form-fields/ValidatedInputFormGroup';
+  import ValidatedTextareaFormGroup from '../../../form-fields/ValidatedTextareaFormGroup';
+  import DateInput from '../../../form-fields/DateInput';
+  import StaticFormField from '../../../form-fields/StaticFormField';
+  import { validateForm } from '../forms.validation';
+  import { valuesNames, valuesLabels } from '../forms.config';
+  import { defaultFormValues } from './default-values.config';
+
+  // decorator to connect its form component to Redux
+  @reduxForm({
+    form: 'diagnosesCreateFormSelector',
+    validate: validateForm,
+  })
+  export default class ProblemsDiagnosisCreateForm extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/ProblemsDiagnosis/ducks/fetch-patient-diagnoses.duck.js">Diagnosis List Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import _ from 'lodash/fp';
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientDiagnosesDetailRequest } from './fetch-patient-diagnoses-detail.duck';
+
+  // Actions names
+  export const FETCH_PATIENT_DIAGNOSES_REQUEST = 'FETCH_PATIENT_DIAGNOSES_REQUEST';
+  export const FETCH_PATIENT_DIAGNOSES_SUCCESS = 'FETCH_PATIENT_DIAGNOSES_SUCCESS';
+  export const FETCH_PATIENT_DIAGNOSES_FAILURE = 'FETCH_PATIENT_DIAGNOSES_FAILURE';
+  export const FETCH_PATIENT_DIAGNOSES_UPDATE_REQUEST = 'FETCH_PATIENT_DIAGNOSES_UPDATE_REQUEST';
+
+  // Actions
+  export const fetchPatientDiagnosesRequest = createAction(FETCH_PATIENT_DIAGNOSES_REQUEST);
+  export const fetchPatientDiagnosesSuccess = createAction(FETCH_PATIENT_DIAGNOSES_SUCCESS);
+  export const fetchPatientDiagnosesFailure = createAction(FETCH_PATIENT_DIAGNOSES_FAILURE);
+  export const fetchPatientDiagnosesUpdateRequest = createAction(FETCH_PATIENT_DIAGNOSES_UPDATE_REQUEST);
+
+  // Epics for async actions
+  export const fetchPatientDiagnosesEpic = (action$, store) => {};
+  export const fetchPatientDiagnosesUpdateEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(patientsDiagnoses = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_DIAGNOSES_SUCCESS:
+        return _.set(action.payload.userId, action.payload.diagnoses, patientsDiagnoses);
+      default:
+        return patientsDiagnoses;
+    }
+  }
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/ProblemsDiagnosis/ducks/fetch-patient-diagnoses-detail.duck.js">Diagnosis Detail Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import _ from 'lodash/fp';
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+
+  // Actions names
+  export const FETCH_PATIENT_DIAGNOSES_DETAIL_REQUEST = 'FETCH_PATIENT_DIAGNOSES_DETAIL_REQUEST';
+  export const FETCH_PATIENT_DIAGNOSES_DETAIL_SUCCESS = 'FETCH_PATIENT_DIAGNOSES_DETAIL_SUCCESS';
+  export const FETCH_PATIENT_DIAGNOSES_DETAIL_FAILURE = 'FETCH_PATIENT_DIAGNOSES_DETAIL_FAILURE';
+
+  // Actions
+  export const fetchPatientDiagnosesDetailRequest = createAction(FETCH_PATIENT_DIAGNOSES_DETAIL_REQUEST);
+  export const fetchPatientDiagnosesDetailSuccess = createAction(FETCH_PATIENT_DIAGNOSES_DETAIL_SUCCESS);
+  export const fetchPatientDiagnosesDetailFailure = createAction(FETCH_PATIENT_DIAGNOSES_DETAIL_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientDiagnosesDetailEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(diagnosesDetail = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_DIAGNOSES_DETAIL_SUCCESS:
+        return _.set(action.payload.userId, action.payload.diagnosesDetail, diagnosesDetail);
+      default:
+        return diagnosesDetail;
+    }
+  }
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/ProblemsDiagnosis/ducks/fetch-patient-diagnoses-detail-edit.duck.js">Diagnosis Detail Edit Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientDiagnosesUpdateRequest } from './fetch-patient-diagnoses.duck'
+
+  // Actions names
+  export const FETCH_PATIENT_DIAGNOSES_DETAIL_EDIT_REQUEST = 'FETCH_PATIENT_DIAGNOSES_DETAIL_EDIT_REQUEST';
+  export const FETCH_PATIENT_DIAGNOSES_DETAIL_EDIT_SUCCESS = 'FETCH_PATIENT_DIAGNOSES_DETAIL_EDIT_SUCCESS';
+  export const FETCH_PATIENT_DIAGNOSES_DETAIL_EDIT_FAILURE = 'FETCH_PATIENT_DIAGNOSES_DETAIL_EDIT_FAILURE';
+
+  // Actions
+  export const fetchPatientDiagnosesDetailEditRequest = createAction(FETCH_PATIENT_DIAGNOSES_DETAIL_EDIT_REQUEST);
+  export const fetchPatientDiagnosesDetailEditSuccess = createAction(FETCH_PATIENT_DIAGNOSES_DETAIL_EDIT_SUCCESS);
+  export const fetchPatientDiagnosesDetailEditFailure = createAction(FETCH_PATIENT_DIAGNOSES_DETAIL_EDIT_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientDiagnosesDetailEditEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(diagnosesDetailEdit = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_DIAGNOSES_DETAIL_EDIT_SUCCESS:
+        return action.payload;
+      default:
+        return diagnosesDetailEdit;
+    }
+  }
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/ProblemsDiagnosis/ducks/fetch-patient-diagnoses-create.duck.js">Diagnosis Create Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientDiagnosesRequest } from './fetch-patient-diagnoses.duck'
+
+  // Actions names
+  export const FETCH_PATIENT_DIAGNOSES_CREATE_REQUEST = 'FETCH_PATIENT_DIAGNOSES_CREATE_REQUEST';
+  export const FETCH_PATIENT_DIAGNOSES_CREATE_SUCCESS = 'FETCH_PATIENT_DIAGNOSES_CREATE_SUCCESS';
+  export const FETCH_PATIENT_DIAGNOSES_CREATE_FAILURE = 'FETCH_PATIENT_DIAGNOSES_CREATE_FAILURE';
+
+  // Actions
+  export const fetchPatientDiagnosesCreateRequest = createAction(FETCH_PATIENT_DIAGNOSES_CREATE_REQUEST);
+  export const fetchPatientDiagnosesCreateSuccess = createAction(FETCH_PATIENT_DIAGNOSES_CREATE_SUCCESS);
+  export const fetchPatientDiagnosesCreateFailure = createAction(FETCH_PATIENT_DIAGNOSES_CREATE_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientDiagnosesCreateEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(patientDiagnosesCreate = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_DIAGNOSES_CREATE_SUCCESS:
+        return action.payload;
+      default:
+        return patientDiagnosesCreate
+    }
+  }
+</pre>

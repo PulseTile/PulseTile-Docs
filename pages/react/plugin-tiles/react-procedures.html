@@ -1,0 +1,363 @@
+---
+title: Procedures module
+keywords: sample
+summary: "Procedures module"
+sidebar: react_sidebar
+permalink: react-procedures.html
+folder: react/plugin-tiles
+filename: react-procedures.html
+---
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Procedures/Procedures.js">Procedures</a></h4>
+{% include image.html file="procedures/procedureslist.png" url="#" alt="Procedures view" caption="Procedures" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/procedures
+</pre>
+<h5>GET response</h5>
+<pre>
+  {
+    date:1436969493829
+    name:"total replacement of hip"
+    source:"ethercis"
+    sourceId:"fa7408c3-7d69-4f50-84ac-cbf735a0ab18"
+    time:54693829
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { bindActionCreators } from 'redux';
+  import { connect } from 'react-redux';
+  import { lifecycle, compose } from 'recompose';
+
+  import PluginListHeader from '../../plugin-page-component/PluginListHeader';
+  import PluginMainPanel from '../../plugin-page-component/PluginMainPanel';
+  import { fetchPatientProceduresRequest } from './ducks/fetch-patient-procedures.duck';
+  import { fetchPatientProceduresCreateRequest } from './ducks/fetch-patient-procedures-create.duck';
+  import { fetchPatientProceduresDetailRequest } from './ducks/fetch-patient-procedures-detail.duck';
+  import { fetchPatientProceduresDetailEditRequest } from './ducks/fetch-patient-procedures-detail-edit.duck';
+  import { fetchPatientProceduresOnMount, fetchPatientProceduresDetailOnMount } from '../../../utils/HOCs/fetch-patients.utils';
+  import { patientProceduresSelector, proceduresDetailFormStateSelector, proceduresCreateFormStateSelector, metaPanelFormStateSelector, patientProceduresDetailSelector } from './selectors';
+  import { checkIsValidateForm, operationsOnCollection } from '../../../utils/plugin-helpers.utils';
+  import ProceduresDetail from './ProceduresDetail/ProceduresDetail';
+  import PluginCreate from '../../plugin-page-component/PluginCreate';
+  import ProceduresCreateForm from './ProceduresCreate/ProceduresCreateForm'
+
+  // map dispatch to Properties
+  const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ fetchPatientProceduresRequest, fetchPatientProceduresCreateRequest, fetchPatientProceduresDetailRequest, fetchPatientProceduresDetailEditRequest }, dispatch) });
+
+  // Higher-Order Components (HOC) for get some data
+  @connect(patientProceduresSelector, mapDispatchToProps)
+  @connect(patientProceduresDetailSelector, mapDispatchToProps)
+  @connect(proceduresDetailFormStateSelector)
+  @connect(proceduresCreateFormStateSelector)
+  @connect(metaPanelFormStateSelector)
+  @compose(lifecycle(fetchPatientProceduresOnMount), lifecycle(fetchPatientProceduresDetailOnMount))
+  export default class Procedures extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Procedures/ProceduresDetail/ProceduresDetail.js">Procedures Detail</a></h4>
+{% include image.html file="procedures/proceduresdetail.png" url="#" alt="Procedures Detail" caption="Procedures Detail" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/procedures/{sourceId}
+</pre>
+<h5>GET response</h5>
+<pre>
+  {
+    author:"Dr Ian Shannon"
+    currentStatus:"completed"
+    date:1483695900000
+    dateSubmitted:1499452459000
+    name:"Proc Name"
+    notes:"Proc Notes (Marand 06-Jan 11:33)"
+    performer:"Performer"
+    procedureCode:12345
+    procedureName:"Proc Name"
+    procedureTerminology:"SNOMED-CT"
+    source:"EtherCIS"
+    sourceId:"bab412c3-132f-487a-b63b-0cb99dbe4358"
+    time:35100000
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import PluginDetailPanel from '../../../plugin-page-component/PluginDetailPanel'
+  import ProceduresDetailForm from './ProceduresDetailForm'
+  import { getDDMMMYYYY } from '../../../../utils/time-helpers.utils';
+  import { valuesNames, valuesLabels } from '../forms.config';
+
+  export default class ProceduresDetail extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Procedures/ProceduresDetail/ProceduresDetailForm.js">Procedures Detail Edit Form</a></h4>
+{% include image.html file="procedures/proceduresedit.png" url="#" alt="Procedures Edit" caption="Procedures Edit" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/procedures/{sourceId}
+</pre>
+<h5>PUT data</h5>
+<pre>
+  {
+    author:"bob.smith@gmail.com"
+    currentStatus:"completed"
+    date:1510667151000
+    dateSubmitted:"2017-12-21T16:59:04.140Z"
+    name:"Anna
+    notes:"note"
+    originalComposition:""
+    originalSource:""
+    performer:"Performer"
+    procedureCode:"567891211"
+    procedureName:"Anna
+    procedureTerminology:"SNOMED-CT"
+    source:"ethercis"
+    sourceId:"a35d5c44-8275-484c-8bd4-ddc36f64005e"
+    time:68344140
+    userId:"9999999000"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { Field, reduxForm } from 'redux-form'
+  import ValidatedInput from '../../../form-fields/ValidatedInputFormGroup';
+  import ValidatedTextareaFormGroup from '../../../form-fields/ValidatedTextareaFormGroup';
+  import DateInput from '../../../form-fields/DateInput';
+  import { validateForm } from '../forms.validation';
+  import { valuesNames, valuesLabels } from '../forms.config';
+
+  // decorator to connect its form component to Redux
+  @reduxForm({
+    form: 'proceduresDetailFormSelector',
+    validate: validateForm,
+  })
+  export default class ProceduresDetailForm extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Procedures/ProceduresCreate/ProceduresCreateForm.js">Procedures Create Form</a></h4>
+{% include image.html file="procedures/procedurescreate.png" url="#" alt="Procedures Create" caption="Procedures Create" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/procedures
+</pre>
+<h5>POST data</h5>
+<pre>
+  {
+    author:"bob.smith@gmail.com"
+    currentStatus:""
+    date:"05-Dec-2017"
+    dateSubmitted:"2017-12-21T16:59:58.504Z"
+    name:test
+    notes:"test
+    originalComposition:""
+    originalSource:""
+    performer:"erg"
+    procedureCode:"g"
+    procedureName:"test"
+    procedureTerminology:"test"
+    source:"ethercis"
+    time:68398504
+    userId:"9999999000"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { Field, reduxForm } from 'redux-form'
+  import ValidatedInput from '../../../form-fields/ValidatedInputFormGroup';
+  import ValidatedTextareaFormGroup from '../../../form-fields/ValidatedTextareaFormGroup';
+  import DateInput from '../../../form-fields/DateInput';
+  import { validateForm } from '../forms.validation';
+  import { valuesNames, valuesLabels } from '../forms.config';
+  import { defaultFormValues } from './default-values.config';
+
+  // decorator to connect its form component to Redux
+  @reduxForm({
+    form: 'proceduresCreateFormSelector',
+    validate: validateForm,
+  })
+  export default class ProceduresCreateForm extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Procedures/ducks/fetch-patient-procedures.duck.js">Procedures List Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientProceduresDetailRequest } from './fetch-patient-procedures-detail.duck';
+
+  // Actions names
+  export const FETCH_PATIENT_PROCEDURES_REQUEST = 'FETCH_PATIENT_PROCEDURES_REQUEST';
+  export const FETCH_PATIENT_PROCEDURES_SUCCESS = 'FETCH_PATIENT_PROCEDURES_SUCCESS';
+  export const FETCH_PATIENT_PROCEDURES_FAILURE = 'FETCH_PATIENT_PROCEDURES_FAILURE';
+  export const FETCH_PATIENT_PROCEDURES_UPDATE_REQUEST = 'FETCH_PATIENT_PROCEDURES_UPDATE_REQUEST';
+
+  // Actions
+  export const fetchPatientProceduresRequest = createAction(FETCH_PATIENT_PROCEDURES_REQUEST);
+  export const fetchPatientProceduresSuccess = createAction(FETCH_PATIENT_PROCEDURES_SUCCESS);
+  export const fetchPatientProceduresFailure = createAction(FETCH_PATIENT_PROCEDURES_FAILURE);
+  export const fetchPatientProceduresUpdateRequest = createAction(FETCH_PATIENT_PROCEDURES_UPDATE_REQUEST);
+
+  // Epics for async actions
+  export const fetchPatientProceduresEpic = (action$, store) => {};
+  export const fetchPatientProceduresUpdateEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(patientsProcedures = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_PROCEDURES_SUCCESS:
+        return _.set(action.payload.userId, action.payload.procedures, patientsProcedures);
+      default:
+        return patientsProcedures;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Procedures/ducks/fetch-patient-procedures-detail.duck.js">Procedures Detail Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+
+  // Actions names
+  export const FETCH_PATIENT_PROCEDURES_DETAIL_REQUEST = 'FETCH_PATIENT_PROCEDURES_DETAIL_REQUEST';
+  export const FETCH_PATIENT_PROCEDURES_DETAIL_SUCCESS = 'FETCH_PATIENT_PROCEDURES_DETAIL_SUCCESS';
+  export const FETCH_PATIENT_PROCEDURES_DETAIL_FAILURE = 'FETCH_PATIENT_PROCEDURES_DETAIL_FAILURE';
+
+  // Actions
+  export const fetchPatientProceduresDetailRequest = createAction(FETCH_PATIENT_PROCEDURES_DETAIL_REQUEST);
+  export const fetchPatientProceduresDetailSuccess = createAction(FETCH_PATIENT_PROCEDURES_DETAIL_SUCCESS);
+  export const fetchPatientProceduresDetailFailure = createAction(FETCH_PATIENT_PROCEDURES_DETAIL_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientProceduresDetailEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(proceduresDetail = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_PROCEDURES_DETAIL_SUCCESS:
+        return _.set(action.payload.userId, action.payload.proceduresDetail, proceduresDetail);
+      default:
+        return proceduresDetail;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Procedures/ducks/fetch-patient-procedures-detail-edit.duck.js">Procedures Detail Edit Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientProceduresUpdateRequest } from './fetch-patient-procedures.duck'
+
+  // Actions names
+  export const FETCH_PATIENT_PROCEDURES_DETAIL_EDIT_REQUEST = 'FETCH_PATIENT_PROCEDURES_DETAIL_EDIT_REQUEST';
+  export const FETCH_PATIENT_PROCEDURES_DETAIL_EDIT_SUCCESS = 'FETCH_PATIENT_PROCEDURES_DETAIL_EDIT_SUCCESS';
+  export const FETCH_PATIENT_PROCEDURES_DETAIL_EDIT_FAILURE = 'FETCH_PATIENT_PROCEDURES_DETAIL_EDIT_FAILURE';
+
+  // Actions
+  export const fetchPatientProceduresDetailEditRequest = createAction(FETCH_PATIENT_PROCEDURES_DETAIL_EDIT_REQUEST);
+  export const fetchPatientProceduresDetailEditSuccess = createAction(FETCH_PATIENT_PROCEDURES_DETAIL_EDIT_SUCCESS);
+  export const fetchPatientProceduresDetailEditFailure = createAction(FETCH_PATIENT_PROCEDURES_DETAIL_EDIT_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientProceduresDetailEditEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(proceduresDetailEdit = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_PROCEDURES_DETAIL_EDIT_SUCCESS:
+        return action.payload;
+      default:
+        return proceduresDetailEdit;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Procedures/ducks/fetch-patient-procedures-create.duck.js">Procedures Create Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientProceduresRequest } from './fetch-patient-procedures.duck'
+
+  // Actions names
+  export const FETCH_PATIENT_PROCEDURES_CREATE_REQUEST = 'FETCH_PATIENT_PROCEDURES_CREATE_REQUEST';
+  export const FETCH_PATIENT_PROCEDURES_CREATE_SUCCESS = 'FETCH_PATIENT_PROCEDURES_CREATE_SUCCESS';
+  export const FETCH_PATIENT_PROCEDURES_CREATE_FAILURE = 'FETCH_PATIENT_PROCEDURES_CREATE_FAILURE';
+
+  // Actions
+  export const fetchPatientProceduresCreateRequest = createAction(FETCH_PATIENT_PROCEDURES_CREATE_REQUEST);
+  export const fetchPatientProceduresCreateSuccess = createAction(FETCH_PATIENT_PROCEDURES_CREATE_SUCCESS);
+  export const fetchPatientProceduresCreateFailure = createAction(FETCH_PATIENT_PROCEDURES_CREATE_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientProceduresCreateEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(patientProceduresCreate = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_PROCEDURES_CREATE_SUCCESS:
+        return action.payload;
+      default:
+        return patientProceduresCreate
+    }
+  }
+</pre>

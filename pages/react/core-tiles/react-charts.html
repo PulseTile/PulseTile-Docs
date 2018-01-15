@@ -1,0 +1,59 @@
+---
+title: Charts module
+keywords: sample
+summary: "Charts module"
+sidebar: react_sidebar
+permalink: react-charts.html
+folder: react/core-tiles
+filename: react-charts.html
+---
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/SystemDashboard/SystemDashboard.js">Report Chart</a></h4>
+{% include image.html file="charts/react-charts.png" url="#" alt="Charts view" caption="Charts" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients
+</pre>
+<h5>GET response</h5>
+<pre>
+  {
+    address:"6948 Et St., Halesowen, Worcestershire, VX27 5DV"
+    dateOfBirth:-806976000000
+    department:"Neighbourhood"
+    gender:"Male"
+    gpAddress:"Hamilton Practice, 5544 Ante Street, Hamilton, Lanarkshire, N06 5LP"
+    gpName:"Goff Carolyn D."
+    id:"9999999000"
+    name:"Ivor Cox"nhsNumber:"9999999000"
+    pasNo:"352541"
+    phone:"(011981) 32362"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { bindActionCreators } from 'redux';
+  import { connect } from 'react-redux';
+  import { lifecycle } from 'recompose';
+
+  import patientsSelector from './selectors';
+  import { fetchPatientsRequest } from '../../../ducks/feth-patients.duck';
+  import { fetchPatientsOnMount } from '../../../utils/HOCs/fetch-patients.utils';
+
+  // map dispatch to Properties
+  const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ fetchPatientsRequest }, dispatch) });
+
+  // Higher-Order Components (HOC) for get some data
+  @connect(patientsSelector, mapDispatchToProps)
+  @lifecycle(fetchPatientsOnMount)
+  export default class SystemDashboard extends PureComponent {
+  // React component
+
+    // component template
+    render() { return ()
+    }
+  }
+</pre>

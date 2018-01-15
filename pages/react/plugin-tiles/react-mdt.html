@@ -1,0 +1,345 @@
+---
+title: MDT module
+keywords: sample
+summary: "MDT module"
+sidebar: react_sidebar
+permalink: react-mdt.html
+folder: react/plugin-tiles
+filename: react-mdt.html
+---
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/MDTs/MDTs.js">MDTs</a></h4>
+{% include image.html file="mdt/mdtlist.png" url="#" alt="MDT list view" caption="MDTs" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/mdtreports
+</pre>
+<h5>GET response</h5>
+<pre>
+  {
+    dateOfMeeting:1455062400000
+    dateOfRequest:1458739933006
+    serviceTeam:""
+    source:"marand"
+    sourceId:"5836b208-160f-4925-b2b1-a26626432940"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { bindActionCreators } from 'redux';
+  import { connect } from 'react-redux';
+  import { lifecycle, compose } from 'recompose';
+
+  import PluginListHeader from '../../plugin-page-component/PluginListHeader';
+  import PluginCreate from '../../plugin-page-component/PluginCreate';
+  import PluginMainPanel from '../../plugin-page-component/PluginMainPanel';
+  import MDTsCreateForm from './MDTsCreate/MDTsCreateForm';
+  import { fetchPatientMDTsRequest } from './ducks/fetch-patient-mdts.duck';
+  import { fetchPatientMDTsDetailRequest } from './ducks/fetch-patient-mdts-detail.duck';
+  import { fetchPatientMDTsDetailEditRequest } from './ducks/fetch-patient-mdts-detail-edit.duck';
+  import { fetchPatientMDTsCreateRequest } from './ducks/fetch-patient-mdts-create.duck';
+  import { fetchPatientMDTsOnMount, fetchPatientMDTsDetailOnMount } from '../../../utils/HOCs/fetch-patients.utils';
+  import { patientMDTsSelector, patientMDTsDetailSelector, mdtPanelFormSelector, mdtCreateFormStateSelector } from './selectors';
+  import MDTsDetail from './MDTsDetail/MDTsDetail';
+  import { checkIsValidateForm, operationsOnCollection } from '../../../utils/plugin-helpers.utils';
+
+  // map dispatch to Properties
+  const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ fetchPatientMDTsRequest, fetchPatientMDTsDetailRequest, fetchPatientMDTsDetailEditRequest, fetchPatientMDTsCreateRequest }, dispatch) });
+
+  @connect(patientMDTsSelector, mapDispatchToProps)
+  @connect(patientMDTsDetailSelector, mapDispatchToProps)
+  @connect(mdtPanelFormSelector)
+  @connect(mdtCreateFormStateSelector)
+  @compose(lifecycle(fetchPatientMDTsOnMount), lifecycle(fetchPatientMDTsDetailOnMount))
+  export default class MDTs extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/MDTs/MDTsDetail/MDTsDetail.js">MDT Detail</a></h4>
+{% include image.html file="mdt/mdtdetail.png" url="#" alt="MDT Detail" caption="MDT Detail" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/mdtreports/{sourceId}
+</pre>
+<h5>GET response</h5>
+<pre>
+  {
+    dateOfMeeting:1451779200000
+    dateOfRequest:1459497013278
+    notes:"Discussion abc"
+    question:"Question abc"
+    servicePageLink:null
+    serviceTeam:""
+    source:"Marand"
+    sourceId:"7148406b-90dd-4ffe-899e-0b86a3943a91"
+    timeOfMeeting:0
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import PluginDetailPanel from '../../../plugin-page-component/PluginDetailPanel'
+  import MDTsDetailForm from './MDTsDetailForm'
+  import { getDDMMMYYYY } from '../../../../utils/time-helpers.utils';
+  import { valuesNames, valuesLabels } from '../forms.config';
+
+  export default class MDTsDetail extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/MDTs/MDTsDetail/MDTsDetailForm.js">MDT Detail Edit Form</a></h4>
+{% include image.html file="mdt/mdtedit.png" url="#" alt="MDT Edit" caption="MDT Edit" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/mdtreports/{sourceId}
+</pre>
+<h5>PUT data</h5>
+<pre>
+  {
+    dateCreated:1513944310667
+    dateOfMeeting:1456265462518
+    dateOfRequest:1482170593395
+    notes:"Investigations normal. Review in 3 weeks"
+    question:"Increasing back pain"
+    servicePageLink:"test"
+    serviceTeam:"MDT Prostate Cancer team"
+    source:"marand"
+    sourceId:"3e3ee29e-36bf-4fb1-82fb-0fea9813899c"
+    userId:"9999999000"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { Field, reduxForm } from 'redux-form'
+  import ValidatedInput from '../../../form-fields/ValidatedInputFormGroup';
+  import ValidatedTextareaFormGroup from '../../../form-fields/ValidatedTextareaFormGroup';
+  import DateInput from '../../../form-fields/DateInput';
+  import { valuesNames, valuesLabels } from '../forms.config';
+  import { validateForm } from '../forms.validation';
+
+  // decorator to connect its form component to Redux
+  @reduxForm({
+    form: 'mdtsPanelFormSelector',
+    validate: validateForm,
+  })
+  export default class MDTsDetailForm extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/MDTs/MDTsCreate/MDTsCreateForm.js">MDT Create Form</a></h4>
+{% include image.html file="mdt/mdtcreate.png" url="#" alt="MDT Create" caption="MDT Create" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/mdtreports
+</pre>
+<h5>POST data</h5>
+<pre>
+  {
+    dateCreated:1513944407018
+    dateOfMeeting:1513634400000
+    dateOfRequest:1512943200000
+    notes:"Investigations normal. Review in 3 weeks"
+    question:"Increasing back pain"
+    servicePageLink:"test"
+    serviceTeam:"MDT Prostate Cancer team"
+    source:"openehr"
+    userId:"9999999000
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { Field, reduxForm } from 'redux-form'
+  import ValidatedInput from '../../../form-fields/ValidatedInputFormGroup';
+  import ValidatedTextareaFormGroup from '../../../form-fields/ValidatedTextareaFormGroup';
+  import DateInput from '../../../form-fields/DateInput';
+  import { validateForm } from '../forms.validation';
+  import { valuesNames, valuesLabels } from '../forms.config';
+  import { defaultFormValues } from './default-values.config';
+
+  // decorator to connect its form component to Redux
+  @reduxForm({
+    form: 'mdtsCreateFormSelector',
+    validate: validateForm,
+  })
+  export default class MDTsCreateForm extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/MDTs/ducks/fetch-patient-mdts.duck.js">MDTs List Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientMDTsDetailRequest } from './fetch-patient-mdts-detail.duck';
+
+  // Actions names
+  export const FETCH_PATIENT_MDTS_REQUEST = 'FETCH_PATIENT_MDTS_REQUEST';
+  export const FETCH_PATIENT_MDTS_SUCCESS = 'FETCH_PATIENT_MDTS_SUCCESS';
+  export const FETCH_PATIENT_MDTS_FAILURE = 'FETCH_PATIENT_MDTS_FAILURE';
+  export const FETCH_PATIENT_MDTS_UPDATE_REQUEST = 'FETCH_PATIENT_MDTS_UPDATE_REQUEST';
+
+  // Actions
+  export const fetchPatientMDTsRequest = createAction(FETCH_PATIENT_MDTS_REQUEST);
+  export const fetchPatientMDTsSuccess = createAction(FETCH_PATIENT_MDTS_SUCCESS);
+  export const fetchPatientMDTsFailure = createAction(FETCH_PATIENT_MDTS_FAILURE);
+  export const fetchPatientMDTsUpdateRequest = createAction(FETCH_PATIENT_MDTS_UPDATE_REQUEST);
+
+  // Epics for async actions
+  export const fetchPatientMDTsEpic = (action$, store) => {};
+  export const fetchPatientMDTsUpdateEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(patientsMDTs = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_MDTS_SUCCESS:
+        return _.set(action.payload.userId, action.payload.mdts, patientsMDTs);
+      default:
+        return patientsMDTs;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/MDTs/ducks/fetch-patient-mdts-detail.duck.js">MDTs Detail Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+
+  // Actions names
+  export const FETCH_PATIENT_MDTS_DETAIL_REQUEST = 'FETCH_PATIENT_MDTS_DETAIL_REQUEST';
+  export const FETCH_PATIENT_MDTS_DETAIL_SUCCESS = 'FETCH_PATIENT_MDTS_DETAIL_SUCCESS';
+  export const FETCH_PATIENT_MDTS_DETAIL_FAILURE = 'FETCH_PATIENT_MDTS_DETAIL_FAILURE';
+
+  // Actions
+  export const fetchPatientMDTsDetailRequest = createAction(FETCH_PATIENT_MDTS_DETAIL_REQUEST);
+  export const fetchPatientMDTsDetailSuccess = createAction(FETCH_PATIENT_MDTS_DETAIL_SUCCESS);
+  export const fetchPatientMDTsDetailFailure = createAction(FETCH_PATIENT_MDTS_DETAIL_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientMDTsDetailEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(mdtsDetail = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_MDTS_DETAIL_SUCCESS:
+        return _.set(action.payload.userId, action.payload.mdtsDetail, mdtsDetail);
+      default:
+        return mdtsDetail;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/MDTs/ducks/fetch-patient-mdts-detail-edit.duck.js">MDTs Detail Edit Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientMDTsUpdateRequest } from './fetch-patient-mdts.duck'
+
+  // Actions names
+  export const FETCH_PATIENT_MDTS_DETAIL_EDIT_REQUEST = 'FETCH_PATIENT_MDTS_DETAIL_EDIT_REQUEST';
+  export const FETCH_PATIENT_MDTS_DETAIL_EDIT_SUCCESS = 'FETCH_PATIENT_MDTS_DETAIL_EDIT_SUCCESS';
+  export const FETCH_PATIENT_MDTS_DETAIL_EDIT_FAILURE = 'FETCH_PATIENT_MDTS_DETAIL_EDIT_FAILURE';
+
+  // Actions
+  export const fetchPatientMDTsDetailEditRequest = createAction(FETCH_PATIENT_MDTS_DETAIL_EDIT_REQUEST);
+  export const fetchPatientMDTsDetailEditSuccess = createAction(FETCH_PATIENT_MDTS_DETAIL_EDIT_SUCCESS);
+  export const fetchPatientMDTsDetailEditFailure = createAction(FETCH_PATIENT_MDTS_DETAIL_EDIT_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientMDTsDetailEditEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(mdtsDetailEdit = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_MDTS_DETAIL_EDIT_SUCCESS:
+        return action.payload;
+      default:
+        return mdtsDetailEdit;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/MDTs/ducks/fetch-patient-mdts-create.duck.js">MDTs Create Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientMDTsRequest } from './fetch-patient-mdts.duck'
+
+  // Actions names
+  export const FETCH_PATIENT_MDTS_CREATE_REQUEST = 'FETCH_PATIENT_MDTS_CREATE_REQUEST';
+  export const FETCH_PATIENT_MDTS_CREATE_SUCCESS = 'FETCH_PATIENT_MDTS_CREATE_SUCCESS';
+  export const FETCH_PATIENT_MDTS_CREATE_FAILURE = 'FETCH_PATIENT_MDTS_CREATE_FAILURE';
+
+  // Actions
+  export const fetchPatientMDTsCreateRequest = createAction(FETCH_PATIENT_MDTS_CREATE_REQUEST);
+  export const fetchPatientMDTsCreateSuccess = createAction(FETCH_PATIENT_MDTS_CREATE_SUCCESS);
+  export const fetchPatientMDTsCreateFailure = createAction(FETCH_PATIENT_MDTS_CREATE_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientMDTsCreateEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(patientMDTsCreate = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_MDTS_CREATE_SUCCESS:
+        return action.payload;
+      default:
+        return patientMDTsCreate
+    }
+  }
+</pre>

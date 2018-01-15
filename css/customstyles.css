@@ -72,12 +72,12 @@ body {
 .breadcrumb > .active {color: #777 !important;}
 
 /* make room for the nav bar */
-h1[id],
-h2[id],
-h3[id],
-h4[id],
-h5[id],
-h6[id],
+h1[id], .h1,
+h2[id], .h2,
+h3[id], .h3,
+h4[id], .h4,
+h5[id], .h5,
+h6[id], .h6,
 dt[id]{
 padding-top: 60px;
 margin-top: -40px
@@ -263,7 +263,7 @@ div#toc ul {
     background-color: whitesmoke;
     padding: 5px;
     border-radius: 5px;
-    max-width: 300px;
+    max-width: 360px;
     color: gray;
 }
 
@@ -607,8 +607,8 @@ a.fa.fa-envelope-o.mailto {
     font-weight: 600;
 }
 
-h3 {color: #ED1951; font-weight:normal; font-size:130%;}
-h4 {color: #808080; font-weight:normal; font-size:120%; font-style:italic;}
+h3, .h3 {color: #ED1951; font-weight:normal; font-size:130%;}
+h4, .h4 {color: #808080; font-weight:normal; font-size:120%; font-style:italic;}
 
 .alert, .callout {
     overflow: hidden;
@@ -1420,4 +1420,8 @@ footer .links li a:hover {
 
 figure img, .post-content img {
 	cursor: zoom-in;
+}
+
+.link {
+	color: #df5f17;
 }

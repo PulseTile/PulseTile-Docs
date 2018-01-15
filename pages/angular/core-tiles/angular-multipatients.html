@@ -1,0 +1,56 @@
+---
+title: Multipatients view
+keywords: sample
+summary: "Multipatients view"
+sidebar: angular_sidebar
+permalink: angular-multipatients.html
+folder: angular/core-tiles
+filename: angular-multipatients.html
+---
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/master/src/app/pulsetileui/pages/patients-list-full/patients-list-full.component.js">Multipatients view</a></h4>
+{% include image.html file="multipatientsview/multipatientslist.png" url="#" alt="Multipatients view" caption="Multipatients view" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients
+</pre>
+<h5>GET data</h5>
+<pre>
+  {
+    address:"6948 Et St., Halesowen, Worcestershire, VX27 5DV"
+    dateOfBirth:-806976000000
+    department:"Neighbourhood"
+    gender:"Male"
+    gpAddress:"Hamilton Practice, 5544 Ante Street, Hamilton, Lanarkshire, N06 5LP"
+    gpName:"Goff Carolyn D."
+    id:"9999999000"
+    name:"Ivor Cox"
+    nhsNumber:"9999999000"
+    pasNo:"352541"
+    phone:"(011981) 32362"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  //component template
+  let templatePatientsListFull = require('./patients-list-full.html');
+
+  //controller init
+  class PatientsListFullController {
+    constructor($scope, $window, $rootScope, $state, $stateParams, $ngRedux) {
+    }
+
+    const PatientsSummaryComponent = {
+      template: templatePatientsListFull,
+      controller: PatientsListFullController
+    };
+
+  //inject services/modules to controller
+  PatientsListFullController.$inject = ['$scope', '$window', '$rootScope', '$state', '$stateParams', '$ngRedux'];
+  //es6 export for component
+  export default PatientsSummaryComponent;
+</pre>
+
+{% include image.html file="multipatientsview/listsfilter.png" url="#" alt="Multipatients view" caption="Multipatients filters" %}

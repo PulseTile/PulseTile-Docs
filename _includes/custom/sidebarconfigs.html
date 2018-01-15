@@ -17,11 +17,11 @@
 {% assign sidebar = site.data.sidebars.plugin_tiles_sidebar.entries %}
 
 
-{% elsif page.sidebar == "product1_sidebar" %}
-{% assign sidebar = site.data.sidebars.product1_sidebar.entries %}
+{% elsif page.sidebar == "angular_sidebar" %}
+{% assign sidebar = site.data.sidebars.angular_sidebar.entries %}
 
-{% elsif page.sidebar == "product2_sidebar" %}
-{% assign sidebar = site.data.sidebars.product2_sidebar.entries %}
+{% elsif page.sidebar == "react_sidebar" %}
+{% assign sidebar = site.data.sidebars.react_sidebar.entries %}
 
 {% elsif page.sidebar == "mydoc_sidebar" %}
 {% assign sidebar = site.data.sidebars.mydoc_sidebar.entries %}
@@ -40,10 +40,10 @@ sidebar configuration for print files
 {% assign sidebar_pdf = site.data.sidebars.mydoc_sidebar.entries %}
 {% endif %}
 
-{% if site.product == "product1" %}
-{% assign sidebar_pdf = site.data.sidebars.product1_sidebar.entries %}
+{% if site.product == "angular" %}
+{% assign sidebar_pdf = site.data.sidebars.angular_sidebar.entries %}
 {% endif %}
 
-{% if site.product == "product2" %}
-{% assign sidebar_pdf = site.data.sidebars.product2_sidebar.entries %}
+{% if site.product == "react" %}
+{% assign sidebar_pdf = site.data.sidebars.react_sidebar.entries %}
 {% endif %}

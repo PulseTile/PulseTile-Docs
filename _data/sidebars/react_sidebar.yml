@@ -1,0 +1,124 @@
+# This is your sidebar TOC. The sidebar code loops through sections here and provides the appropriate formatting.
+entries:
+- title: React Sidebar
+  product: PulseTile React Documentation
+  levels: one
+  flagSidebar: accordeon
+  folders:
+
+  - title: Technologies
+    output: web, pdf
+    folderitems:
+    - title: Background
+      url: /react-background.html
+      output: web-mc
+    - title: Technologies Stack
+      url: /react-tech-intro.html
+      output: web-mc
+    - title: React
+      url: /react-technology.html
+      output: web-mc, pdf
+    - title: Redux
+      url: /react-redux-technology.html
+      output: web-mc, pdf
+    - title: Webpack
+      url: /react-webpack-technology.html
+      output: web-mc, pdf
+    - title: RxJS
+      url: /react-rxjs-technology.html
+      output: web-mc, pdf
+
+  - title: Core Tiles
+    output: web, pdf
+    folderitems:
+    - title: Core Tiles
+      url: /react-core-tiles-landing.html
+      output: web, pdf
+    - title: Intelligence & Charts
+      url: /react-charts.html
+      output: web, pdf
+    - title: Search
+      url: /react-search.html
+      output: web, pdf
+    - title: Multipatients View
+      url: /react-multipatients.html
+      output: web, pdf
+    - title: Person/Patient Summary
+      url: /react-patient-summary.html
+      output: web, pdf
+    - title: Problems/Diagnosis
+      url: /react-problems-diagnosis.html
+      output: web, pdf
+    - title: Medications
+      url: /react-medications.html
+      output: web, pdf
+    - title: Allergies
+      url: /react-allergies.html
+      output: web, pdf
+    - title: Contacts
+      url: /react-contacts.html
+      output: web, pdf
+    - title: Clinical Notes
+      url: /react-clinical-notes.html
+      output: web, pdf
+
+  - title: Plugin Tiles
+    output: web, pdf
+    folderitems:
+    - title: Plugin Catalogue
+      url: /react-plugin-tiles-landing.html
+      output: web, pdf
+#    - title: Plugin Process
+#      url: /react-plugin-process.html
+#      output: web, pdf
+    - title: Plugins Q&A
+      url: /react-pluginsQA.html
+      output: web, pdf
+    - title: Events
+      url: /react-events.html
+      output: web, pdf
+#    - title: TeleHealth (WebRTC)
+#      url: /react-webRTC.html
+#      output: web, pdf
+#    - title: Documents
+#      url: /react-documents.html
+#      output: web, pdf
+    - title: Orders
+      url: /react-orders.html
+      output: web, pdf
+    - title: Test Results
+      url: /react-test-results.html
+      output: web, pdf
+    - title: Procedures
+      url: /react-procedures.html
+      output: web, pdf
+#    - title: Clinical Statements
+#      url: /react-clinical-statements.html
+#      output: web, pdf
+    - title: Personal Notes
+      url: /react-personal-notes.html
+      output: web, pdf
+    - title: Vaccinations
+      url: /react-vaccinations.html
+      output: web, pdf
+#    - title: Vitals
+#      url: /react-vitals.html
+#      output: web, pdf
+#    - title: Images
+#      url: /react-images.html
+#      output: web, pdf
+#    - title: Drawings
+#      url: /react-drawings.html
+#      output: web, pdf
+    - title: Referrals
+      url: /react-referrals.html
+      output: web, pdf
+    - title: MDT
+      url: /react-mdt.html
+      output: web, pdf
+#    - title: Transfers Of Care
+#      url: /react-transfers-of-care.html
+#      output: web, pdf
+    - title: Generic Plugin
+      url: /react-generic-plugin.html
+      output: web, pdf

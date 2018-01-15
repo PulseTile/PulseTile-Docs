@@ -1,0 +1,343 @@
+---
+title: Vaccinations module
+keywords: sample
+summary: "Vaccinations module"
+sidebar: react_sidebar
+permalink: react-vaccinations.html
+folder: react/plugin-tiles
+filename: react-vaccinations.html
+---
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Vaccinations/Vaccinations.js">Vaccinations</a></h4>
+{% include image.html file="vaccinations/vaccinationslist.png" url="#" alt="Vaccinations view" caption="Vaccinations" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/vaccinations
+</pre>
+<h5>GET response</h5>
+<pre>
+  {
+    dateCreated:1356149462000
+    source:"ethercis"
+    sourceId:"3e13f196-2334-41b6-b788-660464e7436a"
+    vaccinationName:"Influenza"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { bindActionCreators } from 'redux';
+  import { connect } from 'react-redux';
+  import { lifecycle, compose } from 'recompose';
+
+  import PluginListHeader from '../../plugin-page-component/PluginListHeader';
+  import PluginMainPanel from '../../plugin-page-component/PluginMainPanel';
+  import { fetchPatientVaccinationsRequest } from './ducks/fetch-patient-vaccinations.duck';
+  import { fetchPatientVaccinationsDetailRequest } from './ducks/fetch-patient-vaccinations-detail.duck';
+  import { fetchPatientVaccinationsDetailEditRequest } from './ducks/fetch-patient-vaccinations-detail-edit.duck';
+  import { fetchPatientVaccinationsCreateRequest } from './ducks/fetch-patient-vaccinations-create.duck';
+  import { fetchPatientVaccinationsOnMount, fetchPatientVaccinationsDetailOnMount } from '../../../utils/HOCs/fetch-patients.utils';
+  import { patientVaccinationsSelector, patientVaccinationsDetailSelector, vaccinationPanelFormSelector, vaccinationsCreateFormStateSelector } from './selectors';
+  import { checkIsValidateForm, operationsOnCollection } from '../../../utils/plugin-helpers.utils';
+  import VaccinationDetail from './VaccinationDetail/VaccinationDetail';
+  import PluginCreate from '../../plugin-page-component/PluginCreate';
+  import VaccinationCreateForm from './VaccinationCreate/VaccinationCreateForm'
+
+  // map dispatch to Properties
+  const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ fetchPatientVaccinationsRequest, fetchPatientVaccinationsDetailRequest, fetchPatientVaccinationsDetailEditRequest, fetchPatientVaccinationsCreateRequest }, dispatch) });
+
+  // Higher-Order Components (HOC) for get some data
+  @connect(patientVaccinationsSelector, mapDispatchToProps)
+  @connect(patientVaccinationsDetailSelector, mapDispatchToProps)
+  @connect(vaccinationPanelFormSelector)
+  @connect(vaccinationsCreateFormStateSelector)
+  @compose(lifecycle(fetchPatientVaccinationsOnMount), lifecycle(fetchPatientVaccinationsDetailOnMount))
+  export default class Vaccination extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Vaccinations/VaccinationDetail/VaccinationDetail.js">Vaccinations Detail</a></h4>
+{% include image.html file="vaccinations/vaccinationsdetail.png" url="#" alt="Vaccinations Detail" caption="Vaccinations Detail" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/vaccinations/{sourceId}
+</pre>
+<h5>GET response</h5>
+<pre>
+  {
+    author:"Dr Tony Shannon"
+    comment:"Yet Another test"
+    dateCreated:1485286012000
+    series:1
+    source:"EtherCIS"
+    sourceId:"5fc517aa-1c88-46f3-ad83-60aea8ccce0f"
+    vaccinationDateTime:1485257206618
+    vaccinationName:"Test Vacs2"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import PluginDetailPanel from '../../../plugin-page-component/PluginDetailPanel'
+  import VaccinationDetailForm from './VaccinationDetailForm'
+  import { getDDMMMYYYY } from '../../../../utils/time-helpers.utils';
+  import { valuesNames, valuesLabels } from '../forms.config';
+
+  export default class VaccinationDetail extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Vaccinations/VaccinationDetail/VaccinationDetailForm.js">Vaccinations Detail Edit Form</a></h4>
+{% include image.html file="vaccinations/vaccinationsedit.png" url="#" alt="Vaccinations Edit" caption="Vaccinations Edit" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/vaccinations/{sourceId}
+</pre>
+<h5>PUT response</h5>
+<pre>
+  {
+    comment:"Tetanus cover complete"
+    dateCreated:"2017-12-22T11:25:44.363Z"
+    series:"4"
+    source:"ethercis"
+    sourceId:"5df146fc-f7ed-4adb-87ac-53014d43c1c1"
+    userId:"9999999000"
+    vaccinationDateTime:1466011360167
+    vaccinationName:"Tetanus"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { Field, reduxForm } from 'redux-form'
+  import ValidatedInput from '../../../form-fields/ValidatedInputFormGroup';
+  import ValidatedTextareaFormGroup from '../../../form-fields/ValidatedTextareaFormGroup';
+  import DateInput from '../../../form-fields/DateInput';
+  import StaticFormField from '../../../form-fields/StaticFormField';
+  import { validateForm } from '../forms.validation';
+  import { valuesNames, valuesLabels } from '../forms.config';
+
+  // decorator to connect its form component to Redux
+  @reduxForm({
+    form: 'vaccinationsPanelFormSelector',
+    validate: validateForm,
+  })
+  export default class VaccinationDetailForm extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Vaccinations/VaccinationCreate/VaccinationCreateForm.js">Vaccinations Create Form</a></h4>
+{% include image.html file="vaccinations/vaccinationscreate.png" url="#" alt="Vaccinations Create" caption="Vaccinations Create" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/vaccinations
+</pre>
+<h5>POST data</h5>
+<pre>
+  {
+    comment:"Vaccination"
+    dateCreated:"2017-12-22T11:27:29.356Z"
+    series:"123"
+    source:"Marand"
+    userId:"9999999000"
+    vaccinationDateTime:"2017-12-13T22:00:00.000Z"
+    vaccinationName:"Vaccination 1"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { Field, reduxForm } from 'redux-form'
+  import ValidatedInput from '../../../form-fields/ValidatedInputFormGroup';
+  import ValidatedTextareaFormGroup from '../../../form-fields/ValidatedTextareaFormGroup';
+  import DateInput from '../../../form-fields/DateInput';
+  import StaticFormField from '../../../form-fields/StaticFormField';
+  import { valuesNames, valuesLabels } from '../forms.config';
+  import { validateForm } from '../forms.validation';
+  import { defaultFormValues } from './default-values.config';
+
+  // decorator to connect its form component to Redux
+  @reduxForm({
+    form: 'vaccinationsCreateFormSelector',
+    validate: validateForm,
+  })
+  export default class VaccinationCreateForm extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Vaccinations/ducks/fetch-patient-vaccinations.duck.js">Vaccinations List Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientVaccinationsDetailRequest } from './fetch-patient-vaccinations-detail.duck';
+
+  // Actions names
+  export const FETCH_PATIENT_VACCINATIONS_REQUEST = 'FETCH_PATIENT_VACCINATIONS_REQUEST';
+  export const FETCH_PATIENT_VACCINATIONS_SUCCESS = 'FETCH_PATIENT_VACCINATIONS_SUCCESS';
+  export const FETCH_PATIENT_VACCINATIONS_FAILURE = 'FETCH_PATIENT_VACCINATIONS_FAILURE';
+  export const FETCH_PATIENT_VACCINATIONS_UPDATE_REQUEST = 'FETCH_PATIENT_VACCINATIONS_UPDATE_REQUEST';
+
+  // Actions
+  export const fetchPatientVaccinationsRequest = createAction(FETCH_PATIENT_VACCINATIONS_REQUEST);
+  export const fetchPatientVaccinationsSuccess = createAction(FETCH_PATIENT_VACCINATIONS_SUCCESS);
+  export const fetchPatientVaccinationsFailure = createAction(FETCH_PATIENT_VACCINATIONS_FAILURE);
+  export const fetchPatientVaccinationsUpdateRequest = createAction(FETCH_PATIENT_VACCINATIONS_UPDATE_REQUEST);
+
+  // Epics for async actions
+  export const fetchPatientVaccinationsEpic = (action$, store) => {};
+  export const fetchPatientVaccinationsUpdateEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(patientsVaccinations = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_VACCINATIONS_SUCCESS:
+        return _.set(action.payload.userId, action.payload.vaccinations, patientsVaccinations);
+      default:
+        return patientsVaccinations;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Vaccinations/ducks/fetch-patient-vaccinations-detail.duck.js">Vaccinations Detail Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+
+  // Actions names
+  export const FETCH_PATIENT_VACCINATIONS_DETAIL_REQUEST = 'FETCH_PATIENT_VACCINATIONS_DETAIL_REQUEST';
+  export const FETCH_PATIENT_VACCINATIONS_DETAIL_SUCCESS = 'FETCH_PATIENT_VACCINATIONS_DETAIL_SUCCESS';
+  export const FETCH_PATIENT_VACCINATIONS_DETAIL_FAILURE = 'FETCH_PATIENT_VACCINATIONS_DETAIL_FAILURE';
+
+  // Actions
+  export const fetchPatientVaccinationsDetailRequest = createAction(FETCH_PATIENT_VACCINATIONS_DETAIL_REQUEST);
+  export const fetchPatientVaccinationsDetailSuccess = createAction(FETCH_PATIENT_VACCINATIONS_DETAIL_SUCCESS);
+  export const fetchPatientVaccinationsDetailFailure = createAction(FETCH_PATIENT_VACCINATIONS_DETAIL_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientVaccinationsDetailEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(vaccinationsDetail = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_VACCINATIONS_DETAIL_SUCCESS:
+        return _.set(action.payload.userId, action.payload.vaccinationsDetail, vaccinationsDetail);
+      default:
+        return vaccinationsDetail;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Vaccinations/ducks/fetch-patient-vaccinations-detail-edit.duck.js">Vaccinations Detail Edit Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientVaccinationsUpdateRequest } from './fetch-patient-vaccinations.duck'
+
+  // Actions names
+  export const FETCH_PATIENT_VACCINATIONS_DETAIL_EDIT_REQUEST = 'FETCH_PATIENT_VACCINATIONS_DETAIL_EDIT_REQUEST';
+  export const FETCH_PATIENT_VACCINATIONS_DETAIL_EDIT_SUCCESS = 'FETCH_PATIENT_VACCINATIONS_DETAIL_EDIT_SUCCESS';
+  export const FETCH_PATIENT_VACCINATIONS_DETAIL_EDIT_FAILURE = 'FETCH_PATIENT_VACCINATIONS_DETAIL_EDIT_FAILURE';
+
+  // Actions
+  export const fetchPatientVaccinationsDetailEditRequest = createAction(FETCH_PATIENT_VACCINATIONS_DETAIL_EDIT_REQUEST);
+  export const fetchPatientVaccinationsDetailEditSuccess = createAction(FETCH_PATIENT_VACCINATIONS_DETAIL_EDIT_SUCCESS);
+  export const fetchPatientVaccinationsDetailEditFailure = createAction(FETCH_PATIENT_VACCINATIONS_DETAIL_EDIT_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientVaccinationsDetailEditEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(vaccinationsDetailEdit = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_VACCINATIONS_DETAIL_EDIT_SUCCESS:
+        return action.payload;
+      default:
+        return vaccinationsDetailEdit;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Vaccinations/ducks/fetch-patient-vaccinations-create.duck.js">Vaccinations Create Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientVaccinationsRequest } from './fetch-patient-vaccinations.duck'
+
+  // Actions names
+  export const FETCH_PATIENT_VACCINATIONS_CREATE_REQUEST = 'FETCH_PATIENT_VACCINATIONS_CREATE_REQUEST';
+  export const FETCH_PATIENT_VACCINATIONS_CREATE_SUCCESS = 'FETCH_PATIENT_VACCINATIONS_CREATE_SUCCESS';
+  export const FETCH_PATIENT_VACCINATIONS_CREATE_FAILURE = 'FETCH_PATIENT_VACCINATIONS_CREATE_FAILURE';
+
+  // Actions
+  export const fetchPatientVaccinationsCreateRequest = createAction(FETCH_PATIENT_VACCINATIONS_CREATE_REQUEST);
+  export const fetchPatientVaccinationsCreateSuccess = createAction(FETCH_PATIENT_VACCINATIONS_CREATE_SUCCESS);
+  export const fetchPatientVaccinationsCreateFailure = createAction(FETCH_PATIENT_VACCINATIONS_CREATE_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientVaccinationsCreateEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(patientVaccinationsCreate = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_VACCINATIONS_CREATE_SUCCESS:
+        return action.payload;
+      default:
+        return patientVaccinationsCreate
+    }
+  }
+</pre>

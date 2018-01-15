@@ -1,0 +1,167 @@
+---
+title: Test Results module
+keywords: sample
+summary: "Test Results module"
+sidebar: react_sidebar
+permalink: react-test-results.html
+folder: react/plugin-tiles
+filename: react-test-results.html
+---
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/TestResults/TestResults.js">Test Results</a></h4>
+{% include image.html file="results/resultslist.png" url="#" alt="Test Results view" caption="Test Results" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/labresults
+</pre>
+<h5>GET response</h5>
+<pre>
+  {
+    dateCreated:1427004662000
+    sampleTaken:1426889462518
+    source:"ethercis"
+    sourceId:"810272ac-28e8-4928-b61b-79dcef4b4170"
+    testName:""
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { bindActionCreators } from 'redux';
+  import { connect } from 'react-redux';
+  import { lifecycle, compose } from 'recompose';
+
+  import PluginListHeader from '../../plugin-page-component/PluginListHeader';
+  import PluginMainPanel from '../../plugin-page-component/PluginMainPanel';
+  import { fetchPatientTestResultsRequest } from './ducks/fetch-patient-test-results.duck';
+  import { fetchPatientTestResultsDetailRequest } from './ducks/fetch-patient-test-results-detail.duck';
+  import { fetchPatientTestResultsOnMount } from '../../../utils/HOCs/fetch-patients.utils';
+  import { patientTestResultsSelector, patientTestResultsDetailSelector } from './selectors';
+  import { operationsOnCollection } from '../../../utils/plugin-helpers.utils';
+  import TestResultsDetail from './TestResultsDetail/TestResultsDetail';
+
+  // map dispatch to Properties
+  const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ fetchPatientTestResultsRequest, fetchPatientTestResultsDetailRequest }, dispatch) });
+
+  // Higher-Order Components (HOC) for get some data
+  @connect(patientTestResultsSelector, mapDispatchToProps)
+  @connect(patientTestResultsDetailSelector, mapDispatchToProps)
+  @compose(lifecycle(fetchPatientTestResultsOnMount))
+  export default class TestResults extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/TestResults/TestResultsDetail/TestResultsDetail.js">Test Results Detail</a></h4>
+{% include image.html file="results/resultsdetail.png" url="#" alt="Test Results Detail" caption="Test Results Detail" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/labresults/{sourceId}
+</pre>
+<h5>GET response</h5>
+<pre>
+  {
+    author:"Dr Lab"
+    conclusion:""
+    dateCreated:1437624662000
+    sampleTaken:1437513062518
+    source:"EtherCIS"
+    sourceId:"b97e9fde-d994-4874-b671-8b1cd81b811c"
+    status:""
+    testName:""
+    testResults:[{result: "", value: "", unit: "", normalRange: "", comment: ""}]
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import PluginDetailPanel from '../../../plugin-page-component/PluginDetailPanel'
+  import { valuesNames, valuesLabels } from '../forms.config';
+
+  export default class TestResultsDetail extends PureComponent {
+  // React component
+
+  	// component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/TestResults/ducks/fetch-patient-test-results.duck.js">Test Results List Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+
+  // Actions names
+  export const FETCH_PATIENT_TEST_RESULTS_REQUEST = 'FETCH_PATIENT_TEST_RESULTS_REQUEST';
+  export const FETCH_PATIENT_TEST_RESULTS_SUCCESS = 'FETCH_PATIENT_TEST_RESULTS_SUCCESS';
+  export const FETCH_PATIENT_TEST_RESULTS_FAILURE = 'FETCH_PATIENT_TEST_RESULTS_FAILURE';
+
+  // Actions
+  export const fetchPatientTestResultsRequest = createAction(FETCH_PATIENT_TEST_RESULTS_REQUEST);
+  export const fetchPatientTestResultsSuccess = createAction(FETCH_PATIENT_TEST_RESULTS_SUCCESS);
+  export const fetchPatientTestResultsFailure = createAction(FETCH_PATIENT_TEST_RESULTS_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientTestResultsEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(patientsTestResults = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_TEST_RESULTS_SUCCESS:
+        return _.set(action.payload.userId, action.payload.testResults, patientsTestResults);
+      default:
+        return patientsTestResults;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/TestResults/ducks/fetch-patient-test-results-detail.duck.js">Test Results Detail Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+
+  // Actions names
+  export const FETCH_PATIENT_TEST_RESULTS_DETAIL_REQUEST = 'FETCH_PATIENT_TEST_RESULTS_DETAIL_REQUEST';
+  export const FETCH_PATIENT_TEST_RESULTS_DETAIL_SUCCESS = 'FETCH_PATIENT_TEST_RESULTS_DETAIL_SUCCESS';
+  export const FETCH_PATIENT_TEST_RESULTS_DETAIL_FAILURE = 'FETCH_PATIENT_TEST_RESULTS_DETAIL_FAILURE';
+
+  // Actions
+  export const fetchPatientTestResultsDetailRequest = createAction(FETCH_PATIENT_TEST_RESULTS_DETAIL_REQUEST);
+  export const fetchPatientTestResultsDetailSuccess = createAction(FETCH_PATIENT_TEST_RESULTS_DETAIL_SUCCESS);
+  export const fetchPatientTestResultsDetailFailure = createAction(FETCH_PATIENT_TEST_RESULTS_DETAIL_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientTestResultsDetailEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(testResultsDetail = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_TEST_RESULTS_DETAIL_SUCCESS:
+        return _.set(action.payload.userId, action.payload.testResultsDetail, testResultsDetail);
+      default:
+        return testResultsDetail;
+    }
+  }
+</pre>

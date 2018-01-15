@@ -99,17 +99,17 @@ The sidebarconfigs.html file uses simple `if elsif` logic to set a variable that
 {% if page.sidebar == "home_sidebar" %}
 {% assign sidebar = site.data.sidebars.home_sidebar.entries %}
 
-{% elsif page.sidebar == "product1_sidebar" %}
-{% assign sidebar = site.data.sidebars.product1_sidebar.entries %}
+{% elsif page.sidebar == "angular_sidebar" %}
+{% assign sidebar = site.data.sidebars.angular_sidebar.entries %}
 
-{% elsif page.sidebar == "product2_sidebar" %}
-{% assign sidebar = site.data.sidebars.product2_sidebar.entries %}
+{% elsif page.sidebar == "react_sidebar" %}
+{% assign sidebar = site.data.sidebars.react_sidebar.entries %}
 
 {% elsif page.sidebar == "mydoc_sidebar" %}
 {% assign sidebar = site.data.sidebars.mydoc_sidebar.entries %}
 
 {% else %}
-{% assign sidebar = site.data.sidebars.home_sidebar.entries %}
+{% assign sidebar = site.data.sidebars.angular_sidebar.entries %}
 {% endif %}
 ```
 {% endraw %}

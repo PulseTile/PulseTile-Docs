@@ -1,0 +1,138 @@
+# This is your sidebar TOC. The sidebar code loops through sections here and provides the appropriate formatting.
+entries:
+- title: Angular Sidebar
+  product: PulseTile Angular Documentation
+  levels: one
+  flagSidebar: accordeon
+  folders:
+
+  - title: Technologies
+    output: web, pdf
+    folderitems:
+    - title: Background
+      url: /angular-background.html
+      output: web-mc
+    - title: Technologies Stack
+      url: /angular-tech-intro.html
+      output: web-mc
+    - title: Angular
+      url: /angular-technology.html
+      output: web-mc, pdf
+    - title: Redux
+      url: /angular-redux-technology.html
+      output: web-mc, pdf
+    - title: Webpack
+      url: /angular-webpack-technology.html
+      output: web-mc, pdf
+    - title: Bower
+      url: /angular-bower-technology.html
+      output: web-mc, pdf
+    - title: Q&A on tech
+      url: /angular-initial-QA.html
+      output: web-mc
+    - title: More Q & A on the tech
+      url: /angular-technologies.html
+      output: web-mc
+
+  - title: UI Kit
+    output: web-mc, pdf
+    folderitems:
+    - title: UI Kit
+      url: /ui-kit-page.html
+      output: web
+
+  - title: Core Tiles
+    output: web, pdf
+    folderitems:
+    - title: Core Tiles
+      url: /angular-core-tiles-landing.html
+      output: web, pdf
+    - title: Intelligence & Charts
+      url: /angular-charts.html
+      output: web, pdf
+    - title: Search
+      url: /angular-search.html
+      output: web, pdf
+    - title: Multipatients View
+      url: /angular-multipatients.html
+      output: web, pdf
+    - title: Person/Patient Summary
+      url: /angular-patient-summary.html
+      output: web, pdf
+    - title: Problems/Diagnosis
+      url: /angular-problems-diagnosis.html
+      output: web, pdf
+    - title: Medications
+      url: /angular-medications.html
+      output: web, pdf
+    - title: Allergies
+      url: /angular-allergies.html
+      output: web, pdf
+    - title: Contacts
+      url: /angular-contacts.html
+      output: web, pdf
+    - title: Clinical Notes
+      url: /angular-clinical-notes.html
+      output: web, pdf
+
+  - title: Plugin Tiles
+    output: web, pdf
+    folderitems:
+    - title: Plugin Catalogue
+      url: /angular-plugin-tiles-landing.html
+      output: web, pdf
+    - title: Plugin Process
+      url: /angular-plugin-process.html
+      output: web, pdf
+    - title: Plugins Q&A
+      url: /angular-pluginsQA.html
+      output: web, pdf
+    - title: Events
+      url: /angular-events.html
+      output: web, pdf
+    - title: TeleHealth (WebRTC)
+      url: /angular-webRTC.html
+      output: web, pdf
+    - title: Documents
+      url: /angular-documents.html
+      output: web, pdf
+    - title: Orders
+      url: /angular-orders.html
+      output: web, pdf
+    - title: Test Results
+      url: /angular-test-results.html
+      output: web, pdf
+    - title: Procedures
+      url: /angular-procedures.html
+      output: web, pdf
+    - title: Clinical Statements
+      url: /angular-clinical-statements.html
+      output: web, pdf
+    - title: Personal Notes
+      url: /angular-personal-notes.html
+      output: web, pdf
+    - title: Vaccinations
+      url: /angular-vaccinations.html
+      output: web, pdf
+    - title: Vitals
+      url: /angular-vitals.html
+      output: web, pdf
+    - title: Images
+      url: /angular-images.html
+      output: web, pdf
+    - title: Drawings
+      url: /angular-drawings.html
+      output: web, pdf
+    - title: Referrals
+      url: /angular-referrals.html
+      output: web, pdf
+    - title: MDT
+      url: /angular-mdt.html
+      output: web, pdf
+    - title: Transfers Of Care
+      url: /angular-transfers-of-care.html
+      output: web, pdf
+    - title: Generic Plugin
+      url: /angular-generic-plugin.html
+      output: web, pdf
+

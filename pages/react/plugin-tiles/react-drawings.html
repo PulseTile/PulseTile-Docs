@@ -1,0 +1,214 @@
+---
+title: Drawings module
+keywords: sample
+summary: "Drawings module"
+sidebar: react_sidebar
+permalink: react-drawings.html
+folder: react/plugin-tiles
+filename: react-drawings.html
+---
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/events/events-list.component.js">Drawings List</a></h4>
+{% include image.html file="drawings/drawingslist.png" url="#" alt="Drawings list view" caption="Drawings List" %}
+
+<h5>API URL</h5>
+<pre>
+    /api/patients/{patientId}/drawings
+</pre>
+<h5>GET response</h5>
+<pre>
+    {
+        date: 1423440000000
+        name: 'Cardiac Catherization'
+        source: 'Marand'
+        sourceId: "6ba725c8-9a61-41e9-82c0-d4c6788d9ec8"
+    }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+    //component template
+    let templateDrawingsList = require('./drawings-list.html');
+
+    //controller init
+    class DrawingsListController {
+        constructor($scope, $state, $stateParams, $ngRedux, drawingsActions, serviceRequests, usSpinnerService, serviceFormatted) {
+        }
+
+    //component init
+    const DrawingsListComponent = {
+      template: templateDrawingsList,
+      controller: DrawingsListController
+    };
+
+    //inject services/modules to controller
+    DrawingsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'drawingsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
+    //es6 export for component
+    export default DrawingsListComponent;
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/drawings/drawings-detail.component.js">Drawings Detail</a></h4>
+{% include image.html file="drawings/drawingsdetail.png"  url="#" alt="Drawings Detail Tab 1" caption="Drawings Detail Tab 1" %}
+{% include image.html file="drawings/drawingsdetail2.png" url="#" alt="Drawings Detail Tab 2" caption="Drawings Detail Tab 2" %}
+
+<h5>API URL</h5>
+<pre>
+    /api/patients/{patientId}/drawings/{sourceId}
+</pre>
+<h5>GET response</h5>
+<pre>
+    {
+        author: 'Dr Jhon Smith'
+        date: 1423440000000
+        image64: 'data:image/png;base64,/...' 
+        name: 'Cardiac Catherization'
+        source: 'Marand'
+        sourceId: "6ba725c8-9a61-41e9-82c0-d4c6788d9ec8"
+    }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+    //component template
+    let templateDrawingsDetail= require('./drawings-detail.html');
+
+    //controller init
+    class DrawingsDetailController {
+        constructor($scope, $state, $stateParams, $ngRedux, drawingsActions, usSpinnerService, serviceRequests, $timeout, $window) {
+        }
+
+    //component init
+    const DrawingsDetailComponent = {
+      template: templateDrawingsDetail,
+      controller: DrawingsDetailController
+    };
+
+    //inject services/modules to controller
+    DrawingsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'drawingsActions', 'usSpinnerService', 'serviceRequests', '$timeout', '$window'];
+    //es6 export for component
+    export default DrawingsDetailComponent;
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/drawings/drawings-create.component.js">Drawings Create</a></h4>
+{% include image.html file="drawings/drawingscreate.png" url="#" alt="Drawings Create" caption="Drawings Create" %}
+
+<h5>API URL</h5>
+<pre>
+    /api/patients/{patientId}/drawings
+</pre>
+<h5>POST data</h5>
+<pre>
+    {
+        author: 'Dr Jhon Smith'
+        date: 1423440000000
+        image64: 'data:image/png;base64,/...' 
+        name: 'Cardiac Catherization'
+    }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+    //component template
+    let templateCreate = require('./drawings-create.html');
+
+    //controller init
+    class DrawingsCreateController {
+        constructor($scope, $state, $stateParams, $ngRedux, drawingsActions, serviceRequests, serviceFormatted, usSpinnerService, $window) {
+        }
+
+    //component init
+    const DrawingsCreateComponent = {
+      template: templateCreate,
+      controller: DrawingsCreateController
+    };
+
+     //inject services/modules to controller
+    DrawingsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'drawingsActions', 'serviceRequests', 'serviceFormatted', 'usSpinnerService', '$window'];
+    //es6 export for component
+    export default DrawingsCreateComponent;
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/drawings/drawings-drawing.component.js">Drawings Create</a></h4>
+{% include image.html file="drawings/drawingsdrawingbrushes.png" url="#" alt="Drawings Drawing work with Brushes" caption="Drawings Drawing work with Brushes" %}
+{% include image.html file="drawings/drawingsdrawingfonts.png" url="#" alt="Drawings Drawing work with Fonts" caption="Drawings Drawing work with Fonts" %}
+{% include image.html file="drawings/drawingsdrawingpictures.png" url="#" alt="Drawings Drawing work with Pictures" caption="Drawings Drawing work with Pictures" %}
+
+
+<h5>Component structure</h5>
+<pre>
+    //component template
+    let templateDrawingsDrawing = require('./drawings-drawing.html');
+
+    //controller init
+    class DrawingsDrawingController {
+      constructor($scope, $state, $stateParams, serviceRequests, usSpinnerService, $timeout, $window) {
+        }
+
+    //component init
+    const DrawingsDrawingComponent = {
+      template: templateDrawingsDrawing,
+      controller: DrawingsDrawingController
+    };
+
+    //inject services/modules to controller
+    DrawingsDrawingController.$inject = ['$scope', '$state', '$stateParams', 'serviceRequests', 'usSpinnerService', '$timeout', '$window'];
+    //es6 export for component
+    export default DrawingsDrawingComponent;
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/drawings/drawings-actions.js">Drawings Actions</a></h4>
+
+<h5>Component structure</h5>
+<pre>
+    //es6 import modules
+    import {bindActionCreators} from 'redux';
+    import * as types from '../../../constants/ActionTypes';
+
+    //es6 export function
+    export function all(patientId) {
+      return {
+        types: [types.DRAWINGS, types.DRAWINGS_SUCCESS, types.DRAWINGS_ERROR],
+
+        shouldCallAPI: (state) => !state.drawings.response,
+
+        config: {
+          method: 'get',
+          url: '/api/patients/' + patientId + '/drawings'
+        },
+
+        d: {
+          timestamp: Date.now()
+        }
+      };
+    }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/drawings/drawings-reducer-all.js">Drawings Reducer</a></h4>
+
+<h5>Component structure</h5>
+<pre>
+    //es6 import modules
+    import * as types from '../../../constants/ActionTypes';
+
+    const INITIAL_STATE = {
+      isFetching: false,
+      error: false,
+      data: null,
+      dataGet: null,
+      dataCreate: null
+    };
+
+    //es6 export function
+    export default function drawing(state = INITIAL_STATE, action) {
+      const {payload} = action;
+
+    //redux action for Drawings requests
+    [types.DRAWINGS]: (state) => {
+      state.dataCreate = null;
+      state.dataUpdate = null;
+      return Object.assign({}, state, {
+        isFetching: true,
+        error: false
+      });
+    }
+</pre>
