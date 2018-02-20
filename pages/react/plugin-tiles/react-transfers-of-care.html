@@ -8,431 +8,408 @@ folder: react/plugin-tiles
 filename: react-transfers-of-care.html
 ---
 
-<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/transfer-of-care/transfer-of-care-list.component.js">Transfers Of Care List</a></h4>
-{% include image.html file="transfersofcare/transfersofcarelist.png" url="#" alt="Transfers Of Care list view" caption="Transfers Of Care List" %}
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/TransfersOfCare/TransfersOfCare.js">Transfers Of Care</a></h4>
+{% include image.html file="transfersofcare/transfersofcarelist.jpg" url="#" alt="Transfers Of Care view" caption="Transfers Of Care" %}
 
 <h5>API URL</h5>
 <pre>
-    /api/patients/{patientId}/events/toc
+  /api/patients/{patientId}/events/toc
 </pre>
 <h5>GET response</h5>
 <pre>
-    {
-        from:"Oxford NHS Trust"
-        source:"qewdDB"
-        sourceId:"cabab978-2e21-46e8-9e00-88d5e885effe"
-        to:"Kings Hospital"
-        transferDateTime:"2017-05-26T14:12:48.260Z"
-    }
+  {
+    from: "St James' Hospital"
+    source: "qewdDB"
+    sourceId: "09ce8ef7-80fb-4553-874e-4944e527a27b"
+    to: "Worcester Trust"
+    transferDateTime: 1518523260000
+  }
 </pre>
 
 <h5>Component structure</h5>
 <pre>
-    //component template
-    let templateTransferOfCareList = require('./transfer-of-care-list.html');
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { bindActionCreators } from 'redux';
+  import { connect } from 'react-redux';
+  import { lifecycle, compose } from 'recompose';
 
-    //controller init
-    class TransferOfCareListController {
-        constructor($scope, $state, $stateParams, $ngRedux, transferOfCareActions, serviceRequests, usSpinnerService, serviceFormatted) {
-        }
+  import PluginListHeader from '../../plugin-page-component/PluginListHeader';
+  import PluginMainPanel from '../../plugin-page-component/PluginMainPanel';
+  import { fetchPatientTransfersOfCareRequest } from './ducks/fetch-patient-transfers-of-care.duck';
+  import { fetchPatientTransfersOfCareCreateRequest } from './ducks/fetch-patient-transfers-of-care-create.duck';
+  import { fetchPatientTransfersOfCareDetailRequest } from './ducks/fetch-patient-transfers-of-care-detail.duck';
+  import { fetchPatientTransfersOfCareDetailEditRequest } from './ducks/fetch-patient-transfers-of-care-detail-edit.duck';
+  import { fetchPatientTransfersOfCareOnMount, fetchPatientTransfersOfCareDetailOnMount } from '../../../utils/HOCs/fetch-patients.utils';
+  import { patientTransfersOfCareSelector, transfersOfCareDetailFormStateSelector, transfersOfCareCreateFormStateSelector, patientTransfersOfCareDetailSelector } from './selectors';
+  import { checkIsValidateForm, operationsOnCollection } from '../../../utils/plugin-helpers.utils';
+  import TransfersOfCareDetail from './TransfersOfCareDetail/TransfersOfCareDetail';
+  import PluginCreate from '../../plugin-page-component/PluginCreate';
+  import TransfersOfCareCreateForm from './TransfersOfCareCreate/TransfersOfCareCreateForm'
 
-    //component init
-    const TransferOfCareListComponent = {
-      template: templateTransferOfCareList,
-      controller: TransferOfCareListController
-    };
+  // map dispatch to Properties
+  const mapDispatchToProps = dispatch => ({
+    actions: bindActionCreators({
+      fetchPatientTransfersOfCareRequest,
+      fetchPatientTransfersOfCareCreateRequest,
+      fetchPatientTransfersOfCareDetailRequest,
+      fetchPatientTransfersOfCareDetailEditRequest,
+    }, dispatch) });
 
-    //inject services/modules to controller
-    EventsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'transferOfCareActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
-    //es6 export for component
-    export default TransferOfCareListComponent;
+  // Higher-Order Components (HOC) for get some data
+  @connect(patientTransfersOfCareSelector, mapDispatchToProps)
+  @connect(patientTransfersOfCareDetailSelector)
+  @connect(transfersOfCareDetailFormStateSelector)
+  @connect(transfersOfCareCreateFormStateSelector)
+  @compose(lifecycle(fetchPatientTransfersOfCareOnMount), lifecycle(fetchPatientTransfersOfCareDetailOnMount))
+  export default class TransfersOfCare extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
 </pre>
 
-<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/transfer-of-care/transfer-of-care-detail.component.js">Transfers Of Care Detail</a></h4>
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/TransfersOfCare/TransfersOfCareDetail/TransfersOfCareDetail.js">Transfers Of Care Detail</a></h4>
 {% include image.html file="transfersofcare/transfersofcaredetail.png" url="#" alt="Transfers Of Care Detail" caption="Transfers Of Care Detail" %}
 
 <h5>API URL</h5>
 <pre>
-    /api/patients/{patientId}/events/toc/{sourceId}
+  /api/patients/{patientId}/events/toc/{sourceId}
 </pre>
 <h5>GET response</h5>
 <pre>
-    {
-        clinicalSummary:"Review"
-        dateCreated:1495704408641
-        from:"Worcester Trust"
-        reasonForContact:"Testing TOC"
-        records:[
-            {
-                date:"17-Jul-1984"
-                name:"asthma"
-                source:"ethercis"
-                sourceId:"08fd487b-765a-41b4-9501-334d48dc2b00"
-                type:"diagnosis"
-                typeTitle:"Problems / Diagnosis"
-            }, {
-                date:"24-Oct-2016"
-                name:"24-Oct-2016 Dr Adams CXH"
-                source:"marand"
-                sourceId:"9d19b534-9324-418f-a6b7-4cffbf73f879"
-                type:"referrals"
-                typeTitle:"Referrals"
-            }
-            ...
-        ]
-        source:"qewdDB"
-        to:"Oxford NHS Trust"
-        transferDateTime:"2017-05-25T09:25:33.026Z"
-    }
+  {
+    clinicalSummary:"Review"
+    dateCreated: 1495704408641
+    from:"Worcester Trust"
+    reasonForContact:"Testing TOC"
+    records:[
+      {
+        date:"17-Jul-1984"
+        name:"asthma"
+        source:"ethercis"
+        sourceId:"08fd487b-765a-41b4-9501-334d48dc2b00"
+        type:"diagnosis"
+        typeTitle:"Problems / Diagnosis"
+      }, {
+        date:"24-Oct-2016"
+        name:"24-Oct-2016 Dr Adams CXH"
+        source:"marand"
+        sourceId:"9d19b534-9324-418f-a6b7-4cffbf73f879"
+        type:"referrals"
+        typeTitle:"Referrals"
+      }
+      ...
+    ]
+    source:"qewdDB"
+    to:"Oxford NHS Trust"
+    transferDateTime: 1518523260000
+  }
 </pre>
 
 <h5>Component structure</h5>
 <pre>
-    //component template
-    let templateTransferOfCareDetail= require('./transfer-of-care-detail.html');
+  // import packages
+  import React, { PureComponent } from 'react';
+  import PluginDetailPanel from '../../../plugin-page-component/PluginDetailPanel';
+  import TransfersOfCareDetailForm from './TransfersOfCareDetailForm';
+  import RecordsOfTableView from '../../../form-fields/RecordsOfTable/RecordsOfTableView';
 
-    //controller init
-    class TransferOfCareDetailController {
-      constructor($scope, $state, $stateParams, $ngRedux, transferOfCareActions, usSpinnerService, serviceRequests, serviceTransferOfCare, $window) {}
+  export default class TransfersOfCareDetail extends PureComponent {
+  // React component
 
-
-    //component init
-    const TransferOfCareDetailComponent = {
-      template: templateTransferOfCareDetail,
-      controller: TransferOfCareDetailController
-    };
-
-    //inject services/modules to controller
-    TransferOfCareDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'transferOfCareActions', 'usSpinnerService', 'serviceRequests', 'serviceTransferOfCare', '$window'];
-    //es6 export for component
-    export default TransferOfCareDetailComponent;
+    // component template
+    render() {
+      return ()
+    }
+  }
 </pre>
 
-<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/transfer-of-care/transfer-of-care-create.component.js">Transfers Of Care Create</a></h4>
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/TransfersOfCare/TransfersOfCareDetail/TransfersOfCareDetailForm.js">Transfers Of Care Detail Edit Form</a></h4>
+{% include image.html file="transfersofcare/transfersofcaredetail-edit.jpg" url="#" alt="Transfers Of Care Edit Form" caption="Transfers Of Care Edit Form" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/events/toc/{sourceId}
+</pre>
+<h5>PUT data</h5>
+<pre>
+  {
+    clinicalSummary:"test"
+    dateCreated:1519144518721
+    from:"St James' Hospital"
+    reasonForContact:"test"
+    records:[
+      {
+        date:"17-Jul-1984"
+        name:"asthma"
+        source:"ethercis"
+        sourceId:"08fd487b-765a-41b4-9501-334d48dc2b00"
+        type:"diagnosis"
+        typeTitle:"Problems / Diagnosis"
+      }, {
+        date:"24-Oct-2016"
+        name:"24-Oct-2016 Dr Adams CXH"
+        source:"marand"
+        sourceId:"9d19b534-9324-418f-a6b7-4cffbf73f879"
+        type:"referrals"
+        typeTitle:"Referrals"
+      }
+      ...
+    ]
+    sourceId:"09ce8ef7-80fb-4553-874e-4944e527a27b"
+    to:"Worcester Trust"
+    transferDateTime:1518523260000
+    userId:"9999999000"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { connect } from "react-redux";
+  import { Field, reduxForm } from 'redux-form'
+  import moment from "moment";
+  import ValidatedTextareaFormGroup from '../../../form-fields/ValidatedTextareaFormGroup';
+  import SelectFormGroup from '../../../form-fields/SelectFormGroup';
+  import DateInput from '../../../form-fields/DateInput';
+  import RecordsOfTable from '../../../form-fields/RecordsOfTable/RecordsOfTable';
+  import { validateForm } from '../forms.validation';
+  import { valuesNames, valuesLabels, citiesOptions, typesOfRecordsOptions } from '../forms.config';
+  import { transfersOfCareDetailFormStateSelector} from "../selectors";
+
+  // decorator to connect its form component to Redux
+  @reduxForm({
+  	form: 'transfersOfCareDetailFormSelector',
+  	validate: validateForm,
+  })
+  // Higher-Order Components (HOC) for get some data
+  @connect(transfersOfCareDetailFormStateSelector)
+  export default class TransfersOfCareDetailForm extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/TransfersOfCare/TransfersOfCareCreate/TransfersOfCareCreateForm.js">Transfers Of Care Create Form</a></h4>
 {% include image.html file="transfersofcare/transfersofcarecreate.png" url="#" alt="Transfers Of Care Create" caption="Transfers Of Care Create" %}
 
 <h5>API URL</h5>
 <pre>
-    /api/patients/{patientId}/events/toc/
+  /api/patients/{patientId}/events/toc/
 </pre>
-
 <h5>POST data</h5>
 <pre>
-    {
-        clinicalSummary:"Text"
-        from:"Worcester Trust"
-        reasonForContact:"Text"
-        records:[
-            {
-                date"11-Feb-2015"
-                name"Care Service Team 444"
-                source"marand"
-                sourceId"3a994bec-2f41-4dc0-aae6-f7e69e573f7a"
-                type"events"
-                typeTitle"Events"
-            }, {
-                date:"11-Oct-2016"
-                name:"11-Oct-2016 Gareth Crooks Calderdale"
-                source:"ethercis"
-                sourceId:"61c03547-e756-4b39-9fcd-bd9cffacde75"
-                type:"referrals"
-                typeTitle:"Referrals"
-            }
-            ...
-        ]
-        to:"Oxford NHS Trust"
-        transferDateTime:"2017-06-09T14:39:39.155Z"
-    }
-</pre>
-
-<h5>API URL for GET lists</h5>
-<pre>
-    /api/patients/{patientId}/{recordType}/
-</pre>
-
-<h5>GET response recordType - problems</h5>
-<pre>
-    [
-        {
-            dateOfOnset:1491861600000
-            problem:"Cholecystectomy"
-            source:"ethercis"
-            sourceId:"0318e94e-1803-46fe-a92a-647eca029323"
-        }
+  {
+    clinicalSummary:"Text"
+    from:"Worcester Trust"
+    reasonForContact:"Text"
+    records:[
+      {
+        date"11-Feb-2015"
+        name"Care Service Team 444"
+        source"marand"
+        sourceId"3a994bec-2f41-4dc0-aae6-f7e69e573f7a"
+        type"events"
+        typeTitle"Events"
+      }, {
+        date:"11-Oct-2016"
+        name:"11-Oct-2016 Gareth Crooks Calderdale"
+        source:"ethercis"
+        sourceId:"61c03547-e756-4b39-9fcd-bd9cffacde75"
+        type:"referrals"
+        typeTitle:"Referrals"
+      }
+      ...
     ]
+    to:"Oxford NHS Trust"
+    transferDateTime:1518523260000
+  }
 </pre>
-<h5>GET response recordType - medications</h5>
-<pre>
-    [
-        {
-            dateCreated1484778901000
-            doseAmount10
-            name"vbcvb"
-            source"ethercis"
-            sourceId"da5b4b98-1916-41dd-8fe4-9df7c34ba319"
-        }
-    ]
-</pre>
-<h5>GET response recordType - referrals</h5>
-<pre>
-    [
-        {
-            dateOfReferral:1458792662000
-            referralFrom:"Tony Shannon"
-            referralTo:"Ripplefields Optometry service"
-            source:"ethercis"
-            sourceId:"94133578-f505-4e76-b4ed-762462508801"
-        }
-    ]
-</pre>
-<h5>GET response recordType - appointments</h5>
-<pre>
-    [
-        {
-            dateOfAppointment:1486684800000
-            serviceTeam:"test"
-            source:"marand"
-            sourceId:"8c93a4a9-0197-449a-b832-ea3b42e289cf"
-            timeOfAppointment:50400000
-        }
-    ]
-</pre>
-<h5>GET response recordType - vitalsigns</h5>
-<pre>
-    [
-        {
-            author:"Test02071516"
-            dateCreated:1486509378000
-            diastolicBP:"60.0"
-            heartRate:"45.0"
-            levelOfConsciousness:"Pain"
-            newsScore:3
-            oxygenSaturation:"97.0"
-            oxygenSupplemental:"true"
-            respirationRate:"25.0"
-            source:"ethercis"
-            sourceId:"7252ff75-b9aa-4080-8447-4744da72ea59"
-            systolicBP:"90.0"
-            temperature:35.4
-        }
-    ]
-</pre>
-
-
-
-
 
 <h5>Component structure</h5>
 <pre>
-    //component template
-    let templateCreate = require('./transfer-of-care-create.html');
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { connect } from 'react-redux';
+  import { Field, reduxForm } from 'redux-form';
+  import moment from 'moment';
+  import ValidatedTextareaFormGroup from '../../../form-fields/ValidatedTextareaFormGroup';
+  import RecordsOfTable from '../../../form-fields/RecordsOfTable/RecordsOfTable';
+  import SelectFormGroup from '../../../form-fields/SelectFormGroup';
+  import DateInput from '../../../form-fields/DateInput';
+  import { validateForm } from '../forms.validation';
+  import { valuesNames, valuesLabels, citiesOptions, typesOfRecordsOptions } from '../forms.config';
+  import { defaultFormValues } from './default-values.config';
+  import { getDDMMMYYYY } from '../../../../utils/time-helpers.utils';
+  import { transfersOfCareCreateFormStateSelector } from '../selectors';
 
-    //controller init
-    class TransferOfCareCreateController {
-      constructor($scope, $state, $stateParams, $ngRedux, transferOfCareActions, serviceRequests, serviceTransferOfCare, serviceFormatted, usSpinnerService, $window) {}
+  // decorator to connect its form component to Redux
+  @reduxForm({
+  	form: 'transfersOfCareCreateFormSelector',
+  	validate: validateForm,
+  })
+  // Higher-Order Components (HOC) for get some data
+  @connect(transfersOfCareCreateFormStateSelector)
+  export default class TransfersOfCareCreateForm extends PureComponent {
+  // React component
 
-
-    //component init
-    const TransferOfCareCreateComponent = {
-      template: templateCreate,
-      controller: TransferOfCareCreateController
-    };
-
-    //inject services/modules to controller
-    TransferOfCareCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'transferOfCareActions', 'serviceRequests', 'serviceTransferOfCare', 'serviceFormatted', 'usSpinnerService', '$window'];
-    //es6 export for component
-    export default TransferOfCareCreateComponent;
+    // component template
+    render() {
+      return ()
+    }
+  }
 </pre>
 
-<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/transfer-of-care/transfer-of-care-popover.component.js">Transfers Of Care Popover</a></h4>
+<h4>Transfers Of Care Popover</h4>
 {% include image.html file="transfersofcare/transfersofcarepopover.png" url="#" alt="Transfers Of Care Popover" caption="Transfers Of Care Popover" %}
 
-<h5>API URL</h5>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/TransfersOfCare/ducks/fetch-patient-transfers-of-care.duck.js">Transfers Of Care List Duck</a></h4>
+
+<h5>File structure</h5>
 <pre>
-    /api/patients/{patientId}/{recordType}/{sourceId}
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientTransfersOfCareDetailRequest } from './fetch-patient-transfers-of-care-detail.duck';
+
+  // Actions names
+  export const FETCH_PATIENT_TRANSFERS_OF_CARE_REQUEST = 'FETCH_PATIENT_TRANSFERS_OF_CARE_REQUEST';
+  export const FETCH_PATIENT_TRANSFERS_OF_CARE_SUCCESS = 'FETCH_PATIENT_TRANSFERS_OF_CARE_SUCCESS';
+  export const FETCH_PATIENT_TRANSFERS_OF_CARE_FAILURE = 'FETCH_PATIENT_TRANSFERS_OF_CARE_FAILURE';
+  export const FETCH_PATIENT_TRANSFERS_OF_CARE_UPDATE_REQUEST = 'FETCH_PATIENT_TRANSFERS_OF_CARE_UPDATE_REQUEST';
+
+  // Actions
+  export const fetchPatientTransfersOfCareRequest = createAction(FETCH_PATIENT_TRANSFERS_OF_CARE_REQUEST);
+  export const fetchPatientTransfersOfCareSuccess = createAction(FETCH_PATIENT_TRANSFERS_OF_CARE_SUCCESS);
+  export const fetchPatientTransfersOfCareFailure = createAction(FETCH_PATIENT_TRANSFERS_OF_CARE_FAILURE);
+  export const fetchPatientTransfersOfCareUpdateRequest = createAction(FETCH_PATIENT_TRANSFERS_OF_CARE_UPDATE_REQUEST);
+
+  // Epics for async actions
+  export const fetchPatientTransfersOfCareEpic = (action$, store) => {};
+  export const fetchPatientTransfersOfCareUpdateEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(patientsTransfersOfCare = {}, action) {
+  	switch (action.type) {
+  		case FETCH_PATIENT_TRANSFERS_OF_CARE_SUCCESS:
+  			return _.set(action.payload.userId, action.payload.transfersOfCare, patientsTransfersOfCare);
+  		default:
+  			return patientsTransfersOfCare;
+  	}
+  }
 </pre>
 
-<h5>GET response recordType - problems</h5>
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/TransfersOfCare/ducks/fetch-patient-transfers-of-care-detail.duck.js">Transfers Of Care Detail Duck</a></h4>
+
+<h5>File structure</h5>
 <pre>
-    {
-        author:"Dr Tony Shannon"
-        code:"00001"
-        dateCreated:1491914001000
-        dateOfOnset:1491861600000
-        description:"Working"
-        originalComposition:""
-        originalSource:""
-        problem:"Cholecystectomy"
-        source:"ethercis"
-        sourceId:"0318e94e-1803-46fe-a92a-647eca029323"
-        terminology:"local"
-    }
-</pre>
-<h5>GET response recordType - medications</h5>
-<pre>
-    {
-        author:"Dr Tony Shannon"
-        dateCreated:1484785264000
-        doseAmount:12
-        doseDirections:"sdfd"
-        doseTiming:1
-        medicationCode:123456789
-        medicationTerminology:""
-        name:123456
-        route:"IV Intra Venous"
-        source:"ethercis"
-        sourceId:"9302be50-97a2-4771-aa0a-d825787ec445"
-        startDate:1485392400000
-        startTime:3600000
-    }
-</pre>
-<h5>GET response recordType - referrals</h5>
-<pre>
-    {
-        author:"Dr Jekyll"
-        dateCreated:1477332394832
-        dateOfReferral:1477332394832
-        referralCareFlow:"Service request sent"
-        referralFrom:"Dr Adams"
-        referralOutcome:""
-        referralReason:"REason ffield"
-        referralRef:"1c88ef4d-dd31-4ecf-9b1e-aaf334830152"
-        referralServiceName:"Referral Type field"
-        referralState:"planned"
-        referralStateCode:526
-        referralStateDate:1476835200000
-        referralSummary:"not populated"
-        referralTo:"CXH"
-        referralType:"Referral Type field"
-        source:"marand"
-        sourceId:"9d19b534-9324-418f-a6b7-4cffbf73f879"
-    }
-</pre>
-<h5>GET response recordType - appointments</h5>
-<pre>
-    {
-        author:"c4h_ripple_osi"
-        dateCreated:1456328221375
-        dateOfAppointment:1423612800000
-        location:"Leeds General"
-        serviceTeam:"Care Service Team 444"
-        source:"marand"
-        sourceId:"3a994bec-2f41-4dc0-aae6-f7e69e573f7a"
-        status:"Scheduled"
-        timeOfAppointment:28800000
-    }
-</pre>
-<h5>GET response recordType - vitalsigns</h5>
-<pre>
-    {
-        author:"bob.smith@gmail.com"
-        dateCreated:1495194453000
-        diastolicBP:"50.0"
-        heartRate:"40.0"
-        levelOfConsciousness:"Pain"
-        newsScore:15
-        oxygenSaturation:"30.0"
-        oxygenSupplemental:"true"
-        respirationRate:"10.0"
-        source:"ethercis"
-        sourceId:"9b77a7b6-187b-4fa5-8d81-3acba3bae37d"
-        systolicBP:"20.0"
-        temperature:"60.0"
-    }
+  // import packages
+  import _ from 'lodash/fp';
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+
+  // Actions names
+  export const FETCH_PATIENT_TRANSFERS_OF_CARE_DETAIL_REQUEST = 'FETCH_PATIENT_TRANSFERS_OF_CARE_DETAIL_REQUEST';
+  export const FETCH_PATIENT_TRANSFERS_OF_CARE_DETAIL_SUCCESS = 'FETCH_PATIENT_TRANSFERS_OF_CARE_DETAIL_SUCCESS';
+  export const FETCH_PATIENT_TRANSFERS_OF_CARE_DETAIL_FAILURE = 'FETCH_PATIENT_TRANSFERS_OF_CARE_DETAIL_FAILURE';
+
+  // Actions
+  export const fetchPatientTransfersOfCareDetailRequest = createAction(FETCH_PATIENT_TRANSFERS_OF_CARE_DETAIL_REQUEST);
+  export const fetchPatientTransfersOfCareDetailSuccess = createAction(FETCH_PATIENT_TRANSFERS_OF_CARE_DETAIL_SUCCESS);
+  export const fetchPatientTransfersOfCareDetailFailure = createAction(FETCH_PATIENT_TRANSFERS_OF_CARE_DETAIL_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientTransfersOfCareDetailEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(transfersOfCareDetail = {}, action) {
+  	switch (action.type) {
+  		case FETCH_PATIENT_TRANSFERS_OF_CARE_DETAIL_SUCCESS:
+  			return _.set(action.payload.userId, action.payload.transfersOfCareDetail, transfersOfCareDetail);
+  		default:
+  			return transfersOfCareDetail;
+  	}
+  }
 </pre>
 
-<h5>Component structure</h5>
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/TransfersOfCare/ducks/fetch-patient-transfers-of-care-detail-edit.duck.js">Transfers Of Care Detail Edit Duck</a></h4>
+
+<h5>File structure</h5>
 <pre>
-    //component template
-    let transferOfCarePopoverTemplate = require('./transfer-of-care-popover.html');
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientTransfersOfCareUpdateRequest } from './fetch-patient-transfers-of-care.duck'
 
-    //controller init
-    class TransferOfCarePopover {
-      constructor($scope, $state, $stateParams, $ngRedux, serviceRequests, serviceTransferOfCare, usSpinnerService, serviceVitalsSigns, $window) {}
+  // Actions names
+  export const FETCH_PATIENT_TRANSFERS_OF_CARE_DETAIL_EDIT_REQUEST = 'FETCH_PATIENT_TRANSFERS_OF_CARE_DETAIL_EDIT_REQUEST';
+  export const FETCH_PATIENT_TRANSFERS_OF_CARE_DETAIL_EDIT_SUCCESS = 'FETCH_PATIENT_TRANSFERS_OF_CARE_DETAIL_EDIT_SUCCESS';
+  export const FETCH_PATIENT_TRANSFERS_OF_CARE_DETAIL_EDIT_FAILURE = 'FETCH_PATIENT_TRANSFERS_OF_CARE_DETAIL_EDIT_FAILURE';
 
+  // Actions
+  export const fetchPatientTransfersOfCareDetailEditRequest = createAction(FETCH_PATIENT_TRANSFERS_OF_CARE_DETAIL_EDIT_REQUEST);
+  export const fetchPatientTransfersOfCareDetailEditSuccess = createAction(FETCH_PATIENT_TRANSFERS_OF_CARE_DETAIL_EDIT_SUCCESS);
+  export const fetchPatientTransfersOfCareDetailEditFailure = createAction(FETCH_PATIENT_TRANSFERS_OF_CARE_DETAIL_EDIT_FAILURE);
 
-    //component init
-    const TransferOfCarePopoverComponent = {
-      template: transferOfCarePopoverTemplate,
-      controller: TransferOfCarePopover
-    };
+  // Epics for async actions
+  export const fetchPatientTransfersOfCareDetailEditEpic = (action$, store) => {};
 
-    //inject services/modules to controller
-    TransferOfCarePopover.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'serviceRequests', 'serviceTransferOfCare', 'usSpinnerService', 'serviceVitalsSigns', '$window'];
-    //es6 export for component
-    export default TransferOfCarePopoverComponent;
+  // reducer
+  export default function reducer(transfersOfCareDetailEdit = {}, action) {
+  	switch (action.type) {
+  		case FETCH_PATIENT_TRANSFERS_OF_CARE_DETAIL_EDIT_SUCCESS:
+  			return action.payload;
+  		default:
+  			return transfersOfCareDetailEdit;
+  	}
+  }
 </pre>
 
-<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/transfer-of-care/serviceTransferOfCare.js">Transfers Of Care Service</a></h4>
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/TransfersOfCare/ducks/fetch-patient-transfers-of-care-create.duck.js">Transfers Of Care Create Duck</a></h4>
 
-<h5>Component structure</h5>
+<h5>File structure</h5>
 <pre>
-    //service init
-    class serviceTransferOfCare {
-      constructor (diagnosesActions, eventsActions, vitalsActions, referralsActions, medicationsActions, serviceFormatted) {
-      }
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientTransfersOfCareRequest } from './fetch-patient-transfers-of-care.duck'
 
-    //inject services/modules to service
-    serviceTransferOfCare.$inject = ['diagnosesActions', 'eventsActions', 'vitalsActions', 'referralsActions', 'medicationsActions', 'serviceFormatted'];
-    //es6 export function
-    export default serviceTransferOfCare;
-</pre>
+  // Actions names
+  export const FETCH_PATIENT_TRANSFERS_OF_CARE_CREATE_REQUEST = 'FETCH_PATIENT_TRANSFERS_OF_CARE_CREATE_REQUEST';
+  export const FETCH_PATIENT_TRANSFERS_OF_CARE_CREATE_SUCCESS = 'FETCH_PATIENT_TRANSFERS_OF_CARE_CREATE_SUCCESS';
+  export const FETCH_PATIENT_TRANSFERS_OF_CARE_CREATE_FAILURE = 'FETCH_PATIENT_TRANSFERS_OF_CARE_CREATE_FAILURE';
 
-<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/transfer-of-care/transfer-of-care-actions.js">Transfers Of Care Actions</a></h4>
+  // Actions
+  export const fetchPatientTransfersOfCareCreateRequest = createAction(FETCH_PATIENT_TRANSFERS_OF_CARE_CREATE_REQUEST);
+  export const fetchPatientTransfersOfCareCreateSuccess = createAction(FETCH_PATIENT_TRANSFERS_OF_CARE_CREATE_SUCCESS);
+  export const fetchPatientTransfersOfCareCreateFailure = createAction(FETCH_PATIENT_TRANSFERS_OF_CARE_CREATE_FAILURE);
 
-<h5>Component structure</h5>
-<pre>
-    //es6 import modules
-    import {bindActionCreators} from 'redux';
-    import * as types from '../../../constants/ActionTypes';
+  // Epics for async actions
+  export const fetchPatientTransfersOfCareCreateEpic = (action$, store) => {};
 
-    //es6 export function
-    export function all(patientId) {
-      return {
-        types: [types.TRANSFEROFCARE, types.TRANSFEROFCARE_SUCCESS, types.TRANSFEROFCARE_ERROR],
-
-        shouldCallAPI: (state) => !state.transferOfCare.response,
-
-        config: {
-          method: 'get',
-          url: '/api/patients/' + patientId + '/events/toc'
-        },
-
-        d: {
-          timestamp: Date.now()
-        }
-      };
-    }
-</pre>
-
-<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/transfer-of-care/transfer-of-care-reducer-all.js">Transfers Of Care Reducer</a></h4>
-
-<h5>Component structure</h5>
-<pre>
-    //es6 import modules
-    import * as types from '../../../constants/ActionTypes';
-
-    const INITIAL_STATE = {
-      isFetching: false,
-      error: false,
-      data: null,
-      dataGet: null,
-      dataCreate: null,
-      dataUpdate: null
-    };
-
-    //es6 export function
-    export default function transferOfCare(state = INITIAL_STATE, action) {
-      const {payload} = action;
-
-    //redux action for Events requests
-      var actions = {
-        [types.TRANSFEROFCARE]: (state) => {
-          state.dataCreate = null;
-          state.dataUpdate = null;
-          return Object.assign({}, state, {
-            isFetching: true,
-            error: false
-          });
-        }
+  // reducer
+  export default function reducer(patientTransfersOfCareCreate = {}, action) {
+  	switch (action.type) {
+  		case FETCH_PATIENT_TRANSFERS_OF_CARE_CREATE_SUCCESS:
+  			return action.payload;
+  		default:
+  			return patientTransfersOfCareCreate
+  	}
+  }
 </pre>

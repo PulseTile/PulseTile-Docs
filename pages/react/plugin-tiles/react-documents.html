@@ -8,154 +8,216 @@ folder: react/plugin-tiles
 filename: react-documents.html
 ---
 
-<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/documents/documents-list.component.js">Documents List</a></h4>
-{% include image.html file="documents/documentslist.png" url="#" alt="Documents list view" caption="Documents List" %}
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Documents/Documents.js">Documents</a></h4>
+{% include image.html file="documents/documentslist.png" url="#" alt="Documents view" caption="Documents" %}
 
 <h5>API URL</h5>
 <pre>
-    /api/documents/patient/{patientId}
+  /api/documents/patient/{patientId}
 </pre>
 <h5>GET response</h5>
 <pre>
-    {
-        author:"McCrea, Siobhan"
-        dateCreated:"2010-05-14T00:00:00Z"
-        documentType:"Discharge summary"
-        source:"marand"
-        sourceId:"16cad9dd-cc4b-42f8-b7b2-980835d9e977"
-    }
+  {
+    author:"McCrea, Siobhan"
+    dateCreated:1495704408641
+    documentType:"Discharge summary"
+    source:"marand"
+    sourceId:"16cad9dd-cc4b-42f8-b7b2-980835d9e977"
+  }
 </pre>
 
 <h5>Component structure</h5>
 <pre>
-     //component template
-    let templateDocumentsList = require('./documents-list.html');
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { bindActionCreators } from 'redux';
+  import { connect } from 'react-redux';
+  import { lifecycle, compose } from 'recompose';
 
-    //controller init
-    class DocumentsListController {
-        constructor($scope, $state, $stateParams, $ngRedux, documentsActions, serviceRequests, usSpinnerService, serviceFormatted, templateService) {
-        }
+  import PluginListHeader from '../../plugin-page-component/PluginListHeader';
+  import PluginMainPanel from '../../plugin-page-component/PluginMainPanel';
+  import DocumentsDetail from './DocumentsDetail/DocumentsDetail';
+  import { fetchPatientDocumentsRequest } from './ducks/fetch-patient-documents.duck';
+  import { fetchPatientDocumentsDetailRequest } from './ducks/fetch-patient-documents-detail.duck';
+  import { fetchPatientDocumentsOnMount, fetchPatientDocumentsDetailOnMount } from '../../../utils/HOCs/fetch-patients.utils';
+  import { patientDocumentsSelector, patientDocumentsDetailSelector } from './selectors';
 
-     //component init
-    const DocumentsListComponent = {
-      template: templateDocumentsList,
-      controller: DocumentsListController
-    };
+  // map dispatch to Properties
+  const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ fetchPatientDocumentsRequest, fetchPatientDocumentsDetailRequest }, dispatch) });
 
-    //inject services/modules to controller
-    DocumentsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'documentsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted', 'templateService'];
-    //es6 export for component
-    export default DocumentsListComponent;
+  // Higher-Order Components (HOC) for get some data
+  @connect(patientDocumentsSelector, mapDispatchToProps)
+  @connect(patientDocumentsDetailSelector, mapDispatchToProps)
+  @compose(lifecycle(fetchPatientDocumentsOnMount), lifecycle(fetchPatientDocumentsDetailOnMount))
+  export default class Documents extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
 </pre>
 
-<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/documents/documents-detail.component.js">Documents Detail</a></h4>
-{% include image.html file="documents/documentsdetail.png" url="#" alt="Documents Detail" caption="Documents Detail" %}
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Documents/DocumentsDetail/DocumentsDetail.js">Documents Detail</a></h4>
 
 <h5>API URL</h5>
 <pre>
-    /api//documents/patient/{patientId}/{sourceId}
+  /api/documents/patient/{patientId}/{sourceId}
 </pre>
 <h5>GET response</h5>
 <pre>
-    {
-        author_id:"023781"
-        author_idScheme:"Medical Council No"
-        author_name:"McCrea, Siobhan"
-        clinicalSynopsis:"ADMISSION REASON: Admit with acute abdominal pain, deranged LFTs, normal amylase DIAGNOSIS: Cholecystectomy PROBLEMS: Abdominal pain PROBLEMS: Gallstones THEATRE PROCS: Lap Chole NON THEATRE PROCS: None LAB INVESTIGATIONS: As attached - FBC, UE, LFTs, Amylase RAD INVESTIGATIONS: As attached - USS Abdomen, MRCP OTHER INVESTIGATIONS: None PROGRESS DURING STAY: Uncomplicated post operative recovery.Full diet tolerated, wound sites dry and intact, no oozing.  Vital signs normal, apyrexial.  Mobilising/teds/clexane.  No c/o abdominal pain.  C/O right shoulder tip pain - advised post operative complication and should resolve within several days.  Normal MRCP pre-op. Dx = acute cholecystitis with transiemt choledocholithiasis. ALLERGIES: NKDA DISCHARGE MEDICATION: MEDICATION:Refused analgesia on d/c INFO GIVEN TO PATIENT: All results and surgery as above explained.  For removal of clips in 10/7 in dressing clinic - appt given.  Avoid constipation OPD FOLLOW UP: 6/52 GP ACTIONS: Routine follow up"
-        dateOfAdmission:""
-        dateTimeOfDischarge:""
-        diagnosisList:[]
-        dischargingOrganisation:""
-        documentDate:1273795200000
-        facility:"St.James's Hospital (Dublin)"
-        patientIdentifier_gms:"-"
-        patientIdentifier_gmsType:"GMS"
-        patientIdentifier_mrn:"9999999000"
-        patientIdentifier_mrnType:"MRN"
-        patientIdentifier_oth:"1020714"
-        patientIdentifier_othType:"OTH"
-        responsibleProfessional_id:"4547"
-        responsibleProfessional_idType:"MCN"
-        responsibleProfessional_name:"COOKE MR FIACHRA"
-        sourceId:"88463100-c7f4-4e0b-9cbf-a212d96b1030::ripple_osi.ehrscape.c4h::1"
+  {
+    author_id:"023781"
+    author_idScheme:"Medical Council No"
+    author_name:"McCrea, Siobhan"
+    clinicalSynopsis:"ADMISSION REASON: Admit with acute abdominal pain"
+    dateOfAdmission:1518523260000
+    dateTimeOfDischarge:1518523260000
+    diagnosisList:[…,…]
+    dischargingOrganisation:""
+    documentDate:1273795200000
+    documentType:"Discharge summary"
+    facility:"St.James's Hospital (Dublin)"
+    patientIdentifier_gms:"-"
+    patientIdentifier_gmsType:"GMS"
+    patientIdentifier_mrn:"9999999000"
+    patientIdentifier_mrnType:"MRN"
+    patientIdentifier_oth:"1020714"
+    patientIdentifier_othType:"OTH"
+    responsibleProfessional_id:"4547"
+    responsibleProfessional_idType:"MCN"
+    responsibleProfessional_name:"COOKE MR FIACHRA"
+    sourceId:"3105626d-d3ad-4443-98be-c5abb375a3b0"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import PluginDetailPanel from '../../../plugin-page-component/PluginDetailPanel';
+  import DocumentsDetailDischarge from './DocumentsDetailDischarge';
+  import DocumentsDetailReferral from './DocumentsDetailReferral';
+  import ConfirmationModal from '../../../ui-elements/ConfirmationModal/ConfirmationModal';
+
+  export default class DocumentsDetail extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
     }
+  }
 </pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Documents/DocumentsDetail/DocumentsDetailDischarge.js">Documents Detail Discharge</a></h4>
+{% include image.html file="documents/documentsdetail-descharge.jpg" url="#" alt="Documents Detail Discharge" caption="Documents Detail Discharge" %}
 
 <h5>Component structure</h5>
 <pre>
-    //controller init
-    class DocumentsDetailController {
-        constructor($scope, $state, $stateParams, $ngRedux, documentsActions, usSpinnerService, ConfirmationDocsModal) {
-        }
+  // import packages
+  import React, { PureComponent } from 'react';
+  import FormSectionList from '../../../form-fields/FormSectionList';
+  import FormSection from '../../../form-fields/FormSection';
 
-    //component init
-    const DocumentsDetailComponent = {
-      template: function($element, $attrs, templateService) {
-        let templateDocumentsType = require('./' + templateService.getTemplate());
-        return templateDocumentsType;
-      },
-      controller: DocumentsDetailController
-    };
+  export default class DocumentsDetailDischarge extends PureComponent {
+  // React component
 
-    //inject services/modules to controller
-    DocumentsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'documentsActions', 'usSpinnerService', 'ConfirmationDocsModal'];
-    //es6 export for component
-    export default DocumentsDetailComponent;
-</pre>
-
-<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/documents/documents-actions.js">Documents Actions</a></h4>
-
-<h5>Component structure</h5>
-<pre>
-    //es6 import modules
-    import {bindActionCreators} from 'redux';
-    import * as types from '../../../constants/ActionTypes';
-
-    //es6 export function
-    export function findAllDocuments(patientId) {
-      return {
-        types: [types.DOCUMENTS, types.DOCUMENTS_SUCCESS, types.DOCUMENTS_ERROR],
-
-        shouldCallAPI: (state) => !state.allergies.response,
-
-        config: {
-          method: 'get',
-          url: '/api/documents/patient/' + patientId
-        },
-
-        meta: {
-          timestamp: Date.now()
-        }
-      };
+    // component template
+    render() {
+      return ()
     }
+  }
 </pre>
 
-<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/clinical-statements/clinicalstatements-reducer-all.js">Documents Reducer</a></h4>
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Documents/DocumentsDetail/DocumentsDetailReferral.js">Documents Detail Refferal</a></h4>
+{% include image.html file="documents/documentsdetail-refferal.png" url="#" alt="Documents Detail Refferal" caption="Documents Detail Refferal" %}
 
 <h5>Component structure</h5>
 <pre>
-    //es6 import modules
-    import * as types from '../../../constants/ActionTypes';
+  // import packages
+  import React, { PureComponent } from 'react';
+  import FormSectionList from '../../../form-fields/FormSectionList';
+  import FormSection from '../../../form-fields/FormSection';
 
-    const INITIAL_STATE = {
-      isFetching: false,
-      error: false,
-      data: null,
-      dataGet: null,
-      dataCreate: null,
-      dataUpdate: null
-    };
+  export default class DocumentsDetailReferral extends PureComponent {
+  // React component
 
-    //es6 export function
-    export default function documents(state = INITIAL_STATE, action) {
-      const {payload} = action;
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
 
-    //redux action for Clinical statements requests
-      var actions = {
-        [types.DOCUMENTS]: (state) => {
-          return Object.assign({}, state, {
-            isFetching: true,
-            error: false
-          });
-        }
+<h4>Documents Import Access Disclaimer</h4>
+{% include image.html file="documents/documents-modal.jpg" url="#" alt="Documents Import Access Disclaimer" caption="Documents Import Access Disclaimer" %}
+
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Documents/ducks/fetch-patient-documents.duck.js">Documents List Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+
+  // Actions names
+  export const FETCH_PATIENT_DOCUMENTS_REQUEST = 'FETCH_PATIENT_DOCUMENTS_REQUEST';
+  export const FETCH_PATIENT_DOCUMENTS_SUCCESS = 'FETCH_PATIENT_DOCUMENTS_SUCCESS';
+  export const FETCH_PATIENT_DOCUMENTS_FAILURE = 'FETCH_PATIENT_DOCUMENTS_FAILURE';
+
+  // Actions
+  export const fetchPatientDocumentsRequest = createAction(FETCH_PATIENT_DOCUMENTS_REQUEST);
+  export const fetchPatientDocumentsSuccess = createAction(FETCH_PATIENT_DOCUMENTS_SUCCESS);
+  export const fetchPatientDocumentsFailure = createAction(FETCH_PATIENT_DOCUMENTS_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientDocumentsEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(patientsDocuments = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_DOCUMENTS_SUCCESS:
+        return _.set(action.payload.userId, action.payload.documents, patientsDocuments);
+      default:
+        return patientsDocuments;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Documents/ducks/fetch-patient-documents-detail.duck.js">Documents Detail Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+
+  // Actions names
+  export const FETCH_PATIENT_DOCUMENTS_DETAIL_REQUEST = 'FETCH_PATIENT_DOCUMENTS_DETAIL_REQUEST';
+  export const FETCH_PATIENT_DOCUMENTS_DETAIL_SUCCESS = 'FETCH_PATIENT_DOCUMENTS_DETAIL_SUCCESS';
+  export const FETCH_PATIENT_DOCUMENTS_DETAIL_FAILURE = 'FETCH_PATIENT_DOCUMENTS_DETAIL_FAILURE';
+
+  // Actions
+  export const fetchPatientDocumentsDetailRequest = createAction(FETCH_PATIENT_DOCUMENTS_DETAIL_REQUEST);
+  export const fetchPatientDocumentsDetailSuccess = createAction(FETCH_PATIENT_DOCUMENTS_DETAIL_SUCCESS);
+  export const fetchPatientDocumentsDetailFailure = createAction(FETCH_PATIENT_DOCUMENTS_DETAIL_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientDocumentsDetailEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(documentsDetail = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_DOCUMENTS_DETAIL_SUCCESS:
+        return _.set(action.payload.userId, action.payload.documentsDetail, documentsDetail);
+      default:
+        return documentsDetail;
+    }
+  }
 </pre>

@@ -8,192 +8,380 @@ folder: react/plugin-tiles
 filename: react-clinical-statements.html
 ---
 
-<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/clinical-statements/clinicalstatements-list.component.js">Clinical Statements List</a></h4>
-{% include image.html file="clinicalstatements/clinicalstatementslist.png" url="#" alt="Clinical Statements list view" caption="Clinical Statements List" %}
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/ClinicalStatements/ClinicalStatements.js">Clinical Statements</a></h4>
+{% include image.html file="clinicalstatements/clinicalstatementslist.png" url="#" alt="Clinical Statements view" caption="Clinical Statements" %}
 
 <h5>API URL</h5>
 <pre>
-    /api/patients/{patientId}/clinicalStatements
+  /api/patients/{patientId}/clinicalStatements
 </pre>
 <h5>GET response</h5>
 <pre>
-    {
-        author:"bob.smith@gmail.com"
-        dateCreated:1489655645844
-        source:"ethercis"
-        sourceId:"0f86daea-9d25-4921-aa9c-b79b6478433d"
-        type:"test ids"
-    }
+  {
+    author:"bob.smith@gmail.com"
+    dateCreated:1489655645844
+    source:"ethercis"
+    sourceId:"0f86daea-9d25-4921-aa9c-b79b6478433d"
+    type:"test ids"
+  }
 </pre>
 
 <h5>Component structure</h5>
 <pre>
-    //component template
-    let templateClinicalstatementsList = require('./clinicalstatements-list.html');
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { bindActionCreators } from 'redux';
+  import { connect } from 'react-redux';
+  import { lifecycle, compose } from 'recompose';
 
-    //controller init
-    class ClinicalstatementsListController {
-        constructor($scope, $state, $stateParams, $ngRedux, clinicalstatementsActions, serviceRequests, usSpinnerService, serviceFormatted) {
-        }
+  import PluginListHeader from '../../plugin-page-component/PluginListHeader';
+  import PluginMainPanel from '../../plugin-page-component/PluginMainPanel';
+  import { fetchPatientClinicalStatementsRequest } from './ducks/fetch-patient-clinical-statements.duck';
+  import { fetchPatientClinicalStatementsCreateRequest } from './ducks/fetch-patient-clinical-statements-create.duck';
+  import { fetchPatientClinicalStatementsDetailRequest } from './ducks/fetch-patient-clinical-statements-detail.duck';
+  import { fetchPatientClinicalStatementsOnMount, fetchPatientClinicalStatementsDetailOnMount } from '../../../utils/HOCs/fetch-patients.utils';
+  import { patientClinicalStatementsSelector, clinicalStatementsCreateFormStateSelector, patientClinicalStatementsDetailSelector } from './selectors';
+  import ClinicalStatementsDetail from './ClinicalStatementsDetail/ClinicalStatementsDetail';
+  import PluginCreate from '../../plugin-page-component/PluginCreate';
+  import ClinicalStatementsCreateForm from './ClinicalStatementsCreate/ClinicalStatementsCreateForm'
 
-    //component init
-    const ClinicalstatementsListComponent = {
-      template: templateClinicalstatementsList,
-      controller: ClinicalstatementsListController
-    };
+  // map dispatch to Properties
+  const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ fetchPatientClinicalStatementsRequest, fetchPatientClinicalStatementsCreateRequest, fetchPatientClinicalStatementsDetailRequest }, dispatch) });
 
-    //inject services/modules to controller
-    ClinicalstatementsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'clinicalstatementsActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
-    //es6 export for component
-    export default ClinicalstatementsListComponent;
+  // Higher-Order Components (HOC) for get some data
+  @connect(patientClinicalStatementsSelector, mapDispatchToProps)
+  @connect(patientClinicalStatementsDetailSelector)
+  @connect(clinicalStatementsCreateFormStateSelector)
+  @compose(lifecycle(fetchPatientClinicalStatementsOnMount), lifecycle(fetchPatientClinicalStatementsDetailOnMount))
+  export default class ClinicalStatements extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
 </pre>
 
-<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/clinical-statements/clinicalstatements-detail.component.js">Clinical Statements Detail</a></h4>
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/ClinicalStatements/ClinicalStatementsDetail/ClinicalStatementsDetail.js">Clinical Statements Detail</a></h4>
 {% include image.html file="clinicalstatements/clinicalstatementsdetail.png" url="#" alt="Clinical Statements Detail" caption="Clinical Statements Detail" %}
 
 <h5>API URL</h5>
 <pre>
-    /api/patients/{patientId}/clinicalStatements/{sourceId}
+  /api/patients/{patientId}/clinicalStatements/{sourceId}
 </pre>
 <h5>GET response</h5>
 <pre>
-    {
-        author:"bob.smith@gmail.com"
-        dateCreated:1489489481713
-        source:"ethercis"
-        sourceId:"f546b8c0-97d6-489f-97e1-02622d721dc2"
-        text:"The pain was medium at 5/10 in severity.  "
-        type:"aaaa"
-    }
+  {
+    author:"bob.smith@gmail.com"
+    dateCreated:1489489481713
+    source:"ethercis"
+    sourceId:"f546b8c0-97d6-489f-97e1-02622d721dc2"
+    text:"The pain was medium at 5/10 in severity.  "
+    type:"aaaa"
+  }
 </pre>
 
 <h5>Component structure</h5>
 <pre>
-    //es6 import modules
-    import * as helper from './clinicalstatements-helper';
+  // import packages
+  import React, { PureComponent } from 'react';
+  import PluginDetailPanel from '../../../plugin-page-component/PluginDetailPanel';
+  import { Tag, TagList } from '../../../ui-elements/Tag/Tag';
+  import { getDDMMMYYYY } from '../../../../utils/time-helpers.utils';
+  import { valuesNames, valuesLabels } from '../forms.config';
 
-    //component template
-    let templateClinicalstatementsDetail = require('./clinicalstatements-detail.html');
+  export default class ClinicalStatementsDetail extends PureComponent {
+  // React component
 
-    //controller init
-    class ClinicalstatementsDetailController {
-        constructor($scope, $state, $stateParams, $ngRedux, clinicalstatementsActions, serviceRequests, usSpinnerService) {
-        }
-
-    //component init
-    const ClinicalstatementsDetailComponent = {
-      template: templateClinicalstatementsDetail,
-      controller: ClinicalstatementsDetailController
-    };
-
-    //inject services/modules to controller
-    ClinicalstatementsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'clinicalstatementsActions', 'serviceRequests', 'usSpinnerService'];
-    //es6 export for component
-    export default ClinicalstatementsDetailComponent;
-
+    // component template
+    render() {
+      return ()
+    }
+  }
 </pre>
 
-<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/clinical-statements/clinicalstatements-create.component.js">Clinical Statements Create</a></h4>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/ClinicalStatements/ClinicalStatementsCreate/ClinicalStatementsCreateForm.js">Clinical Statements Create Form</a></h4>
 {% include image.html file="clinicalstatements/clinicalstatementscreate.png" url="#" alt="Clinical Statements Create" caption="Clinical Statements Create" %}
 
 <h5>API URL</h5>
 <pre>
-    /api/patients/{patientId}/clinicalStatements
+  /api/patients/{patientId}/clinicalStatements
 </pre>
 <h5>POST data</h5>
 <pre>
+  {
+    author:"bob.smith@gmail.com"
+    contentStore:{name: "ts", phrases: [{id: "6", tag: "chestpain"}]}
+    dateCreated:"2017-04-07T09:49:29.918Z"
+    text:'<span class="tag" data-id="3" data-phrase="The pain was severe at 10/10 in severity" contenteditable="false">The pain was severe at 10/10 in severity. <a class="remove" contenteditable="false"><i class="fa" contenteditable="false"></i></a></span> <span id="temp"></span>'
+    type:"test CS 33"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { Field, reduxForm } from 'redux-form';
+  import ValidatedInput from '../../../form-fields/ValidatedInputFormGroup';
+  import ClinicalNoteField from '../form-fields/ClinicalNoteField';
+  import DateInput from '../../../form-fields/DateInput';
+  import { validateForm } from '../forms.validation';
+  import { valuesNames, valuesLabels } from '../forms.config';
+  import { defaultFormValues } from './default-values.config';
+  import { getDDMMMYYYY } from '../../../../utils/time-helpers.utils';
+
+  // decorator to connect its form component to Redux
+  @reduxForm({
+    form: 'clinicalStatementsCreateFormSelector',
+    validate: validateForm,
+  })
+  export default class ClinicalStatementsCreateForm extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/ClinicalStatements/form-fields/ClinicalNoteField.js">Clinical Statements Clinical Note Field</a></h4>
+{% include image.html file="clinicalstatements/clinicalstatements-field.jpg" url="#" alt="Clinical Statements Clinical Note Field" caption="Clinical Statements Clinical Note Field" %}
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { bindActionCreators } from 'redux';
+  import { connect } from 'react-redux';
+  import { lifecycle, compose } from 'recompose';
+  import PropTypes from 'prop-types';
+  import classNames from 'classnames';
+  import 'bootstrap';
+  import 'x-editable/dist/bootstrap3-editable/js/bootstrap-editable';
+  import 'x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css';
+  import PaginationBlock from '../../../presentational/PaginationBlock/PaginationBlock';
+  import { valuesLabels, valuesNames } from '../forms.config';
+  import { operationsOnCollection } from '../../../../utils/plugin-helpers.utils';
+  import * as helper from './clinical-statements-helper';
+  import { fetchPatientClinicalStatementsTagsRequest } from '../ducks/fetch-patient-clinical-statements-tags.duck';
+  import { fetchPatientClinicalStatementsQueryRequest } from '../ducks/fetch-patient-clinical-statements-query.duck';
+  import { fetchPatientClinicalStatementsTagsOnMount } from '../../../../utils/HOCs/fetch-patients.utils';
+  import { patientClinicalStatementsTagsSelector, patientClinicalStatementsQuerySelector } from '../selectors';
+
+  // map dispatch to Properties
+  const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ fetchPatientClinicalStatementsTagsRequest, fetchPatientClinicalStatementsQueryRequest }, dispatch) });
+
+
+  // Higher-Order Components (HOC) for get some data
+  @connect(patientClinicalStatementsTagsSelector, mapDispatchToProps)
+  @connect(patientClinicalStatementsQuerySelector)
+  @compose(lifecycle(fetchPatientClinicalStatementsTagsOnMount))
+  export default class ClinicalNoteField extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/ClinicalStatements/ducks/fetch-patient-clinical-statements.duck.js">Clinical Statements List Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { handleErrors } from '../../../../ducks/handle-errors.duck';
+
+  // Actions names
+  export const FETCH_PATIENT_CLINICAL_STATEMENTS_REQUEST = 'FETCH_PATIENT_CLINICAL_STATEMENTS_REQUEST';
+  export const FETCH_PATIENT_CLINICAL_STATEMENTS_SUCCESS = 'FETCH_PATIENT_CLINICAL_STATEMENTS_SUCCESS';
+  export const FETCH_PATIENT_CLINICAL_STATEMENTS_FAILURE = 'FETCH_PATIENT_CLINICAL_STATEMENTS_FAILURE';
+
+  // Actions
+  export const fetchPatientClinicalStatementsRequest = createAction(FETCH_PATIENT_CLINICAL_STATEMENTS_REQUEST);
+  export const fetchPatientClinicalStatementsSuccess = createAction(FETCH_PATIENT_CLINICAL_STATEMENTS_SUCCESS);
+  export const fetchPatientClinicalStatementsFailure = createAction(FETCH_PATIENT_CLINICAL_STATEMENTS_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientClinicalStatementsEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(patientsClinicalStatements = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_CLINICAL_STATEMENTS_SUCCESS:
+        return _.set(action.payload.userId, action.payload.clinicalStatements, patientsClinicalStatements);
+      default:
+        return patientsClinicalStatements;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/ClinicalStatements/ducks/fetch-patient-clinical-statements-detail.duck.js">Clinical Statements Detail Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { handleErrors } from '../../../../ducks/handle-errors.duck';
+
+  // Actions names
+  export const FETCH_PATIENT_CLINICAL_STATEMENTS_DETAIL_REQUEST = 'FETCH_PATIENT_CLINICAL_STATEMENTS_DETAIL_REQUEST';
+  export const FETCH_PATIENT_CLINICAL_STATEMENTS_DETAIL_SUCCESS = 'FETCH_PATIENT_CLINICAL_STATEMENTS_DETAIL_SUCCESS';
+  export const FETCH_PATIENT_CLINICAL_STATEMENTS_DETAIL_FAILURE = 'FETCH_PATIENT_CLINICAL_STATEMENTS_DETAIL_FAILURE';
+
+  // Actions
+  export const fetchPatientClinicalStatementsDetailRequest = createAction(FETCH_PATIENT_CLINICAL_STATEMENTS_DETAIL_REQUEST);
+  export const fetchPatientClinicalStatementsDetailSuccess = createAction(FETCH_PATIENT_CLINICAL_STATEMENTS_DETAIL_SUCCESS);
+  export const fetchPatientClinicalStatementsDetailFailure = createAction(FETCH_PATIENT_CLINICAL_STATEMENTS_DETAIL_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientClinicalStatementsDetailEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(clinicalStatementsDetail = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_CLINICAL_STATEMENTS_DETAIL_SUCCESS:
+        return _.set(action.payload.userId, action.payload.clinicalStatementsDetail, clinicalStatementsDetail);
+      default:
+        return clinicalStatementsDetail;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/ClinicalStatements/ducks/fetch-patient-clinical-statements-create.duck.js">Clinical Statements Create Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientClinicalStatementsRequest } from './fetch-patient-clinical-statements.duck'
+  import { handleErrors } from "../../../../ducks/handle-errors.duck";
+
+  // Actions names
+  export const FETCH_PATIENT_CLINICAL_STATEMENTS_CREATE_REQUEST = 'FETCH_PATIENT_CLINICAL_STATEMENTS_CREATE_REQUEST';
+  export const FETCH_PATIENT_CLINICAL_STATEMENTS_CREATE_SUCCESS = 'FETCH_PATIENT_CLINICAL_STATEMENTS_CREATE_SUCCESS';
+  export const FETCH_PATIENT_CLINICAL_STATEMENTS_CREATE_FAILURE = 'FETCH_PATIENT_CLINICAL_STATEMENTS_CREATE_FAILURE';
+
+  // Actions
+  export const fetchPatientClinicalStatementsCreateRequest = createAction(FETCH_PATIENT_CLINICAL_STATEMENTS_CREATE_REQUEST);
+  export const fetchPatientClinicalStatementsCreateSuccess = createAction(FETCH_PATIENT_CLINICAL_STATEMENTS_CREATE_SUCCESS);
+  export const fetchPatientClinicalStatementsCreateFailure = createAction(FETCH_PATIENT_CLINICAL_STATEMENTS_CREATE_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientClinicalStatementsCreateEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(patientClinicalStatementsCreate = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_CLINICAL_STATEMENTS_CREATE_SUCCESS:
+        return action.payload;
+      default:
+        return patientClinicalStatementsCreate
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/ClinicalStatements/ducks/fetch-patient-clinical-statements-tags.duck.js">Clinical Statements Tags Duck</a></h4>
+
+<h5>API URL</h5>
+<pre>
+  /api/contentStore/ts/tags
+</pre>
+<h5>GET response</h5>
+<pre>
+  ["acutesob", "chestpain", "earpain", "lung", "shoulder", "shoulder2", "snomedct", "t1", "tagb", …]
+</pre>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { handleErrors } from '../../../../ducks/handle-errors.duck';
+
+  // Actions names
+  export const FETCH_PATIENT_CLINICAL_STATEMENTS_TAGS_REQUEST = 'FETCH_PATIENT_CLINICAL_STATEMENTS_TAGS_REQUEST';
+  export const FETCH_PATIENT_CLINICAL_STATEMENTS_TAGS_SUCCESS = 'FETCH_PATIENT_CLINICAL_STATEMENTS_TAGS_SUCCESS';
+  export const FETCH_PATIENT_CLINICAL_STATEMENTS_TAGS_FAILURE = 'FETCH_PATIENT_CLINICAL_STATEMENTS_TAGS_FAILURE';
+
+  // Actions
+  export const fetchPatientClinicalStatementsTagsRequest = createAction(FETCH_PATIENT_CLINICAL_STATEMENTS_TAGS_REQUEST);
+  export const fetchPatientClinicalStatementsTagsSuccess = createAction(FETCH_PATIENT_CLINICAL_STATEMENTS_TAGS_SUCCESS);
+  export const fetchPatientClinicalStatementsTagsFailure = createAction(FETCH_PATIENT_CLINICAL_STATEMENTS_TAGS_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientClinicalStatementsTagsEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(patientsClinicalStatementsTags = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_CLINICAL_STATEMENTS_TAGS_SUCCESS:
+        return _.set(action.payload.userId, action.payload.clinicalStatementsTags, patientsClinicalStatementsTags);
+      default:
+        return patientsClinicalStatementsTags;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/ClinicalStatements/ducks/fetch-patient-clinical-statements-query.duck.js">Clinical Statements Query Duck</a></h4>
+
+<h5>API URL</h5>
+<pre>
+  /api/contentStore/ts/phrases?tag={tag}
+</pre>
+<h5>GET response</h5>
+<pre>
+  [
     {
-        author:"bob.smith@gmail.com"
-        contentStore:{name: "ts", phrases: [{id: "6", tag: "chestpain"}]}
-        dateCreated:"2017-04-07T09:49:29.918Z"
-        text:'<span class="tag" data-id="3" data-phrase="The pain was severe at 10/10 in severity" contenteditable="false">The pain was severe at 10/10 in severity. <a class="remove" contenteditable="false"><i class="fa fa-close" contenteditable="false"></i></a></span> <span id="temp"></span>'
-        type:"test CS 33"
-    }
+      id:7
+      phrase:"The pain was mild at |?| in severity"
+    },
+    ...
+  ]
 </pre>
 
-<h5>Component structure</h5>
+<h5>File structure</h5>
 <pre>
-    //es6 import modules
-    import * as helper from './clinicalstatements-helper';
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { handleErrors } from '../../../../ducks/handle-errors.duck';
 
-    //component template
-    let templateClinicalstatementsCreate = require('./clinicalstatements-create.html');
-    let _ = require('underscore');
+  // Actions names
+  export const FETCH_PATIENT_CLINICAL_STATEMENTS_QUERY_REQUEST = 'FETCH_PATIENT_CLINICAL_STATEMENTS_QUERY_REQUEST';
+  export const FETCH_PATIENT_CLINICAL_STATEMENTS_QUERY_SUCCESS = 'FETCH_PATIENT_CLINICAL_STATEMENTS_QUERY_SUCCESS';
+  export const FETCH_PATIENT_CLINICAL_STATEMENTS_QUERY_FAILURE = 'FETCH_PATIENT_CLINICAL_STATEMENTS_QUERY_FAILURE';
 
-    //controller init
-    class ClinicalstatementsCreateController {
-        constructor($scope, $state, $stateParams, $ngRedux, clinicalstatementsActions, usSpinnerService, serviceRequests, serviceFormatted) {
-        }
+  // Actions
+  export const fetchPatientClinicalStatementsQueryRequest = createAction(FETCH_PATIENT_CLINICAL_STATEMENTS_QUERY_REQUEST);
+  export const fetchPatientClinicalStatementsQuerySuccess = createAction(FETCH_PATIENT_CLINICAL_STATEMENTS_QUERY_SUCCESS);
+  export const fetchPatientClinicalStatementsQueryFailure = createAction(FETCH_PATIENT_CLINICAL_STATEMENTS_QUERY_FAILURE);
 
-    //component init
-    const ClinicalstatementsCreateComponent = {
-      template: templateClinicalstatementsCreate,
-      controller: ClinicalstatementsCreateController
-    };
+  // Epics for async actions
+  export const fetchPatientClinicalStatementsQueryEpic = (action$, store) => {};
 
-    //inject services/modules to controller
-    ClinicalstatementsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'clinicalstatementsActions', 'usSpinnerService', 'serviceRequests', 'serviceFormatted'];
-    //es6 export for component
-    export default ClinicalstatementsCreateComponent;
-
-</pre>
-
-<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/clinical-statements/clinicalstatements-actions.js">Clinical Statements Actions</a></h4>
-
-<h5>Component structure</h5>
-<pre>
-    //es6 import modules
-    import {bindActionCreators} from 'redux';
-    import * as types from '../../../constants/ActionTypes';
-
-    //es6 export function
-    export function all(patientId) {
-      return {
-        types: [types.CLINICALSTATEMENTS, types.CLINICALSTATEMENTS_SUCCESS, types.CLINICALSTATEMENTS_ERROR],
-
-        shouldCallAPI: (state) => !state.clinicalstatements.response,
-
-        config: {
-          method: 'get',
-          url: '/api/patients/' + patientId + '/clinicalStatements'
-        },
-
-        meta: {
-          timestamp: Date.now()
-        }
-      };
+  // reducer
+  export default function reducer(patientsClinicalStatementsQuery = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_CLINICAL_STATEMENTS_QUERY_SUCCESS:
+        return _.set(action.payload.tag, action.payload.clinicalStatementsQuery, patientsClinicalStatementsQuery);
+      default:
+        return patientsClinicalStatementsQuery;
     }
-</pre>
-
-<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/clinical-statements/clinicalstatements-reducer-all.js">Clinical Statements Reducer</a></h4>
-
-<h5>Component structure</h5>
-<pre>
-    //es6 import modules
-    import * as types from '../../../constants/ActionTypes';
-
-    const INITIAL_STATE = {
-      isFetching: false,
-      error: false,
-      data: null,
-      dataGet: null,
-      dataCreate: null,
-      dataUpdate: null
-    };
-
-    //es6 export function
-    export default function clinicalstatements(state = INITIAL_STATE, action) {
-      const {payload} = action;
-
-    //redux action for Clinical statements requests
-      var actions = {
-        [types.CLINICALSTATEMENTS]: (state) => {
-          state.dataCreate = null;
-          state.dataUpdate = null;
-          return Object.assign({}, state, {
-            isFetching: true,
-            error: false
-          });
-        }
-    }
+  }
 </pre>

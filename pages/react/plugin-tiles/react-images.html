@@ -8,141 +8,272 @@ folder: react/plugin-tiles
 filename: react-images.html
 ---
 
-<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/dicom/image-list.component.js">Images List</a></h4>
-{% include image.html file="dicom/imageslist.png" url="#" alt="Images list view" caption="Images List" %}
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Images/Images.js">Images</a></h4>
+{% include image.html file="dicom/imageslist.jpg" url="#" alt="Images view" caption="Images" %}
 
 <h5>API URL</h5>
 <pre>
-    /api/patients/{patientId}/dicom/studies
+  /api/patients/{patientId}/dicom/studies
 </pre>
 <h5>GET response</h5>
 <pre>
-    {
-        dateRecorded:736124400000
-        source:"orthanc"
-        studyDescription:"RT ANKLE"
-        studyId:"55a9fcd2-e8197ca2-1af7a8e2-0e1ab147-841c65ba"
-    }
+  {
+    dateRecorded:736124400000
+    source:"orthanc"
+    studyDescription:"RT ANKLE"
+    studyId:"55a9fcd2-e8197ca2-1af7a8e2-0e1ab147-841c65ba"
+  }
 </pre>
 
 <h5>Component structure</h5>
 <pre>
-    //component template
-    let templateImageList = require('./image-list.html');
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { bindActionCreators } from 'redux';
+  import { connect } from 'react-redux';
+  import { lifecycle, compose } from 'recompose';
 
-    //controller init
-    class ImageListController {
-        constructor($scope, $window, $state, $stateParams, $ngRedux, imageActions, serviceRequests, usSpinnerService, serviceFormatted) {
-        }
+  import PluginListHeader from '../../plugin-page-component/PluginListHeader';
+  import PluginMainPanel from '../../plugin-page-component/PluginMainPanel';
+  import { fetchPatientImagesRequest } from './ducks/fetch-patient-images.duck';
+  import { fetchPatientImagesDetailRequest } from './ducks/fetch-patient-images-detail.duck';
+  import { fetchSeriesRequest } from './ducks/fetch-all-series.duck';
+  import { fetchSeriesDetailRequest } from './ducks/fetch-series-detail.duck';
+  import { fetchPatientImagesOnMount, fetchSeriesOnMount } from '../../../utils/HOCs/fetch-patients.utils';
+  import { patientImagesSelector, seriesDetailAndInstanceIdsSelector, allSeriesSelector } from './selectors';
+  import { clientUrls } from '../../../config/client-urls.constants';
+  import ImagesDetail from './ImagesDetail/ImagesDetail';
 
-    //component init
-    const ImageListComponent = {
-      template: templateImageList,
-      controller: ImageListController
-    };
+  // map dispatch to Properties
+  const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ fetchPatientImagesRequest, fetchPatientImagesDetailRequest, fetchSeriesRequest, fetchSeriesDetailRequest }, dispatch) });
 
-    //inject services/modules to controller
-    ImageListController.$inject = ['$scope', '$window', '$state', '$stateParams', '$ngRedux', 'imageActions', 'serviceRequests', 'usSpinnerService', 'serviceFormatted'];
-    //es6 export for component
-    export default ImageListComponent;
+  // Higher-Order Components (HOC) for get some data
+  @connect(patientImagesSelector, mapDispatchToProps)
+  @connect(seriesDetailAndInstanceIdsSelector)
+  @connect(allSeriesSelector)
+  @compose(lifecycle(fetchPatientImagesOnMount), lifecycle(fetchSeriesOnMount))
+  export default class Images extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
 </pre>
 
-<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/dicom/image-detail.component.js">Images Detail</a></h4>
-{% include image.html file="dicom/imagesdetail.png" url="#" alt="Images Detail" caption="Images Detail" %}
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Images/ImagesDetail/ImagesDetail.js">Images Detail</a></h4>
+{% include image.html file="dicom/imagesdetail.jpg" url="#" alt="Images Detail" caption="Images Detail" %}
 
 <h5>API URL</h5>
 <pre>
-    /api/patients/{patientId}/dicom/studies/{studyId}/series?source=orthanc
+  /api/patients/{patientId}/dicom/studies/{studyId}/series?source=orthanc
 </pre>
 <h5>GET response</h5>
 <pre>
-    {
-        seriesIds:["fd6433fb-cac3aecf-e1b315ea-a534c0c8-dba38a8f"]
-        source:"orthanc"
-        studyId:"885eb7e5-d07fa57b-5a1c6637-3886ed16-d6f22cf5"
+  {
+    seriesIds:["fd6433fb-cac3aecf-e1b315ea-a534c0c8-dba38a8f"]
+    source:"orthanc"
+    studyId:"885eb7e5-d07fa57b-5a1c6637-3886ed16-d6f22cf5"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import Swiper from 'react-id-swiper';
+  import 'react-id-swiper/src/styles/scss/swiper.scss';
+  import * as cornerstone from 'cornerstone-core';
+  import * as cornerstoneTools from 'cornerstone-tools';
+  import PluginDetailPanel from '../../../plugin-page-component/PluginDetailPanel';
+  import ImagesDetailPanel from '../images-page-component/ImagesDetailPanel';
+  import CornerstoneImage from '../images-page-component/CornerstoneImage';
+
+  export default class ImagesDetail extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
     }
+  }
 </pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Images/images-page-component/CornerstoneImage.js">Cornerstone Image</a></h4>
+{% include image.html file="dicom/imagescontrol.jpg" url="#" alt="Cornerstone Image" caption="Cornerstone Image" %}
 
 <h5>Component structure</h5>
 <pre>
-    //component template
-    let templateImageDetail= require('./image-detail.html');
-    import cornerstoneJS from '../../../../cornerstone/cornerstone';
+  // import packages
+  import React, { PureComponent } from 'react';
+  import * as cornerstone from 'cornerstone-core';
+  import * as cornerstoneTools from 'cornerstone-tools';
+  import * as cornerstoneMath from 'cornerstone-math';
+  import * as cornerstoneWebImageLoader from 'cornerstone-web-image-loader';
 
-    //controller init
-    class ImageDetailController {
-        constructor($scope, $state, $stateParams, $ngRedux, serviceActions, serviceRequests, usSpinnerService) {
-        }
+  export default class CornerstoneImage extends PureComponent {
+  // React component
 
-    //component init
-    const ImageDetailComponent = {
-      template: templateImageDetail,
-      controller: ImageDetailController
-    };
-
-    //inject services/modules to controller
-    ImageDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'serviceActions', 'serviceRequests', 'usSpinnerService'];
-    //es6 export for component
-    export default ImageDetailComponent;
-</pre>
-
-{% include image.html file="dicom/imagescontrol.png" url="#" alt="Images Control" caption="Images Control" %}
-
-<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/dicom/image-actions.js">Dicom Actions</a></h4>
-
-<h5>Component structure</h5>
-<pre>
-    //es6 import modules
-    import {bindActionCreators} from 'redux';
-    import * as types from '../../../constants/ActionTypes';
-
-    //es6 export function
-    export function allStudies(patientId) {
-      return {
-        types: [types.STUDIES, types.STUDIES_SUCCESS, types.STUDIES_ERROR],
-    
-        shouldCallAPI: (state) => !state.studies.response,
-    
-        config: {
-          method: 'get',
-          url: '/api/patients/' + patientId + '/dicom/' + 'studies'
-        },
-    
-        meta: {
-          timestamp: Date.now()
-        }
-      };
+    // component template
+    render() {
+      return ()
     }
+  }
 </pre>
 
-<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/dicom/series-reducer-all.js">Dicom Reducer</a></h4>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Images/images-page-component/ImagesDetailPanel.js">Images Detail Panel</a></h4>
 
 <h5>Component structure</h5>
 <pre>
-    //es6 import modules
-    import * as types from '../../../constants/ActionTypes';
+  // import packages
+  import React, { PureComponent } from 'react';
+  import PTButton from '../../../ui-elements/PTButton/PTButton';
+  import PluginDetailHeader from '../../../plugin-page-component/PluginDetailHeader';
 
-    const INITIAL_STATE = {
-      isFetching: false,
-      error: false,
-      data: null,
-      dataGet: null,
-      dataCreate: null,
-      dataUpdate: null
-    };
+  export default class ImagesDetailPanel extends PureComponent {
+  // React component
 
-    //es6 export function
-    export default function series(state = INITIAL_STATE, action) {
-      const {payload} = action;
-
-    //redux action for Dicom requests
-      var actions = {
-        [types.SERIES_GET]: (state) => {
-          return Object.assign({}, state, {
-            isFetching: true,
-            error: false
-          });
-        }
+    // component template
+    render() {
+      return ()
+    }
+  }
 </pre>
 
-Cornerstone librry is by default excluded from the core build, and should be included from the external plugin repo: <a href="https://github.com/PulseTile-Plugins/Carbon-Plugin-DICOM">here</a>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Images/ducks/fetch-patient-images.duck.js">Images List Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientImagesDetailRequest } from './fetch-patient-images-detail.duck';
+
+  // Actions names
+  export const FETCH_PATIENT_IMAGES_REQUEST = 'FETCH_PATIENT_IMAGES_REQUEST';
+  export const FETCH_PATIENT_IMAGES_SUCCESS = 'FETCH_PATIENT_IMAGES_SUCCESS';
+  export const FETCH_PATIENT_IMAGES_FAILURE = 'FETCH_PATIENT_IMAGES_FAILURE';
+
+  // Actions
+  export const fetchPatientImagesRequest = createAction(FETCH_PATIENT_IMAGES_REQUEST);
+  export const fetchPatientImagesSuccess = createAction(FETCH_PATIENT_IMAGES_SUCCESS);
+  export const fetchPatientImagesFailure = createAction(FETCH_PATIENT_IMAGES_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientImagesEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(patientsImages = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_IMAGES_SUCCESS:
+        return _.set(action.payload.userId, action.payload.images, patientsImages);
+      default:
+        return patientsImages;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Images/ducks/fetch-patient-images-detail.duck.js">Images Detail Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+
+  // Actions names
+  export const FETCH_PATIENT_IMAGES_DETAIL_REQUEST = 'FETCH_PATIENT_IMAGES_DETAIL_REQUEST';
+  export const FETCH_PATIENT_IMAGES_DETAIL_SUCCESS = 'FETCH_PATIENT_IMAGES_DETAIL_SUCCESS';
+  export const FETCH_PATIENT_IMAGES_DETAIL_FAILURE = 'FETCH_PATIENT_IMAGES_DETAIL_FAILURE';
+
+  // Actions
+  export const fetchPatientImagesDetailRequest = createAction(FETCH_PATIENT_IMAGES_DETAIL_REQUEST);
+  export const fetchPatientImagesDetailSuccess = createAction(FETCH_PATIENT_IMAGES_DETAIL_SUCCESS);
+  export const fetchPatientImagesDetailFailure = createAction(FETCH_PATIENT_IMAGES_DETAIL_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientImagesDetailEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(imagesDetail = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_IMAGES_DETAIL_SUCCESS:
+        return _.set(action.payload.userId, action.payload.imagesDetail, imagesDetail);
+      default:
+        return imagesDetail;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Images/ducks/fetch-all-series.duck.js">Images All Series Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import _ from 'lodash/fp';
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchSeriesDetailRequest } from '../../Images/ducks/fetch-series-detail.duck';
+
+  // Actions names
+  export const FETCH_SERIES_REQUEST = 'FETCH_SERIES_REQUEST';
+  export const FETCH_SERIES_SUCCESS = 'FETCH_SERIES_SUCCESS';
+  export const FETCH_SERIES_FAILURE = 'FETCH_SERIES_FAILURE';
+
+  // Actions
+  export const fetchSeriesRequest = createAction(FETCH_SERIES_REQUEST);
+  export const fetchSeriesSuccess = createAction(FETCH_SERIES_SUCCESS);
+  export const fetchSeriesFailure = createAction(FETCH_SERIES_FAILURE);
+
+  // Epics for async actions
+  export const fetchSeriesEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(allSeries = {}, action) {
+    switch (action.type) {
+      case FETCH_SERIES_SUCCESS:
+        return _.set(action.payload.userId, action.payload.allSeries, allSeries);
+      default:
+        return allSeries;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Images/ducks/fetch-series-detail.duck.js">Images Series Detail Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+
+  // Actions names
+  export const FETCH_SERIES_DETAIL_REQUEST = 'FETCH_SERIES_DETAIL_REQUEST';
+  export const FETCH_SERIES_DETAIL_SUCCESS = 'FETCH_SERIES_DETAIL_SUCCESS';
+  export const FETCH_SERIES_DETAIL_FAILURE = 'FETCH_SERIES_DETAIL_FAILURE';
+
+  // Actions
+  export const fetchSeriesDetailRequest = createAction(FETCH_SERIES_DETAIL_REQUEST);
+  export const fetchSeriesDetailSuccess = createAction(FETCH_SERIES_DETAIL_SUCCESS);
+  export const fetchSeriesDetailFailure = createAction(FETCH_SERIES_DETAIL_FAILURE);
+
+  // Epics for async actions
+  export const fetchSeriesDetailEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(seriesDetail = {}, action) {
+    switch (action.type) {
+      case FETCH_SERIES_DETAIL_SUCCESS:
+        return _.set(action.payload.userId, action.payload.seriesDetail, seriesDetail);
+      default:
+        return seriesDetail;
+    }
+  }
+</pre>

@@ -1,0 +1,395 @@
+---
+title: PROMs module
+keywords: sample
+summary: "PROMs module"
+sidebar: react_sidebar
+permalink: react-proms.html
+folder: react/plugin-tiles
+filename: react-proms.html
+---
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/PROMs/Proms.js">PROMs</a></h4>
+{% include image.html file="proms/proms-list-table.jpg" url="#" alt="PROMs table view" caption="PROMs table view" %}
+{% include image.html file="proms/proms-list-graph.jpg" url="#" alt="PROMs graph view" caption="PROMs graph view" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/proms
+</pre>
+<h5>GET response</h5>
+<pre>
+  {
+    name: 'test Proms 1',
+    score: 9,
+    dateCreated: 1482170593395,
+    source: 'openehr',
+    sourceId: 'testSourceID1',
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { bindActionCreators } from 'redux';
+  import { connect } from 'react-redux';
+  import { lifecycle, compose } from 'recompose';
+  import PromsListHeader from './proms-page-component/PromsListHeader';
+  import PromsMainPanel from './proms-page-component/PromsMainPanel';
+  import { fetchPatientPromsRequest } from './ducks/fetch-patient-proms.duck';
+  import { fetchPatientPromsCreateRequest } from './ducks/fetch-patient-proms-create.duck';
+  import { fetchPatientPromsDetailRequest } from './ducks/fetch-patient-proms-detail.duck';
+  import { fetchPatientPromsDetailEditRequest } from './ducks/fetch-patient-proms-detail-edit.duck';
+  import { fetchPatientPromsOnMount, fetchPatientPromsDetailOnMount } from '../../../utils/HOCs/fetch-patients.utils';
+  import { patientPromsSelector, promsDetailFormStateSelector, promsCreateFormStateSelector, patientPromsDetailSelector } from './selectors';
+  import PromsDetail from './PromsDetail/PromsDetail';
+  import PluginCreate from '../../plugin-page-component/PluginCreate';
+  import PromsCreateForm from './PromsCreate/PromsCreateForm'
+  import { serviceProms } from './proms-helpers.utils';
+
+  // map dispatch to Properties
+  const mapDispatchToProps = dispatch => ({
+    actions: bindActionCreators({
+      fetchPatientPromsRequest,
+      fetchPatientPromsCreateRequest,
+      fetchPatientPromsDetailRequest,
+      fetchPatientPromsDetailEditRequest,
+    }, dispatch) });
+
+  // Higher-Order Components (HOC) for get some data
+  @connect(patientPromsSelector, mapDispatchToProps)
+  @connect(patientPromsDetailSelector)
+  @connect(promsDetailFormStateSelector)
+  @connect(promsCreateFormStateSelector)
+  @compose(lifecycle(fetchPatientPromsOnMount), lifecycle(fetchPatientPromsDetailOnMount))
+  export default class Proms extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/PROMs/PromsDetail/PromsDetail.js">PROMs Detail</a></h4>
+{% include image.html file="proms/proms-detail.jpg" url="#" alt="PROMs Detail" caption="PROMs Detail" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/proms/{sourceId}
+</pre>
+<h5>GET response</h5>
+<pre>
+  {
+    name: 'test Proms 1',
+    records: [
+      {
+        date: 1482190593395,
+        name: 'test records',
+        source: 'test records source',
+        sourceId: 'test records sourceId',
+        type: 'test records type',
+        typeTitle: 'test records typeTitle',
+      },
+    ],
+    score: 9,
+    dateCreated: 1482170593395,
+    specific_Q1: 'No Pain',
+    specific_Q2: 'No limitations',
+    specific_Q3: 'Around the house',
+    specific_Q4: 'No difficulty',
+    author: 'DR Mary Jones',
+    source: 'openehr',
+    sourceId: 'testSourceID1',
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import PluginDetailPanel from '../../../plugin-page-component/PluginDetailPanel';
+  import PromsDetailForm from './PromsDetailForm';
+  import FormTitle from '../../../ui-elements/FormTitle/FormTitle';
+  import RecordsOfTableView from '../../../form-fields/RecordsOfTable/RecordsOfTableView';
+
+  export default class PromsDetail extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/PROMs/PromsDetail/PromsDetailForm.js">PROMs Detail Edit Form</a></h4>
+{% include image.html file="proms/proms-edit.jpg" url="#" alt="PROMs Edit Form" caption="PROMs Edit Form" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/proms/{sourceId}
+</pre>
+<h5>PUT data</h5>
+<pre>
+  {
+    name: 'test Proms 1',
+    records: [
+      {
+        date: 1482190593395,
+        name: 'test records',
+        source: 'test records source',
+        sourceId: 'test records sourceId',
+        type: 'test records type',
+        typeTitle: 'test records typeTitle',
+      },
+    ],
+    score: 9,
+    dateCreated: 1482170593395,
+    specific_Q1: 'No Pain',
+    specific_Q2: 'No limitations',
+    specific_Q3: 'Around the house',
+    specific_Q4: 'No difficulty',
+    author: 'DR Mary Jones',
+    source: 'openehr',
+    sourceId: 'testSourceID1',
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { connect } from 'react-redux';
+  import { Field, reduxForm } from 'redux-form'
+  import Slider from 'rc-slider';
+  import 'rc-slider/assets/index.css';
+  import ValidatedTextareaFormGroup from '../../../form-fields/ValidatedTextareaFormGroup';
+  import SelectFormGroup from '../../../form-fields/SelectFormGroup';
+  import DateInput from '../../../form-fields/DateInput';
+  import ValidatedInput from '../../../form-fields/ValidatedInputFormGroup';
+  import FormTitle from '../../../ui-elements/FormTitle/FormTitle';
+  import { validateForm } from '../forms.validation';
+  import { valuesNames, valuesLabels, questionPainOptions, questionLimitationsOptions, questionWalkingOptions, questionWalkingSurfacesOptions, marksForPromsRange, typesOfRecordsOptions } from '../forms.config';
+  import RangeInput from '../../../form-fields/RangeInput';
+  import RecordsOfTable from '../../../form-fields/RecordsOfTable/RecordsOfTable';
+
+  // decorator to connect its form component to Redux
+  @reduxForm({
+    form: 'promsDetailFormSelector',
+    validate: validateForm,
+  })
+  export default class PromsDetailForm extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/PROMs/PromsCreate/PromsCreateForm.js">PROMs Create Form</a></h4>
+{% include image.html file="proms/proms-create.jpg" url="#" alt="PROMs Create" caption="PROMs Create" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/proms
+</pre>
+<h5>POST data</h5>
+<pre>
+  {
+    name: 'test Proms 1',
+    records: [
+      {
+        date: 1482190593395,
+        name: 'test records',
+        source: 'test records source',
+        sourceId: 'test records sourceId',
+        type: 'test records type',
+        typeTitle: 'test records typeTitle',
+      },
+    ],
+    score: 9,
+    dateCreated: 1482170593395,
+    specific_Q1: 'No Pain',
+    specific_Q2: 'No limitations',
+    specific_Q3: 'Around the house',
+    specific_Q4: 'No difficulty',
+    author: 'DR Mary Jones',
+    source: 'openehr',
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+ import { Field, reduxForm } from 'redux-form';
+ import Slider from 'rc-slider';
+ import 'rc-slider/assets/index.css';
+ import SelectFormGroup from '../../../form-fields/SelectFormGroup';
+ import DateInput from '../../../form-fields/DateInput';
+ import ValidatedInput from '../../../form-fields/ValidatedInputFormGroup';
+ import FormTitle from '../../../ui-elements/FormTitle/FormTitle';
+ import { validateForm } from '../forms.validation';
+ import { valuesNames, valuesLabels, questionPainOptions, questionLimitationsOptions, questionWalkingOptions, questionWalkingSurfacesOptions, marksForPromsRange, typesOfRecordsOptions } from '../forms.config';
+ import { defaultFormValues } from './default-values.config';
+ import { getDDMMMYYYY } from '../../../../utils/time-helpers.utils';
+ import RecordsOfTable from '../../../form-fields/RecordsOfTable/RecordsOfTable';
+
+  // decorator to connect its form component to Redux
+  @reduxForm({
+    form: 'promsCreateFormSelector',
+    validate: validateForm,
+  })
+  export default class PromsCreateForm extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/PROMs/ducks/fetch-patient-proms.duck.js">PROMs List Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientPromsDetailRequest } from './fetch-patient-proms-detail.duck';
+
+  // Actions names
+  export const FETCH_PATIENT_PROMS_REQUEST = 'FETCH_PATIENT_PROMS_REQUEST';
+  export const FETCH_PATIENT_PROMS_SUCCESS = 'FETCH_PATIENT_PROMS_SUCCESS';
+  export const FETCH_PATIENT_PROMS_FAILURE = 'FETCH_PATIENT_PROMS_FAILURE';
+  export const FETCH_PATIENT_PROMS_UPDATE_REQUEST = 'FETCH_PATIENT_PROMS_UPDATE_REQUEST';
+
+  // Actions
+  export const fetchPatientPromsRequest = createAction(FETCH_PATIENT_PROMS_REQUEST);
+  export const fetchPatientPromsSuccess = createAction(FETCH_PATIENT_PROMS_SUCCESS);
+  export const fetchPatientPromsFailure = createAction(FETCH_PATIENT_PROMS_FAILURE);
+  export const fetchPatientPromsUpdateRequest = createAction(FETCH_PATIENT_PROMS_UPDATE_REQUEST);
+
+  // Epics for async actions
+  export const fetchPatientPromsEpic = (action$, store) => {};
+  export const fetchPatientPromsUpdateEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(patientsProms = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_PROMS_SUCCESS:
+        return _.set(action.payload.userId, action.payload.proms, patientsProms);
+      default:
+        return patientsProms;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/PROMs/ducks/fetch-patient-proms-detail.duck.js">PROMs Detail Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+
+  // Actions names
+  export const FETCH_PATIENT_PROMS_DETAIL_REQUEST = 'FETCH_PATIENT_PROMS_DETAIL_REQUEST';
+  export const FETCH_PATIENT_PROMS_DETAIL_SUCCESS = 'FETCH_PATIENT_PROMS_DETAIL_SUCCESS';
+  export const FETCH_PATIENT_PROMS_DETAIL_FAILURE = 'FETCH_PATIENT_PROMS_DETAIL_FAILURE';
+
+  // Actions
+  export const fetchPatientPromsDetailRequest = createAction(FETCH_PATIENT_PROMS_DETAIL_REQUEST);
+  export const fetchPatientPromsDetailSuccess = createAction(FETCH_PATIENT_PROMS_DETAIL_SUCCESS);
+  export const fetchPatientPromsDetailFailure = createAction(FETCH_PATIENT_PROMS_DETAIL_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientPromsDetailEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(promsDetail = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_PROMS_DETAIL_SUCCESS:
+        return _.set(action.payload.userId, action.payload.promsDetail, promsDetail);
+      default:
+        return promsDetail;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/PROMs/ducks/fetch-patient-proms-detail-edit.duck.js">PROMs Detail Edit Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientPromsUpdateRequest } from './fetch-patient-proms.duck'
+
+  // Actions names
+  export const FETCH_PATIENT_PROMS_DETAIL_EDIT_REQUEST = 'FETCH_PATIENT_PROMS_DETAIL_EDIT_REQUEST';
+  export const FETCH_PATIENT_PROMS_DETAIL_EDIT_SUCCESS = 'FETCH_PATIENT_PROMS_DETAIL_EDIT_SUCCESS';
+  export const FETCH_PATIENT_PROMS_DETAIL_EDIT_FAILURE = 'FETCH_PATIENT_PROMS_DETAIL_EDIT_FAILURE';
+
+  // Actions
+  export const fetchPatientPromsDetailEditRequest = createAction(FETCH_PATIENT_PROMS_DETAIL_EDIT_REQUEST);
+  export const fetchPatientPromsDetailEditSuccess = createAction(FETCH_PATIENT_PROMS_DETAIL_EDIT_SUCCESS);
+  export const fetchPatientPromsDetailEditFailure = createAction(FETCH_PATIENT_PROMS_DETAIL_EDIT_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientPromsDetailEditEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(promsDetailEdit = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_PROMS_DETAIL_EDIT_SUCCESS:
+        return action.payload;
+      default:
+        return promsDetailEdit;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/PROMs/ducks/fetch-patient-proms-create.duck.js">PROMs Create Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientPromsRequest } from './fetch-patient-proms.duck'
+
+  // Actions names
+  export const FETCH_PATIENT_PROMS_CREATE_REQUEST = 'FETCH_PATIENT_PROMS_CREATE_REQUEST';
+  export const FETCH_PATIENT_PROMS_CREATE_SUCCESS = 'FETCH_PATIENT_PROMS_CREATE_SUCCESS';
+  export const FETCH_PATIENT_PROMS_CREATE_FAILURE = 'FETCH_PATIENT_PROMS_CREATE_FAILURE';
+
+  // Actions
+  export const fetchPatientPromsCreateRequest = createAction(FETCH_PATIENT_PROMS_CREATE_REQUEST);
+  export const fetchPatientPromsCreateSuccess = createAction(FETCH_PATIENT_PROMS_CREATE_SUCCESS);
+  export const fetchPatientPromsCreateFailure = createAction(FETCH_PATIENT_PROMS_CREATE_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientPromsCreateEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(patientPromsCreate = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_PROMS_CREATE_SUCCESS:
+        return action.payload;
+      default:
+        return patientPromsCreate
+    }
+  }
+</pre>

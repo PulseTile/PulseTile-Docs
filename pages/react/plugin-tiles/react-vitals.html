@@ -8,229 +8,463 @@ folder: react/plugin-tiles
 filename: react-vitals.html
 ---
 
-<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/vitals/vitals-list.component.js">Vitals List</a></h4>
-{% include image.html file="vitals/vitalslist.png" url="#" alt="Vitals list view" caption="Vitals List" %}
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Vitals/Vitals.js">Vitals</a></h4>
+{% include image.html file="vitals/vitalslist.png" url="#" alt="Vitals view" caption="Vitals" %}
 
 <h5>API URL</h5>
 <pre>
-    /api/patients/{patientId}/vitalsigns
+  /api/patients/{patientId}/vitalsigns
 </pre>
 <h5>GET response</h5>
 <pre>
-    {
-        author:"Dr Tony Shannon"
-        dateCreate:1438572182000
-        diastolicBP:"64.0"
-        heartRate:"45.0"
-        levelOfConsciousness:"Alert"
-        newsScore:12
-        oxygenSaturation:"97.0"
-        oxygenSupplemental:"true"
-        respirationRate:"23.0"
-        source:"ethercis"
-        sourceId:"27ee5e25-4c32-46d2-b45a-f74149d72030"
-        systolicBP:"92.0"
-        temperature:35.4
-    }
+  {
+    author:"Dr Tony Shannon"
+    dateCreate:1438572182000
+    diastolicBP:"64.0"
+    heartRate:"45.0"
+    levelOfConsciousness:"Alert"
+    newsScore:"12"
+    oxygenSaturation:"97.0"
+    oxygenSupplemental:"true"
+    respirationRate:"23.0"
+    source:"ethercis"
+    sourceId:"27ee5e25-4c32-46d2-b45a-f74149d72030"
+    systolicBP:"92.0"
+    temperature:"35.4"
+  }
 </pre>
 
 <h5>Component structure</h5>
 <pre>
-    //component template
-    let templateVitalsList = require('./vitals-list.html');
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { bindActionCreators } from 'redux';
+  import { connect } from 'react-redux';
+  import { lifecycle, compose } from 'recompose';
+  import VitalsListHeader from './vitals-page-component/VitalsListHeader';
+  import VitalsMainPanel from './vitals-page-component/VitalsMainPanel';
 
-    //controller init
-    class VitalsListController {
-        constructor($scope, $state, $stateParams, $ngRedux, vitalsActions, serviceRequests, usSpinnerService, $window, $timeout, serviceVitalsSigns, serviceFormatted) {
-        }
+  import { fetchPatientVitalsRequest } from './ducks/fetch-patient-vitals.duck';
+  import { fetchPatientVitalsCreateRequest } from './ducks/fetch-patient-vitals-create.duck';
+  import { fetchPatientVitalsDetailRequest } from './ducks/fetch-patient-vitals-detail.duck';
+  import { fetchPatientVitalsDetailEditRequest } from './ducks/fetch-patient-vitals-detail-edit.duck';
+  import { fetchPatientVitalsOnMount, fetchPatientVitalsDetailOnMount } from '../../../utils/HOCs/fetch-patients.utils';
+  import { patientVitalsSelector, vitalsDetailFormStateSelector, vitalsCreateFormStateSelector, patientVitalsDetailSelector } from './selectors';
+  import VitalsDetail from './VitalsDetail/VitalsDetail';
+  import PluginCreate from '../../plugin-page-component/PluginCreate';
+  import VitalsCreateForm from './VitalsCreate/VitalsCreateForm'
+  import { serviceVitalsSigns } from './viltals-helpers.utils';
 
-    //component init
-    const VitalsListComponent = {
-      template: templateVitalsList,
-      controller: VitalsListController
-    };
+  // map dispatch to Properties
+  const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ fetchPatientVitalsRequest, fetchPatientVitalsCreateRequest, fetchPatientVitalsDetailRequest, fetchPatientVitalsDetailEditRequest }, dispatch) });
 
-    //inject services/modules to controller
-    VitalsListController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'vitalsActions', 'serviceRequests', 'usSpinnerService', '$window', '$timeout', 'serviceVitalsSigns', 'serviceFormatted'];
-    //es6 export for component
-    export default VitalsListComponent;
+  // Higher-Order Components (HOC) for get some data
+  @connect(patientVitalsSelector, mapDispatchToProps)
+  @connect(patientVitalsDetailSelector, mapDispatchToProps)
+  @connect(vitalsDetailFormStateSelector)
+  @connect(vitalsCreateFormStateSelector)
+  @compose(lifecycle(fetchPatientVitalsOnMount), lifecycle(fetchPatientVitalsDetailOnMount))
+  export default class Vitals extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
 </pre>
 
-<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/vitals/vitals-detail.component.js">Vitals Detail</a></h4>
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Vitals/VitalsDetail/VitalsDetail.js">Vitals Detail</a></h4>
 {% include image.html file="vitals/vitalsdetail.png" url="#" alt="Vitals Detail" caption="Vitals Detail" %}
 
 <h5>API URL</h5>
 <pre>
-    /api/patients/{patientId}/vitalsigns/{sourceId}
+  /api/patients/{patientId}/vitalsigns/{sourceId}
 </pre>
 <h5>GET response</h5>
 <pre>
-    {
-        author:"Dr Tony Shannon"
-        dateCreate:1438553462518
-        diastolicBP:60
-        heartRate:45
-        levelOfConsciousness:"Alert"
-        newsScore:12
-        oxygenSaturation:97
-        oxygenSupplemental:"false"
-        respirationRate:25
-        source:"Marand"
-        sourceId:"2f4dff89-a41b-465b-85b6-b81d8a59e7a0"
-        systolicBP:90
-        temperature:35.4
-    }
+  {
+    author:"Dr Tony Shannon"
+    dateCreate:1438553462518
+    diastolicBP:"60"
+    heartRate:"45"
+    levelOfConsciousness:"Alert"
+    newsScore:"12"
+    oxygenSaturation:"97"
+    oxygenSupplemental:"false"
+    respirationRate:"25"
+    source:"Marand"
+    sourceId:"2f4dff89-a41b-465b-85b6-b81d8a59e7a0"
+    systolicBP:"90"
+    temperature:"35.4"
+  }
 </pre>
 
 <h5>Component structure</h5>
 <pre>
-    //component template
-    let templateVitalsDetail = require('./vitals-detail.html');
+  // import packages
+  import React, { PureComponent } from 'react';
+  import PluginDetailPanel from '../../../plugin-page-component/PluginDetailPanel'
+  import VitalsDetailForm from './VitalsDetailForm'
+  import VitalsPopover from '../vitals-page-component/VitalsPopover'
+  import Switch from '../../../form-fields/Switch';
+  import { getDDMMMYYYY } from '../../../../utils/time-helpers.utils';
+  import { valuesNames, valuesLabels, valuesAddons } from '../forms.config';
 
-    //controller init
-    class VitalsDetailController {
-        constructor($scope, $state, $stateParams, $ngRedux, patientsActions, vitalsActions, serviceRequests, usSpinnerService, serviceVitalsSigns) {
-        }
+  export default class VitalsDetail extends PureComponent {
+  // React component
 
-    //component init
-    const VitalsDetailComponent = {
-      template: templateVitalsDetail,
-      controller: VitalsDetailController
-    };
-
-    //inject services/modules to controller
-    VitalsDetailController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'vitalsActions', 'serviceRequests', 'usSpinnerService', 'serviceVitalsSigns'];
-    //es6 export for component
-    export default VitalsDetailComponent;
+    // component template
+    render() {
+      return ()
+    }
+  }
 </pre>
 
-{% include image.html file="vitals/vitalsedit.png" url="#" alt="Vitals Edit" caption="Vitals Edit" %}
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Vitals/VitalsDetail/VitalsDetailForm.js">Vitals Detail Edit Form</a></h4>
+{% include image.html file="vitals/vitalsedit.png" url="#" alt="Vitals Edit Form" caption="Vitals Edit Form" %}
 
 <h5>API URL</h5>
 <pre>
-    /api/patients/{patientId}/vitalsigns
+  /api/patients/{patientId}/vitalsigns
 </pre>
-<h5>GET response</h5>
+<h5>PUT data</h5>
 <pre>
-    {
-        author:"Dr Tony Shannon"
-        dateCreate:1491571062000
-        diastolicBP:60
-        heartRate:45
-        levelOfConsciousness:"Pain"
-        newsScore:11
-        oxygenSaturation:97
-        oxygenSupplemental:false
-        respirationRate:25
-        source:"Marand"
-        sourceId:"2f4dff89-a41b-465b-85b6-b81d8a59e7a0"
-        systolicBP:90
-        temperature:35.4
-    }
+  {
+    author:"Dr Tony Shannon"
+    dateCreate:1491571062000
+    diastolicBP:"60"
+    heartRate:"45"
+    levelOfConsciousness:"Pain"
+    newsScore:"11"
+    oxygenSaturation:"97"
+    oxygenSupplemental:false
+    respirationRate:"25"
+    source:"Marand"
+    sourceId:"2f4dff89-a41b-465b-85b6-b81d8a59e7a0"
+    systolicBP:"90"
+    temperature:"35.4"
+  }
 </pre>
 
-<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/vitals/vitals-create.component.js">Vitals Create</a></h4>
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { Field, reduxForm } from 'redux-form'
+  import VitalsInput from '../vitals-page-component/VitalsInput';
+  import Switch from '../../../form-fields/Switch';
+  import ValidatedInput from '../../../form-fields/ValidatedInputFormGroup';
+  import DateInput from '../../../form-fields/DateInput';
+  import { validateForm } from '../forms.validation';
+  import { valuesNames, valuesLabels, valuesAddons } from '../forms.config';
+  import { getDDMMMYYYY } from '../../../../utils/time-helpers.utils';
+
+  // decorator to connect its form component to Redux
+  @reduxForm({
+    form: 'vitalsDetailFormSelector',
+    validate: validateForm,
+  })
+  export default class VitalsDetailForm extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Vitals/VitalsCreate/VitalsCreateForm.js">Vitals Create Form</a></h4>
 {% include image.html file="vitals/vitalscreate.png" url="#" alt="Vitals Create" caption="Vitals Create" %}
 
 <h5>API URL</h5>
 <pre>
-    /api/patients/{patientId}/vitalsigns
+  /api/patients/{patientId}/vitalsigns
 </pre>
-<h5>GET response</h5>
+<h5>POST data</h5>
 <pre>
-    {
-        author:"ripple_osi"
-        dateCreate:1491571176000
-        diastolicBP:"77"
-        heartRate:"55"
-        levelOfConsciousness:"Verbal"
-        newsScore:16
-        oxygenSaturation:"33"
-        oxygenSupplemental:true
-        respirationRate:"33"
-        systolicBP:"88"
-        temperature:"88"
-    }
+  {
+    author:"ripple_osi"
+    dateCreate:1491571176000
+    diastolicBP:"77"
+    heartRate:"55"
+    levelOfConsciousness:"Verbal"
+    newsScore:"16"
+    oxygenSaturation:"33"
+    oxygenSupplemental:true
+    respirationRate:"33"
+    systolicBP:"88"
+    temperature:"88"
+  }
 </pre>
 
 <h5>Component structure</h5>
 <pre>
-    //component template
-    let templateVitalsCreate = require('./vitals-create.html');
+  // import packages
+  import React, { PureComponent } from 'react';
+  import { Field, reduxForm } from 'redux-form'
+  import ValidatedInput from '../../../form-fields/ValidatedInputFormGroup';
+  import DateInput from '../../../form-fields/DateInput';
+  import VitalsInput from '../vitals-page-component/VitalsInput';
+  import Switch from '../../../form-fields/Switch';
+  import { validateForm } from '../forms.validation';
+  import { valuesNames, valuesLabels, valuesAddons } from '../forms.config';
+  import { defaultFormValues } from './default-values.config';
+  import { getDDMMMYYYY } from '../../../../utils/time-helpers.utils';
 
-    //controller init
-    class VitalsCreateController {
-        constructor($scope, $state, $stateParams, $ngRedux, patientsActions, vitalsActions, serviceRequests, serviceVitalsSigns) {
-        }
+  // decorator to connect its form component to Redux
+  @reduxForm({
+    form: 'vitalsCreateFormSelector',
+    validate: validateForm,
+  })
+  export default class VitalsCreateForm extends PureComponent {
+  // React component
 
-    //component init
-    const VitalsCreateComponent = {
-      template: templateVitalsCreate,
-      controller: VitalsCreateController
-    };
-
-    //inject services/modules to controller
-    VitalsCreateController.$inject = ['$scope', '$state', '$stateParams', '$ngRedux', 'patientsActions', 'vitalsActions', 'serviceRequests', 'serviceVitalsSigns'];
-    //es6 export for component
-    export default VitalsCreateComponent;
+    // component template
+    render() {
+      return ()
+    }
+  }
 </pre>
 
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Vitals/vitals-page-component/VitalsChart.js">Vitals Chart</a></h4>
 {% include image.html file="vitals/vitalscharts.png" url="#" alt="Vitals Create" caption="Vitals Chart" %}
 {% include image.html file="vitals/vitalschartdetail.png" url="#" alt="Vitals Create" caption="Vitals Chart Detail" %}
 
-<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/vitals/vitals-actions.js">Vitals Actions</a></h4>
-
-<h5>Component structure</h5>
 <pre>
-    //es6 import modules
-    import {bindActionCreators} from 'redux';
-    import * as types from '../../../constants/ActionTypes';
+  // import packages
+  import React from 'react';
+  import _ from 'lodash/fp';
+  import { Line } from 'react-chartjs-2';
 
-    //es6 export function
-    export function all(patientId) {
-      return {
-        types: [types.VITALS, types.VITALS_SUCCESS, types.VITALS_ERROR],
+  // React component as function
+  const VitalsChart = props => {};
 
-        shouldCallAPI: (state) => !state.vitals.response,
-
-        config: {
-          method: 'get',
-          url: '/api/patients/' + patientId + '/vitalsigns'
-        },
-
-        meta: {
-          timestamp: Date.now()
-        }
-      };
-    }
+  // Export component
+  export default VitalsChart;
 </pre>
 
-<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/pages/vitals/vitals-reducer-all.js">Vitals Reducer</a></h4>
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Vitals/vitals-page-component/VitalsPopover.js">Vitals Popover</a></h4>
+{% include image.html file="vitals/vitals-popover.jpg" url="#" alt="Vitals Popover" caption="Vitals Popover" %}
 
-<h5>Component structure</h5>
 <pre>
-    //es6 import modules
-    import * as types from '../../../constants/ActionTypes';
+  // import packages
+  import React, { PureComponent } from 'react';
+  import classNames from 'classnames';
+  import rangeVital from '../../../../assets/images/range-vital.jpg';
+  import { hasClass } from '../../../../utils/plugin-helpers.utils';
 
-    const INITIAL_STATE = {
-      isFetching: false,
-      error: false,
-      data: null,
-      dataGet: null,
-      dataCreate: null,
-      dataUpdate: null
-    };
+  export default class VitalsPopover extends PureComponent {
+  // React component
 
-    //es6 export function
-    export default function vitals(state = INITIAL_STATE, action) {
-      const {payload} = action;
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
 
-    //redux action for Vitals requests
-      var actions = {
-        [[types.VITALS]: (state) => {
-          return Object.assign({}, state, {
-            isFetching: true,
-            error: false
-          });
-        }
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Vitals/vitals-page-component/VitalsInput.js">Vitals Input Field</a></h4>
+
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import PropTypes from 'prop-types';
+  import classNames from 'classnames';
+  import VitalsPopover from './VitalsPopover'
+
+  export default class VitalsInput extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Vitals/vitals-page-component/VitalsListHeader.js">Vitals List Header of Panel</a></h4>
+
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import PropTypes from 'prop-types';
+  import PTButton from '../../../ui-elements/PTButton/PTButton';
+
+  export default class VitalsListHeader extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Vitals/vitals-page-component/VitalsMainPanel.js">Vitals List Main Panel</a></h4>
+
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import PTButton from '../../../ui-elements/PTButton/PTButton';
+  import SortableTable from '../../../containers/SortableTable/SortableTable';
+  import PaginationBlock from '../../../presentational/PaginationBlock/PaginationBlock';
+  import Spinner from '../../../ui-elements/Spinner/Spinner';
+  import VitalsChart from './VitalsChart';
+
+  export default class VitalsMainPanel extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Vitals/ducks/fetch-patient-vitals.duck.js">Vitals List Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientVitalsDetailRequest } from './fetch-patient-vitals-detail.duck';
+  import { handleErrors } from "../../../../ducks/handle-errors.duck";
+
+  // Actions names
+  export const FETCH_PATIENT_VITALS_REQUEST = 'FETCH_PATIENT_VITALS_REQUEST';
+  export const FETCH_PATIENT_VITALS_SUCCESS = 'FETCH_PATIENT_VITALS_SUCCESS';
+  export const FETCH_PATIENT_VITALS_FAILURE = 'FETCH_PATIENT_VITALS_FAILURE';
+  export const FETCH_PATIENT_VITALS_UPDATE_REQUEST = 'FETCH_PATIENT_VITALS_UPDATE_REQUEST';
+
+  // Actions
+  export const fetchPatientVitalsRequest = createAction(FETCH_PATIENT_VITALS_REQUEST);
+  export const fetchPatientVitalsSuccess = createAction(FETCH_PATIENT_VITALS_SUCCESS);
+  export const fetchPatientVitalsFailure = createAction(FETCH_PATIENT_VITALS_FAILURE);
+  export const fetchPatientVitalsUpdateRequest = createAction(FETCH_PATIENT_VITALS_UPDATE_REQUEST);
+
+  // Epics for async actions
+  export const fetchPatientVitalsEpic = (action$, store) => {};
+  export const fetchPatientVitalsUpdateEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(patientsVitals = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_VITALS_SUCCESS:
+        return _.set(action.payload.userId, action.payload.vitals, patientsVitals);
+      default:
+        return patientsVitals;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Vitals/ducks/fetch-patient-vitals-detail.duck.js">Vitals Detail Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { handleErrors } from "../../../../ducks/handle-errors.duck";
+
+  // Actions names
+  export const FETCH_PATIENT_VITALS_DETAIL_REQUEST = 'FETCH_PATIENT_VITALS_DETAIL_REQUEST';
+  export const FETCH_PATIENT_VITALS_DETAIL_SUCCESS = 'FETCH_PATIENT_VITALS_DETAIL_SUCCESS';
+  export const FETCH_PATIENT_VITALS_DETAIL_FAILURE = 'FETCH_PATIENT_VITALS_DETAIL_FAILURE';
+
+  // Actions
+  export const fetchPatientVitalsDetailRequest = createAction(FETCH_PATIENT_VITALS_DETAIL_REQUEST);
+  export const fetchPatientVitalsDetailSuccess = createAction(FETCH_PATIENT_VITALS_DETAIL_SUCCESS);
+  export const fetchPatientVitalsDetailFailure = createAction(FETCH_PATIENT_VITALS_DETAIL_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientVitalsDetailEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(vitalsDetail = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_VITALS_DETAIL_SUCCESS:
+        return _.set(action.payload.userId, action.payload.vitalsDetail, vitalsDetail);
+      default:
+        return vitalsDetail;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Vitals/ducks/fetch-patient-vitals-detail-edit.duck.js">Vitals Detail Edit Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientVitalsUpdateRequest } from './fetch-patient-vitals.duck'
+  import { handleErrors } from "../../../../ducks/handle-errors.duck";
+
+  // Actions names
+  export const FETCH_PATIENT_VITALS_DETAIL_EDIT_REQUEST = 'FETCH_PATIENT_VITALS_DETAIL_EDIT_REQUEST';
+  export const FETCH_PATIENT_VITALS_DETAIL_EDIT_SUCCESS = 'FETCH_PATIENT_VITALS_DETAIL_EDIT_SUCCESS';
+  export const FETCH_PATIENT_VITALS_DETAIL_EDIT_FAILURE = 'FETCH_PATIENT_VITALS_DETAIL_EDIT_FAILURE';
+
+  // Actions
+  export const fetchPatientVitalsDetailEditRequest = createAction(FETCH_PATIENT_VITALS_DETAIL_EDIT_REQUEST);
+  export const fetchPatientVitalsDetailEditSuccess = createAction(FETCH_PATIENT_VITALS_DETAIL_EDIT_SUCCESS);
+  export const fetchPatientVitalsDetailEditFailure = createAction(FETCH_PATIENT_VITALS_DETAIL_EDIT_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientVitalsDetailEditEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(vitalsDetailEdit = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_VITALS_DETAIL_EDIT_SUCCESS:
+        return action.payload;
+      default:
+        return vitalsDetailEdit;
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Vitals/ducks/fetch-patient-vitals-create.duck.js">Vitals Create Duck</a></h4>
+
+<h5>File structure</h5>
+<pre>
+  // import packages
+  import { Observable } from 'rxjs';
+  import { ajax } from 'rxjs/observable/dom/ajax';
+  import { createAction } from 'redux-actions';
+  import { fetchPatientVitalsRequest } from './fetch-patient-vitals.duck'
+  import { handleErrors } from "../../../../ducks/handle-errors.duck";
+
+  // Actions names
+  export const FETCH_PATIENT_VITALS_CREATE_REQUEST = 'FETCH_PATIENT_VITALS_CREATE_REQUEST';
+  export const FETCH_PATIENT_VITALS_CREATE_SUCCESS = 'FETCH_PATIENT_VITALS_CREATE_SUCCESS';
+  export const FETCH_PATIENT_VITALS_CREATE_FAILURE = 'FETCH_PATIENT_VITALS_CREATE_FAILURE';
+
+  // Actions
+  export const fetchPatientVitalsCreateRequest = createAction(FETCH_PATIENT_VITALS_CREATE_REQUEST);
+  export const fetchPatientVitalsCreateSuccess = createAction(FETCH_PATIENT_VITALS_CREATE_SUCCESS);
+  export const fetchPatientVitalsCreateFailure = createAction(FETCH_PATIENT_VITALS_CREATE_FAILURE);
+
+  // Epics for async actions
+  export const fetchPatientVitalsCreateEpic = (action$, store) => {};
+
+  // reducer
+  export default function reducer(patientVitalsCreate = {}, action) {
+    switch (action.type) {
+      case FETCH_PATIENT_VITALS_CREATE_SUCCESS:
+        return action.payload;
+      default:
+        return patientVitalsCreate
+    }
+  }
 </pre>

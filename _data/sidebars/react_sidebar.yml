@@ -80,9 +80,9 @@ entries:
 #    - title: TeleHealth (WebRTC)
 #      url: /react-webRTC.html
 #      output: web, pdf
-#    - title: Documents
-#      url: /react-documents.html
-#      output: web, pdf
+    - title: Documents
+      url: /react-documents.html
+      output: web, pdf
     - title: Orders
       url: /react-orders.html
       output: web, pdf
@@ -92,33 +92,36 @@ entries:
     - title: Procedures
       url: /react-procedures.html
       output: web, pdf
-#    - title: Clinical Statements
-#      url: /react-clinical-statements.html
-#      output: web, pdf
+    - title: Clinical Statements
+      url: /react-clinical-statements.html
+      output: web, pdf
     - title: Personal Notes
       url: /react-personal-notes.html
       output: web, pdf
     - title: Vaccinations
       url: /react-vaccinations.html
       output: web, pdf
-#    - title: Vitals
-#      url: /react-vitals.html
-#      output: web, pdf
-#    - title: Images
-#      url: /react-images.html
-#      output: web, pdf
-#    - title: Drawings
-#      url: /react-drawings.html
-#      output: web, pdf
+    - title: Vitals
+      url: /react-vitals.html
+      output: web, pdf
+    - title: Images
+      url: /react-images.html
+      output: web, pdf
+    - title: Drawings
+      url: /react-drawings.html
+      output: web, pdf
     - title: Referrals
       url: /react-referrals.html
       output: web, pdf
     - title: MDT
       url: /react-mdt.html
       output: web, pdf
-#    - title: Transfers Of Care
-#      url: /react-transfers-of-care.html
-#      output: web, pdf
+    - title: Transfers Of Care
+      url: /react-transfers-of-care.html
+      output: web, pdf
+    - title: PROMs
+      url: /react-proms.html
+      output: web, pdf
     - title: Generic Plugin
       url: /react-generic-plugin.html
       output: web, pdf
