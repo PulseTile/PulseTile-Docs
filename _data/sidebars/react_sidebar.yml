@@ -68,18 +68,18 @@ entries:
     - title: Plugin Catalogue
       url: /react-plugin-tiles-landing.html
       output: web, pdf
-#    - title: Plugin Process
-#      url: /react-plugin-process.html
-#      output: web, pdf
+    - title: Plugin Process
+      url: /react-plugin-process.html
+      output: web, pdf
     - title: Plugins Q&A
       url: /react-pluginsQA.html
       output: web, pdf
     - title: Events
       url: /react-events.html
       output: web, pdf
-#    - title: TeleHealth (WebRTC)
-#      url: /react-webRTC.html
-#      output: web, pdf
+    - title: TeleHealth (WebRTC)
+      url: /react-webRTC.html
+      output: web, pdf
     - title: Documents
       url: /react-documents.html
       output: web, pdf

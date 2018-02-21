@@ -29,7 +29,7 @@ filename: react-search.html
   // import packages
   import React, { PureComponent } from 'react';
 
-	// React component
+  // React component
   export default class BasicPatientSearch extends PureComponent {
 
     // component template
@@ -39,7 +39,7 @@ filename: react-search.html
   }
 </pre>
 
-<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/containers/AdvancedPatientSearch/AdvancedPatientSearch.js">Advanced Search</a></h4>
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/feature/proms/src/components/containers/AdvancedPatientSearch/AdvancedPatientSearch.js">Advanced Search</a></h4>
 {% include image.html file="search/react-advanced-search.png" url="#" alt="Advanced Search" caption="Advanced Search" %}
 
 <h5>API URL</h5>
@@ -57,14 +57,172 @@ filename: react-search.html
 <pre>
   // import packages
   import React, { PureComponent } from 'react';
+  import PropTypes from 'prop-types';
+  import classNames from 'classnames';
+  import qs from 'qs';
   import { connect } from 'react-redux'
-
   import AdvancedPatientSearchForm from './AdvancedSearchForm/AdvancedPatientSearchForm';
   import formStateSelector from './selectors';
+  import { valuesNames, valuesLabels } from './AdvancedSearchForm/values-names.config';
+  import { nhsNumberValidation } from '../../../utils/validation-helpers/validation.utils';
 
   // Higher-Order Components (HOC) for get some data
   @connect(formStateSelector)
   export default class AdvancedPatientSearch extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+    	return ()
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/feature/proms/src/components/containers/AdvancedPatientSearch/AdvancedSearchForm/AdvancedPatientSearchForm.js">Advanced Search Form</a></h4>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import PropTypes from 'prop-types';
+  import { Field, reduxForm } from 'redux-form'
+  import ValidatedInput from '../../../form-fields/ValidatedInputFormGroup';
+  import SelectFormGroup from '../../../form-fields/SelectFormGroup';
+  import CustomInputCheckbox from '../../../form-fields/CustomInputCheckbox';
+  import DateInput from '../../../form-fields/DateInput';
+  import RangeInput from '../../../form-fields/RangeInput';
+  import { defaultFormValues } from './default-values.config';
+  import { optionsForAgeField } from './options-for-select.config';
+  import { validateAdvancedSearchValues } from './validation';
+  import { valuesNames } from './values-names.config';
+
+  // decorator to connect its form component to Redux
+  @reduxForm({
+    form: 'advancedPatientSearchForm',
+    validate: validateAdvancedSearchValues,
+  })
+  export default class AdvancedPatientSearchForm extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+    	return ()
+    }
+  }
+</pre>
+
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/feature/proms/src/components/containers/ClinicalQuerySearch/ClinicalQuerySearch.js">Clinical Query Search</a></h4>
+{% include image.html file="search/clinical-query-search.jpg" url="#" alt="Clinical Query Search" caption="Clinical Query Search" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/querySearch
+</pre>
+<h5>POST data</h5>
+<pre>
+  {
+    maxValue: 93,
+    minValue: 10,
+    queryContains: true,
+    queryText: "Ivor",
+    sexFemale: false,
+    sexMale: true,
+    type: "allergies",
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import PropTypes from 'prop-types';
+  import classNames from 'classnames';
+  import qs from 'qs';
+  import { connect } from 'react-redux'
+  import ClinicalQuerySearchForm from './ClinicalQuerySearchForm/ClinicalQuerySearchForm';
+  import formStateSelector from './selectors';
+  import { getDDMMMYYYY } from '../../../utils/time-helpers.utils';
+  import { clientUrls } from '../../../config/client-urls.constants';
+  import { valuesNames, valuesLabels } from './forms.config';
+
+  // Higher-Order Components (HOC) for get some data
+  @connect(formStateSelector)
+  export default class ClinicalQuerySearch extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+    	return ()
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/feature/proms/src/components/containers/ClinicalQuerySearch/ClinicalQuerySearchForm/ClinicalQuerySearchForm.js">Clinical Query Search Form</a></h4>
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import PropTypes from 'prop-types';
+  import { Field, reduxForm } from 'redux-form'
+  import ValidatedInput from '../../../form-fields/ValidatedInputFormGroup';
+  import SelectFormGroup from '../../../form-fields/SelectFormGroup';
+  import CustomInputCheckbox from '../../../form-fields/CustomInputCheckbox';
+  import DateInput from '../../../form-fields/DateInput';
+  import RangeInput from '../../../form-fields/RangeInput';
+  import { defaultFormValues } from './default-values.config';
+  import { validateForm } from '../forms.validation';
+  import { valuesNames, valuesLabels, optionsForAgeField, optionsForSearchQuery, optionsForSearchType } from '../forms.config';
+
+  // decorator to connect its form component to Redux
+  @reduxForm({
+    form: 'clinicalQuerySearchForm',
+    validate: validateForm,
+  })
+  export default class ClinicalQuerySearchForm extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+    	return ()
+    }
+  }
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/feature/proms/src/components/pages/SearchReport/SearchReport.js">Search Report after Clinical Query Searching</a></h4>
+{% include image.html file="search/search-report.jpg" url="#" alt="Search Report after Clinical Query Searching with results data" caption="Search Report after Clinical Query Searching with results data" %}
+{% include image.html file="search/search-report-empty.jpg" url="#" alt="Search Report after Clinical Query Searching with empty results data" caption="Search Report after Clinical Query Searching with empty results data" %}
+
+<h5>Component structure</h5>
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import PropTypes from 'prop-types';
+  import qs from 'qs';
+  import { bindActionCreators } from 'redux';
+  import { connect } from 'react-redux';
+  import { compose, lifecycle } from 'recompose';
+  import { Row, Col } from 'react-bootstrap';
+  import PTPanel from '../../ui-elements/PTPanel/PTPanel';
+  import PatientsChart from '../../containers/PatientsChart/PatientsChart';
+  import { fetchPatientOnSearch } from '../../../utils/HOCs/fetch-patient-on-search.utils';
+  import { fetchClinicalQuerySearchRequest } from '../../../ducks/fetch-clinical-query-search.duck';
+  import { fetchBasicPatientSearchRequest } from '../../../ducks/fetch-basic-patient-search.duck';
+  import { patientsSelector, clinicalQuerySearchSelector } from './selectors';
+  import { patientAgeRangesForClinicalSearch } from '../../../config/patients.constants';
+  import { clientUrls } from '../../../config/client-urls.constants';
+
+  // map dispatch to Properties
+  const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ fetchClinicalQuerySearchRequest, fetchBasicPatientSearchRequest }, dispatch) });
+
+  // Higher-Order Components (HOC) for get some data
+  @connect(patientsSelector, mapDispatchToProps)
+  @connect(clinicalQuerySearchSelector)
+  @lifecycle(fetchPatientOnSearch)
+  export default class SearchReport extends PureComponent {
   // React component
 
     // component template

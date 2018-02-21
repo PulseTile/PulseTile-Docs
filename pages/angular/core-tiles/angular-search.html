@@ -47,7 +47,9 @@ filename: angular-search.html
   export default SearchComponent;
 </pre>
 
-<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/search/search-advanced.component.js">Advanced Search</a></h4>
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/search/search-advanced.component.js">Advanced Search and Clinical Query Search</a></h4>
+
+<h4>Advanced Search</h4>
 {% include image.html file="search/patientssearch.png" url="#" alt="Advanced Search" caption="Advanced Search" %}
 
 <h5>API URL</h5>
@@ -61,15 +63,35 @@ filename: angular-search.html
   }
 </pre>
 
+<h4>Clinical Query Search</h4>
+{% include image.html file="search/clinical-query-search.jpg" url="#" alt="Clinical Query Search" caption="Clinical Query Search" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/querySearch
+</pre>
+<h5>POST data</h5>
+<pre>
+  {
+    maxValue: 93,
+    minValue: 10,
+    queryContains: true,
+    queryText: "Ivor",
+    sexFemale: false,
+    sexMale: true,
+    type: "allergies",
+  }
+</pre>
+
+
 <h5>Component structure</h5>
 <pre>
   //component template
   let templateSearch = require('./search-advanced.html');
-  import plugins from '../../plugins';
 
   //controller init
   class SearchAdvancedController {
-    constructor($scope, $http, $ngRedux, serviceRequests, searchActions, $state, $timeout, ConfirmationModal) {
+    constructor($scope, serviceRequests, $state, $timeout, $rootScope, serviceFormatted) {
     }
 
   //component init
@@ -82,8 +104,34 @@ filename: angular-search.html
   };
 
   //inject services/modules to controller
-  SearchAdvancedController.$inject = ['$scope', '$http', '$ngRedux', 'serviceRequests', 'searchActions', '$state', '$timeout', 'ConfirmationModal'];
+  SearchAdvancedController.$inject = ['$scope', 'serviceRequests', '$state', '$timeout', '$rootScope', 'serviceFormatted'];
   //es6 export for component
   export default SearchAdvancedComponent;
 </pre>
 
+
+<h4><a href="https://github.com/PulseTile/PulseTile/blob/develop/src/app/pulsetileui/search/report-chart.component.js">Search Report after Clinical Query Searching</a></h4>
+{% include image.html file="search/search-report.jpg" url="#" alt="Search Report after Clinical Query Searching with results data" caption="Search Report after Clinical Query Searching with results data" %}
+{% include image.html file="search/search-report-empty.jpg" url="#" alt="Search Report after Clinical Query Searching with empty results data" caption="Search Report after Clinical Query Searching with empty results data" %}
+
+<h5>Component structure</h5>
+<pre>
+  //component template
+  let templateReportChart = require('./report-chart.html');
+
+  //controller init
+  class ReportChartController {
+    constructor($scope, $state, $ngRedux, $stateParams, searchActions, serviceRequests, Patient, $window, $timeout, serviceFormatted) {
+    }
+
+  //component init
+  const ReportChartComponent = {
+    template: templateReportChart,
+    controller: ReportChartController
+  };
+
+  //inject services/modules to controller
+  ReportChartController.$inject = ['$scope', '$state', '$ngRedux', '$stateParams', 'searchActions', 'serviceRequests', 'Patient', '$window', '$timeout', 'serviceFormatted'];
+  //es6 export for component
+  export default ReportChartController;
+</pre>

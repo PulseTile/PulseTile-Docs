@@ -10,7 +10,6 @@ filename: react-proms.html
 
 <h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/PROMs/Proms.js">PROMs</a></h4>
 {% include image.html file="proms/proms-list-table.jpg" url="#" alt="PROMs table view" caption="PROMs table view" %}
-{% include image.html file="proms/proms-list-graph.jpg" url="#" alt="PROMs graph view" caption="PROMs graph view" %}
 
 <h5>API URL</h5>
 <pre>
@@ -246,6 +245,61 @@ filename: react-proms.html
     validate: validateForm,
   })
   export default class PromsCreateForm extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/PROMs/proms-page-component/PromsChart.js">PROMs Chart</a></h4>
+{% include image.html file="proms/proms-list-graph.jpg" url="#" alt="PROMs graph view" caption="PROMs graph view" %}
+
+<pre>
+  // import packages
+  import React from 'react';
+  import { Line } from 'react-chartjs-2';
+
+  // React component as function
+  const PromsChart = props => {};
+
+  // Export component
+  export default PromsChart;
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/PROMs/proms-page-component/PromsListHeader.js">PROMs List Header of Panel</a></h4>
+
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import PropTypes from 'prop-types';
+  import classNames from 'classnames';
+  import PTButton from '../../../ui-elements/PTButton/PTButton';
+
+  export default class PromsListHeader extends PureComponent {
+  // React component
+
+    // component template
+    render() {
+      return ()
+    }
+  }
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/PROMs/proms-page-component/PromsMainPanel.js">PROMs List Main Panel</a></h4>
+
+<pre>
+  // import packages
+  import React, { PureComponent } from 'react';
+  import PTButton from '../../../ui-elements/PTButton/PTButton';
+  import SortableTable from '../../../containers/SortableTable/SortableTable';
+  import PaginationBlock from '../../../presentational/PaginationBlock/PaginationBlock';
+  import Spinner from '../../../ui-elements/Spinner/Spinner';
+  import PromsChart from './PromsChart';
+
+  export default class PromsMainPanel extends PureComponent {
   // React component
 
     // component template
