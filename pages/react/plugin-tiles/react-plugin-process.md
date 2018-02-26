@@ -10,13 +10,13 @@ filename: react-plugin-process.md
 
 ## Plugin's development:
 
-To get started, copy the core project (https://github.com/PulseTile/PulseTile-React) for creating your functionality environment.
+To get started, copy the core project (https://github.com/PulseTile/PulseTile-React) for creating your functional environment.
 
 ### Structure of ExamplePlugins
-To create a new Heading, you can create a new folder in the path ```src/components/pages```
+To create a new Heading, you can create a new folder by the following path ```src/components/pages```
 
-To implement simple Heading (e.g. 'ExamplePlugins'), you can use the following structure.
-For example, you can also look at the implementation of simple Heading in the repository PulseTile-React - [GenericPlugin](https://github.com/PulseTile/PulseTile-React/tree/master/src/components/pages/GenericPlugin)
+To implement a simple heading (e.g. 'ExamplePlugins'), you can use the following structure.
+For example, you can, also look at the implementation of the simple heading in the repository PulseTile-React - [GenericPlugin](https://github.com/PulseTile/PulseTile-React/tree/master/src/components/pages/GenericPlugin)
 
 ```
 src/components/pages
