@@ -13,10 +13,10 @@ filename: react-plugin-process.md
 To get started, copy the core project (https://github.com/PulseTile/PulseTile-React) for creating your functional environment.
 
 ### Structure of ExamplePlugins
-To create a new Heading, you can create a new folder by the following path ```src/components/pages```
+To create a new heading, you can create a new folder by the following path ```src/components/pages```
 
-To implement a simple heading (e.g. 'ExamplePlugins'), you can use the following structure.
-For example, you can, also look at the implementation of the simple heading in the repository PulseTile-React - [GenericPlugin](https://github.com/PulseTile/PulseTile-React/tree/master/src/components/pages/GenericPlugin)
+To implement a simple heading (e.g. 'ExamplePlugins'), you can use the structure mentioned below.
+For example, you can also look at the implementation of the simple heading in the repository PulseTile-React - [GenericPlugin](https://github.com/PulseTile/PulseTile-React/tree/master/src/components/pages/GenericPlugin)
 
 ```
 src/components/pages
@@ -42,44 +42,44 @@ src/components/pages
     - selectors.js
     - table-columns.config.js
 ```
-Below is information on the description of each file and its need.
+Below you can find the information with the description of each file and its role.
 
 #### ExamplePlugins.js
-This is the main component of the plugin. This includes all internal components and implements the business logic of your plug-in.
+This is the main component of the plugin. It includes all internal components and implements the business logic of your plug-in.
 
 ##### Component structure
 ```
-  // import main packages
+  // to import main packages
   import React, { PureComponent } from 'react';
   import { bindActionCreators } from 'redux';
   import { connect } from 'react-redux';
   import { lifecycle, compose } from 'recompose';
 
-  // import auxiliary components for the implementation of panels
+  // to import auxiliary components for the implementation of panels
   import PluginListHeader from '../../plugin-page-component/PluginListHeader';
   import PluginCreate from '../../plugin-page-component/PluginCreate';
   import PluginMainPanel from '../../plugin-page-component/PluginMainPanel';
 
-  // import internal components
+  // to import internal components
   import ExamplePluginsDetail from './ExamplePluginsDetail/ExamplePluginsDetail';
   import ExamplePluginsCreateForm from './ExamplePluginsCreate/ExamplePluginsCreateForm';
 
-  // import actions for start of requests to server
+  // to import actions for fetching the requests to server
   import { fetchExamplePluginsRequest } from './ducks/fetch-example-plugins.duck';
   import { fetchExamplePluginsCreateRequest } from './ducks/fetch-example-plugins-create.duck';
   import { fetchExamplePluginsDetailRequest } from './ducks/fetch-example-plugins-detail.duck';
   import { fetchExamplePluginsDetailEditRequest } from './ducks/fetch-example-plugins-detail-edit.duck';
 
-  // import selectors for to retrieve data from the main storage
+  // to import selectors for retrieving data from the main storage
   import { patientExamplePluginsSelector, patientExamplePluginsDetailSelector, personalNotePanelFormSelector, personalCreateFormStateSelector } from './selectors';
 
-  // import additional functions for the simple handling of data collections
+  // to import additional functions for the simple handling of data collections
   import { checkIsValidateForm, operationsOnCollection } from '../../../utils/plugin-helpers.utils';
 
-  // map dispatch to Properties
+  // to map dispatch to Properties
   const mapDispatchToProps = dispatch => ({ actions: bindActionCreators({ fetchExamplePluginsRequest, fetchExamplePluginsDetailRequest, fetchExamplePluginsDetailEditRequest, fetchExamplePluginsCreateRequest }, dispatch) });
 
-  // Higher-Order Components (HOC) for get some data
+  // Higher-Order Components (HOC) for getting some data
   @connect(patientExamplePluginsSelector, mapDispatchToProps)
   @connect(patientExamplePluginsDetailSelector, mapDispatchToProps)
   @connect(personalNotePanelFormSelector)
@@ -88,7 +88,7 @@ This is the main component of the plugin. This includes all internal components 
   @compose(lifecycle(fetchExamplePluginsOnMount), lifecycle(fetchExamplePluginsDetailOnMount))
   // React component
   export default class ExamplePlugins extends PureComponent {
-    // Implementing the Functional of a Component
+    // implementing the functionality of a Component
 
     // component template
     render() {
@@ -102,13 +102,13 @@ This component is needed to display more information about one record from the l
 
 ##### Component structure
 ```
-  // import packages
+  // to import packages
   import React, { PureComponent } from 'react';
 
-  // import auxiliary components for the implementation of panels
+  // to import auxiliary components for the implementation of panels
   import PluginDetailPanel from '../../../plugin-page-component/PluginDetailPanel'
 
-  // import internal components
+  // to import internal components
   import ExamplePluginsDetailForm from './ExamplePluginsDetailForm'
 
   // React component
@@ -127,22 +127,22 @@ This component contains a form for editing information about one record from the
 
 ##### Component structure
 ```
-  // import of main packages
+  // to import the main packages
   import React, { PureComponent } from 'react';
   import { Field, reduxForm } from 'redux-form'
 
-  // import of Fields components
+  // to import the Fields components
   import ValidatedInput from '../../../form-fields/ValidatedInputFormGroup';
   import ValidatedTextareaFormGroup from '../../../form-fields/ValidatedTextareaFormGroup';
   import DateInput from '../../../form-fields/DateInput';
 
-  // import of constants containing the names of fields and their labels
+  // to import the constants containing the names of fields and their labels
   import { valuesNames, valuesLabels } from '../forms.config';
 
-  // import of function for validate of form
+  // to import the function to validate form
   import { validateForm } from '../forms.validation';
 
-  // decorator to connect its form component to Redux
+  // decorator to connect this component form to Redux
   @reduxForm({
     form: 'examplePluginPanelFormSelector',
     validate: validateForm,
@@ -162,22 +162,22 @@ This component contains a form for editing information about one record from the
 
 ##### Component structure
 ```
-  // import of main packages
+  // to import the main packages
   import React, { PureComponent } from 'react';
   import { Field, reduxForm } from 'redux-form'
 
-  // import of Fields components
+  // to import the Fields components
   import ValidatedInput from '../../../form-fields/ValidatedInputFormGroup';
   import ValidatedTextareaFormGroup from '../../../form-fields/ValidatedTextareaFormGroup';
   import DateInput from '../../../form-fields/DateInput';
 
-  // import of constants containing the names of fields and their labels
+  // to import the constants containing the names of fields and their labels
   import { valuesNames, valuesLabels } from '../forms.config';
 
-  // import of function for validate of form
+  // to import the function for validate of form
   import { validateForm } from '../forms.validation';
 
-  // import of object contains default values of fields
+  // to import of object contains default values of fields
   import { defaultFormValues } from './default-values.config';
 
   // decorator to connect its form component to Redux
@@ -196,8 +196,8 @@ This component contains a form for editing information about one record from the
 ```
 
 #### default-values.config.js
-It's just an object containing the default values of the fields for pre-populating before editing the fields by the users.
-Used in component ExamplePluginsCreateForm
+It's just an object containing the default values of the fields for pre-populating before editing the fields by users.
+It is used in component ExamplePluginsCreateForm
 
 ##### File structure
 ```
@@ -207,8 +207,8 @@ Used in component ExamplePluginsCreateForm
 ```
 
 #### forms.config.js
-This file contains 2 basic configuration objects for working with fields in forms and for displaying detailed information about the record.
-You can also add additional configuration objects here for use in forms
+This file contains 2 basic configuration objects for working with the fields in forms and for displaying detailed information about the record.
+You can also add additional configuration objects here to use it in forms
 
 ##### File structure
 ```
@@ -246,7 +246,7 @@ This file contains 2 configuration objects for configuring the main record table
 ##### File structure
 ```
   // The object contains the setting of possible columns in the table
-  // transformer - it is function, which is called before the display of the field and is necessary for the modification of the field itself
+  // transformer - it is a function, which is called before the displaying of the field and is necessary for the modification of the field itself
   export const columnsConfig = [
     { key: 'nameOfField', title: 'Title of Field', transformer: transformerFunction, width: '30%' },
     { key: 'sourceId', title: 'SourceID', display: 'none' },
@@ -264,11 +264,11 @@ This file contains 2 configuration objects for configuring the main record table
   - fetch-example-plugins-detail.duck.js
   - fetch-example-plugins-detail-edit.duck.js
 
-Each of this files contains all of its related constants, actions/action creators, epic, and it’s reducer for work with requests to server
+Each of these files contains all of its related constants, actions/action creators, epic, and its reducer for work with requests to server
 
 ##### File structure
 ```
-  // import packages
+  // to import packages
   import { Observable } from 'rxjs';
   import { ajax } from 'rxjs/observable/dom/ajax';
   import { createAction } from 'redux-actions';
@@ -303,7 +303,7 @@ Selector - this is a function that extracts the necessary data from a centralize
 
 ##### File structure
 ```
-  // import packages
+  // to import packages
   import { createSelector } from 'reselect';
   import _ from 'lodash/fp';
 
@@ -322,10 +322,10 @@ Selector - this is a function that extracts the necessary data from a centralize
 ```
 
 #### index.js
-This is the main file of the new Heading, which exports all the resources of this plugin to the application core and configuration objects.
+This is the main file of the new heading, which exports all the resources of this plugin to the application core and configuration objects.
 
 ```
-  // import all resources
+  // to import all resources
   import { combineEpics } from 'redux-observable';
 
   import ExamplePlugins from './ExamplePlugins';
@@ -365,7 +365,7 @@ This is the main file of the new Heading, which exports all the resources of thi
   }
 ```
 
-### Steps to connect the Plugin to the apps core
+### Steps how to connect the Plugin to the apps core
 
 #### 1. Connection index.js
 1. Go to ```src/plugins.config.js```
@@ -411,8 +411,8 @@ This is the main file of the new Heading, which exports all the resources of thi
 ```
 
 #### 3. Generating a component subscription to requests from the server
-1. Go to ```src/utils/HOCs/fetch-patients.utils.js```
-2. Create new Higher-Order Components (HOC) for realizing call requests in the life cycle of a component.
+1. Please, go to ```src/utils/HOCs/fetch-patients.utils.js```
+2. Create a new Higher-Order Component (HOC) for realizing call requests in the life cycle of a component.
 
 ##### Example code
 ```
