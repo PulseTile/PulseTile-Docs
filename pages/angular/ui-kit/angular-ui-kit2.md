@@ -3,9 +3,9 @@ title: PulseTile - Core - UI Kit
 keywords: UIKit
 sidebar: angular_sidebar
 toc: false
-permalink: ui-kit-page.html
+permalink: angular-ui-kit-page.html
 folder: ui_kit
-filename: ui-kit2.md
+filename: angular-ui-kit2.md
 ---
 
 We link from here to our UI kit that is derived from our working showcase application.

@@ -1,11 +1,11 @@
 ---
 title: PulseTile - Core - UI Kit
 keywords: UIKit
-sidebar: angular_sidebar
+sidebar: react_sidebar
 toc: false
-permalink: ui-kit-page.html
+permalink: react-ui-kit-page.html
 folder: ui_kit
-filename: ui-kit2.md
+filename: react-ui-kit2.md
 ---
 
 We link from here to our UI kit that is derived from our working showcase application.

@@ -1,10 +1,10 @@
 ---
 title: Core UI
 keywords: mydoc
-sidebar: angular_sidebar
+sidebar: react_sidebar
 toc: false
 permalink: ui-kit-original.html
-folder: angular/ui-kit
+folder: react/ui-kit
 ---
 
 This section contains description for UI elements.
