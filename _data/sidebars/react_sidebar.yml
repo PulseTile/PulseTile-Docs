@@ -28,6 +28,13 @@ entries:
       url: /react-rxjs-technology.html
       output: web-mc, pdf
 
+  - title: UI Kit
+    output: web-mc, pdf
+    folderitems:
+    - title: UI Kit
+      url: /ui-kit-page.html
+      output: web
+
   - title: Core Tiles
     output: web, pdf
     folderitems:
