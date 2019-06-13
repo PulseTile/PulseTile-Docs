@@ -1,0 +1,215 @@
+---
+title: Top Three Things module
+keywords: sample
+summary: "Top Three Things module"
+sidebar: react_admin_sidebar
+permalink: react-admin-top-three-things.html
+folder: react-admin/plugin-tiles
+filename: react-admin-top-three-things.html
+---
+
+<h4>General information</h4>
+
+<p>
+    Top Three Things is a non-core plugin of PulseTile-RA.
+    It is used to create, edit and review information about Top Three Things of the current patient.
+    Actions, Reducer and Sagas required for the Top Three Things plugin are created automatically by React-Admin framework, because all operations are typical.
+</p>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/TopThreeThings/TopThreeThingsList.js" target="_blank">Top Three Things List</a></h4>
+
+{% include image.html file="react-admin/top3Things/top3Thingsgeneral.png" url="#" alt="Top Three Things List" caption="Top Three Things List" %}
+
+<h5>API URL</h5>
+
+<pre>
+  /api/patients/{patientId}/top3Things
+</pre>
+
+<h5>GET response</h5>
+
+<pre>
+  {
+    dateCreated: 1556800238000,
+    name1: "I am a carer",
+    name2: "Struggling with sleep",
+    name3: "I have a cat",
+    source: "ethercis",
+    sourceId: "ethercis-70ead587-e929-4297-9732-7a3f35fe139d",
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+
+import React from "react";
+import { DateField, TextField } from "react-admin";
+
+import ListTemplate from "../../../core/common/ResourseTemplates/ListTemplate";
+import TopThreeThingsCreate from "./TopThreeThingsCreate";
+import TopThreeThingsEdit from "./TopThreeThingsEdit";
+import TopThreeThingsShow from "./TopThreeThingsShow";
+import DatagridRow from "./fragments/DatagridRow";
+
+const TopThreeThingsList = ({ classes, ...rest }) => (
+    <&zwj;ListTemplate
+      create={TopThreeThingsCreate}
+      edit={TopThreeThingsEdit}
+      show={TopThreeThingsShow}
+      resourceUrl="top3Things"
+      title="Top Three Things"
+      CustomRow={DatagridRow}
+      isCustomDatagrid={true}
+      {...rest}
+    >
+        <&zwj;DateField source="dateCreated" label="Date created"  />
+        <&zwj;TextField source="name1" label="Issue #1" />
+        <&zwj;TextField source="name2" label="Issue #2" />
+        <&zwj;TextField source="name3" label="Issue #3" />
+        <&zwj;TextField source="source" label="Source" />
+    <&zwj;/ListTemplate>
+);
+
+export default TopThreeThingsList;
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/TopThreeThings/TopThreeThingsShow.js" target="_blank">Top Three Things Detail</a></h4>
+
+{% include image.html file="react-admin/top3Things/top3Thingsdetail.png" url="#" alt="Top Three Things Detail" caption="Top Three Things Detail" %}
+
+<h5>API URL</h5>
+
+<pre>
+  /api/patients/{patientId}/top3Things/{sourceId}
+</pre>
+
+<h5>GET response</h5>
+<pre>
+  {
+    author: "Robert Tweed",
+    dateCreated: 1559643539000,
+    description1: "Allergy to nut (disorder)",
+    description2: "Adverse reaction caused by lysergide (disorder)",
+    description3: "Allergy to eggs (disorder)",
+    name1: "Allergy to nut (disorder)",
+    name2: "Adverse reaction caused by lysergide (disorder)",
+    name3: "Allergy to eggs (disorder)",
+    source: "ethercis",
+    sourceId: "ethercis-dc94f380-ec1b-46de-96ee-81429b06693c",
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+import { TextField, DateField } from "react-admin";
+import { withStyles } from '@material-ui/core/styles';
+
+import ShowTemplate from "../../../core/common/ResourseTemplates/ShowTemplate";
+
+const TopThreeThingsShow = ({ classes, ...rest }) => (
+    <&zwj;ShowTemplate pageTitle="Top Three Things" {...rest}>
+        <&zwj;TextField source="name1" label="Issue #1" />
+        <&zwj;TextField source="description1" label="Description #1" />
+        <&zwj;TextField source="name2" label="Issue #2" />
+        <&zwj;TextField source="description2" label="Description #2" />
+        <&zwj;TextField source="name3" label="Issue #3" />
+        <&zwj;TextField source="description3" label="Description #3" />
+    <&zwj;/ShowTemplate>
+);
+
+export default withStyles(styles)(TopThreeThingsShow);
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/TopThreeThings/TopThreeThingsEdit.js" target="_blank">Top Three Things Edit Page</a></h4>
+
+{% include image.html file="react-admin/top3Things/top3Thingsedit.png" url="#" alt="Top Three Things Edit" caption="Top Three Things Edit" %}
+
+<h5>API URL</h5>
+
+<pre>
+  /api/patients/{patientId}/top3Things/{sourceId}
+</pre>
+
+<h5>PUT data</h5>
+
+<pre>
+  {
+    author: "Robert Tweed",
+    dateCreated: 1559643539000,
+    dateSubmitted: "06/12/2019",
+    description1: "Allergy to nut (disorder)",
+    description2: "Adverse reaction caused by lysergide (disorder)",
+    description3: "Allergy to eggs (disorder)",
+    id: "ethercis-dc94f380-ec1b-46de-96ee-81429b06693c",
+    name1: "Allergy to nut (disorder)",
+    name2: "Adverse reaction caused by lysergide (disorder)",
+    name3: "Allergy to eggs (disorder)",
+    source: "ethercis",
+    sourceId: "ethercis-dc94f380-ec1b-46de-96ee-81429b06693c",
+    userId: "9999999801",
+  }
+</pre>
+
+<h5>Component structure</h5>
+
+<pre>
+import React from "react";
+
+import EditTemplate from "../../../core/common/ResourseTemplates/EditTemplate";
+import Inputs from "./fragments/Inputs";
+
+const TopThreeThingsEdit = ({ classes, ...rest }) => (
+    <&zwj;EditTemplate blockTitle="Top Three Things" {...rest}>
+        <&zwj;Inputs />
+    <&zwj;/EditTemplate>
+);
+
+export default TopThreeThingsEdit;
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/TopThreeThings/TopThreeThingsCreate.js" target="_blank">Top Three Things Create Page</a></h4>
+
+{% include image.html file="react-admin/top3Things/top3Thingscreate.png" url="#" alt="Top Three Things Create" caption="Top Three Things Create" %}
+
+<h5>API URL</h5>
+
+<pre>
+  /api/patients/{patientId}/top3Things
+</pre>
+
+<h5>POST data</h5>
+
+<pre>
+  {
+    author: "Robert Tweed",
+    dateSubmitted: "06/12/2019",
+    description1: "Description1",
+    description2: "Description2",
+    description3: "Description3",
+    name1: "issue1",
+    name2: "issue2",
+    name3: "issue3",
+    userId: "9999999801",
+  }
+</pre>
+
+<h5>Component structure</h5>
+
+<pre>
+import React from "react";
+
+import CreateTemplate from "../../../core/common/ResourseTemplates/CreateTemplate";
+import Inputs from "./fragments/Inputs";
+
+const TopThreeThingsCreate = ({ classes, ...rest }) => (
+    <&zwj;CreateTemplate blockTitle="Top Three Things" {...rest}>
+        <&zwj;Inputs />
+    <&zwj;/CreateTemplate>
+);
+
+export default TopThreeThingsCreate;
+</pre>

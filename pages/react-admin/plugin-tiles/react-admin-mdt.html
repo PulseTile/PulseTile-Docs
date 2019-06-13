@@ -1,0 +1,206 @@
+---
+title: MDT module
+keywords: sample
+summary: "MDT module"
+sidebar: react_admin_sidebar
+permalink: react-admin-mdt.html
+folder: react-admin/plugin-tiles
+filename: react-admin-mdt.html
+---
+
+<h4>General information</h4>
+
+<p>
+    MDT is a non-core plugin of PulseTile-RA.
+    It is used to create, edit and review information about MDT of the current patient.
+    Actions, Reducer and Sagas required for the MDT plugin are created automatically by React-Admin framework, because all operations are typical.
+</p>
+
+<h4>
+    <a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/MDT/MdtList.js" target="_blank">MDT List</a>
+</h4>
+
+{% include image.html file="react-admin/mdt/mdtgeneral.png" url="#" alt="MDT List" caption="MDT List" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/mdtreports
+</pre>
+
+<h5>GET response</h5>
+<pre>
+  {
+    dateOfMeeting: 1558479600000,
+    dateOfRequest: 1557097200000,
+    serviceTeam: "Test MDT",
+    source: "ethercis",
+    sourceId: "ethercis-3b913746-9e5d-40e5-96ca-a8ad418ef9e8",
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+import { DateField, TextField } from "react-admin";
+
+import ListTemplate from "../../../core/common/ResourseTemplates/ListTemplate";
+import MdtCreate from "./MdtCreate";
+import MdtEdit from "./MdtEdit";
+import MdtShow from "./MdtShow";
+import DatagridRow from "./fragments/DatagridRow";
+
+const MdtList = ({ classes, ...rest }) => (
+    <&zwj;ListTemplate
+      create={MdtCreate}
+      edit={MdtEdit}
+      show={MdtShow}
+      resourceUrl="mdtreports"
+      title="Generic MDT"
+      CustomRow={DatagridRow}
+      isCustomDatagrid={true}
+      {...rest}
+    >
+        <&zwj;DateField label="Date of Request" source="dateOfRequest" />
+        <&zwj;TextField label="Service / Team" source="serviceTeam" />
+        <&zwj;DateField label="Date of Meeting" source="dateOfMeeting" />
+        <&zwj;TextField label="Source" source="source" />
+    <&zwj;/ListTemplate>
+);
+
+export default MdtList;
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/MDT/MdtShow.js" target="_blank">MDT Detail</a></h4>
+
+{% include image.html file="react-admin/mdt/mdtdetail.png" url="#" alt="MDT Detail" caption="MDT Detail" %}
+
+<h5>API URL</h5>
+
+<pre>
+  /api/patients/{patientId}/mdtreports/{sourceId}
+</pre>
+
+<h5>GET response</h5>
+<pre>
+  {
+    dateOfMeeting: 1559602800000,
+    dateOfRequest: 1559430000000,
+    notes: "test",
+    question: "test",
+    servicePageLink: "",
+    serviceTeam: "test",
+    source: "ethercis",
+    sourceId: "ethercis-55227455-3c85-451e-aba2-9077003a71fa",
+    timeOfMeeting: 0,
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+import { TextField, DateField } from "react-admin";
+import { withStyles } from '@material-ui/core/styles';
+
+import ShowTemplate from "../../../core/common/ResourseTemplates/ShowTemplate";
+
+const MdtShow = ({ classes, ...rest }) => (
+    <&zwj;ShowTemplate pageTitle="MDT" {...rest}>
+        <&zwj;TextField source="serviceTeam" label="Service / Team" />
+        <&zwj;DateField source="dateOfRequest" label="Date of Request" />
+        <&zwj;DateField source="dateOfMeeting" label="Date of Meeting" />
+        <&zwj;TextField source="servicePageLink" label="Link to MDT Web Service Directory" />
+        <&zwj;TextField source="question" label="Question For MDT" />
+        <&zwj;TextField source="notes" label="Meeting Discussion" />
+    <&zwj;/ShowTemplate>
+);
+
+export default withStyles(styles)(MdtShow);
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/MDT/MdtEdit.js" target="_blank">MDT Edit Page</a></h4>
+
+{% include image.html file="react-admin/mdt/mdtedit.png" url="#" alt="MDT Edit" caption="MDT Edit" %}
+
+<h5>API URL</h5>
+
+<pre>
+  /api/patients/{patientId}/mdtreports/{sourceId}
+</pre>
+
+<h5>PUT data</h5>
+<pre>
+{
+    author: "Robert Tweed",
+    dateOfMeeting: 1559602800000,
+    dateOfRequest: 1559430000000,
+    dateSubmitted: "06/13/2019",
+    id: "ethercis-55227455-3c85-451e-aba2-9077003a71fa",
+    notes: "test",
+    question: "test",
+    servicePageLink: "test",
+    serviceTeam: "test",
+    source: "ethercis",
+    sourceId: "ethercis-55227455-3c85-451e-aba2-9077003a71fa",
+    timeOfMeeting: 0,
+    userId: "9999999801",
+}
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+
+import EditTemplate from "../../../core/common/ResourseTemplates/EditTemplate";
+import Inputs from "./fragments/Inputs";
+
+const MdtEdit = ({ classes, ...rest }) => (
+    <&zwj;EditTemplate blockTitle="MDT"  {...rest}>
+        <&zwj;Inputs />
+    <&zwj;/EditTemplate>
+);
+
+export default MdtEdit;
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/MDT/MdtCreate.js" target="_blank">MDT Create Page</a></h4>
+
+{% include image.html file="react-admin/mdt/mdtcreate.png" url="#" alt="MDT Create" caption="MDT Create" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/mdtreports
+</pre>
+
+<h5>POST data</h5>
+<pre>
+  {
+    author: "Robert Tweed",
+    dateOfMeeting: "2019-06-04",
+    dateOfRequest: "2019-06-02",
+    dateSubmitted: "06/13/2019",
+    notes: "test",
+    question: "test",
+    servicePageLink: "test",
+    serviceTeam: "test",
+    userId: "9999999801",
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+
+import CreateTemplate from "../../../core/common/ResourseTemplates/CreateTemplate";
+import Inputs from "./fragments/Inputs";
+
+const MdtCreate = ({ classes, ...rest }) => (
+    <&zwj;CreateTemplate blockTitle="MDT" {...rest}>
+        <&zwj;Inputs />
+    <&zwj;/CreateTemplate>
+);
+
+export default MdtCreate;
+</pre>

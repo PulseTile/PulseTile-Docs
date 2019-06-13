@@ -1,0 +1,80 @@
+# This is your sidebar TOC. The sidebar code loops through sections here and provides the appropriate formatting.
+entries:
+- title: PulseTile-RA Sidebar
+  product: PulseTile-RA Documentation
+  levels: one
+  flagSidebar: accordeon
+  folders:
+
+  - title: Technologies
+    output: web, pdf
+    folderitems:
+    - title: Background
+      url: /react-admin-background.html
+      output: web-mc
+    - title: Technologies Stack
+      url: /react-admin-tech-intro.html
+      output: web-mc
+    - title: React
+      url: /react-admin-react.html
+      output: web-mc
+    - title: Redux
+      url: /react-admin-redux.html
+      output: web-mc
+
+  - title: Core Tiles
+    output: web, pdf
+    folderitems:
+    - title: Core Tiles
+      url: /react-admin-core-tiles.html
+      output: web, pdf
+    - title: Patients List
+      url: /react-admin-patients-list.html
+      output: web, pdf
+    - title: Patient Summary
+      url: /react-admin-summary.html
+      output: web, pdf
+    - title: Allergies
+      url: /react-admin-allergies.html
+      output: web, pdf
+    - title: Contacts
+      url: /react-admin-contacts.html
+      output: web, pdf
+    - title: Medications
+      url: /react-admin-medications.html
+      output: web, pdf
+    - title: Problems / Issues
+      url: /react-admin-problems.html
+      output: web, pdf
+
+
+  - title: Plugin Tiles
+    output: web, pdf
+    folderitems:
+    - title: Clinical Notes
+      url: /react-admin-clinical-notes.html
+      output: web, pdf
+    - title: MDT
+      url: /react-admin-mdt.html
+      output: web, pdf
+    - title: Personal Notes
+      url: /react-admin-personal-notes.html
+      output: web, pdf
+    - title: Procedures
+      url: /react-admin-procedures.html
+      output: web, pdf
+    - title: Referrals
+      url: /react-admin-referrals.html
+      output: web, pdf
+    - title: Top Three Things
+      url: /react-admin-top-three-things.html
+      output: web, pdf
+    - title: Vaccinations
+      url: /react-admin-vaccinations.html
+      output: web, pdf
+    - title: Vitals
+      url: /react-admin-vitals.html
+      output: web, pdf
+    - title: ReSPECT
+      url: /react-admin-respect.html
+      output: web, pdf

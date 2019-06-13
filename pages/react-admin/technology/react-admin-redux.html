@@ -1,0 +1,219 @@
+---
+title: Redux
+sidebar: react_admin_sidebar
+toc: false
+permalink: react-admin-redux.html
+folder: react-admin/technology
+filename: react-admin-redux.html
+---
+
+<h3>Redux</h3>
+
+<h4>Redux general information</h4>
+<p>
+	<strong>Redux</strong> is a predictable state container for JavaScript apps.
+	It helps you write applications that behave consistently, run in different environments
+	(client, server, and native), and are easy to test. On top of that, it provides a great developer experience,
+	such as live code editing combined with a time traveling debugger.
+	We use redux module for React - <a href="https://github.com/reactjs/react-redux">https://github.com/reactjs/react-redux</a>
+</p>
+
+<h4>Redux in React-Admin framework</h4>
+
+<p>
+    React-Admin framework based on ReactJS and Redux.
+    All typical operations for CRUDs (create, read, update, delete) actions are realized by framework: React-Admin creates actions and reducers automatically.
+    Developer should only create <a href="https://marmelab.com/react-admin/DataProviders.html" target="_blank">data provider</a>, which is used for running requests to the server side and parse server responses.
+</p>
+
+<p>
+    But in some cases it is necessary to run non-typical request to the server side, or to change custom Store parameters.
+    In this case React-Admin gives possibility to create custom <a href="https://marmelab.com/react-admin/Admin.html" target="_blank">actions, reducers and sagas</a>.
+</p>
+
+<h4>Custom actions in React-Admin</h4>
+
+<p>
+    Actions are payloads of information that send data from your application to your store.
+	They are the only source of information for the store. You send them to the store using [`store.dispatch()`](../api/Store.md#dispatch).
+</p>
+
+<p>Here's an example action which represents adding a new todo item:</p>
+
+<pre>
+import { createRequestTypes } from "./functions";
+
+export const ADVANCED_SEARCH_ACTION = createRequestTypes('ADVANCED_SEARCH_ACTION', { CREATE: 'CREATE', REMOVE: 'REMOVE' });
+
+export const advancedSearchAction = {
+    create: data => ({ type: ADVANCED_SEARCH_ACTION.CREATE, data }),
+    remove: data => ({ type: ADVANCED_SEARCH_ACTION.REMOVE, data }),
+};
+</pre>
+
+<p>
+    Actions are plain JavaScript objects. Actions must have a `type` property that indicates the type of action being performed.
+	Types should typically be defined as string constants. Once your app is large enough, you may want to move them into a separate module.
+</p>
+
+<p>
+    Required actions should be created by the function:
+</p>
+
+<pre>
+export function createRequestTypes(base, optional) {
+    for (let index in optional) {
+        optional[index] = base + '_' + index;
+    }
+
+    return {
+        REQUEST: base + '_REQUEST',
+        SUCCESS: base + '_SUCCESS',
+        FAILURE: base + '_FAILURE',
+        ...optional,
+    };
+}
+</pre>
+
+<p>This makes them portable and easy to test.</p>
+
+<h4>Custom Reducers in React-Admin</h4>
+
+<p>
+	Actions describe the fact that something happened, but don't specify how the application's state changes in response.
+	This is the job of reducers.
+    React-Admin gives possibility to create <a href="https://marmelab.com/react-admin/Admin.html#customreducers" target="_blank">custom reducers</a>:
+</p>
+
+<pre>
+import { ADVANCED_SEARCH_ACTION } from "../actions/advancedSearchAction";
+
+const initialState = {
+    data: false,
+};
+
+export default (state = initialState, action) => {
+    switch (action.type) {
+        case ADVANCED_SEARCH_ACTION.CREATE:
+            return {
+                ...state,
+                data: action.data,
+            };
+        case ADVANCED_SEARCH_ACTION.REMOVE:
+            return {
+                ...state,
+                data: null,
+            };
+        default:
+            return state;
+    }
+}
+</pre>
+
+<p>
+    All reducers are united in one object in the main reducer file:
+</p>
+
+<pre>
+import { combineReducers } from 'redux';
+
+import currentPatientReducer from "./currentPatientReducer";
+import userSearchReducer from "./userSearchReducer";
+import advancedSearchReducer from "./advancedSearchReducer";
+import clinicalQueryReducer from "./clinicalQueryReducer";
+...
+
+const coreReducers = {
+    httpErrors: httpErrorReducer,
+    userSearch: userSearchReducer,
+    advancedSearch: advancedSearchReducer,
+    clinicalQuery: clinicalQueryReducer,
+    ...
+};
+
+export default combineReducers(reducers);
+</pre>
+
+<h4>Custom Sagas in React-Admin</h4>
+
+<p>
+    If custom action should run requests to the server side, React-Admin gives possibility can use <a href="https://marmelab.com/react-admin/Admin.html#customsagas" target="_blank">custom sagas</a>:
+</p>
+
+<pre>
+import get from "lodash/get";
+import { takeEvery, put } from 'redux-saga/effects';
+
+import { domainName, token } from "../token";
+import { DEMOGRAPHICS_ACTION, demographicsAction } from "../actions/demographicsAction";
+import { httpErrorAction } from '../actions/httpErrorAction';
+
+let responseInfo = {};
+
+export default takeEvery(DEMOGRAPHICS_ACTION.REQUEST, function*(action) {
+    const url = domainName + '/api/demographics/' + localStorage.getItem('patientId');
+    let options = {};
+    options.method = "GET";
+    if (!options.headers) {
+        options.headers = new Headers({ Accept: 'application/json' });
+    }
+    options.headers = {
+        Authorization: "Bearer " + token,
+        'X-Requested-With': "XMLHttpRequest",
+    };
+    try {
+        const result = yield fetch(url, options)
+            .then(res => {
+                responseInfo.status = get(res, 'status', null);
+                return res.json()
+            })
+            .then(res => {
+                if (responseInfo.status !== 200) {
+                    responseInfo.errorMessage = get(res, 'error', null);
+                    return false;
+                }
+                return res;
+            });
+
+        if (responseInfo.status === 200) {
+            yield put(demographicsAction.success(result))
+        } else {
+            yield put(httpErrorAction.save({
+                status: responseInfo.status,
+                message: responseInfo.errorMessage
+            }));
+        }
+
+    } catch(e) {
+        yield put(demographicsAction.error(e))
+    }
+});
+</pre>
+
+<p>
+    All custom sagas are united in a common object in the main sagas file:
+</p>
+
+<pre>
+import { all } from 'redux-saga/effects';
+
+import currentPatientSagas from "./currentPatientSagas";
+import initializeSagas from "./initializeSagas";
+import demographicsSagas from "./demographicsSagas";
+import httpErrorSagas from "./httpErrorSagas";
+...
+...
+
+const sagas = [
+    currentPatientSagas,
+    initializeSagas,
+    demographicsSagas,
+    httpErrorSagas,
+    ...
+    ...
+];
+
+export default function* rootSaga() {
+    yield all(sagas);
+}
+</pre>

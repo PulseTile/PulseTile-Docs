@@ -1,0 +1,203 @@
+---
+title: Vaccinations module
+keywords: sample
+summary: "Vaccinations module"
+sidebar: react_admin_sidebar
+permalink: react-admin-vaccinations.html
+folder: react-admin/plugin-tiles
+filename: react-admin-vaccinations.html
+---
+
+<h4>General information</h4>
+
+<p>
+    Vaccinations is a non-core plugin of PulseTile-RA.
+    It is used to create, edit and review information about vaccinations of the current patient.
+    Actions, Reducer and Sagas required for the Vaccinations plugin are created automatically by React-Admin framework, because all operations are typical.
+</p>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/Vaccinations/VaccinationsList.js" target="_blank">Vaccinations List</a></h4>
+
+{% include image.html file="react-admin/vaccinations/vaccinationsgeneral.png" url="#" alt="Vaccinations List" caption="Vaccinations List" %}
+{% include image.html file="react-admin/vaccinations/vaccinationsfilter.png" url="#" alt="Vaccinations Filter" caption="Vaccinations Filter" %}
+
+<h5>API URL</h5>
+
+<pre>
+  /api/patients/{patientId}/vaccinations
+</pre>
+
+<h5>GET response</h5>
+
+<pre>
+  {
+    dateCreated: 1242860400000,
+    source: "ethercis",
+    sourceId: "ethercis-e2ae60b5-db4b-4a18-8ce7-6ea962c44881",
+    vaccinationName: "Influenza vaccination",
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+import { DateField, TextField } from "react-admin";
+
+import ListTemplate from "../../../core/common/ResourseTemplates/ListTemplate";
+import VaccinationsCreate from "./VaccinationsCreate";
+import VaccinationsEdit from "./VaccinationsEdit";
+import VaccinationsShow from "./VaccinationsShow";
+import DatagridRow from "./fragments/DatagridRow";
+
+const VaccinationsList = ({ classes, ...rest }) => (
+    <&zwj;ListTemplate
+            create={VaccinationsCreate}
+            edit={VaccinationsEdit}
+            show={VaccinationsShow}
+            resourceUrl="vaccinations"
+            title="Vaccinations"
+            CustomRow={DatagridRow}
+            isCustomDatagrid={true}
+            {...rest}
+    >
+        <&zwj;TextField label="Vaccination Name" source="vaccinationName" />
+        <&zwj;DateField label="Date and Time" source="dateCreated" />
+        <&zwj;TextField label="Source" source="source" />
+    <&zwj;/ListTemplate>
+);
+
+export default VaccinationsList;
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/Vaccinations/VaccinationsShow.js" target="_blank">Vaccinations Detail</a></h4>
+
+{% include image.html file="react-admin/vaccinations/vaccinationsdetail.png" url="#" alt="Vaccinations Detail" caption="Vaccinations Detail" %}
+
+<h5>API URL</h5>
+
+<pre>
+  /api/patients/{patientId}/vaccinations/{sourceId}
+</pre>
+
+<h5>GET response</h5>
+<pre>
+  {
+    author: "TORBAY, TIM (DR)",
+    comment: "Single vaccination with no stage",
+    dateCreated: 1464908400000,
+    series: 1,
+    source: "ethercis",
+    sourceId: "ethercis-63da131c-24c9-45f5-98fd-3e9c9f251bf3",
+    vaccinationDateTime: 1464908400000,
+    vaccinationName: "Seasonal influenza vaccination",
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+import { TextField, DateField } from "react-admin";
+import { withStyles } from '@material-ui/core/styles';
+
+import ShowTemplate from "../../../core/common/ResourseTemplates/ShowTemplate";
+
+const VaccinationsShow = ({ classes, ...rest }) => (
+    &zwj;ShowTemplate pageTitle="Vaccination" {...rest}>
+        &zwj;TextField source="vaccinationName" label="Vaccination name" />
+        &zwj;TextField source="comment" label="Comment" />
+        &zwj;TextField source="author" label="Author" />
+        &zwj;DateField source="vaccinationDateTime" label="Date" />
+    &zwj;/ShowTemplate>
+);
+
+export default VaccinationsShow;
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/Vaccinations/VaccinationsEdit.js" target="_blank">Vaccination Edit Page</a></h4>
+
+{% include image.html file="react-admin/vaccinations/vaccinationsedit.png" url="#" alt="Vaccination Edit" caption="Vaccination Edit" %}
+
+<h5>API URL</h5>
+
+<pre>
+  /api/patients/{patientId}/vaccinations/{sourceId}
+</pre>
+
+<h5>PUT data</h5>
+
+<pre>
+  {
+    author: "TORBAY, TIM (DR)",
+    comment: "Single vaccination with no stage",
+    dateCreated: 1464908400000,
+    dateSubmitted: "06/12/2019",
+    id: "ethercis-63da131c-24c9-45f5-98fd-3e9c9f251bf3",
+    series: 1,
+    source: "ethercis",
+    sourceId: "ethercis-63da131c-24c9-45f5-98fd-3e9c9f251bf3",
+    userId: "9999999801",
+    vaccinationDateTime: 1464908400000,
+    vaccinationName: "Seasonal influenza vaccination",
+  }
+</pre>
+
+<h5>Component structure</h5>
+
+<pre>
+import React from "react";
+
+import EditTemplate from "../../../core/common/ResourseTemplates/EditTemplate";
+import Inputs from "./fragments/Inputs";
+
+const VaccinationsEdit = ({ classes, ...rest }) => (
+    <&zwj;EditTemplate blockTitle="Vaccination"  {...rest}>
+        <&zwj;Inputs />
+    <&zwj;/EditTemplate>
+);
+
+export default VaccinationsEdit;
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/Vaccinations/VaccinationsCreate.js" target="_blank">Vaccinations Create Page</a></h4>
+
+{% include image.html file="react-admin/vaccinations/vaccinationscreate.png" url="#" alt="Vaccinations Create" caption="Vaccinations Create" %}
+
+<h5>API URL</h5>
+
+<pre>
+  /api/patients/{patientId}/vaccinations
+</pre>
+
+<h5>POST data</h5>
+
+<pre>
+  {
+    author: "Robert Tweed",
+    comment: "test",
+    dateSubmitted: "06/12/2019",
+    series: "test",
+    userId: "9999999801",
+    vaccinationDateTime: "2011-01-01",
+    vaccinationName: "Influence vaccination",
+  }
+</pre>
+
+<h5>Component structure</h5>
+
+<pre>
+import React from "react";
+
+import CreateTemplate from "../../../core/common/ResourseTemplates/CreateTemplate";
+import Inputs from "./fragments/Inputs";
+
+const VaccinationsCreate = ({ classes, ...rest }) => (
+    <&zwj;CreateTemplate blockTitle="Vaccination" {...rest}>
+        <&zwj;Inputs />
+    <&zwj;/CreateTemplate>
+);
+
+export default VaccinationsCreate;
+</pre>
