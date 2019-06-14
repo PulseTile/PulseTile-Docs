@@ -1,0 +1,203 @@
+---
+title: Diagnosis module
+keywords: sample
+summary: "Diagnosis module"
+sidebar: react_admin_sidebar
+permalink: react-admin-problems.html
+folder: react-admin/core-tiles
+filename: react-admin-problems.html
+---
+
+<h4>General information</h4>
+
+<p>
+    Problems / Issues is a core plugin of PulseTile-RA.
+    It is used to create, edit and review information about problems of the current patient.
+    Actions, Reducer and Sagas required for the Problems / Issues plugin are created automatically by React-Admin framework, because all operations are typical.
+</p>
+
+<h4>
+  <a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/core/plugins/Problems/ProblemsList.js" target="_blank">Problems / Issues List</a>
+</h4>
+
+{% include image.html file="react-admin/problems/problemslist.png" url="#" alt="Problems list view" caption="Problems / Issues" %}
+{% include image.html file="react-admin/problems/problemsfilter.png" url="#" alt="Problems filter view" caption="Problems / Issues filter" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/problems
+</pre>
+<h5>GET response</h5>
+<pre>
+  {
+    dateOfOnset: 1172188800000,
+    problem: "Acute sinusitis",
+    source: "ethercis",
+    sourceId: "ethercis-31f70334-cdac-42c6-9334-2e748a4ccaeb",
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+import { DateField, TextField } from "react-admin";
+
+import ListTemplate from "../../common/ResourseTemplates/ListTemplate";
+import ProblemsCreate from "./ProblemsCreate";
+import ProblemsEdit from "./ProblemsEdit";
+import ProblemsShow from "./ProblemsShow";
+import DatagridRow from "./fragments/DatagridRow";
+
+const DiagnosisList = ({ classes, ...rest }) => (
+    <&zwj;ListTemplate
+            create={ProblemsCreate}
+            edit={ProblemsEdit}
+            show={ProblemsShow}
+            resourceUrl="problems"
+            title="Problems / Issues"
+            defaultSort="dateOfOnset"
+            CustomRow={DatagridRow}
+            isCustomDatagrid={true}
+            {...rest}
+    >
+        <&zwj;TextField source="problem" label="Problem / Issue" />
+        <&zwj;DateField source="dateOfOnset" label="Date" />
+        <&zwj;TextField source="source" label="Source" />
+    <&zwj;/ListTemplate>
+);
+
+export default (DiagnosisList);
+</pre>
+
+<h4>
+  <a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/core/plugins/Problems/ProblemsShow.js" target="_blank">Problems / Issues Details</a>
+</h4>
+
+{% include image.html file="react-admin/problems/problemsdetail.png" url="#" alt="Problems / Issues Detail" caption="Problems / Issues Detail" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/problems/{sourceId}
+</pre>
+<h5>GET response</h5>
+<pre>
+  {
+    author: "SOMERSET, SUSAN (DR)",
+    code: 64996003,
+    dateCreated: 1554966501000,
+    dateOfOnset: 1210114800000,
+    description: "None recorded",
+    originalComposition: "",
+    originalSource: "",
+    problem: "Intermenstrual bleeding - irregular",
+    source: "ethercis",
+    sourceId: "ethercis-d678a99c-8764-494b-8bc1-add736d6a84f",
+    terminology: "http://snomed.info/sct",
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+import { TextField, DateField } from "react-admin";
+import { withStyles } from '@material-ui/core/styles';
+
+import ShowTemplate from "../../common/ResourseTemplates/ShowTemplate";
+
+const ProblemsShow = ({ classes, ...rest }) => (
+    <&zwj;ShowTemplate pageTitle="Problem / Diagnosis" {...rest}>
+        <&zwj;TextField label="Problem issue" source="problem" />
+        <&zwj;TextField label="Description" source="description" />
+        <&zwj;TextField label="Author" source="author" />
+        <&zwj;DateField label="Date" source="dateCreated" />
+    <&zwj;/ShowTemplate>
+);
+
+export default withStyles(styles)(ProblemsShow);
+</pre>
+
+
+<h4>
+  <a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/core/plugins/Problems/ProblemsEdit.js" target="_blank">Problems / Issues Edit Page</a>
+</h4>
+
+{% include image.html file="react-admin/problems/problemsedit.png" url="#" alt="Problems / Issues Edit" caption="Problems / Issues Edit" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/problems/{sourceID}
+</pre>
+<h5>PUT data</h5>
+<pre>
+  {
+    author: "SOMERSET, SUSAN (DR)",
+    code: 64996003,
+    dateCreated: 1554966501000,
+    dateOfOnset: "2008-05-07",
+    description: "None recorded",
+    id: "ethercis-d678a99c-8764-494b-8bc1-add736d6a84f",
+    originalComposition: "",
+    originalSource: "",
+    problem: "Intermenstrual bleeding - irregular",
+    source: "ethercis",
+    sourceId: "ethercis-d678a99c-8764-494b-8bc1-add736d6a84f",
+    terminology: "http://snomed.info/sct",
+    userId: "9999999801",
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+
+import EditTemplate from "../../common/ResourseTemplates/EditTemplate";
+import Inputs from "./fragments/Inputs";
+
+const ProblemsEdit = ({ classes, ...rest }) => (
+    <&zwj;EditTemplate blockTitle="Problems / Issues" {...rest}>
+            <&zwj;Inputs />
+    <&zwj;/EditTemplate>
+);
+
+export default ProblemsEdit;
+</pre>
+
+<h4>
+  <a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/core/plugins/Problems/ProblemsCreate.js" target="_blank">Problems / Issues Create Page</a>
+</h4>
+
+{% include image.html file="react-admin/problems/problemscreate.png" url="#" alt="Problems / Issues Create" caption="Problems / Issues Create" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/problems
+</pre>
+<h5>POST data</h5>
+<pre>
+  {
+    author: "Robert Tweed",
+    code: "test",
+    dateCreated: "06/12/2019",
+    dateOfOnset: "2019-06-11",
+    description: "test",
+    problem: "Asthma",
+    terminology: "test",
+    userId: "9999999801",
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+
+import CreateTemplate from "../../common/ResourseTemplates/CreateTemplate";
+import Inputs from "./fragments/Inputs";
+
+const ProblemsCreate = ({ classes, ...rest }) => (
+    <&zwj;CreateTemplate blockTitle="Problems / Issue" {...rest}>
+        <&zwj;Inputs />
+    <&zwj;/CreateTemplate>
+);
+
+export default ProblemsCreate;
+</pre>

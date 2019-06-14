@@ -1,0 +1,217 @@
+---
+title: Medications module
+keywords: sample
+summary: "Medications module"
+sidebar: react_admin_sidebar
+permalink: react-admin-medications.html
+folder: react-admin/core-tiles
+filename: react-admin-medications.html
+---
+
+<h4>General information</h4>
+
+<p>
+    Medications is a core plugin of PulseTile-RA.
+    It is used to create, edit and review information about medications of the current patient.
+    Actions, Reducer and Sagas required for the Medications plugin are created automatically by React-Admin framework, because all operations are typical.
+</p>
+
+<h4>
+  <a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/core/plugins/Medications/MedicationsList.js" target="_blank">Medications</a>
+</h4>
+
+{% include image.html file="react-admin/medications/medicationlist.png" url="#" alt="Medications list view" caption="Medications List" %}
+{% include image.html file="react-admin/medications/medicationfilter.png" url="#" alt="Medications filter view" caption="Medications Filter" %}
+
+<h4>General information</h4>
+
+<p>
+    Medications is a core plugin of PulseTile-RA.
+    It is used to create, edit and review information about medications of the current patient.
+    Actions, Reducer and Sagas required for the Medications plugin are created automatically by React-Admin framework, because all operations are typical.
+</p>
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/medications
+</pre>
+<h5>GET data</h5>
+<pre>
+  {
+    dateCreated: 1204243200000,
+    doseAmount: "20mg",
+    name: "Amoxicillin 500mg capsules",
+    source: "ethercis",
+    sourceId: "ethercis-5ad698d2-5c63-4da9-a4e4-53a017226699",
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+import { DateField, TextField } from "react-admin";
+
+import ListTemplate from "../../common/ResourseTemplates/ListTemplate";
+import MedicationsCreate from "./MedicationsCreate";
+import MedicationsEdit from "./MedicationsEdit";
+import MedicationsShow from "./MedicationsShow";
+import DatagridRow from "./fragments/DatagridRow";
+
+export const MedicationsList = ({ classes, ...rest }) => (
+    <&zwj;ListTemplate
+      create={MedicationsCreate}
+      edit={MedicationsEdit}
+      show={MedicationsShow}
+      resourceUrl="medications"
+      title="Medications"
+      CustomRow={DatagridRow}
+      isCustomDatagrid={true}
+      {...rest}
+    >
+        <&zwj;TextField source="name" label="Name" />
+        <&zwj;DateField source="dateCreated" label="Date" />
+        <&zwj;TextField source="source" label="Source" />
+    <&zwj;/ListTemplate>
+);
+
+export default MedicationsList;
+</pre>
+
+<h4>
+  <a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/core/plugins/Medications/MedicationsShow.js" target="_blank">Medications Detail</a>
+</h4>
+
+{% include image.html file="react-admin/medications/medicationdetail.png" url="#" alt="Medications Detail" caption="Medications Detail" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/medications/{sourceId}
+</pre>
+<h5>GET data</h5>
+<pre>
+  {
+    author: "TORBAY, TIM (DR)",
+    dateCreated: 1465340400000,
+    doseAmount: "",
+    doseDirections: "",
+    doseTiming: "Not known",
+    medicationCode: 323510009,
+    medicationTerminology: "http://snomed.info/sct",
+    name: "Amoxicillin 500mg capsules",
+    route: "Not known",
+    source: "ethercis",
+    sourceId: "ethercis-f28f0c62-04f4-434c-8f80-f3e7cdcbd425",
+    startDate: 1465340400000,
+    startTime: 0,
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+import { TextField, DateField } from "react-admin";
+import { withStyles } from '@material-ui/core/styles';
+
+import ShowTemplate from "../../common/ResourseTemplates/ShowTemplate";
+
+const ProblemsShow = ({ classes, ...rest }) => (
+    <&zwj;ShowTemplate pageTitle="Medication" {...rest}>
+        <&zwj;TextField className={classes.labelBlock} label="Name" source="name" />
+        <&zwj;TextField className={classes.labelBlock} label="Dose Description" source="doseAmount" />
+        <&zwj;TextField className={classes.labelBlock} label="Author" source="author" />
+        <&zwj;DateField className={classes.labelBlock} label="Date" source="dateCreated" />
+    <&zwj;/ShowTemplate>
+);
+
+export default withStyles(styles)(ProblemsShow);
+</pre>
+
+<h4>
+  <a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/core/plugins/Medications/MedicationsEdit.js" target="_blank">Medications Edit Page</a>
+</h4>
+
+{% include image.html file="react-admin/medications/medicationedit.png" url="#" alt="Medications Edit" caption="Medications Edit" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/medications/{sourceId}
+</pre>
+<h5>PUT data</h5>
+<pre>
+  {
+    author: "TORBAY, TIM (DR)",
+    dateCreated: 1465340400000,
+    doseAmount: "20 mg",
+    doseDirections: "20 mg",
+    doseTiming: "1 per day",
+    id: "ethercis-f28f0c62-04f4-434c-8f80-f3e7cdcbd425",
+    medicationCode: 323510009,
+    medicationTerminology: "http://snomed.info/sct",
+    name: "Amoxicillin 500mg capsules",
+    route: "IV Intra Venous",
+    source: "ethercis",
+    sourceId: "ethercis-f28f0c62-04f4-434c-8f80-f3e7cdcbd425",
+    startDate: 1465340400000,
+    startTime: 0,
+    userId: "9999999801",
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+
+import EditTemplate from "../../common/ResourseTemplates/EditTemplate";
+import Inputs from "./fragments/Inputs";
+
+const MedicationsEdit = ({ classes, ...rest }) => (
+    <&zwj;EditTemplate blockTitle="Medication" {...rest}>
+        <&zwj;Inputs />
+    <&zwj;/EditTemplate>
+);
+
+export default MedicationsEdit;
+</pre>
+
+<h4>
+  <a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/core/plugins/Medications/MedicationsCreate.js" target="_blank">Medications Create Page</a>
+</h4>
+
+{% include image.html file="react-admin/medications/medicationcreate.png" url="#" alt="Medications Create" caption="Medications Create" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/medications/{sourceId}
+</pre>
+<h5>POST data</h5>
+<pre>
+  {
+    author: "Robert Tweed",
+    dateCreated: "06/12/2019",
+    doseAmount: "20 mg",
+    doseDirections: "20 mg",
+    doseTiming: "1 per day",
+    medicationCode: "test",
+    name: "Paracetomol",
+    route: "Po Per Oral",
+    startDate: "2019-06-12",
+    startTime: "2019-06-15",
+    userId: "9999999801",
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+
+import CreateTemplate from "../../common/ResourseTemplates/CreateTemplate";
+import Inputs from "./fragments/Inputs";
+
+const MedicationsCreate = ({ classes, ...rest }) => (
+    <&zwj;CreateTemplate blockTitle="Medication" {...rest}>
+        <&zwj;Inputs />
+    <&zwj;/CreateTemplate>
+);
+
+export default MedicationsCreate;
+</pre>

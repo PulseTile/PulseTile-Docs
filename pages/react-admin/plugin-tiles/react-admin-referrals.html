@@ -1,0 +1,218 @@
+---
+title: Referrals module
+keywords: sample
+summary: "Referrals module"
+sidebar: react_admin_sidebar
+permalink: react-admin-referrals.html
+folder: react-admin/plugin-tiles
+filename: react-admin-referrals.html
+---
+
+<h4>General information</h4>
+
+<p>
+    Referrals is a non-core plugin of PulseTile-RA.
+    It is used to create, edit and review information about Referrals of the current patient.
+    Actions, Reducer and Sagas required for the Referrals plugin are created automatically by React-Admin framework, because all operations are typical.
+</p>
+
+<h4>
+    <a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/Referrals/ReferralsList.js" target="_blank">Referrals List</a>
+</h4>
+
+{% include image.html file="react-admin/referrals/referralsgeneral.png" url="#" alt="Referrals List" caption="Referrals List" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/referrals
+</pre>
+
+<h5>GET response</h5>
+<pre>
+  {
+    dateOfReferral: 1559036144000,
+    referralFrom: "Test Referrals",
+    referralTo: "Test Referrals",
+    source: "ethercis",
+    sourceId: "ethercis-2358e033-92f0-440e-8236-93e7cf127907",
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+import { Route } from "react-router";
+import { DateField, TextField } from "react-admin";
+
+import ListTemplate from "../../../core/common/ResourseTemplates/ListTemplate";
+import ReferralsCreate from "./ReferralsCreate";
+import ReferralsEdit from "./ReferralsEdit";
+import ReferralsShow from "./ReferralsShow";
+import DatagridRow from "./fragments/DatagridRow";
+
+const ReferralsList = ({ classes, ...rest }) => (
+    <&zwj;ListTemplate
+      create={ReferralsCreate}
+      edit={ReferralsEdit}
+      show={ReferralsShow}
+      resourceUrl="referrals"
+      title="Referrals"
+      CustomRow={DatagridRow}
+      isCustomDatagrid={true}
+      {...rest}
+    >
+        <&zwj;DateField label="Date of Referral" source="dateOfReferral" />
+        <&zwj;TextField label="Referral From" source="referralFrom" />
+        <&zwj;TextField label="Referral To" source="referralTo" />
+        <&zwj;TextField label="Source" source="source" />
+    <&zwj;/ListTemplate>
+);
+
+export default ReferralsList;
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/Referrals/ReferralsShow.js" target="_blank">Referral Detail</a></h4>
+
+{% include image.html file="react-admin/referrals/referralsdetail.png" url="#" alt="Referral Detail" caption="Referral Detail" %}
+
+<h5>API URL</h5>
+
+<pre>
+  /api/patients/{patientId}/referrals/{sourceId}
+</pre>
+
+<h5>GET response</h5>
+<pre>
+  {
+    author: "Robert Tweed",
+    dateCreated: 1559036144000,
+    dateOfReferral: 1559036144000,
+    referralCareFlow: "Service request sent",
+    referralFrom: "Test Referrals",
+    referralOutcome: "",
+    referralReason: "Test Referrals 2",
+    referralRef: "",
+    referralServiceName: "Referral To",
+    referralState: "planned",
+    referralStateCode: 526,
+    referralStateDate: 1559036198617,
+    referralSummary: "Test Referrals 2",
+    referralTo: "Test Referrals 2",
+    referralType: "Referral To",
+    source: "ethercis",
+    sourceId: "ethercis-2358e033-92f0-440e-8236-93e7cf127907",
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+import { TextField, DateField } from "react-admin";
+import { withStyles } from '@material-ui/core/styles';
+
+import ShowTemplate from "../../../core/common/ResourseTemplates/ShowTemplate";
+
+const ReferralsShow = ({ classes, ...rest }) => (
+    <&zwj;ShowTemplate pageTitle="Referral" {...rest}>
+        <&zwj;TextField className={classes.labelBlock} source="referralFrom" label="Referral From" />
+        <&zwj;TextField className={classes.labelBlock} source="referralTo" label="Referral To" />
+        <&zwj;DateField className={classes.labelBlock} source="dateOfReferral" label="Date of Referral" />
+        <&zwj;TextField className={classes.labelBlock} source="referralReason" label="Reason of Referral" />
+        <&zwj;TextField className={classes.labelBlock} source="referralSummary" label="Clinical Summary" />
+        <&zwj;TextField className={classes.labelBlock} source="author" label="Author" />
+    <&zwj;/ShowTemplate>
+);
+
+export default withStyles(styles)(ReferralsShow);
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/Referrals/ReferralsEdit.js" target="_blank">Referral Edit Page</a></h4>
+
+{% include image.html file="react-admin/referrals/referralsedit.png" url="#" alt="Referral Edit" caption="Referral Edit" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/referrals/{sourceId}
+</pre>
+
+<h5>PUT data</h5>
+<pre>
+{
+    author: "Robert Tweed",
+    dateCreated: 1559036144000,
+    dateOfReferral: 1559036144000,
+    dateSubmitted: "06/13/2019",
+    id: "ethercis-2358e033-92f0-440e-8236-93e7cf127907",
+    referralCareFlow: "Service request sent",
+    referralFrom: "Test Referrals",
+    referralOutcome: "",
+    referralReason: "Test Referrals 2",
+    referralRef: "",
+    referralServiceName: "Referral To",
+    referralState: "planned",
+    referralStateCode: 526,
+    referralStateDate: 1559036198617,
+    referralSummary: "Test Referrals 2",
+    referralTo: "Test Referrals ",
+    referralType: "Referral To",
+    source: "ethercis",
+    sourceId: "ethercis-2358e033-92f0-440e-8236-93e7cf127907",
+    userId: "9999999801",
+}
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+
+import EditTemplate from "../../../core/common/ResourseTemplates/EditTemplate";
+import Inputs from "./fragments/Inputs";
+
+const ReferralsEdit = ({ classes, ...rest }) => (
+    <&zwj;EditTemplate blockTitle="Referral"  {...rest}>
+        <&zwj;Inputs />
+    <&zwj;/EditTemplate>
+);
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/Referrals/ReferralsCreate.js" target="_blank">Referral Create Page</a></h4>
+
+{% include image.html file="react-admin/referrals/referralscreate.png" url="#" alt="Referral Create" caption="Referral Create" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/referrals
+</pre>
+
+<h5>POST data</h5>
+<pre>
+  {
+    author: "Robert Tweed",
+    dateOfReferral: "2019-06-02",
+    dateSubmitted: "06/13/2019",
+    referralFrom: "test from",
+    referralReason: "test",
+    referralSummary: "test",
+    referralTo: "test to",
+    userId: "9999999801",
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+
+import CreateTemplate from "../../../core/common/ResourseTemplates/CreateTemplate";
+import Inputs from "./fragments/Inputs";
+
+const ReferralsCreate = ({ classes, ...rest }) => (
+    <&zwj;CreateTemplate blockTitle="Referrals" {...rest}>
+        <&zwj;Inputs />
+    <&zwj;/CreateTemplate>
+);
+
+export default ReferralsCreate;
+</pre>

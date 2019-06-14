@@ -1,0 +1,212 @@
+---
+title: Contacts module
+keywords: sample
+summary: "Contacts module"
+sidebar: react_admin_sidebar
+permalink: react-admin-contacts.html
+folder: react-admin/core-tiles
+filename: react-admin-contacts.html
+---
+
+<h4>General information</h4>
+
+<p>
+    Contacts is a core plugin of PulseTile-RA.
+    It is used to create, edit and review information about contacts of the current patient.
+    Actions, Reducer and Sagas required for the Contacts plugin are created automatically by React-Admin framework, because all operations are typical.
+</p>
+
+<h4>
+  <a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/core/plugins/Contacts/ContactsList.js" target="_blank">Contacts</a>
+</h4>
+
+{% include image.html file="react-admin/contacts/contactslist.png" url="#" alt="Contacts list view" caption="Contacts" %}
+{% include image.html file="react-admin/contacts/contactsfilter.png" url="#" alt="Contacts Filter" caption="Contacts Filter" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/contacts
+</pre>
+<h5>GET response</h5>
+<pre>
+  {
+    name: "Melinda Gordon",
+    nextOfKin: true,
+    relationship: "Daughter",
+    source: "ethercis",
+    sourceId: "ethercis-e0a5c56a-a78d-4ca4-9650-2565ec6cbc95",
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+import { Route } from "react-router";
+import { TextField } from "react-admin";
+
+import ListTemplate from "../../common/ResourseTemplates/ListTemplate";
+import ContactsCreate from "./ContactsCreate";
+import ContactsEdit from "./ContactsEdit";
+import ContactsShow from "./ContactsShow";
+import DatagridRow from "./fragments/DatagridRow";
+
+const ContactsList = props => (
+    <&zwj;ListTemplate
+            create={ContactsCreate}
+            edit={ContactsEdit}
+            show={ContactsShow}
+            resourceUrl="contacts"
+            title="Contacts"
+            CustomRow={DatagridRow}
+            isCustomDatagrid={true}
+            {...props}
+    >
+        <&zwj;TextField source="name" label="Name" />
+        <&zwj;TextField source="relationship" label="Relationship" />
+        <&zwj;TextField source="nextOfKin" label="Next Of Kin" />
+        <&zwj;TextField source="source" label="Source" />
+    <&zwj;/ListTemplate>
+);
+
+export default ContactsList;
+</pre>
+
+<h4>
+  <a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/core/plugins/Contacts/ContactsShow.js" target="_blank">Contacts Detail</a>
+</h4>
+
+{% include image.html file="react-admin/contacts/contactsdetail.png" url="#" alt="Contacts Detail" caption="Contacts Detail" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/contacts/{sourceId}
+</pre>
+
+<h5>GET response</h5>
+<pre>
+  {
+    author: "Dr Tony Shannon",
+    contactInformation: 22,
+    dateCreated: 1560329223000,
+    name: "Melinda Gordon",
+    nextOfKin: true,
+    notes: "f",
+    relationship: "Daughter",
+    relationshipCode: "at0036",
+    relationshipTerminology: "local",
+    relationshipType: "Informal carer",
+    source: "ethercis",
+    sourceId: "ethercis-e0a5c56a-a78d-4ca4-9650-2565ec6cbc95",
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+import { TextField, DateField } from "react-admin";
+import { withStyles } from '@material-ui/core/styles';
+
+import ShowTemplate from "../../common/ResourseTemplates/ShowTemplate";
+
+const ContactsShow = ({ classes, ...rest }) => (
+    <&zwj;ShowTemplate pageTitle="Contact" {...rest}>
+        <&zwj;TextField source="name" label="Name" />
+        <&zwj;TextField source="relationship" label="Relationship" />
+        <&zwj;TextField source="relationshipType" label="Relationship Type" />
+        <&zwj;TextField source="notes" />
+        <&zwj;TextField source="author" />
+    <&zwj;/ShowTemplate>
+);
+
+export default withStyles(styles)(ContactsShow);
+</pre>
+
+<h4>
+  <a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/core/plugins/Contacts/ContactsEdit.js" target="_blank">Contacts Edit Page</a>
+</h4>
+
+{% include image.html file="react-admin/contacts/contactsedit.png" url="#" alt="Contacts Edit" caption="Contacts Edit" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/contacts/{sourceId}
+</pre>
+<h5>PUT data</h5>
+<pre>
+  {
+    author: "Dr Tony Shannon",
+    contactInformation: 22,
+    dateCreated: 1560329223000,
+    dateSubmitted: "06/12/2019",
+    id: "ethercis-e0a5c56a-a78d-4ca4-9650-2565ec6cbc95",
+    name: "Melinda Gordon",
+    nextOfKin: true,
+    notes: "f",
+    relationship: "Daughter",
+    relationshipCode: "at0036",
+    relationshipTerminology: "local",
+    relationshipType: "Informal carer",
+    source: "ethercis",
+    sourceId: "ethercis-e0a5c56a-a78d-4ca4-9650-2565ec6cbc95",
+    userId: "9999999801",
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+
+import EditTemplate from "../../common/ResourseTemplates/EditTemplate";
+import Inputs from "./fragments/Inputs";
+
+const ContactsEdit = ({ classes, ...rest }) => (
+    <&zwj;EditTemplate blockTitle="Contact" {...rest}>
+        <&zwj;Inputs />
+    <&zwj;/EditTemplate>
+);
+
+export default ContactsEdit;
+</pre>
+
+
+<h4>
+  <a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/core/plugins/Contacts/ContactsCreate.js" target="_blank">Contacts Create Page</a>
+</h4>
+
+{% include image.html file="react-admin/contacts/contactscreate.png" url="#" alt="Contacts Create" caption="Contacts Create" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/contacts/{sourceId}
+</pre>
+<h5>POST data</h5>
+<pre>
+  {
+    author: "bob.smith@gmail.com",
+    contactInformation: "test",
+    dateSubmitted: "06/12/2019",
+    name: "Jimmy Clansy",
+    nextOfKin: true,
+    notes: "test",
+    relationship: "Husband",
+    relationshipCode: "at0037",
+    relationshipTerminology: "test",
+    userId: "9999999801"
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+
+import CreateTemplate from "../../common/ResourseTemplates/CreateTemplate";
+import Inputs from "./fragments/Inputs";
+
+const ContactsCreate = ({ classes, ...rest }) => (
+    <&zwj;CreateTemplate blockTitle="Contact" {...rest}>
+        <&zwj;Inputs />
+    <&zwj;/CreateTemplate>
+);
+
+export default ContactsCreate;
+</pre>

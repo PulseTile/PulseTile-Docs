@@ -1,0 +1,190 @@
+---
+title: Clinical Notes module
+keywords: sample
+summary: "Clinical Notes module"
+sidebar: react_admin_sidebar
+permalink: react-admin-clinical-notes.html
+folder: react-admin/plugin-tiles
+filename: react-admin-clinical-notes.html
+---
+
+<h4>General information</h4>
+
+<p>
+    Clinical Notes is a non-core plugin of PulseTile-RA.
+    It is used to create, edit and review information about Clinical Notes of the current patient.
+    Actions, Reducer and Sagas required for the Clinical Notes plugin are created automatically by React-Admin framework, because all operations are typical.
+</p>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/ClinicalNotes/ClinicalNotesList.js" target="_blank">Clinical Notes List</a></h4>
+
+{% include image.html file="react-admin/clinicalNotes/clinicalNotesgeneral.png" url="#" alt="Clinical Notes List" caption="Clinical Notes List" %}
+
+<h5>API URL</h5>
+
+<pre>
+  /api/patients/{patientId}/clinicalnotes
+</pre>
+
+<h5>GET response</h5>
+
+<pre>
+  {
+    author: "Robert Tweed",
+    clinicalNotesType: "test",
+    dateCreated: 1559222911000,
+    source: "ethercis",
+    sourceId: "ethercis-5313f3a9-1038-44de-a2e1-453b3a34822c",
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+import { DateField, TextField } from "react-admin";
+
+import ListTemplate from "../../../core/common/ResourseTemplates/ListTemplate";
+import ClinicalNotesCreate from "./ClinicalNotesCreate";
+import ClinicalNotesEdit from "./ClinicalNotesEdit";
+import ClinicalNotesShow from "./ClinicalNotesShow";
+import DatagridRow from "./fragments/DatagridRow";
+
+const PersonalNotesList = ({ classes, ...rest }) => (
+    <&zwj;ListTemplate
+            create={ClinicalNotesCreate}
+            edit={ClinicalNotesEdit}
+            show={ClinicalNotesShow}
+            resourceUrl="clinicalnotes"
+            title="Clinical Notes"
+            CustomRow={DatagridRow}
+            isCustomDatagrid={true}
+            {...rest}
+    >
+        <&zwj;TextField label="Type" source="clinicalNotesType" />
+        <&zwj;TextField label="Author" source="author" />
+        <&zwj;DateField label="Date Created" source="dateCreated" />
+        <&zwj;TextField label="Source" source="source" />
+    <&zwj;/ListTemplate>
+);
+
+export default PersonalNotesList;
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/ClinicalNotes/ClinicalNotesShow.js" target="_blank">Clinical Notes Detail</a></h4>
+
+{% include image.html file="react-admin/clinicalNotes/clinicalNotesdetail.png" url="#" alt="Clinical Notes Detail" caption="Clinical Notes Detail" %}
+
+<h5>API URL</h5>
+
+<pre>
+  /api/patients/{patientId}/clinicalnotes/{sourceId}
+</pre>
+
+<h5>GET response</h5>
+<pre>
+  {
+    author: "Robert Tweed",
+    clinicalNotesType: "Note",
+    dateCreated: 1559562808000,
+    note: "test note",
+    source: "ethercis",
+    sourceId: "ethercis-2fd22d3b-8a5c-4563-ac6f-3f563b54179a",
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+import { TextField, DateField } from "react-admin";
+import { withStyles } from '@material-ui/core/styles';
+
+import ShowTemplate from "../../../core/common/ResourseTemplates/ShowTemplate";
+
+const PersonalNotesShow = ({ classes, ...rest }) => (
+    <&zwj;ShowTemplate pageTitle="Clinical Note" {...rest}>
+        <&zwj;TextField className={classes.labelBlock} source="clinicalNotesType" label="Type" />
+        <&zwj;TextField className={classes.labelBlock} source="note" label="Note" />
+        <&zwj;TextField className={classes.labelBlock} source="author" label="Author" />
+    <&zwj;/ShowTemplate>
+);
+
+export default withStyles(styles)(PersonalNotesShow);
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/ClinicalNotes/ClinicalNotesEdit.js" target="_blank">Clinical Notes Edit Page</a></h4>
+
+{% include image.html file="react-admin/clinicalNotes/clinicalNotesedit.png" url="#" alt="Clinical Notes Edit" caption="Clinical Notes Edit" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/clinicalnotes/{sourceId}
+</pre>
+
+<h5>PUT data</h5>
+<pre>
+  {
+    author: "Robert Tweed",
+    clinicalNotesType: "Note",
+    dateCreated: 1559562808000,
+    id: "ethercis-2fd22d3b-8a5c-4563-ac6f-3f563b54179a",
+    note: "test note",
+    source: "ethercis",
+    sourceId: "ethercis-2fd22d3b-8a5c-4563-ac6f-3f563b54179a",
+    userId: "9999999801",
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+
+import EditTemplate from "../../../core/common/ResourseTemplates/EditTemplate";
+import Inputs from "./fragments/Inputs";
+
+const ClinicalNotesEdit = ({ classes, ...rest }) => (
+    <&zwj;EditTemplate blockTitle="Clinical Note"  {...rest}>
+        <&zwj;Inputs />
+    <&zwj;/EditTemplate>
+);
+
+export default ClinicalNotesEdit;
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/ClinicalNotes/ClinicalNotesCreate.js" target="_blank">Clinical Notes Create Page</a></h4>
+
+{% include image.html file="react-admin/clinicalNotes/clinicalNotescreate.png" url="#" alt="Clinical Notes Create" caption="Clinical Notes Create" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/clinicalnotes
+</pre>
+
+<h5>POST data</h5>
+<pre>
+  {
+    author: "Robert Tweed",
+    clinicalNotesType: "clinical note 1",
+    dateCreated: "06/12/2019",
+    note: "clinical note 1",
+    userId: "9999999801",
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+
+import CreateTemplate from "../../../core/common/ResourseTemplates/CreateTemplate";
+import Inputs from "./fragments/Inputs";
+
+const ClinicalNotesCreate = ({ classes, ...rest }) => (
+    <&zwj;CreateTemplate blockTitle="Clinical Note" {...rest}>
+        <&zwj;Inputs />
+    <&zwj;/CreateTemplate>
+);
+
+export default ClinicalNotesCreate;
+</pre>

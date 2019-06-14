@@ -1,0 +1,462 @@
+---
+title: Patients list
+keywords: sample
+summary: "Patients list"
+sidebar: react_admin_sidebar
+permalink: react-admin-patients-list.html
+folder: react-admin/core-tiles
+filename: react-admin-patients-list.html
+---
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/core/pages/PatientsList/index.js" target="_blank">Patient list view</a></h4>
+
+{% include image.html file="react-admin/patients/patientslist.png" url="#" alt="Patient list view" caption="Patient list view" %}
+
+<h4>Searching by user last name</h4>
+
+<h5>API URL</h5>
+<pre>
+  /mpi/Patient?name={lastname}
+</pre>
+<h5>GET data</h5>
+<pre>
+  {
+  	entry: [
+      0: {....},
+      1: {....},
+      2: {....},
+      3: {
+        resource: {
+            address: [
+                0: {
+                    city: "City",
+                    country: "Country",
+                    district: "District",
+                    line: [
+                        0: "Baker street, 221-b",
+                    ],
+                    postalCode: 1234,
+                },
+                1: {....}
+            ],
+            birthDate: "1985-07-25",
+            deceasedBoolean: false,
+            gender: "female",
+            id: "5024d12f-ec35-4619-b982-8f27d28ee71c",
+            identifier: [
+                0: {
+                    system: "https://fhir.nhs.uk/Id/nhs-number",
+                    value: 5555555541,
+                }
+            ],
+            name: [
+                0: {
+                    family: "Kolt",
+                    given: [
+                        "Elise",
+                    ]
+                    prefix: "Lisa"
+                }
+            ],
+            resourceType: "Patient",
+            telecom: "7 093 243 3598",
+        },
+      },
+      4: {....},
+      5: {....},
+    ],
+    resourceType: "Bundle",
+    token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9......",
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React, { Component } from "react";
+import get from "lodash/get";
+import { connect } from 'react-redux';
+import { TextField, DateField, setSidebarVisibility } from "react-admin";
+
+import { withStyles } from '@material-ui/core/styles';
+import CardMedia from "@material-ui/core/CardMedia";
+import Typography from "@material-ui/core/Typography";
+import TodayIcon from "@material-ui/icons/Today";
+import CheckIcon from "@material-ui/icons/Check";
+
+import { patientsCountAction } from "../../actions/patientsCountAction";
+import image from "../../../version/images/pulsetile-logo.png";
+import ListTemplate from "../../common/ResourseTemplates/ListTemplate";
+import ViewButton from "../../common/Buttons/ViewButton";
+import PatientCreate from "./PatientCreate";
+import PatientEdit from "./PatientEdit";
+import PatientShow from "./PatientShow";
+import DatagridRow from "./fragments/DatagridRow";
+import ColumnsTogglingPopover from "./fragments/ColumnsTogglingPopover";
+import { themeCommonElements } from "../../../version/config/theme.config";
+
+const styles = theme => ({
+    content: {
+        width: "100%",
+        height: "100%",
+        backgroundImage: theme.patientSummaryPanel.container.background,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+    },
+    imageBlock: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
+        marginTop: "10%",
+    },
+    image: {
+        width: "30%",
+        height: "30%",
+    },
+    labelWithIcon: {
+        marginBottom: 10,
+    },
+    icon: {
+        marginTop: 5,
+        marginLeft: 5,
+    },
+});
+
+const LabelWithIcon = ({ classes, title, icon }) => {
+    return (
+        <&zwj;Typography className={classes.labelWithIcon}  variant="h1">
+            { title }{ icon }
+        <&zwj;/Typography>
+    )
+};
+
+const defaultHiddenColumns = [
+    'ordersDate', 'resultsDate', 'vitalsDate', 'problemsDate',
+    'ordersCount', 'resultsCount', 'vitalsCount', 'problemsCount'
+];
+
+class PatientsList extends Component {
+
+    state = {
+        key: 0,
+    };
+
+    componentDidMount() {
+        this.props.setSidebarVisibility(false);
+    }
+
+    componentWillReceiveProps(newProps, prevList) {
+        const { getPatientsCounts } = this.props;
+
+        const prevPatientsIds = get(prevList, 'patientsIds', []);
+        const newPatientsIds = get(newProps, 'patientsIds', []);
+        const isPatientListCount = get(themeCommonElements, 'isPatientListCount', false);
+
+        if (isPatientListCount && (prevPatientsIds !== newPatientsIds) && newPatientsIds.length > 0) {
+            newPatientsIds.map(item => {
+                getPatientsCounts(item);
+            });
+        }
+    }
+
+    updateTableHead = () => {
+        this.setState({
+            key: this.state.key + 1,
+        })
+    };
+
+    isColumnHidden = columnName => {
+        const { hiddenColumns } = this.props;
+        return hiddenColumns.indexOf(columnName) === -1;
+    };
+
+    render() {
+        const { userSearch, userSearchID, classes } = this.props;
+
+        if (!userSearch && !userSearchID) {
+            return (
+                <&zwj;div className={classes.content}>
+                    <&zwj;div className={classes.imageBlock} >
+                        <&zwj;CardMedia
+                                className={classes.image}
+                                component="img"
+                                alt="NHS Scotland"
+                                image={image}
+                        />
+                    <&zwj;/div>
+                <&zwj;/div>
+            )
+        }
+
+        return (
+            <&zwj;React.Fragment>
+                <&zwj;ListTemplate
+                  basePath="/patients"
+                  create={PatientCreate}
+                  edit={PatientEdit}
+                  show={PatientShow}
+                  resourceUrl="patients"
+                  title="Patients List"
+                  headerFilterAbsent={true}
+                  CustomRow={DatagridRow}
+                  isCustomDatagrid={true}
+                  ColumnsTogglingPopover={ColumnsTogglingPopover}
+                  updateTableHead={this.updateTableHead}
+                  defaultHiddenColumns={defaultHiddenColumns}
+                  {...this.props}
+                >
+                    <&zwj;TextField source="name" label="Name"/>
+                    { this.isColumnHidden('address') && <&zwj;TextField source="address" label="Address" /> }
+                    <&zwj;TextField source="gender" label="Gender"/>
+                    <&zwj;DateField source="birthDate" label="Born"/>
+                    { this.isColumnHidden('nhsNumber') && <&zwj;TextField source="nhsNumber" label="NHS No." /> }
+
+                    { this.isColumnHidden('ordersDate') &&
+                        <&zwj;DateField source="ordersDate" label={<&zwj;LabelWithIcon classes={classes} title="Orders" icon={<&zwj;TodayIcon className={classes.icon}/>}/>} />
+                    }
+
+                    { this.isColumnHidden('ordersCount') &&
+                        <&zwj;DateField source="ordersCount" label={<&zwj;LabelWithIcon classes={classes} title="Orders" icon={<&zwj;CheckIcon className={classes.icon}/>}/>} />
+                    }
+
+                    { this.isColumnHidden('resultsDate') &&
+                        <&zwj;DateField source="resultsDate" label={<&zwj;LabelWithIcon classes={classes} title="Results" icon={<&zwj;TodayIcon className={classes.icon} />} />} />
+                    }
+
+                    { this.isColumnHidden('resultsCount') &&
+                        <&zwj;DateField source="resultsCount" label={<&zwj;LabelWithIcon classes={classes} title="Results" icon={<&zwj;CheckIcon className={classes.icon} />} />} />
+                    }
+
+                    { this.isColumnHidden('vitalsDate')  &&
+                        <&zwj;DateField source="vitalsDate" label={<&zwj;LabelWithIcon classes={classes} title="Vitals" icon={<&zwj;TodayIcon className={classes.icon} />} />} />
+                    }
+
+                    { this.isColumnHidden('vitalsCount') &&
+                        <&zwj;DateField source="vitalsCount" label={<&zwj;LabelWithIcon classes={classes} title="Vitals" icon={<&zwj;CheckIcon className={classes.icon}/>}/>} />
+                    }
+
+                    { this.isColumnHidden('problemsDate') &&
+                        <&zwj;DateField source="problemsDate" label={<&zwj;LabelWithIcon classes={classes} title="Problems" icon={<&zwj;TodayIcon className={classes.icon} />} />}/>
+                    }
+
+                    { this.isColumnHidden('problemsCount') &&
+                        <&zwj;DateField source="problemsCount" label={<&zwj;LabelWithIcon classes={classes} title="Problems" icon={<&zwj;CheckIcon className={classes.icon} />} />} />
+                    }
+
+                    <&zwj;ViewButton />
+                <&zwj;/ListTemplate>
+            <&zwj;/React.Fragment>
+        );
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        userSearch: get(state, 'custom.userSearch.data', null),
+        userSearchID: get(state, 'custom.userSearch.id', null),
+        hiddenColumns:  get(state, 'custom.toggleColumns.data.patients', []),
+        patientsIds: get(state, 'admin.resources.patients.list.ids', []),
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setSidebarVisibility(params) {
+            dispatch(setSidebarVisibility(params));
+        },
+        getPatientsCounts(patientId) {
+            dispatch(patientsCountAction.request(patientId));
+        }
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(PatientsList));
+</pre>
+
+<h4>Patients list settings</h4>
+
+<p>
+    It is possible to hide/show columns of the patient list table.
+    If user clicks on the cog icon in the right of the block title, settings modal window will appear.
+</p>
+
+{% include image.html file="react-admin/patients/patientslistsettings.png" url="#" alt="Patient list settings" caption="Patient list settings" %}
+
+<h4>
+    <a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/core/pages/PatientsList/PatientShow.js" target="_blank">Patient Details Page</a>
+</h4>
+
+{% include image.html file="react-admin/patients/patientdetails.png" url="#" alt="Patient Details" caption="Patient Details" %}
+
+<h5>API URL</h5>
+
+<pre>
+  /mpi/Patient/{patientId}
+</pre>
+
+<h5>GET response</h5>
+
+<pre>
+  {
+    patient: {
+      address: [
+        0: {
+          city: "City",
+          country: "Country",
+          district: "District",
+          line: [
+            0: "Baker street, 221-b",
+          ],
+          postalCode: 1234,
+        },
+        1: {....}
+      ],
+      birthDate: "1985-07-25",
+      deceasedBoolean: false,
+      gender: "female",
+      id: "5024d12f-ec35-4619-b982-8f27d28ee71c",
+      identifier: [
+        0: {
+          system: "https://fhir.nhs.uk/Id/nhs-number",
+          value: 5555555541,
+        }
+      ],
+      name: [
+        0: {
+          family: "Kolt",
+          given: [
+            "Elise",
+          ]
+          prefix: "Lisa"
+        }
+      ],
+      resourceType: "Patient",
+      telecom: "7 093 243 3598",
+    },
+    token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.....",
+  }
+</pre>
+
+<h5>Component structure</h5>
+
+<pre>
+import React from "react";
+import { TextField, DateField } from "react-admin";
+import { withStyles } from '@material-ui/core/styles';
+
+import ShowTemplate from "../../common/ResourseTemplates/ShowTemplate";
+
+const PatientShow = ({ classes, ...rest }) => (
+    <&zwj;ShowTemplate pageTitle="Patient" {...rest}>
+        <&zwj;TextField label="Name" source="name" />
+        <&zwj;DateField label="Date of Birth" source="dateOfBirth" />
+        <&zwj;TextField label="Gender" source="gender" />
+        <&zwj;TextField label="Address" source="address" />
+    <&zwj;/ShowTemplate>
+);
+
+export default withStyles(styles)(PatientShow);
+</pre>
+
+<h4>
+    <a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/core/pages/PatientsList/PatientEdit.js" target="_blank">Patient Edit Page</a>
+</h4>
+
+{% include image.html file="react-admin/patients/patientedit.png" url="#" alt="Patient Edit Page" caption="Patient Edit Page" %}
+
+<h5>API URL</h5>
+
+<pre>
+  /mpi/Patient/{patientId}
+</pre>
+
+<h5>PUT data</h5>
+
+<pre>
+{
+    address: {
+        city: "Redhill",
+        country: "United Kingdom",
+        district: "Surrey",
+        line: "3 Cooper Walk",
+        postalCode: "RH1 6SF",
+    },
+    birthDate: "1956-11-10",
+    gender: "male",
+    id: "9999999801",
+    name: {
+        family: "Tweed",
+        given: [
+            0: "Rob",
+        ],
+        prefix: "Mr",
+        telecom: "+779017 876"
+    },
+}
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+
+import EditTemplate from "../../common/ResourseTemplates/EditTemplate";
+import FormInputs from "./fragments/FormInputs";
+
+const PatientEdit = ({ classes, ...rest }) => (
+    <&zwj;EditTemplate blockTitle="Patient"  {...rest}>
+        <&zwj;FormInputs />
+    <&zwj;/EditTemplate>
+);
+
+export default PatientEdit;
+</pre>
+
+
+<h4>
+    <a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/core/pages/PatientsList/PatientCreate.js" target="_blank">Patient Create Page</a>
+</h4>
+
+{% include image.html file="react-admin/patients/patientcreate.png" url="#" alt="Patient Create Page" caption="Patient Create Page" %}
+
+<h5>API URL</h5>
+
+<pre>
+  /mpi/Patient/{patientId}
+</pre>
+
+<h5>POST data</h5>
+<pre>
+    address: {
+        city: "Redhill",
+        country: "United Kingdom",
+        district: "Surrey",
+        line: "3 Cooper Walk",
+        postalCode: "RH1 6SF",
+    },
+    birthDate: "1956-11-10",
+    gender: "male",
+    id: "9999999801",
+    name: {
+        family: "Tweed",
+        given: [
+            0: "Rob",
+        ],
+        prefix: "Mr",
+        telecom: "+779017 876"
+    },
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+
+import CreateTemplate from "../../common/ResourseTemplates/CreateTemplate";
+import FormInputs from "./fragments/FormInputs";
+
+const PatientCreate = props => (
+    <&zwj;CreateTemplate blockTitle="Patient" {...props}>
+        <&zwj;FormInputs />
+    <&zwj;/CreateTemplate>
+);
+
+export default PatientCreate;
+</pre>

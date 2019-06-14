@@ -1,0 +1,481 @@
+---
+title: Vitals module
+keywords: sample
+summary: "Vitals module"
+sidebar: react_admin_sidebar
+permalink: react-admin-vitals.html
+folder: react-admin/plugin-tiles
+filename: react-admin-vitals.html
+---
+
+<h4>
+  <a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/Vitals/VitalsList.js" target="_blank">Vitals</a>
+</h4>
+
+{% include image.html file="react-admin/vitals/vitalslist.png" url="#" alt="Vitals view" caption="Vitals" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/vitalsigns
+</pre>
+<h5>GET response</h5>
+<pre>
+  {
+    author: "Robert Tweed",
+    dateCreated: 1558703797000,
+    diastolicBP: 92,
+    heartRate: 92,
+    levelOfConsciousness: "Pain",
+    newsScore: 13,
+    oxygenSaturation: 77,
+    oxygenSupplemental: "true",
+    respirationRate: 7,
+    source: "ethercis",
+    sourceId: "ethercis-d2ee07eb-e568-44f7-9c76-45c3e677b8b0",
+    systolicBP: 92,
+    temperature: 38,
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+import { DateField, TextField } from "react-admin";
+
+import ListTemplate from "../../../core/common/ResourseTemplates/ListTemplate";
+import VitalsCreate from "./VitalsCreate";
+import VitalsEdit from "./VitalsEdit";
+import VitalsShow from "./VitalsShow";
+import VitalsChart from "./VitalsChart";
+import VitalsDatagridRow from "./fragments/DatagridRow";
+
+const VitalsList = ({ classes, ...rest }) => (
+    <&zwj;ListTemplate
+      create={VitalsCreate}
+      edit={VitalsEdit}
+      show={VitalsShow}
+      chartBlock={VitalsChart}
+      CustomRow={VitalsDatagridRow}
+      resourceUrl="vitalsigns"
+      title="Vitals"
+      hasChart={true}
+      isCustomDatagrid={true}
+      {...rest}
+    >
+        <&zwj;DateField label="#" source="number" />
+        <&zwj;DateField label="Date" source="dateCreate" />
+        <&zwj;TextField label="NEWS Score" source="newsScore" />
+        <&zwj;TextField label="Source" source="source" />
+    <&zwj;/ListTemplate>
+);
+
+export default VitalsList;
+</pre>
+
+
+<h4>
+  <a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/Vitals/VitalsShow.js" target="_blank">Vitals Detail</a>
+</h4>
+
+{% include image.html file="react-admin/vitals/vitalsdetail.png" url="#" alt="Vitals Detail" caption="Vitals Detail" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/vitalsigns/{sourceId}
+</pre>
+<h5>GET response</h5>
+<pre>
+  {
+    author: "Robert Tweed",
+    dateCreated: 1560155742000,
+    diastolicBP: 92,
+    heartRate: 92,
+    levelOfConsciousness: "Voice",
+    newsScore: 11,
+    oxygenSaturation: 95,
+    oxygenSupplemental: true,
+    respirationRate: 11,
+    source: "ethercis",
+    sourceId: "ethercis-f9e52b2f-a5b9-471b-af1f-f75dcb3dd237",
+    systolicBP: 92,
+    temperature: 37,
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+
+import ShowTemplate from "../../../core/common/ResourseTemplates/ShowTemplate";
+import Form from "./fragments/Form";
+
+const VitalsShow = ({ classes, ...rest }) => (
+    <&zwj;ShowTemplate pageTitle="Vitals" {...rest}>
+        <&zwj;Form isDetailsPage={true} {...rest} />
+    <&zwj;/ShowTemplate>
+);
+
+export default VitalsShow;
+</pre>
+
+
+<h4>
+  <a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/Vitals/VitalsEdit.js" target="_blank">Vitals Detail Edit Form</a>
+</h4>
+
+{% include image.html file="react-admin/vitals/vitalsedit.png" url="#" alt="Vitals Edit Form" caption="Vitals Edit Form" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/vitalsigns
+</pre>
+<h5>PUT data</h5>
+<pre>
+  {
+    author: "Robert Tweed",
+    dateCreate: 1560428887,
+    diastolicBP: 92,
+    heartRate: 92,
+    id: "ethercis-f9e52b2f-a5b9-471b-af1f-f75dcb3dd237",
+    levelOfConsciousness: "Voice",
+    newsScore: "11",
+    oxygenSaturation: 95,
+    oxygenSupplemental: true,
+    respirationRate: 11,
+    source: "ethercis",
+    systolicBP: 92,
+    temperature: 37,
+    userId: "9999999801",
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+
+
+</pre>
+
+
+<h4>
+  <a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/Vitals/VitalsCreate.js" target="_blank">Vitals Create Form</a>
+</h4>
+
+{% include image.html file="react-admin/vitals/vitalscreate.png" url="#" alt="Vitals Create" caption="Vitals Create Form" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/vitalsigns
+</pre>
+<h5>POST data</h5>
+<pre>
+  {
+    author: "Robert Tweed",
+    dateCreate: 1560429237,
+    diastolicBP: "98",
+    heartRate: "98",
+    levelOfConsciousness: "Voice",
+    newsScore: "11",
+    oxygenSaturation: "95",
+    oxygenSupplemental: true,
+    respirationRate: "13",
+    systolicBP: "98",
+    temperature: "37",
+    userId: "9999999801",
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+
+import CreateTemplate from "../../../core/common/ResourseTemplates/CreateTemplate";
+import Form from "./fragments/Form";
+
+const VitalsCreate = props => (
+    <&zwj;CreateTemplate isCustom={true} blockTitle="Vitals" {...props}>
+        <&zwj;Form isCreate={true} {...props} />
+    <&zwj;/CreateTemplate>
+);
+
+export default VitalsCreate;
+</pre>
+
+
+<h4>
+  <a href="https://github.com/PulseTile/PulseTile-React/blob/develop/src/components/pages/Vitals/vitals-page-component/VitalsChart.js">Vitals Chart</a>
+</h4>
+
+{% include image.html file="react-admin/vitals/vitalscharts.png" url="#" alt="Vitals Create" caption="Vitals Chart" %}
+{% include image.html file="react-admin/vitals/vitalschartdetail.png" url="#" alt="Vitals Create" caption="Vitals Chart Detail" %}
+
+<pre>
+import React, { Component } from "react";
+import get from "lodash/get";
+import moment from "moment";
+import { ResponsiveContainer, LineChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Line } from "recharts";
+import { connect } from 'react-redux';
+import { Toolbar } from "react-admin";
+
+import { withStyles } from "@material-ui/core/styles";
+import Typography from '@material-ui/core/Typography';
+
+import CreateButton from "../../../core/common/Buttons/CreateButton";
+
+const styles = {
+    chartBlock: {
+        width: '100%',
+        height: 500,
+    },
+    toolbar: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+    }
+};
+
+function getTooltipFormatter(value, name) {
+    const row = get(name, 'props.children', null);
+    if (!row) {
+        return null;
+    }
+    const nameArray = row.split(', ');
+    const parameter = nameArray[0];
+    const units = nameArray[1];
+    return (
+        <&zwj;span>
+            <&zwj;Typography variant="h1">{parameter}:<&zwj;/Typography>
+            <&zwj;Typography> {value}, {units}<&zwj;/Typography>
+        <&zwj;/span>
+
+    );
+}
+
+class VitalsChart extends Component {
+
+    state = {
+        disabledLines: [],
+    };
+
+    toggleLine = e => {
+        const { disabledLines } = this.state;
+        const dataKey = e.dataKey;
+        let newDisabledLinesArray = [];
+        if (disabledLines.indexOf(dataKey) !== -1) {
+            newDisabledLinesArray = disabledLines.filter(item => item !== dataKey);
+        } else {
+            newDisabledLinesArray = disabledLines.concat(dataKey);
+        }
+        this.setState({
+            disabledLines: newDisabledLinesArray
+        })
+    };
+
+    onPointClick = e => {
+        const { history } = this.props;
+        const sourceId = get(e, 'payload.sourceId', null);
+        const detailsUrl = '/vitalsigns/' + sourceId;
+        history.push(detailsUrl);
+    };
+
+    render() {
+        const { classes, vitalsList, history, createUrl } = this.props;
+        const { disabledLines } = this.state;
+
+        const vitalsListArray = Object.values(vitalsList);
+        let chartData = [];
+        for (let i = 0, n = vitalsListArray.length; i < n; i++) {
+
+            let item = vitalsListArray[i];
+            chartData.push({
+                name: moment(item.dateCreate).format('MM-DD-YYYY'),
+                diastolicBP: item.diastolicBP,
+                heartRate: item.heartRate,
+                oxygenSaturation: item.oxygenSaturation,
+                respirationRate: item.respirationRate,
+                systolicBP: item.systolicBP,
+                temperature: item.temperature,
+                sourceId: item.sourceId,
+            });
+        }
+
+        const DOT_RADIUS = 8;
+        const STROKE_WIDTH = 4;
+
+        const linesArray = [
+            { dataKey: "respirationRate", color: "#99C78C", label: <&zwj;Typography>Respiration Rate, resps/min<&zwj;/Typography> },
+            { dataKey: "oxygenSaturation", color: "#E18FC0", label: <&zwj;Typography>Oxygen Saturation, %<&zwj;/Typography> },
+            { dataKey: "heartRate", color: "#ACC2D7", label: <&zwj;Typography>Heart Rate, bpm<&zwj;/Typography> },
+            { dataKey: "systolicBP", color: "#EABA97", label: <&zwj;Typography>Systolic BP, mmHg<&zwj;/Typography> },
+            { dataKey: "diastolicBP", color: "#99D9DE", label: <&zwj;Typography>Diastolic BP, mmHg<&zwj;/Typography> },
+            { dataKey: "temperature", color: "#E3A08F", label: <&zwj;Typography>Temperature, C<&zwj;/Typography> },
+        ];
+
+        return (
+            <&zwj;div className={classes.chartBlock}>
+                <&zwj;ResponsiveContainer width={'99%'}>
+                    <&zwj;LineChart data={chartData} margin={{ top: 25, left: 0 }}>
+                        <&zwj;XAxis dataKey="name" tick={{ fontFamily: "HK Grotesk Regular, Arial, sans-serif", fontSize: 14 }} />
+                        <&zwj;YAxis tick={{ fontFamily: "HK Grotesk Regular", Arial, sans-serif", fontSize: 14 }} />
+                        <&zwj;Tooltip
+                                formatter={(value, name) => getTooltipFormatter(value, name)}
+                            labelFormatter={function(value) {
+                                return (
+                                    <&zwj;Typography>Date: {value}<&zwj;/Typography>
+                                );
+                            }}
+                        />
+                        <&zwj;Legend
+                                payload={linesArray.map(item => ({
+                                dataKey: item.dataKey,
+                                color: item.color,
+                                value: item.label,
+                            }))}
+                            onClick={e => this.toggleLine(e)}
+                        />
+                        <&zwj;CartesianGrid stroke="#e5e5e5" strokeDasharray="5 5"/>
+                        {
+                            linesArray.map((item, key) => {
+                                if (disabledLines.indexOf(item.dataKey) !== -1) {
+                                    return null;
+                                }
+                                return (
+                                    <&zwj;Line
+                                       key={key}
+                                       type="monotone"
+                                       name={item.label}
+                                       dataKey={item.dataKey}
+                                       stroke={item.color}
+                                       activeDot={{ r: DOT_RADIUS, onClick: e => this.onPointClick(e) }}
+                                       strokeWidth={STROKE_WIDTH}
+                                    />
+                                )
+                            })
+                        }
+                    <&zwj;/LineChart>
+                <&zwj;/ResponsiveContainer>
+                <&zwj;Toolbar className={classes.toolbar}>
+                    <&zwj;CreateButton history={history} redirectPath={createUrl} />
+                <&zwj;/Toolbar>
+            <&zwj;/div>
+        );
+    }
+};
+
+const mapStateToProps = state => {
+    return {
+        vitalsList: get(state, 'admin.resources.vitalsigns.data', []),
+    }
+};
+
+export default connect(mapStateToProps, null)(withStyles(styles)(VitalsChart));
+</pre>
+
+
+<h4>
+    <a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/Vitals/fragments/RangeLinePopover.js" target="_blank">Vitals Popover</a>
+</h4>
+
+{% include image.html file="react-admin/vitals/vitalspopover.png" url="#" alt="Vitals Popover" caption="Vitals Popover" %}
+
+<pre>
+import React from "react";
+import get from "lodash/get";
+
+import { withStyles } from '@material-ui/core/styles';
+import Popover from "@material-ui/core/Popover";
+import Typography from "@material-ui/core/Typography";
+
+import rangeLine from "../../../images/range-line.jpeg";
+import { rangeLineSettings } from "./settings";
+
+const styles = theme => ({
+    popover: {
+        pointerEvents: 'none',
+    },
+    paper: {
+        display: "block",
+        width: 490,
+        padding: 0,
+        margin: 0,
+        borderRadius: 0,
+    },
+    blockTitle: {
+        display: "flex",
+        alignItems: "center",
+        height: 49,
+        color: theme.palette.paperColor,
+        backgroundColor: theme.palette.secondaryMainColor,
+        paddingLeft: 15,
+    },
+    title: {
+        color: theme.palette.paperColor,
+        fontSize: 18,
+        fontWeight: 700,
+    },
+    rangeAxisItemTop: {
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "flex-start",
+        width: 70,
+        height: 65,
+        float: "left"
+    },
+    rangeAxisItemBottom: {
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "flex-end",
+        width: 70,
+        height: 65,
+        float: "left"
+    },
+    content: {
+        margin: 10,
+        height: 60,
+    },
+    axis: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        backgroundImage: `url(${rangeLine})`,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        backgroundSize: '490px 10px',
+    },
+});
+
+const RangeLinePopover = ({ classes, anchorEl, open, handleClose, label, model }) => {
+    const rangeLineValues = get(rangeLineSettings, model, null);
+    return (
+        <&zwj;Popover
+                open={open}
+                className={classes.popover}
+                classes={{ paper: classes.paper }}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                anchorOrigin={{ vertical: 'center', horizontal: 'center' }}
+            transformOrigin={{ vertical: 'center', horizontal: 'left' }}
+        >
+            <&zwj;div>
+                <&zwj;div className={classes.blockTitle}>
+                    <&zwj;Typography className={classes.title}>{label}<&zwj;/Typography>
+                <&zwj;/div>
+                <&zwj;div className={classes.content}>
+                    <&zwj;div className={classes.axis}>
+                        {
+                            rangeLineValues && rangeLineValues.map(item => {
+                                return (
+                                    <&zwj;div className={classes[item.position]}>
+                                        <&zwj;Typography variant="body2">{item.label}<&zwj;/Typography>
+                                    <&zwj;/div>
+                                );
+                            })
+                        }
+                    <&zwj;/div>
+                <&zwj;/div>
+            <&zwj;/div>
+        <&zwj;/Popover>
+    );
+};
+
+export default withStyles(styles)(RangeLinePopover);
+</pre>

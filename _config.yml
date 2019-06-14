@@ -98,6 +98,7 @@ sidebars:
 - home_sidebar
 - angular_sidebar
 - react_sidebar
+- react_admin_sidebar
 - other
 - technologies-angular_sidebar
 - technologies-react_sidebar

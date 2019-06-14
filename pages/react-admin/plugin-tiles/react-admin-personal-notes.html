@@ -1,0 +1,188 @@
+---
+title: Personal Notes module
+keywords: sample
+summary: "Personal Notes module"
+sidebar: react_admin_sidebar
+permalink: react-admin-personal-notes.html
+folder: react-admin/plugin-tiles
+filename: react-admin-personal-notes.html
+---
+
+<h4>General information</h4>
+
+<p>
+    Personal Notes is a non-core plugin of PulseTile-RA.
+    It is used to create, edit and review information about Personal Notes of the current patient.
+    Actions, Reducer and Sagas required for the Personal Notes plugin are created automatically by React-Admin framework, because all operations are typical.
+</p>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/PersonalNotes/PersonalNotesList.js" target="_blank">Personal Notes List</a></h4>
+
+{% include image.html file="react-admin/personalNotes/personalNotesgeneral.png" url="#" alt="Personal Notes List" caption="Personal Notes List" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/personalnotes
+</pre>
+
+<h5>GET response</h5>
+<pre>
+  {
+    author: "Robert Tweed",
+    dateCreated: 1559562890000,
+    noteType: "test",
+    source: "ethercis",
+    sourceId: "ethercis-bdfeaa79-1c6d-42e7-87bf-e6c972ae39ad",
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+import { DateField, TextField } from "react-admin";
+
+import ListTemplate from "../../../core/common/ResourseTemplates/ListTemplate";
+import PersonalNotesCreate from "./PersonalNotesCreate";
+import PersonalNotesEdit from "./PersonalNotesEdit";
+import PersonalNotesShow from "./PersonalNotesShow";
+import DatagridRow from "./fragments/DatagridRow";
+
+const PersonalNotesList = ({ classes, ...rest }) => (
+    <&zwj;ListTemplate
+      create={PersonalNotesCreate}
+      edit={PersonalNotesEdit}
+      show={PersonalNotesShow}
+      resourceUrl="personalnotes"
+      title="Personal Notes"
+      CustomRow={DatagridRow}
+      isCustomDatagrid={true}
+      {...rest}
+    >
+        <&zwj;TextField label="Type" source="noteType" />
+        <&zwj;TextField label="Author" source="author" />
+        <&zwj;DateField label="Date Created" source="dateCreated" />
+        <&zwj;TextField label="Source" source="source" />
+    <&zwj;/ListTemplate>
+);
+
+export default PersonalNotesList;
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/PersonalNotes/PersonalNotesShow.js" target="_blank">Personal Notes Detail</a></h4>
+
+{% include image.html file="react-admin/personalNotes/personalNotesdetail.png" url="#" alt="Personal Notes Detail" caption="Personal Notes Detail" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/personalnotes/{sourceId}
+</pre>
+
+<h5>GET response</h5>
+<pre>
+  {
+    author: "Robert Tweed",
+    dateCreated: 1559562890000,
+    noteType: "test",
+    notes: "test",
+    source: "ethercis",
+    sourceId: "ethercis-bdfeaa79-1c6d-42e7-87bf-e6c972ae39ad",
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+import { TextField, DateField } from "react-admin";
+import { withStyles } from '@material-ui/core/styles';
+
+import ShowTemplate from "../../../core/common/ResourseTemplates/ShowTemplate";
+
+const PersonalNotesShow = ({ classes, ...rest }) => (
+    <&zwj;ShowTemplate pageTitle="Personal Note" {...rest}>
+        <&zwj;TextField source="noteType" label="Type" />
+        <&zwj;TextField source="notes" label="Note" />
+        <&zwj;TextField source="author" label="Author" />
+    <&zwj;/ShowTemplate>
+);
+
+export default withStyles(styles)(PersonalNotesShow);
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/PersonalNotes/PersonalNotesEdit.js" target="_blank">Personal Notes Edit Page</a></h4>
+
+{% include image.html file="react-admin/personalNotes/personalNotesedit.png" url="#" alt="Personal Notes Edit" caption="Personal Notes Edit" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/personalnotes/{sourceId}
+</pre>
+
+<h5>PUT data</h5>
+<pre>
+  {
+    author: "Robert Tweed",
+    dateCreated: 1559564759000,
+    dateSubmitted: "06/12/2019",
+    id: "ethercis-5493f1cf-f9cb-449e-a189-b73fefd27c06",
+    noteType: "note 2",
+    notes: "note 2",
+    source: "ethercis",
+    sourceId: "ethercis-5493f1cf-f9cb-449e-a189-b73fefd27c06",
+    userId: "9999999801",
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+
+import EditTemplate from "../../../core/common/ResourseTemplates/EditTemplate";
+import Inputs from "./fragments/Inputs";
+
+const PersonalNotesEdit = ({ classes, ...rest }) => (
+    <&zwj;EditTemplate blockTitle="Personal Note"  {...rest}>
+        <&zwj;Inputs />
+    <&zwj;/EditTemplate>
+);
+
+export default PersonalNotesEdit;
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/PersonalNotes/PersonalNotesCreate.js" target="_blank">Personal Notes Create Page</a></h4>
+
+{% include image.html file="react-admin/personalNotes/personalNotescreate.png" url="#" alt="Personal Notes Create" caption="Personal Notes Create" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/personalnotes
+</pre>
+
+<h5>POST data</h5>
+<pre>
+{
+    author: "Robert Tweed",
+    dateSubmitted: "06/12/2019",
+    noteType: "new personal note",
+    notes: "new personal note",
+    userId: "9999999801",
+}
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+
+import CreateTemplate from "../../../core/common/ResourseTemplates/CreateTemplate";
+import Inputs from "./fragments/Inputs";
+
+const PersonalNotesCreate = ({ classes, ...rest }) => (
+    <&zwj;CreateTemplate blockTitle="Personal Note" {...rest}>
+        <&zwj;Inputs />
+    <&zwj;/CreateTemplate>
+);
+
+export default PersonalNotesCreate;
+</pre>

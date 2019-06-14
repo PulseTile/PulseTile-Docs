@@ -1,0 +1,467 @@
+---
+title: ReSPECT module
+keywords: sample
+summary: "ReSPECT module"
+sidebar: react_admin_sidebar
+permalink: react-admin-respect.html
+folder: react-admin/plugin-tiles
+filename: react-admin-respect.html
+---
+
+<h4>
+    <a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/pages/ReSPECT/VersionsTable.js" target="_blank">ReSPECT versions list</a>
+</h4>
+
+{% include image.html file="react-admin/respect/respectVersionsNoData.png" url="#" alt="ReSPECT versions list (no data)" caption="ReSPECT versions list (no data)" %}
+{% include image.html file="react-admin/respect/respectVersionsList.png" url="#" alt="ReSPECT versions list" caption="ReSPECT versions list" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/vitalsigns
+</pre>
+<h5>GET response</h5>
+<pre>
+  {
+    author: "Robert Tweed",
+    dateCreated: 1559916046000,
+    source: "ethercis",
+    sourceId: "ethercis-636a3e90-2f29-4c84-982d-d3ad41601a01",
+    status: "",
+    version: 7,
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React, { Component } from "react";
+import { connect } from 'react-redux';
+
+import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Table from '@material-ui/core/Table';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+
+import { versionsServerAction } from "../../actions/ReSPECT/versionsServerAction";
+
+import Breadcrumbs from "../../../core/common/Breadcrumbs";
+import RespectPageHeader from "./fragments/RespectPageHeader";
+import TableHeadBlock from "./fragments/versions/TableHeadBlock";
+import TableBodyBlock from "./fragments/versions/TableBodyBlock";
+import CurrentVersionBlock from "./fragments/versions/CurrentVersionBlock";
+import EmptyRow from "./fragments/versions/EmptyRow";
+import VersionUpdateButton from "./fragments/buttons/VersionUpdateButton";
+
+const styles = theme => ({
+    root: {
+        width: '100%',
+    },
+    mainBlock: {
+        padding: 10,
+    },
+    blockTitle: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        height: 49,
+        color: theme.isOldDesign ? theme.palette.fontColor : theme.palette.paperColor,
+        backgroundColor: theme.palette.mainColor,
+        fontSize: 18,
+        fontWeight: 700,
+        paddingLeft: 15,
+    },
+    title: {
+        color: theme.isOldDesign ? theme.palette.fontColor : theme.palette.paperColor,
+        backgroundColor: theme.palette.mainColor,
+        fontSize: 18,
+        fontWeight: 700,
+    },
+    tableWrapper: {
+        overflowX: 'auto',
+    },
+    tableList: {
+        '& thead': {
+            backgroundColor: theme.palette.tableHeadColor,
+            '& tr th span span': {
+                color: "#000",
+            },
+            '& tr th': {
+                paddingLeft: 10,
+            },
+            '& tr': {
+                height: 48,
+            },
+        },
+        '& tbody tr td': {
+            paddingLeft: 10,
+        },
+        '& tbody tr:hover': {
+            backgroundColor: theme.palette.secondaryMainColor,
+        },
+        '& tbody tr:hover td span': {
+            color: "#fff"
+        }
+    },
+});
+
+class VersionsTable extends Component {
+
+    state = {
+        currentVersion: null,
+    };
+
+    componentDidMount() {
+        this.props.getVersionsFromServer();
+    };
+
+    showVersion = (version, sourceId) => {
+        this.setState(
+            state => ({ currentVersion: version }),
+            () => this.props.getOneVersion(sourceId, version)
+        );
+    };
+
+    returnToVersions = () => {
+        this.setState({
+            currentVersion: null,
+        })
+    };
+
+    render() {
+        const { classes, versionsInfo, toggleMode, isLoading } = this.props;
+        const { currentVersion } = this.state;
+        let breadcrumbsResource = [
+            { url: "/summary", title: "Patient Summary", isActive: true },
+            { url: null, title: "ReSPECT", isActive: false }
+        ];
+        if (currentVersion) {
+            breadcrumbsResource = [
+                { url: "/summary", title: "Patient Summary", isActive: true },
+                { url: null, title: "ReSPECT", isActive: false, onClickAction: () => this.returnToVersions() },
+                { url: null, title: `Version ${currentVersion}`, isActive: false }
+            ];
+        }
+        let versionsNumber = Array.isArray(versionsInfo) ? versionsInfo.length : 0;
+        return (
+            <&zwj;React.Fragment>
+                <&zwj;Breadcrumbs resource={breadcrumbsResource} />
+                <&zwj;RespectPageHeader />
+                <&zwj;Grid container spacing={16} className={classes.mainBlock}>
+                    <&zwj;Grid className={classes.list} item xs={12} sm={currentVersion ? 6 : 12}>
+                        <&zwj;div className={classes.blockTitle}>
+                            <&zwj;Typography className={classes.title}>ReSPECT Versions<&zwj;/Typography>
+                        <&zwj;/div>
+                        { versionsNumber === 0
+                            ?
+                                <&zwj;EmptyRow toggleMode={toggleMode} isLoading={isLoading} />
+                            :
+                                <&zwj;React.Fragment>
+                                    <&zwj;Paper className={classes.root}>
+                                        <&zwj;div className={classes.tableWrapper}>
+                                            <&zwj;Table className={classes.tableList} aria-labelledby="tableTitle">
+                                                <&zwj;TableHeadBlock />
+                                                <&zwj;TableBodyBlock
+                                                    currentVersion={currentVersion}
+                                                    toggleMode={toggleMode}
+                                                    showVersion={this.showVersion}
+                                                    versionsInfo={versionsInfo}
+                                                />
+                                            <&zwj;/Table>
+                                        <&zwj;/div>
+                                    <&zwj;/Paper>
+                                    <&zwj;div>
+                                        <&zwj;VersionUpdateButton toggleMode={toggleMode} />
+                                    <&zwj;/div>
+                                <&zwj;/React.Fragment>
+                        }
+                    <&zwj;/Grid>
+                    {
+                        currentVersion &&
+                            <&zwj;CurrentVersionBlock toggleMode={toggleMode} currentVersion={currentVersion} />
+                    }
+                <&zwj;/Grid>
+            <&zwj;/React.Fragment>
+        );
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        versionsInfo: state.custom.versionsServerInfo.data,
+        isLoading: state.custom.versionsServerInfo.loading,
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        getVersionsFromServer() {
+            dispatch(versionsServerAction.request());
+        },
+        getOneVersion(sourceId, version) {
+            dispatch(versionsServerAction.requestOne(sourceId, version));
+        },
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(VersionsTable));
+</pre>
+
+
+<h4>Create first ReSPECT-version</h4>
+<p>
+    If current patient doesn't have ReSPECT versions, user should <strong>create</strong> first version.
+    It is necessary to click on <strong>Create</strong> button.
+    When user does it, POST request is sent to the server side.
+</p>
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/respectforms
+</pre>
+
+<h5>POST response</h5>
+<pre>
+{
+  compositionUid: "1e0fee4f-1be5-4745-964c-ba40fb4073f1::nes.ripple.foundation::1"
+  heading: "respectforms"
+  host: "ethercis"
+  ok: true
+  token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9....."
+}
+</pre>
+
+
+<h4>
+    <a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/pages/ReSPECT/SectionsTable.js" target="_blank">ReSPECT-version details</a>
+</h4>
+
+{% include image.html file="react-admin/respect/respectDetails.png" url="#" alt="ReSPECT version details" caption="ReSPECT version details" %}
+
+<p>
+    Each version consists of ten sections.
+    Each section has different form with data set.
+    If user wants to review version data, it ic necessary to click on the row in the version table.
+</p>
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/respectforms/{lastVersionId}/{lastVersionNumber}
+</pre>
+
+<h5>GET data</h5>
+<pre>
+{
+    respect_form: {
+        author: "Robert Tweed",
+        capacityAndRepresentation: {
+            capacityFirst: false,
+            dateCompleted: "22-Mar-2019",
+            legalProxyValue: "No",
+            status: "Completed",
+        },
+        clinicalRecommendations: {
+            clinicalGuidance: "test3343434test123test123",
+            clinicalSignature: "Robert Tweed",
+            cprValue: "NotforCPR",
+            dateCompleted: "10-Apr-2019",
+            dateDecision: 1560110400000,
+            focusValue: "LifeSustainingTreatment",
+            status: "Completed",
+        },
+        clinicalSignatures:{
+            dateCompleted: "22-Mar-2019",
+            signaturesArray: [
+                0: {....},
+                1: {
+                    clinicalSignature: "",
+                    clinicialName: "test123",
+                    dateSigned: 1558814400000,
+                    designation: "test123",
+                    gmcNumber: 234234234,
+                    isSrc: false,
+                },
+                2: {....},
+            ],
+            status: "Completed",
+        },
+        confirmation: {
+            confirmationsArray: : [
+                0: {....},
+                1: {
+                    clinicalSignature: "",
+                    clinicialName: "test",
+                    designation: "test",
+                    gmcNumber: 34534534534,
+                    reviewDate: 1553983200000,
+                },
+                2: {....},
+            ],
+            dateCompleted: "22-Mar-2019"
+            status: "Completed"
+        },
+        dateCreated: 1560164996000,
+        emergencyContacts: {
+            contactsArray: [
+                0: {....},
+                1: {
+                    name: "test",
+                    phone: "test",
+                    role: "Family or friend or other",
+                },
+                2: {....},
+            ],
+            dateCompleted: "22-Mar-2019",
+            details: "test",
+            status: "Completed",
+        },
+        involvement: {
+            dateCompleted: "22-Mar-2019",
+            documentExplanation: "test123",
+            involvementValue: "valueSetD",
+            notSelectingReason: "test123",
+            status: "Completed",
+        },
+        personalPreferences: {
+            dateCompleted: "22-Mar-2019",
+            preferencesText: "test22222test123",
+            preferencesValue: 40,
+            status: "Completed",
+        },
+        source: "ethercis",
+        sourceId: "ethercis-636a3e90-2f29-4c84-982d-d3ad41601a01",
+        status: "",
+        summaryInformation: {
+            dateCompleted: "22-Mar-2019",
+            details: "test123",
+            status: "Completed",
+            summary: "test123",
+        },
+        version: 8,
+    },
+    token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
+}
+</pre>
+
+{% include image.html file="react-admin/respect/respectSectionFirst.png" url="#" alt="ReSPECT section 1 - Personal Details" caption="ReSPECT section 1 - Personal Details" %}
+{% include image.html file="react-admin/respect/respectSectionSecond.png" url="#" alt="ReSPECT section 2 - Summary of relevant information for this plan" caption="ReSPECT section 2 - Summary of relevant information for this plan" %}
+{% include image.html file="react-admin/respect/respectSectionThird.png" url="#" alt="ReSPECT section 3 - Personal preferences to guide this plan" caption="ReSPECT section 3 - Personal preferences to guide this plan" %}
+{% include image.html file="react-admin/respect/respectSectionFourth.png" url="#" alt="ReSPECT section 4 - Clinical recommendations for emergency care and treatment" caption="ReSPECT section 4 - Clinical recommendations for emergency care and treatment" %}
+{% include image.html file="react-admin/respect/respectSectionFifth.png" url="#" alt="ReSPECT section 5 - Capacity and representation at this time" caption="ReSPECT section 5 - Capacity and representation at this time" %}
+{% include image.html file="react-admin/respect/respectSectionSixth.png" url="#" alt="ReSPECT section 6 - Involvement in making this plan" caption="ReSPECT section 6 - Involvement in making this plan" %}
+{% include image.html file="react-admin/respect/respectSectionSeventh.png" url="#" alt="ReSPECT section 7 - Clinical signatures" caption="ReSPECT section 7 - Clinical signatures" %}
+{% include image.html file="react-admin/respect/respectSectionEight.png" url="#" alt="ReSPECT section 8 - Emergency contacts" caption="ReSPECT section 8 - Emergency contacts" %}
+{% include image.html file="react-admin/respect/respectSectionNinth.png" url="#" alt="ReSPECT section 9 - Confirmation of validity" caption="ReSPECT section 9 - Confirmation of validity" %}
+{% include image.html file="react-admin/respect/respectSectionTenth.png" url="#" alt="ReSPECT section 10 - Emergency view" caption="ReSPECT section 10 - Emergency view" %}
+
+<h4>Update latest ReSPECT-version</h4>
+<p>
+    If current patient has ReSPECT versions, user can <strong>update</strong> the latest one.
+    All information from the latest version will be available to updating.
+    Sections 4 and 6 should be completed, if user wants to update version.
+</p>
+
+{% include image.html file="react-admin/respect/respectVersionUpdate.png" url="#" alt="ReSPECT version updating" caption="ReSPECT version updating" %}
+
+<p>
+    User should click on the <strong>Publish</strong> button to create new version.
+</p>
+
+{% include image.html file="react-admin/respect/respectPublishButton.png" url="#" alt="ReSPECT version publish" caption="ReSPECT version publish" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/respectforms/{lastVersionId}/{lastVersionNumber}
+</pre>
+
+<h5>PUT data</h5>
+<pre>
+{
+    capacityAndRepresentation: {
+        capacityFirst: false,
+        dateCompleted: "13-06-2019",
+        legalProxyValue: "No",
+        status: "Completed",
+    },
+    clinicalRecommendations: {
+        clinicalGuidance: "test3343434test123test123",
+        clinicalSignature: "Robert Tweed",
+        cprValue: "CPRRecommended",
+        dateCompleted: "13-06-2019",
+        dateDecision: 1560373200000,
+        focusValue: "LifeSustainingTreatment",
+        status: "Completed",
+    },
+    clinicalSignatures: {
+        dateCompleted: "13-06-2019",
+        signaturesArray: [
+            0: {....},
+            1: {....},
+            2: {
+                clinicalSignature: "",
+                clinicialName: "test",
+                dateSigned: 1554289200000,
+                designation: "test",
+                gmcNumber: 3455345345,
+                isSrc: false,
+            },
+            3: {....}
+        ],
+        status: "Completed"
+    },
+    confirmation: {
+        confirmationsArray: [
+            0: {....},
+            1: {....},
+            2: {
+                clinicalSignature: "",
+                clinicialName: "test123",
+                designation: "test123",
+                gmcNumber: 234234234234,
+                reviewDate: 1558810800000,
+            },
+            3: {....},
+        ],
+        dateCompleted: "13-06-2019",
+        status: "Completed",
+    },
+    emergencyContacts: {
+        contactsArray: [
+            0: {....},
+            1: {....},
+            2: {
+                name: "test123",
+                phone: 2342342342342342,
+                role: "Family or friend or other",
+            },
+            3: {....},
+        ],
+        dateCompleted: "13-06-2019",
+        details: "test",
+        status: "Completed",
+    },
+    involvement: {
+        dateCompleted: "13-06-2019",
+        documentExplanation: "test123",
+        involvementValue: "valueSetD",
+        notSelectingReason: "test123",
+        status: "Completed",
+    },
+    personalPreferences: {
+        dateCompleted: "13-06-2019",
+        preferencesText: "test",
+        preferencesValue: 40,
+        status: "Completed",
+    },
+    summaryInformation: {
+        dateCompleted: "13-06-2019",
+        details: "test123",
+        status: "Completed",
+        summary: "test123",
+    },
+    author: "Robert Tweed"
+    author_id: "9999999801",
+    dateCompleted: "13-06-2019",
+    status: "Completed",
+}
+</pre>

@@ -1,0 +1,289 @@
+---
+title: Patient Summary module
+keywords: sample
+summary: "Patient Summary module"
+sidebar: react_admin_sidebar
+permalink: react-admin-summary.html
+folder: react-admin/core-tiles
+filename: react-admin-summary.html
+---
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/core/pages/PatientSummary/index.js" target="_blank">Patient Summary Page</a></h4>
+
+<p>
+  This is a root page for information about current Patient.
+  Patient Summary page includes following elements:
+</p>
+
+<ul>
+    <li>Breadcrumbs</li>
+    <li>Settings modal window</li>
+    <li>Synopsis grid</li>
+</ul>
+
+{% include image.html file="react-admin/patientsummary.png" url="#" alt="Patient Summary view" caption="Patient Summary Page" %}
+
+<p>
+    Synopsis grid contains panels with synopsis for plugins Allergies, Contacts, Medications, Problems, Top Three Things, Vaccinations and ReSPECT.
+    Synopsis is a list of the last four issues for each plugin.
+    Each synopsis returns by the separate API-request.
+</p>
+
+<p>
+    Click on any of synopsis items redirects user to details page for it.
+    Click on the panel title redirects user to the list for the selected plugin.
+</p>
+
+<h5>Component structure</h5>
+<pre>
+import React, { Component } from "react";
+import get from "lodash/get";
+import { connect } from 'react-redux';
+
+import { withStyles } from "@material-ui/core/styles";
+import Grid from '@material-ui/core/Grid';
+
+import DashboardCard from "../../common/DashboardCard";
+import {
+    synopsisAllergiesAction,
+    synopsisContactsAction,
+    synopsisMedicationsAction,
+    synopsisProblemsAction } from "../../actions/synopsisActions";
+import { synopsisData, getSynopsisProps } from "./config";
+import SettingsDialog from "./SettingsDialog";
+import Breadcrumbs from "../../common/Breadcrumbs";
+import { themeCommonElements } from "../../../version/config/theme.config";
+import { nonCoreSynopsisActions } from "../../../version/config/nonCoreSynopsis";
+import { getSummaryContainerStyles } from "./functions";
+
+const styles = theme => ({
+    ...
+    ...
+    ...
+});
+
+class PatientSummaryInfo extends Component {
+
+    componentDidMount() {
+        if (localStorage.getItem('userId') && localStorage.getItem('username')) {
+            this.props.getPatientSynopsis();
+        }
+    }
+
+    render() {
+        const { classes, loading, showMode, showHeadings, location } = this.props;
+        const breadcrumbsResource = [
+            { url: location.pathname, title: "Patient Summary", isActive: false }
+        ];
+        const FeedsPanels = get(themeCommonElements, 'feedsPanels', false);
+        const RespectPanel = get(themeCommonElements, 'respectPanel', false);
+        return (
+            <&zwj;Grid className={classes.container} >
+                <&zwj;Breadcrumbs resource={breadcrumbsResource} />
+                <&zwj;SettingsDialog className={classes.settingsIcon} />
+                <&zwj;Grid className={classes.summaryContainer} spacing={16} container>
+                    {
+                        synopsisData.map((item, key) => {
+                            return (
+                                <&zwj;DashboardCard
+                                        key={key}
+                                        showMode={showMode}
+                                        showHeadings={showHeadings}
+                                        id={item.id}
+                                        title={item.title}
+                                        list={item.list}
+                                        loading={loading}
+                                        items={get(this.props, item.list, [])}
+                                        icon={item.icon}
+                                        {...this.props}
+                                />
+                            );
+                        })
+                    }
+                    { FeedsPanels && <&zwj;FeedsPanels /> }
+                    { RespectPanel && <&zwj;RespectPanel showMode={showMode} {...this.props} /> }
+                <&zwj;/Grid>
+            <&zwj;/Grid>
+        );
+    }
+}
+
+const mapStateToProps = state => {
+
+    const patientSummaryProps = {
+        loading: state.custom.demographics.loading,
+        showMode: state.custom.showMode.data,
+        showHeadings: state.custom.showHeadings.data,
+    };
+
+    const synopsisProps = getSynopsisProps(state);
+
+    return Object.assign({}, patientSummaryProps, synopsisProps);
+};
+
+const mapDispatchToProps = dispatch => {
+
+    const coreSynopsisActions = [
+        synopsisAllergiesAction,
+        synopsisContactsAction,
+        synopsisProblemsAction,
+        synopsisMedicationsAction,
+    ];
+
+    const synopsisActions = coreSynopsisActions.concat(nonCoreSynopsisActions);
+
+    return {
+        getPatientSynopsis() {
+            synopsisActions.map(item => {
+                return dispatch(item.request());
+            });
+        }
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(PatientSummaryInfo));
+</pre>
+
+<h4>Patient Allergies synopsis</h4>
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/synopsis/allergies
+</pre>
+<h5>GET data</h5>
+<pre>
+  {
+    heading: "allergies",
+    synopsis: [
+      0: {...},
+      1: {...},
+      2: {
+        dateCreated: 1560263418000,
+        source: "ethercis",
+        sourceId: "ethercis-11d2021c-f1a9-4258-800e-9e141b1521b4",
+        text: "Adverse reaction to aspirin",
+      },
+      3: {...},
+    ],
+    token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...."
+  }
+</pre>
+
+<h4>Patient Contacts synopsis</h4>
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/synopsis/contacts
+</pre>
+<h5>GET data</h5>
+<pre>
+  {
+    heading: "contacts",
+    synopsis: [
+      0: {...},
+      1: {...},
+      2: {
+        dateCreated: 1560330131000,
+        source: "ethercis",
+        sourceId: "ethercis-996d182e-89bb-4a0c-9c0e-41f962cf34e5",
+        text: "Jimmy Clansy",
+      },
+      3: {...},
+    ],
+    token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...."
+  }
+</pre>
+
+<h4>Patient Medications synopsis</h4>
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/synopsis/medications
+</pre>
+<h5>GET data</h5>
+<pre>
+  {
+    heading: "medications",
+    synopsis: [
+      0: {...},
+      1: {...},
+      2: {
+        dateCreated: 1560332128000,
+        source: "ethercis",
+        sourceId: "ethercis-f28f0c62-04f4-434c-8f80-f3e7cdcbd425",
+        text: "Amoxicillin 500mg capsules",
+      },
+      3: {...},
+    ],
+    token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...."
+  }
+</pre>
+
+<h4>Patient Problems/Issues synopsis</h4>
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/synopsis/problems
+</pre>
+<h5>GET data</h5>
+<pre>
+  {
+    heading: "problems",
+    synopsis: [
+      0: {...},
+      1: {...},
+      2: {
+        dateCreated: 1560332128000,
+        source: "ethercis",
+        sourceId: "ethercis-f28f0c62-04f4-434c-8f80-f3e7cdcbd425",
+        text: "Amoxicillin 500mg capsules",
+      },
+      3: {...},
+    ],
+    token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...."
+  }
+</pre>
+
+<h4>Patient Vaccinations synopsis</h4>
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/synopsis/vaccinations
+</pre>
+<h5>GET data</h5>
+<pre>
+  {
+    heading: "vaccinations",
+    synopsis: [
+      0: {...},
+      1: {...},
+      2: {
+        dateCreated: 1559650691000,
+        source: "ethercis",
+        sourceId: "ethercis-e57aaa81-18de-44a8-855a-d8bee1149f32",
+        text: "Chinese encephalitis",
+      },
+      3: {...},
+    ],
+    token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...."
+  }
+</pre>
+
+<h4>Patient Top Three Things synopsis</h4>
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/synopsis/top3Things
+</pre>
+<h5>GET data</h5>
+<pre>
+  {
+    heading: "top3Things",
+    synopsis: [
+      0: {...},
+      1: {...},
+      2: {
+        dateCreated: 1559911963000,
+        source: "ethercis",
+        sourceId: "ethercis-884829e1-ea10-42be-809d-b30afd998bc6",
+        text: "Allergy to eggs",
+      },
+      3: {...},
+    ],
+    token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...."
+  }
+</pre>

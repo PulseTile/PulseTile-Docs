@@ -1,0 +1,208 @@
+---
+title: Allergies module
+keywords: sample
+summary: "Allergies module"
+sidebar: react_admin_sidebar
+permalink: react-admin-allergies.html
+folder: react-admin/core-tiles
+filename: react-admin-allergies.html
+---
+
+<h4>General information</h4>
+
+<p>
+    Allergies is a core plugin of PulseTile-RA.
+    It is used to create, edit and review information about allergies of the current patient.
+    Actions, Reducer and Sagas required for the Allergies plugin are created automatically by React-Admin framework, because all operations are typical.
+</p>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/core/plugins/Allergies/AllergiesList.js" target="_blank">Allergies</a></h4>
+
+{% include image.html file="react-admin/allergies/allergiesgeneral.png" url="#" alt="Allergy list view" caption="Allergies" %}
+{% include image.html file="react-admin/allergies/allergiesfilter.png" url="#" alt="Allergy Filter" caption="Allergies Filter" %}
+
+<h5>API URL</h5>
+
+<pre>
+  /api/patients/{patientId}/allergies
+</pre>
+
+<h5>GET response</h5>
+
+<pre>
+  {
+    cause: "Adverse reaction to aspirin",
+    dateCreated: 1181170800000,
+    reaction: "Adverse reaction to aspirin",
+    source: "ethercis",
+    sourceId: "ethercis-11d2021c-f1a9-4258-800e-9e141b1521b4",
+  }
+</pre>
+
+<h5>Component structure</h5>
+
+<pre>
+import React from "react";
+import { TextField, DateField } from "react-admin";
+
+import ListTemplate from "../../common/ResourseTemplates/ListTemplate";
+import AllergiesCreate from "./AllergiesCreate";
+import AllergiesEdit from "./AllergiesEdit";
+import AllergiesShow from "./AllergiesShow";
+import DatagridRow from "./fragments/DatagridRow";
+
+const AllergiesList = props => (
+    <&zwj;ListTemplate
+       create={AllergiesCreate}
+       edit={AllergiesEdit}
+       show={AllergiesShow}
+       resourceUrl="allergies"
+       title="Allergies"
+       CustomRow={DatagridRow}
+       isCustomDatagrid={true}
+    >
+        <&zwj;TextField source="cause" label="Cause" />
+        <&zwj;DateField source="dateCreated" label="Date" />
+        <&zwj;TextField source="source" label="Source" />
+    <&zwj;/ListTemplate>
+);
+
+export default AllergiesList;
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/core/plugins/Allergies/AllergiesShow.js" target="_blank">Allergies Detail</a></h4>
+
+{% include image.html file="react-admin/allergies/allergiesdetail.png" url="#" alt="Allergy Detail" caption="Allergies Detail" %}
+
+<h5>API URL</h5>
+
+<pre>
+  /api/patients/{patientId}/allergies/{sourceId}
+</pre>
+
+<h5>GET response</h5>
+
+<pre>
+  {
+    author: "Not known",
+    cause: "Adverse reaction to aspirin",
+    causeCode: "http://snomed.info/sct",
+    causeTerminology: 292044008,
+    dateCreated: 1181170800000,
+    originalComposition: "",
+    originalSource: "",
+    reaction: "Adverse reaction to aspirin",
+    source: "ethercis",
+    sourceId: "ethercis-11d2021c-f1a9-4258-800e-9e141b1521b4",
+    terminologyCode: "http://snomed.info/sct",
+  }
+</pre>
+
+<h5>Component structure</h5>
+
+<pre>
+import React from "react";
+import { TextField, DateField } from "react-admin";
+
+import ShowTemplate from "../../common/ResourseTemplates/ShowTemplate";
+
+const AllergiesShow = ({ classes, ...rest }) => (
+    <&zwj;ShowTemplate pageTitle="Allergy" {...rest}>
+        <&zwj;TextField label="Cause" source="cause" />
+        <&zwj;TextField label="Reaction / Description" source="reaction" />
+        <&zwj;TextField label="Author" source="author" />
+        <&zwj;DateField label="Date" source="dateCreated" />
+    <&zwj;/ShowTemplate>
+);
+
+export default AllergiesShow;
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/core/plugins/Allergies/AllergiesEdit.js" target="_blank">Allergies Edit Page</a></h4>
+
+{% include image.html file="react-admin/allergies/allergiesedit.png" url="#" alt="Allergy Edit" caption="Allergies Edit" %}
+
+<h5>API URL</h5>
+
+<pre>
+  /api/patients/{patientId}/allergies/{sourceId}
+</pre>
+
+<h5>PUT data</h5>
+
+<pre>
+  {
+    author: "Not known",
+    cause: "Adverse reaction to aspirin",
+    causeCode: "http://snomed.info/sct",
+    causeTerminology: 292044008,
+    dateCreated: 1181170800000,
+    id: "ethercis-11d2021c-f1a9-4258-800e-9e141b1521b4",
+    originalComposition: "",
+    originalSource: "",
+    reaction: "Adverse reaction to aspirin",
+    source: "ethercis",
+    sourceId: "ethercis-11d2021c-f1a9-4258-800e-9e141b1521b4",
+    terminologyCode: "http://snomed.info/sct",
+    userId: "9999999801",
+  }
+</pre>
+
+<h5>Component structure</h5>
+
+<pre>
+import React from "react";
+
+import EditTemplate from "../../common/ResourseTemplates/EditTemplate";
+import Inputs from "./fragments/Inputs";
+
+const AllergiesEdit = ({ classes, ...rest }) => (
+    <&zwj;EditTemplate blockTitle="Allergy"  {...rest}>
+        <&zwj;Inputs />
+    <&zwj;/EditTemplate>
+);
+
+export default AllergiesEdit;
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/core/plugins/Allergies/AllergiesCreate.js" target="_blank">Allergies Create Page</a></h4>
+
+{% include image.html file="react-admin/allergies/allergiescreate.png" url="#" alt="Allergy Create" caption="Allergies Create" %}
+
+<h5>API URL</h5>
+
+<pre>
+  /api/patients/{patientId}/allergies
+</pre>
+
+<h5>POST data</h5>
+
+<pre>
+  {
+    author: "Robert Tweed",
+    cause: "cats",
+    causeCode: "cats",
+    causeTerminology: "cats",
+    dateCreated: "06/11/2019",
+    reaction: "cats",
+    userId: "9999999801",
+  }
+</pre>
+
+<h5>Component structure</h5>
+
+<pre>
+import React from "react";
+
+import CreateTemplate from "../../common/ResourseTemplates/CreateTemplate";
+import Inputs from "./fragments/Inputs";
+
+const AllergiesCreate = props => (
+    <&zwj;CreateTemplate blockTitle="Allergy" {...props}>
+        <&zwj;Inputs />
+    <&zwj;/CreateTemplate>
+);
+
+export default AllergiesCreate;
+</pre>

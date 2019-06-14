@@ -1,0 +1,221 @@
+---
+title: Procedures module
+keywords: sample
+summary: "Procedures module"
+sidebar: react_admin_sidebar
+permalink: react-admin-procedures.html
+folder: react-admin/plugin-tiles
+filename: react-admin-procedures.html
+---
+
+<h4>General information</h4>
+
+<p>
+    Procedures is a non-core plugin of PulseTile-RA.
+    It is used to create, edit and review information about Procedures of the current patient.
+    Actions, Reducer and Sagas required for the Procedures plugin are created automatically by React-Admin framework, because all operations are typical.
+</p>
+
+<h4>
+    <a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/Procedures/ProceduresList.js" target="_blank">Procedures List</a>
+</h4>
+
+{% include image.html file="react-admin/procedures/proceduresgeneral.png" url="#" alt="Procedures List" caption="Procedures List" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/procedures
+</pre>
+
+<h5>GET response</h5>
+<pre>
+  {
+    date: -86316000,
+    name: "test Procedure Name",
+    source: "ethercis",
+    sourceId: "ethercis-3dd59fb7-0a48-4319-8fb8-cbd8bbcf027f",
+    time: 84000,
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+import { DateField, TextField } from "react-admin";
+
+import ListTemplate from "../../../core/common/ResourseTemplates/ListTemplate";
+import ProceduresCreate from "./ProceduresCreate";
+import ProceduresEdit from "./ProceduresEdit";
+import ProceduresShow from "./ProceduresShow";
+import DatagridRow from "./fragments/DatagridRow";
+
+const ProceduresList = ({ classes, ...rest }) => (
+    <&zwj;ListTemplate
+      create={ProceduresCreate}
+      edit={ProceduresEdit}
+      show={ProceduresShow}
+      resourceUrl="procedures"
+      title="Procedures"
+      CustomRow={DatagridRow}
+      isCustomDatagrid={true}
+      {...rest}
+    >
+        <&zwj;TextField label="Procedure Name" source="name" />
+        <&zwj;DateField label="Procedure Date" source="date" />
+        <&zwj;DateField label="Time" source="time" />
+        <&zwj;TextField label="Source" source="source" />
+    <&zwj;/ListTemplate>
+);
+
+export default ProceduresList;
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/Procedures/ProceduresShow.js" target="_blank">Procedure Detail</a></h4>
+
+{% include image.html file="react-admin/procedures/proceduresdetail.png" url="#" alt="Procedure Detail" caption="Procedure Detail" %}
+
+<h5>API URL</h5>
+
+<pre>
+  /api/patients/{patientId}/procedures/{sourceId}
+</pre>
+
+<h5>GET response</h5>
+<pre>
+  {
+    author: "Robert Tweed",
+    currentStatus: "completed",
+    date: 1549796400000,
+    dateSubmitted: 1560242256000,
+    name: "new test",
+    notes: "new test",
+    originalComposition: "",
+    originalSource: "",
+    performer: "Performer",
+    procedureCode: "new test",
+    procedureName: "new test",
+    procedureTerminology: "SNOMED-CT",
+    source: "ethercis",
+    sourceId: "ethercis-076915d0-f51c-422a-b271-df61d08f5121",
+    time: 39600000,
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+import { TextField, DateField } from "react-admin";
+import { withStyles } from '@material-ui/core/styles';
+
+import ShowTemplate from "../../../core/common/ResourseTemplates/ShowTemplate";
+
+const ProceduresShow = ({ classes, ...rest }) => (
+    <&zwj;ShowTemplate pageTitle="Procedure" {...rest}>
+        <&zwj;TextField source="procedureName" label="Procedure name" />
+        <&zwj;DateField source="date" label="Date of Procedure" />
+        <&zwj;TextField source="performer" label="Procedure Performed By" />
+        <&zwj;TextField source="notes" label="Procedure Notes" />
+        <&zwj;TextField source="author" label="Author" />
+    <&zwj;/ShowTemplate>
+);
+
+export default withStyles(styles)(ProceduresShow);
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/Procedures/ProceduresEdit.js" target="_blank">Procedure Edit Page</a></h4>
+
+{% include image.html file="react-admin/procedures/proceduresedit.png" url="#" alt="Procedure Edit" caption="Procedure Edit" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/procedures/{sourceId}
+</pre>
+
+<h5>PUT data</h5>
+<pre>
+{
+    author: "Robert Tweed",
+    currentStatus: "",
+    date: 1549749600000,
+    dateCreated: "13-06-2019 14:42",
+    dateSubmitted: "2019-06-13T14:42:00+03:00",
+    id: "ethercis-076915d0-f51c-422a-b271-df61d08f5121",
+    name: "new test",
+    notes: "new test",
+    originalComposition: "",
+    originalSource: "",
+    performer: "Performer",
+    procedureCode: "new test",
+    procedureName: "new test",
+    procedureTerminology: "SNOMED-CT",
+    source: "ethercis",
+    time: 46800000,
+    userId: "9999999801",
+}
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+
+import EditTemplate from "../../../core/common/ResourseTemplates/EditTemplate";
+import Form from "./fragments/Form";
+
+const ProceduresEdit = props => (
+    <&zwj;EditTemplate isCustom={true} blockTitle="Procedure"  {...props}>
+        <&zwj;Form {...props} />
+    <&zwj;/EditTemplate>
+);
+
+export default ProceduresEdit;
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/Procedures/ProceduresCreate.js" target="_blank">Procedure Create Page</a></h4>
+
+{% include image.html file="react-admin/procedures/procedurescreate.png" url="#" alt="Procedure Create" caption="Procedure Create" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/procedures
+</pre>
+
+<h5>POST data</h5>
+<pre>
+  {
+    author: "Robert Tweed",
+    currentStatus: "",
+    date: 1558990800000,
+    dateCreated: "13-06-2019 14:45",
+    dateSubmitted: "2019-06-13T14:45:00+03:00",
+    name: "test Procedure Name 4",
+    notes: "test 4",
+    originalComposition: "",
+    originalSource: "",
+    performer: "test Performed By 4",
+    procedureCode: "test 4",
+    procedureName: "test Procedure Name 4",
+    procedureTerminology: "test 4",
+    source: "ethercis",
+    time: 48600000,
+    userId: "9999999801",
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+
+import CreateTemplate from "../../../core/common/ResourseTemplates/CreateTemplate";
+import Form from "./fragments/Form";
+
+const ProceduresCreate = props => (
+    <&zwj;CreateTemplate isCustom={true}  blockTitle="Procedure" {...props}>
+        <&zwj;Form isCreate={true} {...props} />
+    <&zwj;/CreateTemplate>
+);
+
+export default ProceduresCreate;
+</pre>
