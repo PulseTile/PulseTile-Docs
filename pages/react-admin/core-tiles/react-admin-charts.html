@@ -1,0 +1,100 @@
+---
+title: Charts
+keywords: sample
+summary: "Charts module"
+sidebar: react_admin_sidebar
+permalink: react-admin-charts.html
+folder: react-admin/core-tiles
+filename: react-admin-charts.html
+---
+
+<h4>General information</h4>
+
+<p>Charts page includes two diagrams: patients statistic by Cities and by Age Ranges.</p>
+<p>Click on a bar on the <b>Patients by Cities</b> chart redirects user to Patients list and run POST-request for searching by cities.</p>
+<p>Click on a bar on the <b>Patients by Age</b> chart redirects user to Patients list and run POST-request for advanced search</p>
+
+{% include image.html file="react-admin/charts/general.png" url="#" alt="Charts" caption="Charts" %}
+
+<h4>Patient search by City</h4>
+
+<h5>API URL</h5>
+<pre>
+    /mpi/Patient/search/searchByCity
+</pre>
+
+<h5>POST-request structure</h5>
+<pre>
+{
+    city: "Edinburgh"
+}
+</pre>
+
+<h4>Patient search by Age Range</h4>
+
+<h5>API URL</h5>
+<pre>
+    /mpi/Patient/search/advanced
+</pre>
+
+<h5>POST-request structure</h5>
+<pre>
+{
+    from: 24,
+    to: 73
+}
+</pre>
+
+<p>Server response structure is similar for both request.</p>
+
+<h5>GET response (equals from all patients search types)</h5>
+<pre>
+  {
+  	entry: [
+      0: {....},
+      1: {....},
+      2: {....},
+      3: {
+        resource: {
+            address: [
+                0: {
+                    city: "City",
+                    country: "Country",
+                    district: "District",
+                    line: [
+                        0: "Baker street, 221-b",
+                    ],
+                    postalCode: 1234,
+                },
+                1: {....}
+            ],
+            birthDate: "1985-07-25",
+            deceasedBoolean: false,
+            gender: "female",
+            id: "5024d12f-ec35-4619-b982-8f27d28ee71c",
+            identifier: [
+                0: {
+                    system: "https://fhir.nhs.uk/Id/nhs-number",
+                    value: 5555555541,
+                }
+            ],
+            name: [
+                0: {
+                    family: "Kolt",
+                    given: [
+                        "Elise",
+                    ]
+                    prefix: "Lisa"
+                }
+            ],
+            resourceType: "Patient",
+            telecom: "7 093 243 3598",
+        },
+      },
+      4: {....},
+      5: {....},
+    ],
+    resourceType: "Bundle",
+    token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9......",
+  }
+</pre>

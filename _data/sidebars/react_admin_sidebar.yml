@@ -28,6 +28,9 @@ entries:
     - title: Core Tiles
       url: /react-admin-core-tiles.html
       output: web, pdf
+    - title: Charts
+      url: /react-admin-charts.html
+      output: web, pdf
     - title: Patients List
       url: /react-admin-patients-list.html
       output: web, pdf
