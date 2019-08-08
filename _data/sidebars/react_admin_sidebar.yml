@@ -28,8 +28,14 @@ entries:
     - title: Core Tiles
       url: /react-admin-core-tiles.html
       output: web, pdf
+    - title: Charts
+      url: /react-admin-charts.html
+      output: web, pdf
     - title: Patients List
       url: /react-admin-patients-list.html
+      output: web, pdf
+    - title: Patients Search
+      url: /react-admin-patients-search.html
       output: web, pdf
     - title: Patient Summary
       url: /react-admin-summary.html
@@ -53,6 +59,9 @@ entries:
     folderitems:
     - title: Clinical Notes
       url: /react-admin-clinical-notes.html
+      output: web, pdf
+    - title: Events
+      url: /react-admin-events.html
       output: web, pdf
     - title: MDT
       url: /react-admin-mdt.html

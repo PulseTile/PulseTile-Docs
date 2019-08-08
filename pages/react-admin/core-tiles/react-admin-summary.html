@@ -8,12 +8,33 @@ folder: react-admin/core-tiles
 filename: react-admin-summary.html
 ---
 
-<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/core/pages/PatientSummary/index.js" target="_blank">Patient Summary Page</a></h4>
+<h4>Patient Summary page</h4>
 
-<p>
-  This is a root page for information about current Patient.
-  Patient Summary page includes following elements:
-</p>
+<p>This is a root page for information about current Patient. Patient summary page has two view types:</p>
+<ul>
+    <li>patient summary roll</li>
+    <li>patient summary table</li>
+</ul>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/core/pages/PatientSummary/views/PatientSummaryRoll.js" target="_blank">Patient Summary Table</a></h4>
+
+<p>Patient Summary roll includes following elements:</p>
+<ul>
+    <li>Breadcrumbs</li>
+    <li>Settings modal window</li>
+    <li>Patient anthropometric information block</li>
+    <li>Block with four latest items of Problems, Medications and Allergies</li>
+    <li>Lab results block</li>
+    <li>Events timeline block</li>
+    <li>Vitals chart block</li>
+</ul>
+
+{% include image.html file="react-admin/summary/patientroll-1.png" url="#" alt="Patient Summary view" caption="Patient Summary Roll" %}
+{% include image.html file="react-admin/summary/patientroll-2.png" url="#" alt="Patient Summary view" caption="Patient Summary Roll" %}
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/core/pages/PatientSummary/views/PatientSummaryTable.js" target="_blank">Patient Summary Table</a></h4>
+
+<p>Patient Summary table includes following elements:</p>
 
 <ul>
     <li>Breadcrumbs</li>
@@ -21,7 +42,7 @@ filename: react-admin-summary.html
     <li>Synopsis grid</li>
 </ul>
 
-{% include image.html file="react-admin/patientsummary.png" url="#" alt="Patient Summary view" caption="Patient Summary Page" %}
+{% include image.html file="react-admin/summary/patientsummary.png" url="#" alt="Patient Summary view" caption="Patient Summary Page" %}
 
 <p>
     Synopsis grid contains panels with synopsis for plugins Allergies, Contacts, Medications, Problems, Top Three Things, Vaccinations and ReSPECT.

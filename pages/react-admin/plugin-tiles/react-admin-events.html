@@ -1,0 +1,315 @@
+---
+title: Events module
+keywords: sample
+summary: "Events module"
+sidebar: react_admin_sidebar
+permalink: react-admin-events.html
+folder: react-admin/plugin-tiles
+filename: react-admin-events.html
+---
+
+<h4>General information</h4>
+
+<p>
+    Events is a non-core plugin of PulseTile-RA.
+    It is used to create, edit and review information about Events of the current patient.
+    Actions, Reducer and Sagas required for the Events plugin are created automatically by React-Admin framework, because all operations are typical.
+</p>
+
+<h4>
+    <a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/Events/EventsList.js" target="_blank">Events List</a>
+</h4>
+
+{% include image.html file="react-admin/events/eventsgeneral.png" url="#" alt="Events List" caption="Events List" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/events
+</pre>
+
+<h5>GET response</h5>
+<pre>
+  {
+    dateCreated: 1454669420000,
+    dateTime: 1452595820958,
+    description: "Complications following surgery",
+    name: "Transfer from ward to ICU",
+    source: "ethercis",
+    sourceId: "ethercis-be7d9647-3c6e-41dd-a1c9-4aaa0c60c81b",
+    type: "Transfer",
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+import { DateField, TextField } from "react-admin";
+
+import ListTemplate from "../../../core/common/ResourseTemplates/ListTemplate";
+import EventsCreate from "./EventsCreate";
+import EventsEdit from "./EventsEdit";
+import EventsShow from "./EventsShow";
+import EventsTimeline from "./EventsTimeline";
+import DatagridRow from "./fragments/DatagridRow";
+
+const EventsList = ({ classes, ...rest }) => (
+    &lt;ListTemplate
+            create={EventsCreate}
+            edit={EventsEdit}
+            show={EventsShow}
+            resourceUrl="events"
+            title="Events"
+            hasTimetable={true}
+            timelineBlock={EventsTimeline}
+            CustomRow={DatagridRow}
+            isCustomDatagrid={true}
+            {...rest}
+    >
+        &lt;TextField label="Event Name" source="noteType" />
+        &lt;TextField label="Event Type" source="author" />
+        &lt;DateField label="Date" source="dateCreated" />
+    &lt;/ListTemplate>
+);
+
+export default EventsList;
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/Events/EventsShow.js" target="_blank">Event Detail</a></h4>
+
+{% include image.html file="react-admin/events/eventsdetail.png" url="#" alt="Event Detail" caption="Event Detail" %}
+
+<h5>API URL</h5>
+
+<pre>
+  /api/patients/{patientId}/events/{sourceId}
+</pre>
+
+<h5>GET response</h5>
+<pre>
+  {
+    author: "Dr. Smith",
+    dateCreated: 1563464410000,
+    dateTime: 1563447600000,
+    description: "Needs nursing and supervisory care",
+    name: "Discharge to care home",
+    source: "ethercis",
+    sourceId: "ethercis-bec0e163-6a1f-4f7a-bb13-1e1d5110b62e",
+    type: "Discharge",
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+import { TextField, DateField } from "react-admin";
+import { withStyles } from '@material-ui/core/styles';
+
+import ShowTemplate from "../../../core/common/ResourseTemplates/ShowTemplate";
+
+const EventsShow = ({ classes, ...rest }) => (
+    &lt;ShowTemplate pageTitle="Event" {...rest}>
+        &lt;TextField source="name" label="Event Name" />
+        &lt;TextField source="type" label="Event Type" />
+        &lt;TextField source="description" label="Notes" />
+        &lt;DateField source="dateTime" label="Event Date" showTime />
+    &lt;/ShowTemplate>
+);
+
+export default withStyles(styles)(EventsShow);
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/Events/EventsEdit.js" target="_blank">Event Edit Page</a></h4>
+
+{% include image.html file="react-admin/events/eventsedit.png" url="#" alt="Event Edit" caption="Event Edit" %}
+
+<h5>API URL</h5>
+
+<pre>
+  /api/patients/{patientId}/events/{sourceId}
+</pre>
+
+<h5>PUT data</h5>
+<pre>
+{
+    author: "Dr. Smith",
+    dateCreated: 1563464410000,
+    dateTime: "2019-07-18T11:00:00.000Z",
+    description: "Needs nursing and supervisory care",
+    id: "ethercis-bec0e163-6a1f-4f7a-bb13-1e1d5110b62e",
+    name: "Discharge to care home",
+    source: "ethercis",
+    type: "Discharge",
+    userId: "9999999801",
+}
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+
+import EditTemplate from "../../../core/common/ResourseTemplates/EditTemplate";
+import Form from "./fragments/Form";
+
+const EventsEdit = props => (
+    &lt;EditTemplate isCustom={true} blockTitle="Event" {...props}>
+        &lt;Form {...props} />
+    &lt;/EditTemplate>
+);
+
+export default EventsEdit;
+</pre>
+
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/Events/EventsCreate.js" target="_blank">Event Create Page</a></h4>
+
+{% include image.html file="react-admin/events/eventscreate.png" url="#" alt="Event Create" caption="Event Create" %}
+
+<h5>API URL</h5>
+<pre>
+  /api/patients/{patientId}/events
+</pre>
+
+<h5>POST data</h5>
+<pre>
+  {
+    author: "Robert Tweed",
+    dateCreated: 1563966657000,
+    dateTime: "2019-07-02T10:45:00.000Z",
+    description: "Test",
+    name: "Test",
+    type: "Appointment",
+    userId: "9999999801",
+  }
+</pre>
+
+<h5>Component structure</h5>
+<pre>
+import React from "react";
+
+import CreateTemplate from "../../../core/common/ResourseTemplates/CreateTemplate";
+import Form from "./fragments/Form";
+
+const EventsCreate = props => (
+    &lt;CreateTemplate isCustom={true} blockTitle="Event" {...props}>
+        &lt;Form isCreate={true} {...props} />
+    &lt;/CreateTemplate>
+);
+
+export default EventsCreate;
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/version/plugins/Events/EventsTimeline.js" target="_blank">Events Timeline</a></h4>
+
+<p>
+    Events timeline presents a list of events for current patient, displayed as timeline.
+    It can be open by selecting "Event Timeline" in the right corner of the Events list block.
+    Events timeline use the same GET-request, which is used in Events table.
+</p>
+
+{% include image.html file="react-admin/events/eventswitcher.png" url="#" alt="Event Timeline Switcher" caption="Event Timeline Switcher" %}
+{% include image.html file="react-admin/events/eventstimeline.png" url="#" alt="Event Create" Timeline="Event Timeline" %}
+
+<pre>
+import React from "react";
+import _ from "lodash";
+import get from "lodash/get";
+import moment from "moment";
+import { connect } from 'react-redux';
+import { Toolbar } from "react-admin";
+
+import {
+    Timeline,
+    Content,
+    ContentYear,
+    ContentBody,
+} from 'vertical-timeline-component-react';
+
+import { withStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+
+import CreateButton from "../../../core/common/Buttons/CreateButton";
+
+const styles = theme => ({
+    ...
+    ...
+    ...
+});
+
+const CustomHeader = ({ classes, items, history }) => {
+
+    const dateAndTime = items[0];
+    const events = items[1];
+    const dateForPoint = moment.unix(dateAndTime).format('Do MMM')
+
+    return (
+        &lt;Content>
+            &lt;ContentYear year={&lt;EventDate classes={classes} label={dateForPoint} />} />
+            &lt;ContentBody>
+                {
+                    events.map(item => {
+                        let eventRoute = '/events/' + get(item, 'sourceId', null);
+                        let dateTime = moment(get(item, 'dateTime', null)).format('DD-MM-YYYY HH:mm');
+                        return (
+                            &lt;div className={classes.eventBlock} onClick={() => history.push(eventRoute)}>
+                                &lt;Typography variant="body1" className={classes.eventType}>{get(item, 'type', null)}&lt;/Typography>
+                                &lt;div className={classes.eventDescription}>
+                                    &lt;Typography className={classes.eventTitle} variant="h1">{get(item, 'name', null)}&lt;/Typography>
+                                    <&lt;Typography variant="caption">{dateTime}&lt;/Typography>
+                                &lt;/div>
+                            &lt;/div>
+                        )
+                    })
+                }
+            &lt;/ContentBody>
+        &lt;/Content>
+    );
+};
+
+const EventDate = ({ classes, label }) => {
+    const dateArray = label.split(' ');
+    return (
+        &lt;div className={classes.eventDate}>
+            &lt;Typography variant="body1">{dateArray[0]}&lt;/Typography>
+            &lt;Typography variant="body1">{dateArray[1]}&lt;/Typography>
+        &lt;/div>
+    )
+}
+
+const EventsTimeline = ({ classes, eventsList, history, createUrl }) => {
+    const eventsGroupByDate = _.mapValues(_.groupBy(eventsList, 'dateCreated'),
+        clist => clist.map(event => _.omit(event, 'date')));
+    const eventsGroupByDateArray = Object.entries(eventsGroupByDate);
+    return (
+        &lt;React.Fragment>
+            &lt;div className={classes.timeline}>
+                &lt;Timeline>
+                    { eventsGroupByDateArray.map(item => {
+                        return (
+                            &lt;CustomHeader classes={classes} items={item} history={history} />
+                        )
+                    })}
+                    &lt;Content>
+                        &lt;ContentYear />
+                    &lt;/Content>
+                &lt;/Timeline>
+            &lt;/div>
+            {
+                createUrl &&
+                    &lt;Toolbar className={classes.toolbar}>
+                        &lt;CreateButton history={history} redirectPath={createUrl} />
+                    &lt;/Toolbar>
+            }
+        &lt;/React.Fragment>
+    );
+};
+
+const mapStateToProps = state => {
+    return {
+        eventsList: get(state, 'admin.resources.events.data', []),
+    };
+};
+
+export default connect(mapStateToProps, null)(withStyles(styles)(EventsTimeline));
+</pre>

@@ -1,0 +1,188 @@
+---
+title: Patients Search
+keywords: sample
+summary: "Patients Search"
+sidebar: react_admin_sidebar
+permalink: react-admin-patients-search.html
+folder: react-admin/core-tiles
+filename: react-admin-patients-search.html
+---
+
+<h4>Patients search</h4>
+
+<p>There are three types of patients search available for user:</p>
+<ul>
+  <li>by user last name</li>
+  <li>by city</li>
+  <li>advanced search</li>
+  <li>clunical query search</li>
+</ul>
+
+<p>All search types have equal GET response structure, which is described below.</p>
+
+<p>Switcher of user search is located in the topbar</p>
+
+{% include image.html file="react-admin/search/switcher.png" url="#" alt="Patient list view" caption="Patient search switcher" %}
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/core/common/Topbar/fragments/UserSearch/index.js" target="_blank">Search by user last name</a></h4>
+
+{% include image.html file="react-admin/search/userSearch.png" url="#" alt="Patients search by last name" caption="Patients search by last name" %}
+
+<h5>API URL</h5>
+<pre>
+  /mpi/Patient?name={lastname}
+</pre>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/core/common/Topbar/fragments/AdvancedUserSearch/AdvancedSearchDialog.js" target="_blank">Advanced search</a></h4>
+
+{% include image.html file="react-admin/search/advancedSearch.png" url="#" alt="Patients advanced search" caption="Patients advanced search" %}
+
+<h5>API URL</h5>
+<pre>
+  /mpi/Patient/search/advanced
+</pre>
+
+<h5>POST request structure</h5>
+
+<p>All parameters in POST-request are optional. No one parameter is required. But there are to search modes to set patient age:</p>
+<ul>
+    <li>
+        <p>by date of born</p>
+        <pre>
+        {
+            firstName: "rob",
+            from: 24,
+            gender: "male",
+            lastName: "tweed",
+            nhsNumber: 1234567890,
+            to: 73
+        }
+        </pre>
+    </li>
+    <li>
+        <p>by age range</p>
+        <pre>
+        {
+            birthDate: "2019-07-01",
+            firstName: "rob",
+            gender: "male",
+            lastName: "tweed",
+            nhsNumber: 1234567890
+        }
+        </pre>
+    </li>
+</ul>
+
+<h4><a href="https://github.com/PulseTile/PulseTile-RA/blob/showcase/src/core/common/Topbar/fragments/AdvancedUserSearch/ClinicalQueryDialog.js" target="_blank">Clinical query search</a></h4>
+
+{% include image.html file="react-admin/search/clinicalQuery.png" url="#" alt="Patients clinical query search" caption="Patients clinical query search" %}
+
+<h5>API URL</h5>
+
+<p>API URL depends on <b>Search Type</b> parameter in clinical query form:</p>
+
+<pre>
+  /api/patient/clinicalSearch/allergies
+  /api/patient/clinicalSearch/problems
+  /api/patient/clinicalSearch/medications
+  /api/patient/clinicalSearch/procedures
+</pre>
+
+<h5>POST request structure</h5>
+
+<p>As same as in advanced search, all parameters in POST-request are optional. No one parameter is required. But there are to search modes to set patient age:</p>
+<ul>
+    <li>
+        <p>by date of born</p>
+        <pre>
+        {
+            from: 15,
+            gender: "male",
+            query: "cats",
+            to: 69
+        }
+        </pre>
+    </li>
+    <li>
+        <p>by age range</p>
+        <pre>
+        {
+            birthDate: "2019-07-01",
+            gender: "male",
+            query: "cats",
+        }
+        </pre>
+    </li>
+</ul>
+
+<h4>Search by City</h4>
+
+<p>Search by city is used in the <b>Patients by Cities</b> chart at the default homepage</p>
+
+{% include image.html file="react-admin/search/searchByCity.png" url="#" alt="Patients search by City" caption="Patients search by City" %}
+
+<p>Click on the Chart bar sends POST-request to the server side automatically</p>
+
+<h5>API URL</h5>
+<pre>
+  /mpi/Patient/search/searchByCity
+</pre>
+
+<h5>POST-request structure</h5>
+<pre>
+{
+    city: "Edinburgh"
+}
+</pre>
+
+<h5>GET response (equals from all patients search types)</h5>
+<pre>
+  {
+  	entry: [
+      0: {....},
+      1: {....},
+      2: {....},
+      3: {
+        resource: {
+            address: [
+                0: {
+                    city: "City",
+                    country: "Country",
+                    district: "District",
+                    line: [
+                        0: "Baker street, 221-b",
+                    ],
+                    postalCode: 1234,
+                },
+                1: {....}
+            ],
+            birthDate: "1985-07-25",
+            deceasedBoolean: false,
+            gender: "female",
+            id: "5024d12f-ec35-4619-b982-8f27d28ee71c",
+            identifier: [
+                0: {
+                    system: "https://fhir.nhs.uk/Id/nhs-number",
+                    value: 5555555541,
+                }
+            ],
+            name: [
+                0: {
+                    family: "Kolt",
+                    given: [
+                        "Elise",
+                    ]
+                    prefix: "Lisa"
+                }
+            ],
+            resourceType: "Patient",
+            telecom: "7 093 243 3598",
+        },
+      },
+      4: {....},
+      5: {....},
+    ],
+    resourceType: "Bundle",
+    token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9......",
+  }
+</pre>
